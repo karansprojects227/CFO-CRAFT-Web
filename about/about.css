@@ -30,6 +30,17 @@ body.about-page {
   color: var(--dark-blue);
   box-shadow: var(--shadow-md);
 }
+
+/* Current service inside Services dropdown */
+.about-page .nav-dropdown a[aria-current="page"] {
+  background: var(--gray-100);
+}
+
+.about-page .nav-dropdown a[aria-current="page"] .dd-title {
+  color: var(--primary-blue);
+  font-weight: 700;
+}
+
 .about-skip:focus { left: .75rem; }
 .about-sr {
   position: absolute;

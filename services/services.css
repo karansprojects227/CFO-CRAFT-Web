@@ -710,6 +710,16 @@ body.service-page {
   line-height: 1.65;
 }
 
+/* Current service inside Services dropdown */
+.service-page .nav-dropdown a[aria-current="page"] {
+  background: var(--gray-100);
+}
+
+.service-page .nav-dropdown a[aria-current="page"] .dd-title {
+  color: var(--primary-blue);
+  font-weight: 700;
+}
+
 /* ---------- Accessibility ---------- */
 .service-skip {
   position: absolute;

@@ -32,6 +32,16 @@ body.industry-page {
 }
 .industry-skip:focus { left: 0.75rem; }
 
+/* Current service inside Services dropdown */
+.industry-page .nav-dropdown a[aria-current="page"] {
+  background: var(--gray-100);
+}
+
+.industry-page .nav-dropdown a[aria-current="page"] .dd-title {
+  color: var(--primary-blue);
+  font-weight: 700;
+}
+
 /* ---------- Hero ---------- */
 .industry-hero {
   position: relative;

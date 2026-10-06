@@ -1,0 +1,838 @@
+/* ==========================================================================
+   CFO CRAFT - SHARED SERVICE PAGE STYLES
+   Uses the design tokens, typography, navbar and footer from ../style.css.
+   Only service-page-specific layout/components live here.
+   ========================================================================== */
+
+body.service-page {
+  background: var(--white);
+  color: #111;
+}
+
+.service-page main {
+  overflow: hidden;
+}
+
+.service-wrap {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 2rem;
+}
+
+/* ---------- Hero ---------- */
+.service-hero {
+  position: relative;
+  overflow: hidden;
+  padding: 9rem 0 5rem;
+  color: var(--white);
+  background: linear-gradient(110deg, var(--dark-blue-gradient));
+}
+
+.service-hero::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(ellipse at 28% 82%, rgba(166, 203, 247, 0.11), transparent 50%),
+    radial-gradient(ellipse at 78% 18%, rgba(43, 109, 178, 0.12), transparent 46%);
+  pointer-events: none;
+}
+
+.service-hero .service-wrap {
+  position: relative;
+  z-index: 1;
+}
+
+.service-breadcrumb {
+  margin-bottom: 1.5rem;
+  color: rgba(255, 255, 255, 0.62);
+  font-size: 0.85rem;
+}
+
+.service-breadcrumb a {
+  color: inherit;
+}
+
+.service-breadcrumb a:hover {
+  color: var(--light-blue);
+}
+
+.service-hero-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1.18fr) minmax(320px, 0.82fr);
+  gap: clamp(2.5rem, 5vw, 5rem);
+  align-items: start;
+}
+
+.service-tier {
+  display: inline-flex;
+  align-items: center;
+  margin-bottom: 1rem;
+  color: var(--light-blue);
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.service-hero h1 {
+  max-width: 760px;
+  margin: 0;
+  color: var(--light-blue);
+  font-size: clamp(2.35rem, 5vw, 3.7rem);
+  font-weight: 400;
+  line-height: 1.12;
+  letter-spacing: -0.025em;
+}
+
+.service-lede {
+  max-width: 680px;
+  margin: 1.25rem 0 1.75rem;
+  color: rgba(255, 255, 255, 0.82);
+  font-size: clamp(1rem, 1.6vw, 1.15rem);
+  line-height: 1.7;
+}
+
+.service-price {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 0.75rem;
+  margin-bottom: 1.75rem;
+}
+
+.service-price b {
+  color: var(--white);
+  font-family: var(--font-heading);
+  font-size: 1.45rem;
+  font-weight: 600;
+}
+
+.service-price small {
+  color: rgba(255, 255, 255, 0.62);
+  font-size: 0.88rem;
+}
+
+.service-cta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  align-items: center;
+}
+
+.service-btn-outline {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.75rem 1.5rem;
+  border: 1px solid rgba(255, 255, 255, 0.44);
+  border-radius: 50px;
+  color: var(--white);
+  font-family: var(--font-primary);
+  font-size: 0.9rem;
+  font-weight: 600;
+  transition: var(--transition);
+}
+
+.service-btn-outline:hover {
+  border-color: var(--light-blue);
+  color: var(--light-blue);
+  transform: translateY(-1px);
+}
+
+/* ---------- Hero summary card ---------- */
+.service-summary {
+  padding: 1.5rem;
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  border-radius: 16px;
+  background: var(--white);
+  color: var(--dark-blue);
+  box-shadow: var(--shadow-xl);
+}
+
+.service-summary h2 {
+  margin: 0 0 0.25rem;
+  color: var(--dark-blue);
+  font-size: 1.05rem;
+  font-weight: 600;
+}
+
+.service-summary-sub {
+  margin: 0 0 1rem;
+  color: var(--gray-600);
+  font-size: 0.85rem;
+}
+
+.service-summary ol {
+  margin: 0;
+  padding: 0;
+  border-top: 1px solid var(--gray-200);
+  list-style: none;
+}
+
+.service-summary li {
+  display: grid;
+  grid-template-columns: 1.8rem minmax(0, 1fr);
+  gap: 0.65rem;
+  padding: 0.8rem 0;
+  border-bottom: 1px solid var(--gray-200);
+  color: var(--dark-blue);
+  font-size: 0.93rem;
+  line-height: 1.45;
+}
+
+.service-summary li:last-child {
+  border-bottom: 0;
+}
+
+.service-summary li i {
+  padding-top: 0.05rem;
+  color: var(--primary-blue);
+  font-family: var(--font-heading);
+  font-size: 0.8rem;
+  font-style: normal;
+  font-weight: 700;
+}
+
+.service-summary li div > span {
+  display: block;
+  margin-top: 0.12rem;
+  color: var(--gray-600);
+  font-size: 0.82rem;
+}
+
+/* ---------- Service ladder ---------- */
+.service-ladder {
+  padding: 2rem 0 2.25rem;
+  border-bottom: 1px solid var(--gray-200);
+  background: var(--gray-100);
+}
+
+.service-ladder-kicker {
+  margin: 0 0 1rem;
+  color: var(--gray-600);
+  font-size: 0.88rem;
+}
+
+.service-rungs {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: 0.65rem;
+  align-items: end;
+}
+
+.service-rung {
+  display: flex;
+  min-height: 82px;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding: 0.9rem;
+  border: 1px solid var(--gray-200);
+  border-radius: 10px;
+  background: var(--white);
+  color: var(--dark-blue);
+  line-height: 1.3;
+  transition: var(--transition);
+}
+
+.service-rung:nth-child(2) { min-height: 92px; }
+.service-rung:nth-child(3) { min-height: 102px; }
+.service-rung:nth-child(4) { min-height: 112px; }
+.service-rung:nth-child(5) { min-height: 122px; }
+
+.service-rung:hover {
+  border-color: var(--primary-blue);
+  box-shadow: var(--shadow-sm);
+  transform: translateY(-2px);
+}
+
+.service-rung small {
+  margin-bottom: 0.2rem;
+  color: var(--gray-600);
+  font-size: 0.72rem;
+}
+
+.service-rung b {
+  font-family: var(--font-heading);
+  font-size: 0.9rem;
+  font-weight: 600;
+}
+
+.service-rung.on {
+  border-color: var(--dark-blue);
+  background: var(--dark-blue);
+  color: var(--white);
+  box-shadow: var(--shadow-md);
+}
+
+.service-rung.on small {
+  color: var(--light-blue);
+}
+
+/* ---------- Shared content sections ---------- */
+.service-section {
+  padding: clamp(4rem, 7vw, 6rem) 0;
+  background: var(--white);
+}
+
+.service-section.alt {
+  background: var(--gray-100);
+}
+
+.service-section-head {
+  max-width: 760px;
+  margin-bottom: 2.5rem;
+}
+
+.service-section-head h2,
+.service-final h2 {
+  margin: 0;
+  color: var(--dark-blue);
+  font-size: clamp(1.75rem, 3.5vw, 2.75rem);
+  font-weight: 400;
+  line-height: 1.2;
+  letter-spacing: -0.02em;
+}
+
+.service-section-head p {
+  margin: 0.85rem 0 0;
+  color: var(--gray-600);
+  font-size: 1rem;
+  line-height: 1.7;
+}
+
+.service-page h3 {
+  color: var(--dark-blue);
+}
+
+.service-fit {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.25rem;
+}
+
+.service-fit > div {
+  padding: 1.6rem;
+  border: 1px solid var(--gray-200);
+  border-radius: 14px;
+  background: var(--white);
+  box-shadow: var(--shadow-sm);
+}
+
+.service-fit h3 {
+  margin: 0 0 1rem;
+  font-size: 1.12rem;
+}
+
+.service-fit ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.service-fit li {
+  position: relative;
+  margin-bottom: 0.8rem;
+  padding-left: 1.6rem;
+  color: var(--gray-600);
+  font-size: 0.95rem;
+  line-height: 1.6;
+}
+
+.service-fit li:last-child {
+  margin-bottom: 0;
+}
+
+.service-fit .yes li::before {
+  content: "✓";
+  position: absolute;
+  left: 0;
+  top: 0;
+  color: var(--primary-blue);
+  font-weight: 700;
+}
+
+.service-fit .no li::before {
+  content: "—";
+  position: absolute;
+  left: 0;
+  top: 0;
+  color: var(--gray-400);
+  font-weight: 700;
+}
+
+.service-fit a,
+.service-faq a {
+  color: var(--primary-blue);
+  font-weight: 500;
+}
+
+.service-fit a:hover,
+.service-faq a:hover {
+  text-decoration: underline;
+}
+
+/* ---------- Scope grids ---------- */
+.service-scope {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0 3rem;
+}
+
+.service-scope > div {
+  padding: 1.5rem 0;
+  border-top: 2px solid var(--primary-blue);
+}
+
+.service-scope h3 {
+  margin: 0 0 0.55rem;
+  font-size: 1.15rem;
+}
+
+.service-scope p {
+  margin: 0;
+  color: var(--gray-600);
+  font-size: 0.95rem;
+  line-height: 1.65;
+}
+
+.service-scope ul {
+  margin: 0.75rem 0 0;
+  padding-left: 1.15rem;
+  color: var(--gray-600);
+  font-size: 0.94rem;
+  line-height: 1.6;
+}
+
+.service-scope li {
+  margin-bottom: 0.35rem;
+}
+
+/* ---------- Process + fee ---------- */
+.service-two {
+  display: grid;
+  grid-template-columns: minmax(0, 1.15fr) minmax(290px, 0.85fr);
+  gap: clamp(2.5rem, 5vw, 4.5rem);
+  align-items: start;
+}
+
+.service-steps {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  counter-reset: service-step;
+}
+
+.service-steps li {
+  display: grid;
+  grid-template-columns: 3rem minmax(0, 1fr);
+  gap: 1rem;
+  padding: 1.15rem 0;
+  border-bottom: 1px solid var(--gray-200);
+  counter-increment: service-step;
+}
+
+.service-steps li::before {
+  content: counter(service-step, decimal-leading-zero);
+  display: grid;
+  width: 2.35rem;
+  height: 2.35rem;
+  place-items: center;
+  border: 1px solid var(--primary-blue);
+  border-radius: 50%;
+  color: var(--primary-blue);
+  font-family: var(--font-heading);
+  font-size: 0.75rem;
+  font-weight: 700;
+}
+
+.service-steps h3 {
+  margin: 0 0 0.25rem;
+  font-size: 1.02rem;
+}
+
+.service-steps p {
+  margin: 0;
+  color: var(--gray-600);
+  font-size: 0.94rem;
+  line-height: 1.6;
+}
+
+.service-extra-block {
+  margin-top: 2.4rem;
+}
+
+.service-extra-heading {
+  margin: 0 0 0.8rem;
+  font-size: 1.05rem;
+}
+
+.service-needs {
+  margin: 0;
+  padding-left: 1.15rem;
+  color: var(--gray-600);
+  line-height: 1.65;
+}
+
+.service-needs li {
+  margin-bottom: 0.55rem;
+}
+
+.service-fee {
+  position: sticky;
+  top: 100px;
+  padding: 1.9rem;
+  border-radius: 16px;
+  background: linear-gradient(155deg, var(--dark-blue), #020c1b);
+  color: var(--white);
+  box-shadow: var(--shadow-lg);
+}
+
+.service-fee h3 {
+  margin: 0 0 0.7rem;
+  color: var(--light-blue);
+  font-size: 0.8rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.service-fee-amount {
+  color: var(--white);
+  font-family: var(--font-heading);
+  font-size: 1.8rem;
+  font-weight: 600;
+  line-height: 1.2;
+}
+
+.service-fee-amount small {
+  display: block;
+  margin-top: 0.35rem;
+  color: rgba(255, 255, 255, 0.65);
+  font-family: var(--font-primary);
+  font-size: 0.82rem;
+  font-weight: 400;
+}
+
+.service-fee dl {
+  display: grid;
+  gap: 0.85rem;
+  margin: 1.4rem 0 0;
+}
+
+.service-fee dt {
+  color: rgba(255, 255, 255, 0.58);
+  font-size: 0.76rem;
+}
+
+.service-fee dd {
+  margin: 0;
+  color: rgba(255, 255, 255, 0.94);
+  font-size: 0.92rem;
+  line-height: 1.55;
+}
+
+.service-fee-cta {
+  margin-top: 1.5rem;
+}
+
+/* Existing content contains intentional launch placeholders. */
+.service-placeholder {
+  display: inline;
+  padding: 0 0.18em;
+  border-bottom: 1px dashed var(--primary-blue);
+  border-radius: 2px;
+  background: rgba(166, 203, 247, 0.2);
+}
+
+/* ---------- FAQs ---------- */
+.service-faq details {
+  border-bottom: 1px solid var(--gray-200);
+}
+
+.service-faq summary {
+  position: relative;
+  padding: 1.15rem 2.6rem 1.15rem 0;
+  color: var(--dark-blue);
+  font-family: var(--font-heading);
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  list-style: none;
+}
+
+.service-faq summary::-webkit-details-marker {
+  display: none;
+}
+
+.service-faq summary::after {
+  content: "+";
+  position: absolute;
+  top: 0.95rem;
+  right: 0.25rem;
+  color: var(--primary-blue);
+  font-size: 1.35rem;
+  font-weight: 400;
+}
+
+.service-faq details[open] summary::after {
+  content: "−";
+}
+
+.service-faq details p {
+  max-width: 780px;
+  margin: 0 0 1.1rem;
+  color: var(--gray-600);
+  font-size: 0.94rem;
+  line-height: 1.7;
+}
+
+.service-next {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1.5rem;
+  padding: 1.6rem 1.8rem;
+  border: 1px solid var(--gray-200);
+  border-radius: 14px;
+  background: var(--white);
+  box-shadow: var(--shadow-sm);
+}
+
+.service-next-spaced {
+  margin-top: 3rem;
+}
+
+.service-next h3 {
+  margin: 0;
+  font-size: 1.05rem;
+}
+
+.service-next p {
+  margin: 0.35rem 0 0;
+  color: var(--gray-600);
+  font-size: 0.92rem;
+}
+
+.service-next-link {
+  display: inline-flex;
+  align-items: center;
+  color: var(--primary-blue);
+  font-family: var(--font-heading);
+  font-size: 0.9rem;
+  font-weight: 600;
+}
+
+.service-next-link:hover {
+  transform: translateX(3px);
+}
+
+/* ---------- Specialist project areas ---------- */
+.service-areas {
+  display: grid;
+}
+
+.service-area {
+  display: grid;
+  grid-template-columns: 0.8fr 1fr 1fr;
+  gap: 2rem;
+  padding: 1.8rem 0;
+  border-top: 1px solid var(--gray-200);
+}
+
+.service-area:first-child {
+  border-top: 2px solid var(--primary-blue);
+}
+
+.service-area h3 {
+  margin: 0;
+  font-size: 1.2rem;
+}
+
+.service-area h4 {
+  margin: 0 0 0.45rem;
+  color: var(--primary-blue);
+  font-size: 0.76rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.service-area ul {
+  margin: 0;
+  padding-left: 1.1rem;
+  color: var(--gray-600);
+  font-size: 0.94rem;
+  line-height: 1.6;
+}
+
+.service-area li {
+  margin-bottom: 0.35rem;
+}
+
+/* ---------- Final CTA ---------- */
+.service-final {
+  position: relative;
+  overflow: hidden;
+  padding: clamp(3.8rem, 6vw, 5rem) 0;
+  background: linear-gradient(135deg, var(--dark-blue-gradient));
+  color: var(--white);
+}
+
+.service-final::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at 82% 45%, rgba(166, 203, 247, 0.12), transparent 36%);
+  pointer-events: none;
+}
+
+.service-final .service-wrap {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 2rem;
+}
+
+.service-final h2 {
+  color: var(--white);
+}
+
+.service-final p {
+  max-width: 620px;
+  margin: 0.65rem 0 0;
+  color: rgba(255, 255, 255, 0.72);
+  line-height: 1.65;
+}
+
+/* ---------- Accessibility ---------- */
+.service-skip {
+  position: absolute;
+  top: 0;
+  left: -999px;
+  z-index: 2000;
+  padding: 0.65rem 1rem;
+  border-radius: 0 0 6px 0;
+  background: var(--white);
+  color: var(--dark-blue);
+  font-weight: 600;
+}
+
+.service-skip:focus {
+  left: 0;
+}
+
+/* ---------- Responsive ---------- */
+@media (max-width: 1024px) {
+  .service-hero-grid,
+  .service-two {
+    grid-template-columns: 1fr;
+  }
+
+  .service-summary {
+    max-width: 720px;
+  }
+
+  .service-fee {
+    position: static;
+  }
+
+  .service-area {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .service-area > h3 {
+    grid-column: 1 / -1;
+  }
+}
+
+@media (max-width: 768px) {
+  .service-wrap {
+    padding: 0 1.25rem;
+  }
+
+  .service-hero {
+    padding: 7rem 0 3.5rem;
+  }
+
+  .service-hero h1 {
+    font-size: clamp(2rem, 8vw, 2.55rem);
+  }
+
+  .service-rungs {
+    grid-template-columns: 1fr;
+  }
+
+  .service-rung,
+  .service-rung:nth-child(2),
+  .service-rung:nth-child(3),
+  .service-rung:nth-child(4),
+  .service-rung:nth-child(5) {
+    min-height: auto;
+  }
+
+  .service-fit,
+  .service-scope,
+  .service-area {
+    grid-template-columns: 1fr;
+  }
+
+  .service-area > h3 {
+    grid-column: auto;
+  }
+
+  .service-section {
+    padding: 3.5rem 0;
+  }
+
+  .service-section-head {
+    margin-bottom: 2rem;
+  }
+
+  .service-cta,
+  .service-final .service-wrap {
+    align-items: stretch;
+  }
+
+  .service-cta .btn-secondary,
+  .service-cta .service-btn-outline,
+  .service-final .btn-secondary {
+    width: 100%;
+  }
+
+  .service-next {
+    align-items: flex-start;
+  }
+}
+
+@media (max-width: 480px) {
+  .service-wrap {
+    padding: 0 1rem;
+  }
+
+  .service-hero {
+    padding-top: 6.5rem;
+  }
+
+  .service-summary,
+  .service-fit > div,
+  .service-fee,
+  .service-next {
+    padding: 1.25rem;
+  }
+
+  .service-steps li {
+    grid-template-columns: 2.65rem minmax(0, 1fr);
+    gap: 0.75rem;
+  }
+
+  .service-steps li::before {
+    width: 2.1rem;
+    height: 2.1rem;
+  }
+}

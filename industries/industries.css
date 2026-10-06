@@ -1,0 +1,389 @@
+/* ==========================================================================
+   CFO CRAFT - SHARED INDUSTRY PAGE STYLES
+   Global typography, navbar, footer, buttons, colors and social hover states
+   come from ../style.css and ../responsive.css.
+   Only industry-specific components live here.
+   ========================================================================== */
+
+body.industry-page {
+  background: var(--white);
+  color: #111;
+}
+
+.industry-page main { overflow: hidden; }
+
+.industry-wrap {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 2rem;
+}
+
+.industry-skip {
+  position: fixed;
+  left: -9999px;
+  top: 0.75rem;
+  z-index: 2000;
+  padding: 0.65rem 1rem;
+  border-radius: 8px;
+  background: var(--white);
+  color: var(--dark-blue);
+  box-shadow: var(--shadow-md);
+}
+.industry-skip:focus { left: 0.75rem; }
+
+/* ---------- Hero ---------- */
+.industry-hero {
+  position: relative;
+  overflow: hidden;
+  padding: 9rem 0 5rem;
+  background: linear-gradient(110deg, var(--dark-blue-gradient));
+  color: var(--white);
+}
+.industry-hero::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background:
+    radial-gradient(ellipse at 22% 82%, rgba(166, 203, 247, 0.12), transparent 48%),
+    radial-gradient(ellipse at 82% 18%, rgba(43, 109, 178, 0.14), transparent 45%);
+}
+.industry-hero > .industry-wrap {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  grid-template-columns: minmax(0, 1.15fr) minmax(320px, 0.85fr);
+  gap: clamp(2.5rem, 5vw, 5rem);
+  align-items: center;
+}
+.industry-breadcrumb {
+  margin: 0 0 1.15rem;
+  color: rgba(255,255,255,.62);
+  font-size: .85rem;
+}
+.industry-breadcrumb a { color: inherit; }
+.industry-breadcrumb a:hover { color: var(--light-blue); }
+.industry-hero h1 {
+  max-width: 820px;
+  margin: 0;
+  color: var(--light-blue);
+  font-family: var(--font-heading);
+  font-size: clamp(2.35rem, 5vw, 3.7rem);
+  font-weight: 400;
+  line-height: 1.12;
+  letter-spacing: -.025em;
+}
+.industry-lede {
+  max-width: 680px;
+  margin: 1.25rem 0 0;
+  color: rgba(255,255,255,.82);
+  font-size: clamp(1rem, 1.6vw, 1.15rem);
+  line-height: 1.7;
+}
+.industry-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  align-items: center;
+  margin-top: 1.8rem;
+}
+.industry-hero-link {
+  color: var(--light-blue);
+  font-size: .9rem;
+  font-weight: 600;
+  text-decoration: none;
+  border-bottom: 1px solid rgba(166,203,247,.55);
+  padding-bottom: 2px;
+}
+.industry-hero-link:hover { color: var(--white); border-color: var(--white); }
+
+/* ---------- Hero finance panel ---------- */
+.industry-pack {
+  position: relative;
+  padding: 1.5rem;
+  border: 1px solid rgba(255,255,255,.14);
+  border-radius: 16px;
+  background: var(--white);
+  color: var(--dark-blue);
+  box-shadow: var(--shadow-xl);
+}
+.industry-pack::before {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  inset: 14px -14px -14px 14px;
+  border-radius: 16px;
+  background: var(--primary-blue);
+  opacity: .82;
+}
+.industry-pack h2 {
+  margin: 0 0 .25rem;
+  color: var(--dark-blue);
+  font-size: 1.05rem;
+  font-weight: 600;
+}
+.industry-pack .cap {
+  margin: 0 0 1rem;
+  color: var(--gray-600);
+  font-size: .8rem;
+}
+.industry-pack ul { margin: 0; padding: 0; list-style: none; }
+.industry-pack li {
+  display: grid;
+  grid-template-columns: minmax(0,1fr) 92px;
+  gap: .75rem;
+  align-items: center;
+  padding: .78rem 0;
+  border-top: 1px solid var(--gray-200);
+  font-size: .9rem;
+}
+.industry-pack li span { color: var(--dark-blue); font-weight: 500; }
+.industry-pack svg { width: 92px; height: 26px; display: block; }
+
+/* ---------- Core section rhythm ---------- */
+.industry-section { padding: clamp(3.75rem, 7vw, 5.5rem) 0; background: var(--white); }
+.industry-section.industry-alt {
+  background: var(--gray-100);
+  border-top: 1px solid var(--gray-200);
+  border-bottom: 1px solid var(--gray-200);
+}
+.industry-heading {
+  max-width: 760px;
+  margin: 0 0 .75rem;
+  color: var(--dark-blue);
+  font-family: var(--font-heading);
+  font-size: clamp(1.8rem, 3.5vw, 2.75rem);
+  font-weight: 400;
+  line-height: 1.2;
+  letter-spacing: -.02em;
+}
+.industry-sub {
+  max-width: 760px;
+  margin: 0;
+  color: var(--gray-600);
+  font-size: 1rem;
+  line-height: 1.7;
+}
+
+/* ---------- Pain points ---------- */
+.industry-symptoms {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0,1fr));
+  gap: 0 3rem;
+  margin: 2.25rem 0 0;
+  padding: 0;
+  list-style: none;
+}
+.industry-symptoms li { padding: 1.5rem 0; border-top: 1px solid var(--gray-200); }
+.industry-symptoms h3 {
+  margin: 0 0 .45rem;
+  color: var(--dark-blue);
+  font-family: var(--font-heading);
+  font-size: 1.12rem;
+  font-weight: 600;
+  line-height: 1.35;
+}
+.industry-symptoms p { margin: 0; color: var(--gray-600); font-size: .95rem; line-height: 1.65; }
+
+/* ---------- Levers ---------- */
+.industry-levers { margin-top: 2.25rem; border-top: 3px solid var(--primary-blue); }
+.industry-lever {
+  display: grid;
+  grid-template-columns: 240px minmax(0,1fr) minmax(0,1fr);
+  gap: 2.25rem;
+  padding: 1.75rem 0;
+  border-bottom: 1px solid var(--gray-200);
+}
+.industry-lever h3 {
+  margin: 0;
+  color: var(--dark-blue);
+  font-family: var(--font-heading);
+  font-size: 1.45rem;
+  font-weight: 500;
+  line-height: 1.25;
+}
+.industry-lever p { margin: 0; color: #24384f; font-size: .95rem; line-height: 1.65; }
+.industry-output {
+  padding-left: 1rem;
+  border-left: 3px solid var(--light-blue);
+  color: var(--gray-600) !important;
+}
+.industry-output b {
+  display: block;
+  margin-bottom: .3rem;
+  color: var(--primary-blue);
+  font-size: .78rem;
+  font-weight: 700;
+  letter-spacing: .05em;
+  text-transform: uppercase;
+}
+
+/* ---------- KPI pack ---------- */
+.industry-kpis {
+  display: grid;
+  grid-template-columns: minmax(0,.85fr) minmax(0,1.15fr);
+  gap: 4rem;
+  align-items: start;
+}
+.industry-kpi-list {
+  columns: 2;
+  column-gap: 2.25rem;
+  margin: 0;
+  padding: .35rem 0 0;
+  border-top: 3px solid var(--primary-blue);
+  list-style: none;
+}
+.industry-kpi-list li {
+  break-inside: avoid;
+  padding: .85rem 0;
+  border-bottom: 1px solid var(--gray-200);
+  font-size: .93rem;
+}
+.industry-kpi-list b { display:block; color:var(--dark-blue); font-weight:600; }
+.industry-kpi-list small { display:block; margin-top:.12rem; color:var(--gray-600); font-size:.83rem; }
+
+/* ---------- Statutory / lender references ---------- */
+.industry-refs {
+  display: grid;
+  gap: .9rem;
+  max-width: 960px;
+  margin: 2rem 0 0;
+  padding: 0;
+  list-style: none;
+}
+.industry-refs li {
+  padding: 1.35rem 1.5rem;
+  border: 1px solid var(--gray-200);
+  border-radius: 12px;
+  background: var(--white);
+  box-shadow: var(--shadow-sm);
+}
+.industry-refs h3 { margin:0 0 .35rem; color:var(--dark-blue); font-size:1.05rem; font-weight:600; }
+.industry-refs p { margin:0; color:#24384f; font-size:.94rem; line-height:1.65; }
+.industry-refs a { color:var(--primary-blue); font-weight:500; }
+.industry-source { display:block; margin-top:.65rem; color:var(--gray-600); font-size:.8rem; line-height:1.55; }
+.industry-disclaimer { max-width:900px; margin:1rem 0 0; color:var(--gray-600); font-size:.8rem; line-height:1.6; }
+
+/* ---------- Fit ---------- */
+.industry-fit-grid { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:2rem; margin-top:2rem; }
+.industry-fit-grid > div { padding:1.5rem; border:1px solid var(--gray-200); border-radius:12px; background:var(--white); }
+.industry-fit-grid h3 { margin:0 0 .75rem; color:var(--dark-blue); font-size:1.05rem; font-weight:600; }
+.industry-fit-grid ul { margin:0; padding:0; list-style:none; }
+.industry-fit-grid li { position:relative; padding:.72rem 0 .72rem 1.65rem; border-top:1px solid var(--gray-200); color:#24384f; font-size:.94rem; line-height:1.55; }
+.industry-fit-grid li::before { position:absolute; left:.1rem; top:.72rem; font-weight:700; }
+.industry-yes li::before { content:'✓'; color:var(--primary-blue); }
+.industry-no li::before { content:'–'; color:var(--gray-600); }
+.industry-fit-grid a { color:var(--primary-blue); font-weight:600; }
+
+/* ---------- Engagement path ---------- */
+.industry-path {
+  display:grid;
+  grid-template-columns:repeat(4,minmax(0,1fr));
+  margin:2rem 0 0;
+  padding:0;
+  overflow:hidden;
+  border:1px solid var(--gray-200);
+  border-radius:14px;
+  background:var(--white);
+  list-style:none;
+}
+.industry-path li { padding:1.4rem; border-right:1px solid var(--gray-200); }
+.industry-path li:last-child { border-right:0; }
+.industry-when { margin:0 0 .25rem; color:var(--primary-blue); font-size:.78rem; font-weight:700; text-transform:uppercase; letter-spacing:.06em; }
+.industry-path h3 { margin:.2rem 0 .5rem; color:var(--dark-blue); font-size:1.02rem; font-weight:600; line-height:1.35; }
+.industry-path h3 a:hover { color:var(--primary-blue); }
+.industry-path p { margin:0; color:var(--gray-600); font-size:.88rem; line-height:1.55; }
+
+/* ---------- FAQ ---------- */
+.industry-faq { max-width:860px; margin-top:1rem; }
+.industry-faq details { border-bottom:1px solid var(--gray-200); }
+.industry-faq details:first-child { border-top:1px solid var(--gray-200); }
+.industry-faq summary {
+  position:relative;
+  padding:1.1rem 2.5rem 1.1rem 0;
+  cursor:pointer;
+  list-style:none;
+  color:var(--dark-blue);
+  font-family:var(--font-heading);
+  font-size:1rem;
+  font-weight:600;
+}
+.industry-faq summary::-webkit-details-marker { display:none; }
+.industry-faq summary::after { content:'+'; position:absolute; right:.25rem; top:.9rem; color:var(--primary-blue); font-size:1.35rem; font-weight:400; }
+.industry-faq details[open] summary::after { content:'−'; }
+.industry-faq details p { max-width:760px; margin:0; padding:0 0 1rem; color:var(--gray-600); font-size:.92rem; line-height:1.7; }
+
+/* ---------- Other industries ---------- */
+.industry-others { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:1rem; margin-top:1.5rem; }
+.industry-others a {
+  display:block;
+  padding:1.35rem;
+  border:1px solid var(--gray-200);
+  border-radius:12px;
+  background:var(--white);
+  box-shadow:var(--shadow-sm);
+  transition:var(--transition);
+}
+.industry-others a:hover { border-color:var(--primary-blue); transform:translateY(-2px); box-shadow:var(--shadow-md); }
+.industry-others b { display:block; margin-bottom:.35rem; color:var(--dark-blue); font-family:var(--font-heading); font-size:1.12rem; font-weight:600; }
+.industry-others span { color:var(--gray-600); font-size:.88rem; line-height:1.5; }
+
+/* ---------- Final CTA ---------- */
+.industry-cta {
+  position:relative;
+  overflow:hidden;
+  background:linear-gradient(135deg, var(--dark-blue-gradient));
+  color:var(--white);
+}
+.industry-cta::before {
+  content:'';
+  position:absolute;
+  inset:0;
+  background:radial-gradient(circle at 82% 50%, rgba(166,203,247,.12), transparent 42%);
+  pointer-events:none;
+}
+.industry-cta .industry-wrap {
+  position:relative;
+  z-index:1;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:2rem;
+  padding-top:3.75rem;
+  padding-bottom:3.75rem;
+}
+.industry-cta h2 { max-width:680px; margin:0; color:var(--light-blue); font-family:var(--font-heading); font-size:clamp(1.75rem,3.3vw,2.55rem); font-weight:400; line-height:1.2; }
+.industry-cta p { max-width:680px; margin:.75rem 0 0; color:rgba(255,255,255,.78); line-height:1.65; }
+
+.industry-placeholder { background:rgba(238,186,125,.18); border-bottom:1px dashed var(--creamish); padding:0 .15em; }
+
+/* ---------- Responsive ---------- */
+@media (max-width: 960px) {
+  .industry-hero > .industry-wrap, .industry-kpis { grid-template-columns:1fr; gap:2.5rem; }
+  .industry-lever { grid-template-columns:1fr; gap:.8rem; }
+  .industry-path { grid-template-columns:repeat(2,minmax(0,1fr)); }
+  .industry-path li:nth-child(2) { border-right:0; }
+  .industry-path li:nth-child(-n+2) { border-bottom:1px solid var(--gray-200); }
+}
+@media (max-width: 768px) {
+  .industry-wrap { padding:0 1.25rem; }
+  .industry-hero { padding:7.5rem 0 3.75rem; }
+  .industry-symptoms, .industry-fit-grid, .industry-others { grid-template-columns:1fr; }
+  .industry-kpi-list { columns:1; }
+  .industry-pack { margin-right:.75rem; }
+  .industry-cta .industry-wrap { align-items:flex-start; flex-direction:column; }
+}
+@media (max-width: 520px) {
+  .industry-hero h1 { font-size:2.15rem; }
+  .industry-actions { align-items:stretch; flex-direction:column; }
+  .industry-actions .btn-secondary, .industry-hero-link { width:100%; text-align:center; justify-content:center; }
+  .industry-pack li { grid-template-columns:1fr; gap:.4rem; }
+  .industry-pack svg { width:100%; max-width:140px; }
+  .industry-path { grid-template-columns:1fr; }
+  .industry-path li { border-right:0 !important; border-bottom:1px solid var(--gray-200); }
+  .industry-path li:last-child { border-bottom:0; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .industry-page * { scroll-behavior:auto !important; }
+}

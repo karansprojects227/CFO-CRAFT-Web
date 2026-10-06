@@ -1,0 +1,688 @@
+/* ==========================================================================
+   CFO CRAFT - RESPONSIVE STYLESHEET (responsive.css)
+   Contains all viewport breakpoints and media queries:
+   - 1024px: Small desktops & tablets landscape
+   - 992px:  Tablets landscape / medium desktops
+   - 768px:  Tablets portrait & mobile devices (Managed spacing, padding & gaps)
+   - 480px:  Small mobile screens
+   ========================================================================== */
+
+/* ==========================================================================
+   1. Breakpoint: max-width 1024px
+   ========================================================================== */
+@media (max-width: 1024px) {
+  .feature-row,
+  .feature-row.reverse {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+    direction: ltr;
+  }
+
+  .cta-content {
+    grid-template-columns: 1fr;
+    gap: 2.5rem;
+  }
+
+  .cta-right {
+    display: none;
+  }
+
+  .footer-top {
+    grid-template-columns: 1fr 1fr;
+    gap: 2rem;
+  }
+}
+
+/* ==========================================================================
+   2. Breakpoint: max-width 992px
+   ========================================================================== */
+@media (max-width: 992px) {
+  .platform-split {
+    grid-template-columns: 1fr;
+    gap: 2.5rem;
+  }
+}
+
+/* ==========================================================================
+   3. Breakpoint: max-width 768px (Mobile & Tablet Portrait)
+   Consistent, proportional paddings, margins, gaps, and spaces
+   ========================================================================== */
+@media (max-width: 768px) {
+  /* --- Global Container & Section Spacing --- */
+  .container {
+    padding: 0 1.25rem;
+  }
+
+  /* Consistent vertical rhythm across all sections */
+  .section-platform,
+  .section-feature,
+  .section-why,
+  .section-how,
+  .section-outcome,
+  .section-metrics,
+  .section-case-studies,
+  .section-pricing,
+  .section-story,
+  .section-banner-cta,
+  .section-cta,
+  .section-faq,
+  .section-contact {
+    padding:0;
+    margin:2rem 0;
+  }
+  .section-how,.section-metrics{
+    padding:2rem 0;
+  }
+
+  .footer {
+    padding: 3.5rem 0 1.5rem;
+  }
+
+  /* Section Headers & Typography Hierarchy */
+  .section-header {
+    margin-bottom: 2rem;
+  }
+
+  .section-header .section-desc {
+    font-size: 1rem;
+    line-height: 1.6;
+  }
+
+  .section-heading {
+    font-size: clamp(1.65rem, 5vw, 2.1rem);
+    line-height: 1.25;
+    margin-bottom: 0.75rem;
+  }
+
+  .section-subheading {
+    font-size: 0.98rem;
+    line-height: 1.6;
+    margin-bottom: 1.75rem;
+  }
+
+  .pre-title {
+    font-size: 0.8rem;
+    letter-spacing: 0.08em;
+    margin-bottom: 0.5rem;
+  }
+
+  .section-pricing > .container > p,
+  .section-story .section-heading,
+  .section-contact > .container > p {
+    margin-bottom: 2rem;
+  }
+
+  /* --- Navigation --- */
+  .nav-links {
+    display: none;
+    position: fixed;
+    top: 60px;
+    left: 0;
+    right: 0;
+    background: var(--white);
+    flex-direction: column;
+    padding: 1.25rem;
+    box-shadow: var(--shadow-lg);
+    gap: 0.5rem;
+    z-index: 999;
+    max-height: calc(100vh - 60px);
+    overflow-y: auto;
+  }
+
+  .nav-links.active {
+    display: flex;
+  }
+
+  .nav-links .nav-link {
+    color: var(--dark-blue);
+    padding: 0.75rem 0.5rem;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    justify-content: flex-start;
+  }
+
+  .nav-links .nav-link .nav-chevron {
+    margin-left: auto;
+    flex-shrink: 0;
+    transition: transform 0.25s ease;
+  }
+
+  .nav-dropdown-wrap {
+    width: 100%;
+    flex-direction: column;
+    align-items: stretch;
+    padding-bottom: 0;
+    margin-bottom: 0;
+  }
+
+  .nav-dropdown {
+    position: static;
+    transform: none !important;
+    opacity: 1;
+    visibility: visible;
+    pointer-events: auto;
+    width: 100%;
+    max-width: 100%;
+    box-shadow: none;
+    border: none;
+    border-left: 2px solid var(--mint);
+    border-radius: 0;
+    padding: 0.35rem 0 0.35rem 0.5rem;
+    margin: 0.25rem 0 0.5rem 0.5rem;
+    display: none;
+  }
+
+  .nav-dropdown .dropdown-item {
+    padding: 8px 10px;
+    gap: 10px;
+  }
+
+  .nav-dropdown .dd-icon {
+    width: 36px;
+    height: 36px;
+  }
+
+  .nav-dropdown .dd-icon svg {
+    width: 18px;
+    height: 18px;
+  }
+
+  .nav-dropdown .dd-title {
+    font-size: 0.85rem;
+  }
+
+  .nav-dropdown .dd-desc {
+    font-size: 0.725rem;
+  }
+
+  .nav-dropdown::before {
+    display: none;
+  }
+
+  .nav-dropdown-wrap:hover .nav-chevron {
+    transform: none;
+  }
+
+  .nav-dropdown-wrap.open .nav-dropdown {
+    display: block;
+  }
+
+  .nav-dropdown-wrap.open > .nav-link .nav-chevron,
+  .nav-dropdown-wrap.open:hover > .nav-link .nav-chevron {
+    transform: rotate(180deg);
+  }
+
+  .dropdown-col {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+
+  .dropdown-arrow {
+    display: none;
+  }
+
+  .dropdown-grid,
+  .two-col-with-promo,
+  .three-col,
+  .dropdown-items-grid {
+    grid-template-columns: 1fr;
+    gap: 0.75rem;
+  }
+
+  .dropdown-featured-card {
+    padding: 1.25rem;
+    margin-top: 0.25rem;
+  }
+
+  .dropdown-promo {
+    display: none;
+  }
+
+  .mobile-menu-btn {
+    display: flex;
+  }
+
+  .mobile-menu-btn.active span:nth-child(1) {
+    transform: rotate(45deg) translate(5px, 5px);
+  }
+
+  .mobile-menu-btn.active span:nth-child(2) {
+    opacity: 0;
+  }
+
+  .mobile-menu-btn.active span:nth-child(3) {
+    transform: rotate(-45deg) translate(5px, -5px);
+  }
+
+  /* --- Hero Section Spacing --- */
+  .hero-content {
+    padding: 3.5rem 0 2rem;
+  }
+
+  .hero-title {
+    font-size: clamp(1.9rem, 6vw, 2.35rem);
+    line-height: 1.2;
+    margin-bottom: 1rem;
+  }
+
+  .hero-subtitle {
+    font-size: 1rem;
+    line-height: 1.55;
+    margin-bottom: 1.5rem;
+  }
+
+  .hero-input {
+    width: 100%;
+  }
+
+  .hero-trust {
+    gap: 0.75rem;
+    margin-top: 1rem;
+  }
+
+  /* --- Hero Dashboard (Mobile Ordering & Spacing) --- */
+  .hero-dashboard {
+    margin: 1.5rem auto 0;
+  }
+
+  .hero-dashboard .dashboard-mockup,
+  .dashboard-mockup {
+    display: flex;
+    flex-direction: column;
+    min-height: auto;
+    border-radius: 14px;
+  }
+
+  .hero-dashboard .dashboard-sidebar,
+  .dashboard-sidebar {
+    display: contents;
+  }
+
+  /* 1. Logo on top */
+  .hero-dashboard .sidebar-logo,
+  .sidebar-logo {
+    order: 1;
+    padding: 1rem 1rem 0.65rem;
+    margin-bottom: 0;
+    border-bottom: 1px solid var(--gray-200);
+    display: block;
+  }
+
+  .hero-dashboard .sidebar-logo .brand-logo,
+  .sidebar-logo .brand-logo {
+    height: 30px;
+  }
+
+  /* 2. Dashboard metrics main in middle */
+  .hero-dashboard .dashboard-main,
+  .dashboard-main {
+    order: 2;
+    padding: 1rem;
+  }
+
+  .dashboard-search {
+    padding: 0.55rem 0.85rem;
+    margin-bottom: 0.85rem;
+    font-size: 0.75rem;
+  }
+
+  .dashboard-cards {
+    grid-template-columns: 1fr;
+    gap: 0.65rem;
+    margin-bottom: 0.75rem;
+  }
+
+  .dash-card {
+    padding: 0.85rem;
+  }
+
+  .dash-card-value {
+    font-size: 1.35rem;
+  }
+
+  .dashboard-charts {
+    grid-template-columns: 1fr;
+    gap: 0.75rem;
+  }
+
+  .mini-chart {
+    padding: 0.85rem;
+  }
+
+  /* 3. Sidebar content at bottom */
+  .hero-dashboard .sidebar-content,
+  .sidebar-content {
+    order: 3;
+    margin-top: 0;
+    border-top: 1px solid var(--gray-200);
+    padding: 1.35rem 1rem 1.25rem;
+  }
+
+  .sidebar-hero-title {
+    font-size: 1.65rem;
+    line-height: 1.2;
+    margin-bottom: 0.85rem;
+  }
+
+  .sidebar-hero-text {
+    font-size: 0.92rem;
+    line-height: 1.55;
+    margin-bottom: 1.25rem;
+  }
+
+  .sidebar-hero-actions {
+    justify-content:center;
+  }
+
+  /* --- Platform Section --- */
+  .platform-left .platform-title{
+    font-size:1.3rem;
+  }
+  .platform-split {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+
+  .platform-header {
+    margin-bottom: 1.75rem;
+  }
+
+  .platform-features-grid {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+
+  .p-feature-card {
+    padding: 1.25rem;
+  }
+  .mock-dashboard-enhanced{
+    padding:1rem;
+  }
+  .md-kpi-grid{
+    gap:0.85rem;
+    margin-bottom:0.85rem;
+  }
+  .md-kpi-card{
+    padding:0.85rem;
+  }
+  /* --- Feature Sections & Visuals --- */
+  .feature-row,
+  .feature-row.reverse {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+    direction: ltr;
+    margin-bottom: 2rem;
+  }
+
+  .feature-desc {
+    margin-bottom: 1.25rem;
+  }
+
+  .feature-list {
+    margin-bottom: 1.25rem;
+    padding-left: 1.25rem;
+  }
+
+  .feature-visual {
+    min-height: auto;
+    padding: 0;
+  }
+
+  .feature-visual.tools-visual {
+    min-height: 380px;
+    padding: 1rem 0;
+  }
+
+  .feature-card {
+    padding: 1.25rem 1rem;
+  }
+
+  /* --- Why CFO Craft --- */
+  .why-grid {
+    grid-template-columns: 1fr;
+    gap: 1.25rem;
+  }
+
+  .why-card {
+    padding: 1.5rem 1.25rem;
+    border-radius: 12px;
+  }
+
+  .why-icon {
+    margin-bottom: 1rem;
+  }
+
+  /* --- How It Works --- */
+  .how-grid {
+    grid-template-columns: 1fr;
+    gap: 1px;
+    border-radius: 12px;
+  }
+
+  .how-step {
+    padding: 1.75rem 1.25rem;
+  }
+
+  /* --- Outcomes Section --- */
+  .outcome-split {
+    grid-template-columns: 1fr;
+    border-radius: 12px;
+  }
+
+  .outcome-before,
+  .outcome-after {
+    padding: 1.75rem 1.25rem;
+  }
+
+  .outcome-title {
+    margin-bottom: 1.5rem;
+  }
+
+  .outcome-list li {
+    gap: 0.75rem;
+    margin-bottom: 1.15rem;
+    font-size: 0.95rem;
+  }
+
+  .outcome-footer-text {
+    margin-top: 1.75rem;
+    font-size: 0.92rem;
+  }
+
+  /* --- Metrics Section --- */
+  .metrics-grid {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+
+  .metric-card {
+    padding: 0.5rem;
+    text-align: center;
+  }
+
+  .metric-number {
+    font-size: 2.5rem;
+  }
+
+  /* --- Case Studies Section --- */
+  .section-case-studies .section-heading {
+    margin-bottom: 0.75rem;
+  }
+
+  .section-case-studies .section-subheading {
+    margin-bottom: 1.5rem;
+  }
+
+  .cs-modal-content {
+    width: 95%;
+    max-width: 1000px;
+    margin: 1rem auto;
+  }
+
+  .cs-slider-btn {
+    width: 34px;
+    height: 34px;
+    font-size: 1rem;
+  }
+
+  .cs-prev { left: 0.5rem; }
+  .cs-next { right: 0.5rem; }
+
+  /* --- Services & Pricing --- */
+  .pricing-grid {
+    grid-template-columns: 1fr;
+    gap: 1.25rem;
+  }
+
+  .pricing-card {
+    padding: 1.75rem 1.25rem;
+    border-radius: 12px;
+  }
+
+  .pricing-bottom-cta {
+    flex-direction: column;
+    gap: 1.25rem;
+    text-align: center;
+    margin-top: 2.25rem;
+    padding-top: 1.5rem;
+  }
+
+  /* --- Our Story --- */
+  .story-grid {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+
+  .founder-card {
+    padding: 1.75rem 1.25rem;
+    border-radius: 12px;
+  }
+
+  .story-list {
+    margin-top: 1.5rem;
+  }
+
+  /* --- Banner CTA Section --- */
+  .section-banner-cta h2 {
+    font-size: clamp(1.75rem, 5vw, 2.25rem);
+    margin-bottom: 1rem;
+  }
+
+  .section-banner-cta p {
+    font-size: 0.95rem;
+    margin-bottom: 2rem;
+  }
+
+  /* --- Mini-Dashboard CTA Section --- */
+  .cta-content {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+
+  .cta-right {
+    display: none;
+  }
+
+  .cta-title {
+    font-size: 1.85rem;
+    margin-bottom: 1rem;
+  }
+
+  .cta-subtitle {
+    margin-bottom: 1.75rem;
+  }
+
+  .cta-buttons {
+    flex-direction: column;
+    gap: 0.75rem;
+    width: 100%;
+  }
+
+  .cta-buttons a {
+    width: 100%;
+    text-align: center;
+    justify-content: center;
+  }
+
+  /* --- FAQ Section --- */
+  .faq-list {
+    gap: 0.75rem;
+  }
+
+  .faq-question {
+    padding: 1.15rem 1rem;
+    font-size: 0.98rem;
+  }
+
+  .faq-answer-inner {
+    padding: 0 1rem 1.15rem;
+    font-size: 0.92rem;
+  }
+
+  /* --- Contact Section --- */
+  .contact-grid {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+
+  .contact-form {
+    gap: 1.15rem;
+  }
+
+  .form-row {
+    grid-template-columns: 1fr;
+    gap: 1.15rem;
+  }
+
+  .contact-info-area {
+    gap: 1.5rem;
+    padding-top: 0.5rem;
+  }
+
+  /* --- Footer --- */
+  .footer-top {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+
+  .footer-bottom {
+    flex-direction: column;
+    gap: 1rem;
+    text-align: center;
+    margin-top: 2rem;
+    padding-top: 1.5rem;
+  }
+}
+
+/* ==========================================================================
+   4. Breakpoint: max-width 480px (Small Mobile Screens)
+   ========================================================================== */
+@media (max-width: 480px) {
+  .container {
+    padding: 0 1rem;
+  }
+
+  .hero-content {
+    padding: 2.75rem 0 1.5rem;
+  }
+
+  .hero-title {
+    font-size: 1.85rem;
+  }
+
+  .nav-right .nav-signin {
+    display: none;
+  }
+
+  .why-card,
+  .how-step,
+  .outcome-before,
+  .outcome-after,
+  .pricing-card,
+  .founder-card {
+    padding: 1.35rem 1rem;
+  }
+}

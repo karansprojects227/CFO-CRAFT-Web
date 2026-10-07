@@ -3516,3 +3516,31 @@ h6,
 @media (prefers-reduced-motion:reduce) {
   .custom-tooltip,.home-page .feature-visual,.home-page .home-plan,.home-page .why-card,.home-page .faq-list details,.home-page .cs-slider-wrapper { transition:none!important; }
 }
+
+/* =========================================
+   HOMEPAGE PRICING INTRO TEXT FIX
+========================================= */
+
+.home-page .section-pricing {
+  background: var(--gray-100);
+  color: #111;
+}
+
+.home-page .section-pricing .pre-title {
+  color: var(--primary-blue);
+}
+
+.home-page .section-pricing .section-heading {
+  color: var(--dark-blue);
+  max-width: 760px;
+  text-align: left;
+  margin-bottom: 0.75rem;
+}
+
+.home-page .section-pricing > .container > .home-pricing-lead {
+  max-width: 760px;
+  margin-bottom: 2.75rem;
+  color: var(--gray-600);
+  font-size: 1rem;
+  line-height: 1.7;
+}

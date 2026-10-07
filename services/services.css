@@ -846,3 +846,632 @@ body.service-page {
     height: 2.1rem;
   }
 }
+
+/* ==========================================================================
+   VISUAL ENHANCEMENT LAYER
+   Adds lightweight visual structure to content-heavy service sections.
+   Keeps existing content intact and theme-consistent.
+   ========================================================================== */
+
+.service-section-head h2,
+.service-final h2 {
+  position: relative;
+  display: inline-block;
+  padding-bottom: 0.9rem;
+}
+
+.service-section-head h2::after,
+.service-final h2::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 82px;
+  height: 4px;
+  border-radius: 999px;
+  background: linear-gradient(90deg, var(--light-blue), var(--primary-blue));
+}
+
+.service-fit > div,
+.service-scope > div,
+.service-area,
+.service-faq details,
+.service-next,
+.service-extra-block {
+  position: relative;
+  overflow: hidden;
+}
+
+.service-fit > div::after,
+.service-scope > div::after,
+.service-area::after,
+.service-faq details::after,
+.service-extra-block::after {
+  content: "";
+  position: absolute;
+  top: -30px;
+  right: -35px;
+  width: 120px;
+  height: 120px;
+  background: radial-gradient(circle, rgba(166, 203, 247, 0.22) 0%, rgba(166, 203, 247, 0) 72%);
+  pointer-events: none;
+}
+
+/* ---------- Fit cards ---------- */
+.service-fit > div {
+  padding: 1.6rem 1.5rem 1.5rem;
+  border: 1px solid rgba(8, 41, 81, 0.08);
+  background: linear-gradient(180deg, #ffffff, #fbfcff);
+  transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
+}
+
+.service-fit > div:hover {
+  transform: translateY(-4px);
+  border-color: rgba(43, 109, 178, 0.25);
+  box-shadow: var(--shadow-md);
+}
+
+.service-fit > div::before {
+  content: "";
+  position: absolute;
+  top: 1.35rem;
+  right: 1.35rem;
+  width: 50px;
+  height: 50px;
+  border-radius: 14px;
+  background-color: rgba(166, 203, 247, 0.24);
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: 22px 22px;
+}
+
+.service-fit h3 {
+  padding-right: 4.2rem;
+}
+
+.service-fit .yes::before {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='%23082951' stroke-width='1.9' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M22 11.08V12a10 10 0 1 1-5.93-9.14'/%3E%3Cpath d='m9 11 3 3L22 4'/%3E%3C/svg%3E");
+}
+
+.service-fit .no::before {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='%23082951' stroke-width='1.9' stroke-linecap='round' stroke-linejoin='round'%3E%3Ccircle cx='12' cy='12' r='9'/%3E%3Cpath d='M8 12h8'/%3E%3C/svg%3E");
+}
+
+/* ---------- Scope cards ---------- */
+.service-scope {
+  gap: 1.5rem;
+}
+
+.service-scope > div {
+  min-height: 100%;
+  padding: 1.55rem 1.5rem 1.4rem;
+  border: 1px solid rgba(8, 41, 81, 0.08);
+  border-radius: 18px;
+  background: linear-gradient(180deg, #ffffff, #fbfcff);
+  box-shadow: var(--shadow-sm);
+  transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
+  border-top: 0;
+  box-shadow: inset 0 3px 0 var(--primary-blue), var(--shadow-sm);
+}
+
+.service-scope > div:hover {
+  transform: translateY(-4px);
+  box-shadow: inset 0 3px 0 var(--primary-blue), var(--shadow-md);
+  border-color: rgba(43, 109, 178, 0.2);
+}
+
+.service-scope > div::before {
+  content: "";
+  position: absolute;
+  top: 1.3rem;
+  right: 1.25rem;
+  width: 52px;
+  height: 52px;
+  border-radius: 16px;
+  background-color: rgba(166, 203, 247, 0.24);
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: 23px 23px;
+}
+
+.service-scope > div:nth-child(1)::before {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='%23082951' stroke-width='1.8' stroke-linecap='round' stroke-linejoin='round'%3E%3Crect x='5' y='4' width='14' height='16' rx='2'/%3E%3Cpath d='M8 9h8M8 13h8M8 17h5'/%3E%3C/svg%3E");
+}
+
+.service-scope > div:nth-child(2)::before {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='%23082951' stroke-width='1.8' stroke-linecap='round' stroke-linejoin='round'%3E%3Ccircle cx='12' cy='12' r='8'/%3E%3Cpath d='M12 7v10M15 9.5c-.6-1-1.7-1.5-3-1.5-1.7 0-3 .95-3 2.3 0 1.35 1.2 1.94 3 2.4 1.8.47 3 1.05 3 2.4 0 1.36-1.3 2.4-3 2.4-1.3 0-2.4-.45-3.05-1.3'/%3E%3C/svg%3E");
+}
+
+.service-scope > div:nth-child(3)::before {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='%23082951' stroke-width='1.8' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M4 19h16'/%3E%3Cpath d='M7 14l3-3 3 2 4-5'/%3E%3Cpath d='M17 8h3v3'/%3E%3C/svg%3E");
+}
+
+.service-scope > div:nth-child(4)::before {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='%23082951' stroke-width='1.8' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M12 3l7 3v5c0 4.5-2.6 8-7 10-4.4-2-7-5.5-7-10V6l7-3Z'/%3E%3Cpath d='m9.2 12.1 1.8 1.8 3.7-4'/%3E%3C/svg%3E");
+}
+
+.service-scope h3 {
+  padding-right: 4.4rem;
+}
+
+.service-scope p {
+  max-width: 46ch;
+}
+
+.service-scope ul {
+  padding-left: 0;
+  list-style: none;
+}
+
+.service-scope li {
+  position: relative;
+  margin-bottom: 0.55rem;
+  padding-left: 1.1rem;
+}
+
+.service-scope li::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0.7em;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--primary-blue);
+}
+
+/* ---------- Steps + supporting blocks ---------- */
+.service-steps li {
+  margin-bottom: 0.9rem;
+  padding: 1rem;
+  border: 1px solid var(--gray-200);
+  border-radius: 16px;
+  background: linear-gradient(180deg, #ffffff, #fbfcff);
+  box-shadow: var(--shadow-sm);
+  transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+}
+
+.service-steps li:hover {
+  transform: translateY(-3px);
+  border-color: rgba(43, 109, 178, 0.2);
+  box-shadow: var(--shadow-md);
+}
+
+.service-steps li:last-child {
+  margin-bottom: 0;
+}
+
+.service-extra-block {
+  padding: 1.4rem 1.4rem 1.2rem;
+  border: 1px solid var(--gray-200);
+  border-radius: 16px;
+  background: linear-gradient(180deg, #ffffff, #f7fbff);
+  box-shadow: var(--shadow-sm);
+}
+
+.service-extra-heading {
+  display: flex;
+  align-items: center;
+  gap: 0.55rem;
+}
+
+.service-extra-heading::before {
+  content: "";
+  width: 34px;
+  height: 34px;
+  flex: 0 0 34px;
+  border-radius: 10px;
+  background: rgba(166, 203, 247, 0.24) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='18' height='18' viewBox='0 0 24 24' fill='none' stroke='%23082951' stroke-width='1.9' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M12 1v22'/%3E%3Cpath d='M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6'/%3E%3C/svg%3E") center/18px 18px no-repeat;
+}
+
+.service-needs {
+  list-style: none;
+  padding-left: 0;
+}
+
+.service-needs li {
+  position: relative;
+  padding-left: 1.35rem;
+}
+
+.service-needs li::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0.72em;
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: linear-gradient(180deg, var(--light-blue), var(--primary-blue));
+}
+
+/* ---------- FAQ cards ---------- */
+.service-faq {
+  display: grid;
+  gap: 0.9rem;
+}
+
+.service-faq details {
+  border: 1px solid var(--gray-200);
+  border-radius: 16px;
+  background: linear-gradient(180deg, #ffffff, #fbfcff);
+  box-shadow: var(--shadow-sm);
+}
+
+.service-faq details[open] {
+  border-color: rgba(43, 109, 178, 0.18);
+  box-shadow: var(--shadow-md);
+}
+
+.service-faq summary {
+  padding: 1.2rem 3rem 1.2rem 1rem;
+}
+
+.service-faq summary::before {
+  content: "";
+  display: inline-block;
+  width: 28px;
+  height: 28px;
+  margin-right: 0.65rem;
+  vertical-align: middle;
+  border-radius: 9px;
+  background: rgba(166, 203, 247, 0.22) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%23082951' stroke-width='1.9' stroke-linecap='round' stroke-linejoin='round'%3E%3Ccircle cx='12' cy='12' r='9'/%3E%3Cpath d='M9.1 9a3 3 0 0 1 5.8 1c0 2-3 2-3 4'/%3E%3Cpath d='M12 17h.01'/%3E%3C/svg%3E") center/16px 16px no-repeat;
+}
+
+.service-faq details p {
+  padding: 0 1rem 1.15rem;
+  margin: 0;
+}
+
+/* ---------- Next-step panel ---------- */
+.service-next {
+  border-color: rgba(8, 41, 81, 0.08);
+  background: linear-gradient(135deg, rgba(166, 203, 247, 0.12), rgba(255, 255, 255, 0.98));
+}
+
+.service-next-link::after {
+  content: "→";
+  margin-left: 0.45rem;
+  transition: transform 0.2s ease;
+}
+
+.service-next-link:hover::after {
+  transform: translateX(3px);
+}
+
+/* ---------- Specialist project areas ---------- */
+.service-areas {
+  gap: 1rem;
+}
+
+.service-area {
+  align-items: start;
+  padding: 1.5rem;
+  border: 1px solid var(--gray-200);
+  border-radius: 18px;
+  background: linear-gradient(180deg, #ffffff, #fbfcff);
+  box-shadow: var(--shadow-sm);
+  transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+}
+
+.service-area:hover {
+  transform: translateY(-3px);
+  border-color: rgba(43, 109, 178, 0.2);
+  box-shadow: var(--shadow-md);
+}
+
+.service-area:first-child {
+  border-top: 1px solid var(--gray-200);
+}
+
+.service-area > h3 {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.service-area > h3::before {
+  content: "";
+  width: 42px;
+  height: 42px;
+  flex: 0 0 42px;
+  border-radius: 12px;
+  background-color: rgba(166, 203, 247, 0.24);
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: 20px 20px;
+}
+
+.service-area:nth-child(1) > h3::before {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='20' height='20' viewBox='0 0 24 24' fill='none' stroke='%23082951' stroke-width='1.8' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M3 21h18'/%3E%3Cpath d='M5 21V8l7-5 7 5v13'/%3E%3Cpath d='M9 21v-6h6v6'/%3E%3C/svg%3E");
+}
+
+.service-area:nth-child(2) > h3::before {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='20' height='20' viewBox='0 0 24 24' fill='none' stroke='%23082951' stroke-width='1.8' stroke-linecap='round' stroke-linejoin='round'%3E%3Ccircle cx='12' cy='12' r='8'/%3E%3Cpath d='M12 7v10M15 9.5c-.6-1-1.7-1.5-3-1.5-1.7 0-3 .95-3 2.3 0 1.35 1.2 1.94 3 2.4 1.8.47 3 1.05 3 2.4 0 1.36-1.3 2.4-3 2.4-1.3 0-2.4-.45-3.05-1.3'/%3E%3C/svg%3E");
+}
+
+.service-area:nth-child(3) > h3::before {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='20' height='20' viewBox='0 0 24 24' fill='none' stroke='%23082951' stroke-width='1.8' stroke-linecap='round' stroke-linejoin='round'%3E%3Crect x='3' y='4' width='18' height='16' rx='2'/%3E%3Cpath d='M3 10h18M8 4v6M16 4v6'/%3E%3C/svg%3E");
+}
+
+.service-area:nth-child(4) > h3::before {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='20' height='20' viewBox='0 0 24 24' fill='none' stroke='%23082951' stroke-width='1.8' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M3 21h18'/%3E%3Cpath d='M7 17l4-4 3 2 5-6'/%3E%3Cpath d='M16 9h4v4'/%3E%3C/svg%3E");
+}
+
+.service-area:nth-child(5) > h3::before {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='20' height='20' viewBox='0 0 24 24' fill='none' stroke='%23082951' stroke-width='1.8' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M8 12h8'/%3E%3Cpath d='M12 8v8'/%3E%3Cpath d='M4 9V5a1 1 0 0 1 1-1h4'/%3E%3Cpath d='M20 9V5a1 1 0 0 0-1-1h-4'/%3E%3Cpath d='M4 15v4a1 1 0 0 0 1 1h4'/%3E%3Cpath d='M20 15v4a1 1 0 0 1-1 1h-4'/%3E%3C/svg%3E");
+}
+
+/* ---------- Small-screen tuning for new visual layer ---------- */
+@media (max-width: 768px) {
+  .service-fit > div::before,
+  .service-scope > div::before {
+    width: 44px;
+    height: 44px;
+    background-size: 20px 20px;
+  }
+
+  .service-fit h3,
+  .service-scope h3 {
+    padding-right: 3.6rem;
+  }
+
+  .service-area {
+    padding: 1.2rem;
+  }
+
+  .service-area > h3::before {
+    width: 38px;
+    height: 38px;
+    flex-basis: 38px;
+  }
+
+  .service-faq summary::before {
+    width: 24px;
+    height: 24px;
+    margin-right: 0.55rem;
+    background-size: 14px 14px;
+  }
+}
+
+@media (max-width: 480px) {
+  .service-section-head h2,
+  .service-final h2 {
+    padding-bottom: 0.75rem;
+  }
+
+  .service-section-head h2::after,
+  .service-final h2::after {
+    width: 64px;
+  }
+
+  .service-fit > div,
+  .service-scope > div,
+  .service-area,
+  .service-extra-block,
+  .service-faq details {
+    border-radius: 14px;
+  }
+
+  .service-fit h3,
+  .service-scope h3 {
+    padding-right: 3.2rem;
+  }
+
+  .service-fit > div::before,
+  .service-scope > div::before {
+    top: 1.1rem;
+    right: 1rem;
+    width: 40px;
+    height: 40px;
+    border-radius: 12px;
+    background-size: 18px 18px;
+  }
+
+  .service-area > h3 {
+    gap: 0.55rem;
+  }
+
+  .service-area > h3::before {
+    width: 34px;
+    height: 34px;
+    flex-basis: 34px;
+    border-radius: 10px;
+    background-size: 18px 18px;
+  }
+}
+
+
+/* ==========================================================================
+   FINAL SERVICE FAQ STANDARD
+   Mirrors the Trading & Distribution FAQ design.
+   Keep this as the shared FAQ style for all Service pages.
+   ========================================================================== */
+
+.service-page .service-faq {
+  display: grid;
+  gap: 0.9rem;
+  max-width: 900px;
+  margin-top: 1.5rem;
+}
+
+/* Closed + open FAQ card */
+.service-page .service-faq details,
+.service-page .service-faq details:first-child {
+  position: relative;
+  overflow: hidden;
+  border: 1px solid var(--gray-200);
+  border-radius: 16px;
+  background: linear-gradient(180deg, #ffffff, #fbfcff);
+  box-shadow: var(--shadow-sm);
+  transition:
+    border-color 0.2s ease,
+    box-shadow 0.2s ease,
+    transform 0.2s ease;
+}
+
+/* Trading-style hover/open visual */
+.service-page .service-faq details:hover,
+.service-page .service-faq details[open] {
+  border-color: rgba(43, 109, 178, 0.2);
+  box-shadow: var(--shadow-md);
+}
+
+/* Question row */
+.service-page .service-faq summary {
+  position: relative;
+  display: flex;
+  align-items: center;
+  min-height: 68px;
+  padding: 1rem 3.5rem 1rem 1rem;
+  color: var(--dark-blue);
+  font-family: var(--font-heading);
+  font-size: 1rem;
+  font-weight: 600;
+  line-height: 1.45;
+  cursor: pointer;
+  list-style: none;
+}
+
+.service-page .service-faq summary::-webkit-details-marker {
+  display: none;
+}
+
+/* Left question icon */
+.service-page .service-faq summary::before {
+  content: "";
+  width: 34px;
+  height: 34px;
+  flex: 0 0 34px;
+  margin-right: 0.75rem;
+  border-radius: 10px;
+  background:
+    rgba(166, 203, 247, 0.24)
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='17' height='17' viewBox='0 0 24 24' fill='none' stroke='%23082951' stroke-width='1.9' stroke-linecap='round' stroke-linejoin='round'%3E%3Ccircle cx='12' cy='12' r='9'/%3E%3Cpath d='M9.1 9a3 3 0 0 1 5.8 1c0 2-3 2-3 4'/%3E%3Cpath d='M12 17h.01'/%3E%3C/svg%3E")
+    center / 17px 17px no-repeat;
+}
+
+/* Circular + */
+.service-page .service-faq summary::after {
+  content: "+";
+  position: absolute;
+  top: 50%;
+  right: 1.15rem;
+  display: grid;
+  width: 28px;
+  height: 28px;
+  place-items: center;
+  border-radius: 50%;
+  background: rgba(166, 203, 247, 0.18);
+  color: var(--primary-blue);
+  transform: translateY(-50%);
+  font-family: var(--font-primary);
+  font-size: 1.35rem;
+  font-weight: 400;
+  line-height: 1;
+}
+
+/* Open state: dark circular minus */
+.service-page .service-faq details[open] summary::after {
+  content: "−";
+  background: var(--dark-blue);
+  color: var(--white);
+}
+
+/* Answer alignment — same visual rhythm as Trading FAQ */
+.service-page .service-faq details p {
+  max-width: 780px;
+  margin: 0;
+  padding: 0 1.25rem 1.2rem 4.6rem;
+  color: var(--gray-600);
+  font-size: 0.94rem;
+  line-height: 1.7;
+}
+
+/* Preserve answer links */
+.service-page .service-faq details p a {
+  color: var(--primary-blue);
+  font-weight: 500;
+}
+
+.service-page .service-faq details p a:hover {
+  text-decoration: underline;
+}
+
+/* Tablet / Mobile */
+@media (max-width: 768px) {
+  .service-page .service-faq {
+    gap: 0.8rem;
+    max-width: 100%;
+  }
+
+  .service-page .service-faq summary {
+    min-height: 64px;
+    padding: 0.9rem 3rem 0.9rem 0.9rem;
+    font-size: 0.95rem;
+  }
+
+  .service-page .service-faq summary::before {
+    width: 30px;
+    height: 30px;
+    flex-basis: 30px;
+    margin-right: 0.6rem;
+    background-size: 15px 15px;
+  }
+
+  .service-page .service-faq summary::after {
+    right: 0.85rem;
+    width: 26px;
+    height: 26px;
+  }
+
+  .service-page .service-faq details p {
+    padding: 0 1rem 1.1rem 4rem;
+    font-size: 0.92rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .service-page .service-faq {
+    gap: 0.7rem;
+  }
+
+  .service-page .service-faq details,
+  .service-page .service-faq details:first-child {
+    border-radius: 14px;
+  }
+
+  .service-page .service-faq summary {
+    min-height: 60px;
+    padding: 0.85rem 2.8rem 0.85rem 0.8rem;
+    font-size: 0.9rem;
+  }
+
+  .service-page .service-faq summary::before {
+    width: 28px;
+    height: 28px;
+    flex-basis: 28px;
+    margin-right: 0.55rem;
+    border-radius: 9px;
+    background-size: 14px 14px;
+  }
+
+  .service-page .service-faq summary::after {
+    right: 0.75rem;
+    width: 25px;
+    height: 25px;
+    font-size: 1.15rem;
+  }
+
+  .service-page .service-faq details p {
+    padding: 0 0.85rem 1rem 3.55rem;
+    font-size: 0.88rem;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .service-page .service-faq details {
+    transition: none !important;
+    transform: none !important;
+  }
+}

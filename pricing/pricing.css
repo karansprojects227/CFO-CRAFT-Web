@@ -510,3 +510,496 @@
     transition: none !important;
   }
 }
+
+
+/* ==========================================================================
+   PREMIUM VISUAL ENHANCEMENT LAYER
+   Pricing page
+   Keeps all pricing copy, values and comparison data unchanged while adding
+   stronger visual hierarchy, iconography, depth and responsive polish.
+   ========================================================================== */
+
+/* ---------- Current-page nav state ---------- */
+.pricing-page .nav-links > .nav-link[aria-current="page"] {
+  color: var(--primary-blue);
+  font-weight: 700;
+  background: rgba(166, 203, 247, 0.2);
+  border-radius: 8px;
+  padding-left: .7rem;
+  padding-right: .7rem;
+}
+
+/* ---------- Hero visual ---------- */
+.pricing-page .p-hero::before {
+  content: "";
+  position: absolute;
+  left: -180px;
+  top: -190px;
+  width: 440px;
+  height: 440px;
+  border-radius: 50%;
+  border: 1px solid rgba(166, 203, 247, 0.1);
+  box-shadow:
+    0 0 0 58px rgba(166, 203, 247, 0.025),
+    0 0 0 116px rgba(43, 109, 178, 0.018);
+  pointer-events: none;
+}
+
+.pricing-page .p-hero .wrap {
+  position: relative;
+  z-index: 1;
+}
+
+/* ---------- Plan cards ---------- */
+.pricing-page .plan {
+  position: relative;
+  overflow: hidden;
+  border-color: rgba(8, 41, 81, 0.09);
+  background: linear-gradient(180deg, #ffffff 0%, #fbfcff 100%);
+  transition: transform .25s ease, box-shadow .25s ease, border-color .25s ease;
+}
+
+.pricing-page .plan::after {
+  content: "";
+  position: absolute;
+  top: -46px;
+  right: -40px;
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(166,203,247,.28), rgba(166,203,247,0) 70%);
+  pointer-events: none;
+}
+
+.pricing-page .plan:hover {
+  transform: translateY(-6px);
+  border-color: rgba(43, 109, 178, .22);
+  box-shadow: 0 22px 58px rgba(8, 41, 81, .14);
+}
+
+.pricing-page .plan:nth-child(2) {
+  transform: translateY(-8px);
+  border-color: rgba(43, 109, 178, .38);
+  box-shadow:
+    inset 0 4px 0 var(--primary-blue),
+    0 22px 60px rgba(8, 41, 81, .14);
+}
+
+.pricing-page .plan:nth-child(2):hover {
+  transform: translateY(-12px);
+}
+
+.pricing-page .plan::before {
+  content: "";
+  width: 48px;
+  height: 48px;
+  display: block;
+  margin-bottom: 1rem;
+  border-radius: 14px;
+  background-color: rgba(166, 203, 247, .24);
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: 23px;
+  flex: 0 0 auto;
+}
+
+.pricing-page .plan:nth-child(1)::before {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='23' height='23' viewBox='0 0 24 24' fill='none' stroke='%23082951' stroke-width='1.7' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M4 19V5M4 19h16'/%3E%3Cpath d='M7 15l4-4 3 2 5-6'/%3E%3C/svg%3E");
+}
+
+.pricing-page .plan:nth-child(2)::before {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='23' height='23' viewBox='0 0 24 24' fill='none' stroke='%23082951' stroke-width='1.7' stroke-linecap='round' stroke-linejoin='round'%3E%3Crect x='3' y='4' width='18' height='16' rx='2'/%3E%3Cpath d='M7 9h10M7 13h6M7 17h4'/%3E%3C/svg%3E");
+}
+
+.pricing-page .plan:nth-child(3)::before {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='23' height='23' viewBox='0 0 24 24' fill='none' stroke='%23082951' stroke-width='1.7' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M4 18l6-6 4 4 6-8'/%3E%3Cpath d='M16 8h4v4'/%3E%3C/svg%3E");
+}
+
+.pricing-page .tier {
+  display: inline-flex;
+  width: fit-content;
+  align-items: center;
+  gap: .45rem;
+  padding: .35rem .6rem;
+  border: 1px solid rgba(43, 109, 178, .1);
+  border-radius: 999px;
+  background: rgba(166, 203, 247, .14);
+  letter-spacing: .1em;
+}
+
+.pricing-page .plan .price {
+  position: relative;
+  padding-top: .2rem;
+}
+
+.pricing-page .plan .price::after {
+  content: "";
+  display: block;
+  width: 46px;
+  height: 3px;
+  margin-top: .7rem;
+  border-radius: 999px;
+  background: linear-gradient(90deg, var(--light-blue), var(--primary-blue));
+}
+
+.pricing-page .plan-feats {
+  display: grid;
+  gap: .12rem;
+}
+
+.pricing-page .plan-feats li {
+  padding-left: 2rem;
+}
+
+.pricing-page .plan-feats li::before {
+  content: "✓";
+  top: .02rem;
+  width: 22px;
+  height: 22px;
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  background: rgba(43, 109, 178, .1);
+  font-size: .72rem;
+}
+
+.pricing-page .plan-feats li.lead-in {
+  padding-left: 0;
+  margin-bottom: .3rem;
+}
+
+.pricing-page .more {
+  display: inline-flex;
+  align-items: center;
+  gap: .4rem;
+  text-decoration: none;
+}
+
+.pricing-page .more::after {
+  content: "→";
+  transition: transform .2s ease;
+}
+
+.pricing-page .more:hover::after {
+  transform: translateX(3px);
+}
+
+/* ---------- Diagnostic + Specialist cards ---------- */
+.pricing-page .bookend {
+  position: relative;
+  overflow: hidden;
+  border-color: rgba(8, 41, 81, .09);
+  border-radius: 18px;
+  background: linear-gradient(180deg, #fff, #fbfcff);
+  box-shadow: var(--shadow-sm);
+  transition: transform .24s ease, box-shadow .24s ease, border-color .24s ease;
+}
+
+.pricing-page .bookend:hover {
+  transform: translateY(-4px);
+  border-color: rgba(43, 109, 178, .2);
+  box-shadow: var(--shadow-md);
+}
+
+.pricing-page .bookend::before {
+  content: "";
+  width: 44px;
+  height: 44px;
+  grid-column: 1;
+  grid-row: 1;
+  margin-bottom: .2rem;
+  border-radius: 13px;
+  background-color: rgba(166,203,247,.24);
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: 21px;
+}
+
+.pricing-page .bookend:nth-child(1)::before {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='21' height='21' viewBox='0 0 24 24' fill='none' stroke='%23082951' stroke-width='1.7' stroke-linecap='round' stroke-linejoin='round'%3E%3Ccircle cx='11' cy='11' r='7'/%3E%3Cpath d='M20 20l-4-4M8 11l2 2 4-4'/%3E%3C/svg%3E");
+}
+
+.pricing-page .bookend:nth-child(2)::before {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='21' height='21' viewBox='0 0 24 24' fill='none' stroke='%23082951' stroke-width='1.7' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M12 3v18M5 7h14M7 7l-4 7h8L7 7zM17 7l-4 7h8l-4-7z'/%3E%3C/svg%3E");
+}
+
+.pricing-page .bookend > div:first-of-type {
+  grid-column: 1;
+}
+
+.pricing-page .bookend::after {
+  content: "";
+  position: absolute;
+  right: -35px;
+  top: -35px;
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(166,203,247,.22), rgba(166,203,247,0) 70%);
+  pointer-events: none;
+}
+
+.pricing-page .bookend .bp a {
+  display: inline-flex;
+  align-items: center;
+  gap: .35rem;
+  text-decoration: none;
+}
+
+.pricing-page .bookend .bp a::after {
+  content: "→";
+}
+
+/* ---------- Compare plans ---------- */
+.pricing-page .cmp h2.sec {
+  position: relative;
+  padding-bottom: .85rem;
+}
+
+.pricing-page .cmp h2.sec::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 72px;
+  height: 4px;
+  border-radius: 999px;
+  background: linear-gradient(90deg, var(--light-blue), var(--primary-blue));
+}
+
+.pricing-page .tbl-wrap {
+  border-radius: 18px;
+  border-color: rgba(8, 41, 81, .09);
+  box-shadow: var(--shadow-md);
+}
+
+.pricing-page thead th {
+  background:
+    linear-gradient(180deg, rgba(255,255,255,.025), rgba(255,255,255,0)),
+    var(--dark-blue);
+}
+
+.pricing-page thead th:nth-child(3) {
+  background: linear-gradient(180deg, #174d88, var(--dark-blue));
+}
+
+.pricing-page tbody tr:not(.grp) {
+  transition: background .18s ease;
+}
+
+.pricing-page tbody tr:not(.grp):hover {
+  background: #f7fbff;
+}
+
+.pricing-page tr.grp th {
+  position: relative;
+  padding-left: 2.7rem;
+  background: linear-gradient(90deg, rgba(166,203,247,.18), var(--gray-100));
+}
+
+.pricing-page tr.grp th::before {
+  content: "";
+  position: absolute;
+  left: 1rem;
+  top: 50%;
+  width: 20px;
+  height: 20px;
+  transform: translateY(-50%);
+  border-radius: 6px;
+  background: rgba(43,109,178,.13) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%23082951' stroke-width='2' stroke-linecap='round'%3E%3Cpath d='M5 12h14M12 5v14'/%3E%3C/svg%3E") center/12px no-repeat;
+}
+
+.pricing-page tbody td:nth-child(3) {
+  background: rgba(166, 203, 247, .055);
+}
+
+.pricing-page .yes {
+  width: 28px;
+  height: 28px;
+  background: rgba(43, 109, 178, 0.11);
+  box-shadow: inset 0 0 0 1px rgba(43,109,178,.08);
+}
+
+/* ---------- Exclusions as visual cards ---------- */
+.pricing-page .exclusions {
+  align-items: start;
+}
+
+.pricing-page .exclusions h2 {
+  position: relative;
+  padding-bottom: .75rem;
+}
+
+.pricing-page .exclusions h2::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 52px;
+  height: 3px;
+  border-radius: 999px;
+  background: linear-gradient(90deg, var(--light-blue), var(--primary-blue));
+}
+
+.pricing-page .ex-grid {
+  gap: 1rem;
+}
+
+.pricing-page .ex-grid > div {
+  position: relative;
+  overflow: hidden;
+  min-height: 100%;
+  padding: 1.3rem 1.25rem 1.2rem 4.35rem;
+  border: 1px solid var(--gray-200);
+  border-radius: 16px;
+  background: linear-gradient(180deg, #fff, #fbfcff);
+  box-shadow: var(--shadow-sm);
+  transition: transform .22s ease, box-shadow .22s ease, border-color .22s ease;
+}
+
+.pricing-page .ex-grid > div:hover {
+  transform: translateY(-3px);
+  border-color: rgba(43,109,178,.18);
+  box-shadow: var(--shadow-md);
+}
+
+.pricing-page .ex-grid > div::before {
+  content: "";
+  position: absolute;
+  left: 1.15rem;
+  top: 1.2rem;
+  width: 42px;
+  height: 42px;
+  border-radius: 12px;
+  background-color: rgba(166,203,247,.23);
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: 20px;
+}
+
+.pricing-page .ex-grid > div:nth-child(1)::before {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='20' height='20' viewBox='0 0 24 24' fill='none' stroke='%23082951' stroke-width='1.7' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M4 4h16v16H4zM8 8h8M8 12h8M8 16h5'/%3E%3C/svg%3E");
+}
+.pricing-page .ex-grid > div:nth-child(2)::before {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='20' height='20' viewBox='0 0 24 24' fill='none' stroke='%23082951' stroke-width='1.7' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M12 3l7 3v5c0 4.7-2.7 8-7 10-4.3-2-7-5.3-7-10V6l7-3Z'/%3E%3Cpath d='M9 12h6'/%3E%3C/svg%3E");
+}
+.pricing-page .ex-grid > div:nth-child(3)::before {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='20' height='20' viewBox='0 0 24 24' fill='none' stroke='%23082951' stroke-width='1.7' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M4 19V5h16v14zM8 9h8M8 13h5'/%3E%3Cpath d='m15 17 1.3 1.3L19 15.5'/%3E%3C/svg%3E");
+}
+.pricing-page .ex-grid > div:nth-child(4)::before {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='20' height='20' viewBox='0 0 24 24' fill='none' stroke='%23082951' stroke-width='1.7' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M4 18l6-6 4 4 6-8M16 8h4v4'/%3E%3C/svg%3E");
+}
+
+/* ---------- Closing CTA ---------- */
+.pricing-page .closing {
+  position: relative;
+  overflow: hidden;
+}
+
+.pricing-page .closing::before {
+  content: "";
+  position: absolute;
+  right: -70px;
+  top: 50%;
+  width: 250px;
+  height: 250px;
+  transform: translateY(-50%);
+  border: 1px solid rgba(166,203,247,.12);
+  border-radius: 50%;
+  box-shadow: 0 0 0 42px rgba(166,203,247,.035);
+  pointer-events: none;
+}
+
+.pricing-page .closing-bar {
+  position: relative;
+  z-index: 1;
+}
+
+/* ---------- Small-screen tuning ---------- */
+@media (max-width: 960px) {
+  .pricing-page .plan:nth-child(2) {
+    transform: none;
+  }
+
+  .pricing-page .plan:nth-child(2):hover {
+    transform: translateY(-6px);
+  }
+
+  .pricing-page .bookend::before {
+    grid-row: auto;
+  }
+}
+
+@media (max-width: 768px) {
+  .pricing-page .pricing-hero-tile {
+    width: 66px;
+    height: 66px;
+    border-radius: 17px;
+  }
+
+  .pricing-page .pricing-hero-tile svg {
+    width: 31px;
+    height: 31px;
+  }
+
+  .pricing-page .bookend {
+    padding-top: 1.4rem;
+  }
+
+  .pricing-page .bookend::before {
+    margin-bottom: .35rem;
+  }
+
+  .pricing-page .cmp h2.sec::after {
+    width: 60px;
+    height: 3px;
+  }
+
+  .pricing-page .ex-grid > div {
+    padding-left: 4.1rem;
+  }
+}
+
+@media (max-width: 520px) {
+  .pricing-page .plan,
+  .pricing-page .bookend,
+  .pricing-page .tbl-wrap,
+  .pricing-page .ex-grid > div {
+    border-radius: 14px;
+  }
+
+  .pricing-page .plan::before {
+    width: 44px;
+    height: 44px;
+    background-size: 21px;
+  }
+
+  .pricing-page .tier {
+    font-size: .7rem;
+  }
+
+  .pricing-page .ex-grid > div {
+    padding: 4.35rem 1.1rem 1.15rem;
+  }
+
+  .pricing-page .ex-grid > div::before {
+    left: 1.1rem;
+    top: 1rem;
+  }
+
+  .pricing-page .closing::before {
+    width: 190px;
+    height: 190px;
+    right: -95px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .pricing-page .pricing-hero-tile,
+  .pricing-page .plan,
+  .pricing-page .bookend,
+  .pricing-page .ex-grid > div,
+  .pricing-page .more::after {
+    transition: none !important;
+  }
+}

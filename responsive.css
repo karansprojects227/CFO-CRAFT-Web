@@ -1100,3 +1100,21 @@
     line-height: 1.5;
   }
 }
+
+
+/* ==========================================================================
+   ANIMATED SVG DASHBOARD EMBEDS - RESPONSIVE
+   ========================================================================== */
+@media (max-width: 768px) {
+  .feature-dashboard-embed,
+  .feature-dashboard-frame {
+    border-radius: 12px;
+  }
+}
+
+@media (max-width: 480px) {
+  .feature-dashboard-embed,
+  .feature-dashboard-frame {
+    border-radius: 10px;
+  }
+}

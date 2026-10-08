@@ -1031,14 +1031,14 @@
     <main id="main">
       <section class="service-hero">
         <div class="service-wrap">
-          <div class="service-breadcrumb">
-            <a href="../index.html"> Home </a>
-            /
-            <a href="../index.html#services"> Services </a>
-            / Finance Diagnostic
-          </div>
           <div class="service-hero-grid">
-            <div>
+            <div class="service-hero-copy">
+              <div class="service-breadcrumb">
+                <a href="../index.html"> Home </a>
+                /
+                <a href="../index.html#services"> Services </a>
+                / Finance Diagnostic
+              </div>
               <span class="service-tier"> Start here </span>
               <h1>Know exactly where your finance function stands.</h1>
               <p class="service-lede">
@@ -1063,57 +1063,46 @@
                 </a>
               </div>
             </div>
-            <aside aria-label="What you receive" class="service-summary">
-              <h2>What you receive</h2>
-              <p class="service-summary-sub">
-                Handed over at the findings readout
-              </p>
-              <ol>
-                <li>
-                  <i> 01 </i>
-                  <div>
-                    Written diagnostic report
-                    <span>
-                      Findings across books, cash, margins and compliance
-                    </span>
+            <aside
+              aria-label="Finance Diagnostic video walkthrough"
+              class="service-demo-card"
+            >
+              <div class="service-demo-shell">
+                <div class="service-demo-media">
+                  <video
+                    aria-label="Finance Diagnostic demo walkthrough"
+                    class="service-demo-video"
+                    controls=""
+                    playsinline=""
+                    poster="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxMjgwIiBoZWlnaHQ9IjcyMCIgdmlld0JveD0iMCAwIDEyODAgNzIwIj4KICAgICAgPGRlZnM+CiAgICAgICAgPGxpbmVhckdyYWRpZW50IGlkPSJiZyIgeDE9IjAiIHkxPSIwIiB4Mj0iMSIgeTI9IjEiPgogICAgICAgICAgPHN0b3Agb2Zmc2V0PSIwIiBzdG9wLWNvbG9yPSIjMDIwQzFCIi8+CiAgICAgICAgICA8c3RvcCBvZmZzZXQ9IjAuNTgiIHN0b3AtY29sb3I9IiMwNzFCMzUiLz4KICAgICAgICAgIDxzdG9wIG9mZnNldD0iMSIgc3RvcC1jb2xvcj0iIzA4Mjk1MSIvPgogICAgICAgIDwvbGluZWFyR3JhZGllbnQ+CiAgICAgICAgPHJhZGlhbEdyYWRpZW50IGlkPSJnbG93IiBjeD0iNzglIiBjeT0iMTglIiByPSI3MiUiPgogICAgICAgICAgPHN0b3Agb2Zmc2V0PSIwIiBzdG9wLWNvbG9yPSIjMkI2REIyIiBzdG9wLW9wYWNpdHk9Ii40MiIvPgogICAgICAgICAgPHN0b3Agb2Zmc2V0PSIxIiBzdG9wLWNvbG9yPSIjMkI2REIyIiBzdG9wLW9wYWNpdHk9IjAiLz4KICAgICAgICA8L3JhZGlhbEdyYWRpZW50PgogICAgICA8L2RlZnM+CiAgICAgIDxyZWN0IHdpZHRoPSIxMjgwIiBoZWlnaHQ9IjcyMCIgcng9IjI4IiBmaWxsPSJ1cmwoI2JnKSIvPgogICAgICA8cmVjdCB3aWR0aD0iMTI4MCIgaGVpZ2h0PSI3MjAiIHJ4PSIyOCIgZmlsbD0idXJsKCNnbG93KSIvPgogICAgICA8Y2lyY2xlIGN4PSIxMTIwIiBjeT0iOTUiIHI9IjIyMCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjQTZDQkY3IiBzdHJva2Utb3BhY2l0eT0iLjA4IiBzdHJva2Utd2lkdGg9IjIiLz4KICAgICAgPGNpcmNsZSBjeD0iMTEyMCIgY3k9Ijk1IiByPSIxNjUiIGZpbGw9Im5vbmUiIHN0cm9rZT0iI0E2Q0JGNyIgc3Ryb2tlLW9wYWNpdHk9Ii4wNTUiIHN0cm9rZS13aWR0aD0iMiIvPgogICAgICA8dGV4dCB4PSI3MiIgeT0iOTIiIGZpbGw9IiNBNkNCRjciIGZvbnQtZmFtaWx5PSJBcmlhbCwgc2Fucy1zZXJpZiIgZm9udC1zaXplPSIyNCIgZm9udC13ZWlnaHQ9IjcwMCIgbGV0dGVyLXNwYWNpbmc9IjMiPkNGTyBDUkFGVCDCtyBERU1PIFNFU1NJT048L3RleHQ+CiAgICAgIDx0ZXh0IHg9IjcyIiB5PSI1MDAiIGZpbGw9IiNmZmZmZmYiIGZvbnQtZmFtaWx5PSJBcmlhbCwgc2Fucy1zZXJpZiIgZm9udC1zaXplPSI1NCIgZm9udC13ZWlnaHQ9IjYwMCI+RmluYW5jZSBEaWFnbm9zdGljPC90ZXh0PgogICAgICA8dGV4dCB4PSI3MiIgeT0iNTU1IiBmaWxsPSIjQTZDQkY3IiBmb250LWZhbWlseT0iQXJpYWwsIHNhbnMtc2VyaWYiIGZvbnQtc2l6ZT0iMjUiPkZpbmFuY2UgaGVhbHRoIGNoZWNrPC90ZXh0PgogICAgICA8ZyB0cmFuc2Zvcm09InRyYW5zbGF0ZSg2NDAgMzEwKSI+CiAgICAgICAgPGNpcmNsZSByPSI3NiIgZmlsbD0iI0VFQkE3RCIvPgogICAgICAgIDxjaXJjbGUgcj0iNzYiIGZpbGw9Im5vbmUiIHN0cm9rZT0iI2ZmZmZmZiIgc3Ryb2tlLW9wYWNpdHk9Ii4yMiIgc3Ryb2tlLXdpZHRoPSIyIi8+CiAgICAgICAgPHBhdGggZD0iTS0xOCAtMzEgTDM5IDAgTC0xOCAzMSBaIiBmaWxsPSIjMDgyOTUxIi8+CiAgICAgIDwvZz4KICAgICAgPHJlY3QgeD0iNzIiIHk9IjYxOCIgd2lkdGg9IjExMzYiIGhlaWdodD0iMiIgcng9IjEiIGZpbGw9IiNBNkNCRjciIGZpbGwtb3BhY2l0eT0iLjE1Ii8+CiAgICAgIDx0ZXh0IHg9IjcyIiB5PSI2NjMiIGZpbGw9IiNmZmZmZmYiIGZpbGwtb3BhY2l0eT0iLjcwIiBmb250LWZhbWlseT0iQXJpYWwsIHNhbnMtc2VyaWYiIGZvbnQtc2l6ZT0iMjAiPlByZXNzIHBsYXkgZm9yIGEgcXVpY2sgd2Fsa3Rocm91Z2g8L3RleHQ+CiAgICA8L3N2Zz4="
+                    preload="metadata"
+                  >
+                    <source
+                      src="../videos/finance-diagnostic-demo.mp4"
+                      type="video/mp4"
+                    />
+                    Your browser does not support HTML5 video.
+                  </video>
+                </div>
+                <div class="service-demo-meta">
+                  <div class="service-demo-copy">
+                    <p class="service-demo-kicker">
+                      Prefer watching over reading?
+                    </p>
+                    <h2>See the Finance Diagnostic in action</h2>
+                    <p>
+                      A quick walkthrough of what we review, how findings are
+                      scored, and what you receive at the readout.
+                    </p>
                   </div>
-                </li>
-                <li>
-                  <i> 02 </i>
-                  <div>
-                    Scorecard by area
-                    <span>
-                      Red, amber or green, with the evidence behind each rating
-                    </span>
-                  </div>
-                </li>
-                <li>
-                  <i> 03 </i>
-                  <div>
-                    Prioritised action plan
-                    <span> What to fix, who owns it, and in what order </span>
-                  </div>
-                </li>
-                <li>
-                  <i> 04 </i>
-                  <div>
-                    Findings readout
-                    <span>
-                      A working session with you and your finance team
-                    </span>
-                  </div>
-                </li>
-                <li>
-                  <i> 05 </i>
-                  <div>
-                    Data format specification
-                    <span>
-                      How monthly data should flow, if you continue to a
-                      retainer
-                    </span>
-                  </div>
-                </li>
-              </ol>
+                  <span aria-hidden="true" class="service-demo-badge">
+                    <svg fill="none" height="15" viewbox="0 0 24 24" width="15">
+                      <path d="M8 5v14l11-7L8 5Z" fill="currentColor"></path>
+                    </svg>
+                    Demo
+                  </span>
+                </div>
+              </div>
             </aside>
           </div>
         </div>

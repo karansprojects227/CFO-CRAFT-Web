@@ -25,6 +25,7 @@ body.service-page {
   position: relative;
   overflow: hidden;
   padding: 9rem 0 5rem;
+  padding-bottom: 3.5rem !important;
   color: var(--white);
   background: linear-gradient(110deg, var(--dark-blue-gradient));
 }
@@ -1471,6 +1472,375 @@ body.service-page {
 
 @media (prefers-reduced-motion: reduce) {
   .service-page .service-faq details {
+    transition: none !important;
+    transform: none !important;
+  }
+}
+
+/* ==========================================================================
+   CFO CRAFT — NORMALISED HERO + VIDEO WALKTHROUGH
+   Desktop goal: balanced one-screen hero where practical.
+   No fixed hero height and no line clamping: long text is never cut.
+   ========================================================================== */
+
+.service-page .service-hero {
+  min-height: 0;
+  padding: 7rem 0 2.6rem;
+  overflow: hidden;
+}
+
+.service-page .service-hero .service-wrap {
+  width: 100%;
+  max-width: 1440px;
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: clamp(1.75rem, 3.2vw, 3.25rem);
+  padding-right: clamp(1.75rem, 3.2vw, 3.25rem);
+}
+
+.service-page .service-hero-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(420px, .92fr);
+  gap: clamp(2.25rem, 4vw, 4rem);
+  align-items: center;
+}
+
+.service-page .service-hero-copy {
+  min-width: 0;
+  align-self: center;
+}
+
+.service-page .service-breadcrumb {
+  margin-top: 0;
+  margin-bottom: .85rem;
+}
+
+.service-page .service-hero h1 {
+  width: 100%;
+  max-width: 730px;
+  margin-top: 0;
+  font-size: clamp(2.55rem, 3.25vw, 3.5rem);
+  line-height: 1.08;
+  letter-spacing: -.025em;
+  text-wrap: balance;
+  overflow-wrap: normal;
+}
+
+.service-page .service-lede {
+  width: 100%;
+  max-width: 690px;
+  font-size: clamp(.98rem, 1.15vw, 1.08rem);
+  line-height: 1.58;
+  text-wrap: pretty;
+  overflow-wrap: anywhere;
+}
+
+.service-page .service-demo-card {
+  width: 100%;
+  max-width: 610px;
+  min-width: 0;
+  justify-self: end;
+  align-self: center;
+}
+
+.service-page .service-demo-shell {
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+  padding: .55rem;
+  border: 1px solid rgba(166,203,247,.20);
+  border-radius: 20px;
+  background: linear-gradient(180deg, rgba(255,255,255,.10), rgba(255,255,255,.055));
+  box-shadow: 0 22px 58px rgba(2,12,27,.32), inset 0 1px 0 rgba(255,255,255,.08);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  transition: transform .25s ease, border-color .25s ease, box-shadow .25s ease;
+}
+
+.service-page .service-demo-shell::before {
+  content: "";
+  position: absolute;
+  width: 240px;
+  height: 240px;
+  top: -115px;
+  right: -95px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(166,203,247,.15), rgba(166,203,247,0) 70%);
+  pointer-events: none;
+}
+
+.service-page .service-demo-media {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  overflow: hidden;
+  border: 1px solid rgba(166,203,247,.12);
+  border-radius: 14px;
+  background: #020c1b;
+  box-shadow: 0 10px 26px rgba(2,12,27,.26);
+}
+
+.service-page .service-demo-video {
+  display: block;
+  width: 100%;
+  height: 100%;
+  border: 0;
+  border-radius: inherit;
+  background: #020c1b;
+  object-fit: cover;
+}
+
+.service-page .service-demo-video::-webkit-media-controls-panel {
+  background: linear-gradient(to top, rgba(2,12,27,.92), rgba(2,12,27,.10));
+}
+
+.service-page .service-demo-meta {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  grid-template-columns: minmax(0,1fr) auto;
+  gap: .85rem;
+  align-items: start;
+  padding: .85rem .5rem .4rem;
+}
+
+.service-page .service-demo-copy {
+  min-width: 0;
+}
+
+.service-page .service-demo-kicker {
+  display: inline-flex;
+  align-items: center;
+  gap: .45rem;
+  margin: 0 0 .4rem;
+  color: var(--creamish);
+  font-family: var(--font-primary);
+  font-size: .68rem;
+  font-weight: 700;
+  line-height: 1.2;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+}
+
+.service-page .service-demo-kicker::before {
+  content: "";
+  width: 20px;
+  height: 2px;
+  flex: 0 0 20px;
+  border-radius: 999px;
+  background: var(--creamish);
+}
+
+.service-page .service-demo-copy h2 {
+  margin: 0;
+  color: var(--white);
+  font-family: var(--font-heading);
+  font-size: clamp(1rem, 1.3vw, 1.18rem);
+  font-weight: 600;
+  line-height: 1.34;
+  letter-spacing: -.015em;
+  text-wrap: balance;
+}
+
+.service-page .service-demo-copy > p:last-child {
+  max-width: 58ch;
+  margin: .34rem 0 0;
+  color: rgba(255,255,255,.68);
+  font-family: var(--font-primary);
+  font-size: .78rem;
+  line-height: 1.48;
+  overflow-wrap: anywhere;
+}
+
+.service-page .service-demo-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: .35rem;
+  padding: .42rem .6rem;
+  border: 1px solid rgba(166,203,247,.18);
+  border-radius: 999px;
+  background: rgba(166,203,247,.10);
+  color: var(--light-blue);
+  font-family: var(--font-primary);
+  font-size: .68rem;
+  font-weight: 700;
+  line-height: 1;
+  white-space: nowrap;
+}
+
+
+.service-page .service-tier {
+  margin-bottom: .7rem;
+  font-size: .72rem;
+}
+.service-page .service-lede {
+  margin: 1rem 0 1.15rem;
+}
+.service-page .service-price {
+  margin-bottom: 1rem;
+}
+.service-page .service-price b {
+  font-size: 1.28rem;
+}
+.service-page .service-price small {
+  font-size: .82rem;
+}
+.service-page .service-cta {
+  gap: .65rem;
+}
+.service-page .service-cta .btn-secondary,
+.service-page .service-cta .service-btn-outline {
+  min-height: 42px;
+  padding-top: .66rem;
+  padding-bottom: .66rem;
+}
+
+
+@media (hover:hover) and (pointer:fine) {
+  .service-page .service-demo-shell:hover {
+    transform: translateY(-3px);
+    border-color: rgba(166,203,247,.34);
+    box-shadow: 0 28px 68px rgba(2,12,27,.38), inset 0 1px 0 rgba(255,255,255,.10);
+  }
+}
+
+@media (max-width: 1180px) {
+  .service-page .service-hero {
+    padding-top: 6.75rem;
+    padding-bottom: 2.5rem;
+  }
+
+  .service-page .service-hero .service-wrap {
+    padding-left: 1.75rem;
+    padding-right: 1.75rem;
+  }
+
+  .service-page .service-hero-grid {
+    grid-template-columns: minmax(0,1fr) minmax(390px,.9fr);
+    gap: 2rem;
+  }
+
+  .service-page .service-hero h1 {
+    font-size: clamp(2.35rem, 4vw, 3rem);
+  }
+
+  .service-page .service-demo-card {
+    max-width: 560px;
+  }
+}
+
+@media (max-width: 900px) {
+  .service-page .service-hero {
+    padding-top: 6.5rem;
+    padding-bottom: 2.75rem;
+  }
+
+  .service-page .service-hero-grid {
+    grid-template-columns: 1fr;
+    gap: 1.7rem;
+    align-items: start;
+  }
+
+  .service-page .service-demo-card {
+    width: 100%;
+    max-width: 720px;
+    justify-self: start;
+  }
+
+  .service-page .service-hero h1,
+  .service-page .service-lede {
+    max-width: 780px;
+  }
+}
+
+@media (max-width: 768px) {
+  .service-page .service-hero {
+    padding-top: 6.15rem;
+    padding-bottom: 2.45rem;
+  }
+
+  .service-page .service-hero .service-wrap {
+    padding-left: 1.25rem;
+    padding-right: 1.25rem;
+  }
+
+  .service-page .service-hero h1 {
+    font-size: clamp(2.1rem, 7vw, 2.6rem);
+    line-height: 1.1;
+  }
+
+  .service-page .service-lede {
+    font-size: .98rem;
+    line-height: 1.55;
+  }
+
+  .service-page .service-demo-shell {
+    padding: .45rem;
+    border-radius: 17px;
+  }
+
+  .service-page .service-demo-media {
+    border-radius: 12px;
+  }
+}
+
+@media (max-width: 560px) {
+  .service-page .service-demo-meta {
+    grid-template-columns: 1fr;
+    gap: .6rem;
+  }
+
+  .service-page .service-demo-badge {
+    width: fit-content;
+  }
+}
+
+@media (max-width: 480px) {
+  .service-page .service-hero {
+    padding-top: 5.75rem;
+    padding-bottom: 2.25rem;
+  }
+
+  .service-page .service-hero .service-wrap {
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
+
+  .service-page .service-hero-grid {
+    gap: 1.25rem;
+  }
+
+  .service-page .service-hero h1 {
+    font-size: clamp(1.9rem, 9vw, 2.2rem);
+    line-height: 1.12;
+  }
+
+  .service-page .service-demo-shell {
+    padding: .35rem;
+    border-radius: 14px;
+  }
+
+  .service-page .service-demo-media {
+    border-radius: 10px;
+  }
+
+  .service-page .service-demo-meta {
+    padding: .72rem .38rem .34rem;
+  }
+
+  .service-page .service-demo-copy h2 {
+    font-size: 1rem;
+  }
+
+  .service-page .service-demo-copy > p:last-child {
+    font-size: .76rem;
+    line-height: 1.48;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .service-page .service-demo-shell {
     transition: none !important;
     transform: none !important;
   }

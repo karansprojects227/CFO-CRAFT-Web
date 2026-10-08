@@ -1835,3 +1835,512 @@ body.tool-page {
   }
 }
 
+/* ==========================================================================
+   CFO CRAFT — NORMALISED HERO + VIDEO WALKTHROUGH
+   Desktop goal: balanced one-screen hero where practical.
+   No fixed hero height and no line clamping: long text is never cut.
+   ========================================================================== */
+
+.tool-page .tool-hero {
+  min-height: 0;
+  padding: 7rem 0 2.6rem;
+  overflow: hidden;
+}
+
+.tool-page .tool-hero .wrap {
+  width: 100%;
+  max-width: 1440px;
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: clamp(1.75rem, 3.2vw, 3.25rem);
+  padding-right: clamp(1.75rem, 3.2vw, 3.25rem);
+}
+
+.tool-page .tool-hero-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(420px, .92fr);
+  gap: clamp(2.25rem, 4vw, 4rem);
+  align-items: center;
+}
+
+.tool-page .tool-hero-copy {
+  min-width: 0;
+  align-self: center;
+}
+
+.tool-page .crumb {
+  margin-top: 0;
+  margin-bottom: .85rem;
+}
+
+.tool-page .tool-hero h1 {
+  width: 100%;
+  max-width: 730px;
+  margin-top: 0;
+  font-size: clamp(2.55rem, 3.25vw, 3.5rem);
+  line-height: 1.08;
+  letter-spacing: -.025em;
+  text-wrap: balance;
+  overflow-wrap: normal;
+}
+
+.tool-page .lede {
+  width: 100%;
+  max-width: 690px;
+  font-size: clamp(.98rem, 1.15vw, 1.08rem);
+  line-height: 1.58;
+  text-wrap: pretty;
+  overflow-wrap: anywhere;
+}
+
+.tool-page .tool-demo-card {
+  width: 100%;
+  max-width: 610px;
+  min-width: 0;
+  justify-self: end;
+  align-self: center;
+}
+
+.tool-page .tool-demo-shell {
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+  padding: .55rem;
+  border: 1px solid rgba(166,203,247,.20);
+  border-radius: 20px;
+  background: linear-gradient(180deg, rgba(255,255,255,.10), rgba(255,255,255,.055));
+  box-shadow: 0 22px 58px rgba(2,12,27,.32), inset 0 1px 0 rgba(255,255,255,.08);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  transition: transform .25s ease, border-color .25s ease, box-shadow .25s ease;
+}
+
+.tool-page .tool-demo-shell::before {
+  content: "";
+  position: absolute;
+  width: 240px;
+  height: 240px;
+  top: -115px;
+  right: -95px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(166,203,247,.15), rgba(166,203,247,0) 70%);
+  pointer-events: none;
+}
+
+.tool-page .tool-demo-media {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  overflow: hidden;
+  border: 1px solid rgba(166,203,247,.12);
+  border-radius: 14px;
+  background: #020c1b;
+  box-shadow: 0 10px 26px rgba(2,12,27,.26);
+}
+
+.tool-page .tool-demo-video {
+  display: block;
+  width: 100%;
+  height: 100%;
+  border: 0;
+  border-radius: inherit;
+  background: #020c1b;
+  object-fit: cover;
+}
+
+.tool-page .tool-demo-video::-webkit-media-controls-panel {
+  background: linear-gradient(to top, rgba(2,12,27,.92), rgba(2,12,27,.10));
+}
+
+.tool-page .tool-demo-meta {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  grid-template-columns: minmax(0,1fr) auto;
+  gap: .85rem;
+  align-items: start;
+  padding: .85rem .5rem .4rem;
+}
+
+.tool-page .tool-demo-copy {
+  min-width: 0;
+}
+
+.tool-page .tool-demo-kicker {
+  display: inline-flex;
+  align-items: center;
+  gap: .45rem;
+  margin: 0 0 .4rem;
+  color: var(--creamish);
+  font-family: var(--font-primary);
+  font-size: .68rem;
+  font-weight: 700;
+  line-height: 1.2;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+}
+
+.tool-page .tool-demo-kicker::before {
+  content: "";
+  width: 20px;
+  height: 2px;
+  flex: 0 0 20px;
+  border-radius: 999px;
+  background: var(--creamish);
+}
+
+.tool-page .tool-demo-copy h2 {
+  margin: 0;
+  color: var(--white);
+  font-family: var(--font-heading);
+  font-size: clamp(1rem, 1.3vw, 1.18rem);
+  font-weight: 600;
+  line-height: 1.34;
+  letter-spacing: -.015em;
+  text-wrap: balance;
+}
+
+.tool-page .tool-demo-copy > p:last-child {
+  max-width: 58ch;
+  margin: .34rem 0 0;
+  color: rgba(255,255,255,.68);
+  font-family: var(--font-primary);
+  font-size: .78rem;
+  line-height: 1.48;
+  overflow-wrap: anywhere;
+}
+
+.tool-page .tool-demo-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: .35rem;
+  padding: .42rem .6rem;
+  border: 1px solid rgba(166,203,247,.18);
+  border-radius: 999px;
+  background: rgba(166,203,247,.10);
+  color: var(--light-blue);
+  font-family: var(--font-primary);
+  font-size: .68rem;
+  font-weight: 700;
+  line-height: 1;
+  white-space: nowrap;
+}
+
+
+.tool-page .tool-hero-copy .crumb {
+  font-size: .83rem;
+}
+.tool-page .tool-hero-copy h1 {
+  margin-bottom: 1rem;
+}
+.tool-page .tool-hero-copy .lede {
+  margin: 0 0 .58rem;
+}
+.tool-page .tool-hero-copy .fine {
+  max-width: 690px;
+  margin: 0;
+  color: rgba(255,255,255,.62);
+  font-size: .8rem;
+  line-height: 1.5;
+  overflow-wrap: anywhere;
+}
+
+
+@media (hover:hover) and (pointer:fine) {
+  .tool-page .tool-demo-shell:hover {
+    transform: translateY(-3px);
+    border-color: rgba(166,203,247,.34);
+    box-shadow: 0 28px 68px rgba(2,12,27,.38), inset 0 1px 0 rgba(255,255,255,.10);
+  }
+}
+
+@media (max-width: 1180px) {
+  .tool-page .tool-hero {
+    padding-top: 6.75rem;
+    padding-bottom: 2.5rem;
+  }
+
+  .tool-page .tool-hero .wrap {
+    padding-left: 1.75rem;
+    padding-right: 1.75rem;
+  }
+
+  .tool-page .tool-hero-grid {
+    grid-template-columns: minmax(0,1fr) minmax(390px,.9fr);
+    gap: 2rem;
+  }
+
+  .tool-page .tool-hero h1 {
+    font-size: clamp(2.35rem, 4vw, 3rem);
+  }
+
+  .tool-page .tool-demo-card {
+    max-width: 560px;
+  }
+}
+
+@media (max-width: 900px) {
+  .tool-page .tool-hero {
+    padding-top: 6.5rem;
+    padding-bottom: 2.75rem;
+  }
+
+  .tool-page .tool-hero-grid {
+    grid-template-columns: 1fr;
+    gap: 1.7rem;
+    align-items: start;
+  }
+
+  .tool-page .tool-demo-card {
+    width: 100%;
+    max-width: 720px;
+    justify-self: start;
+  }
+
+  .tool-page .tool-hero h1,
+  .tool-page .lede {
+    max-width: 780px;
+  }
+}
+
+@media (max-width: 768px) {
+  .tool-page .tool-hero {
+    padding-top: 6.15rem;
+    padding-bottom: 2.45rem;
+  }
+
+  .tool-page .tool-hero .wrap {
+    padding-left: 1.25rem;
+    padding-right: 1.25rem;
+  }
+
+  .tool-page .tool-hero h1 {
+    font-size: clamp(2.1rem, 7vw, 2.6rem);
+    line-height: 1.1;
+  }
+
+  .tool-page .lede {
+    font-size: .98rem;
+    line-height: 1.55;
+  }
+
+  .tool-page .tool-demo-shell {
+    padding: .45rem;
+    border-radius: 17px;
+  }
+
+  .tool-page .tool-demo-media {
+    border-radius: 12px;
+  }
+}
+
+@media (max-width: 560px) {
+  .tool-page .tool-demo-meta {
+    grid-template-columns: 1fr;
+    gap: .6rem;
+  }
+
+  .tool-page .tool-demo-badge {
+    width: fit-content;
+  }
+}
+
+@media (max-width: 480px) {
+  .tool-page .tool-hero {
+    padding-top: 5.75rem;
+    padding-bottom: 2.25rem;
+  }
+
+  .tool-page .tool-hero .wrap {
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
+
+  .tool-page .tool-hero-grid {
+    gap: 1.25rem;
+  }
+
+  .tool-page .tool-hero h1 {
+    font-size: clamp(1.9rem, 9vw, 2.2rem);
+    line-height: 1.12;
+  }
+
+  .tool-page .tool-demo-shell {
+    padding: .35rem;
+    border-radius: 14px;
+  }
+
+  .tool-page .tool-demo-media {
+    border-radius: 10px;
+  }
+
+  .tool-page .tool-demo-meta {
+    padding: .72rem .38rem .34rem;
+  }
+
+  .tool-page .tool-demo-copy h2 {
+    font-size: 1rem;
+  }
+
+  .tool-page .tool-demo-copy > p:last-child {
+    font-size: .76rem;
+    line-height: 1.48;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .tool-page .tool-demo-shell {
+    transition: none !important;
+    transform: none !important;
+  }
+}
+
+
+/* ==========================================================================
+   FREE TOOLS HERO — PRIMARY TOOL ACTION
+   Video remains the secondary action; this CTA takes users straight to the
+   actual calculator/model/checklist without changing any tool logic.
+   ========================================================================== */
+
+.tool-page .tool-hero-action {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin-top: 1.2rem;
+}
+
+.tool-page .tool-hero-cta {
+  display: inline-flex;
+  min-height: 44px;
+  align-items: center;
+  justify-content: center;
+  gap: 0.55rem;
+  padding: 0.72rem 1.15rem;
+  border: 0;
+  border-radius: 999px;
+  background: var(--creamish);
+  color: #081b36;
+  box-shadow: 0 8px 22px rgba(238, 186, 125, 0.16);
+  font-family: var(--font-primary);
+  font-size: 0.88rem;
+  font-weight: 700;
+  line-height: 1;
+  text-decoration: none;
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease,
+    background 0.2s ease;
+}
+
+.tool-page .tool-hero-cta:hover {
+  color: #081b36;
+  background: #f3c98f;
+  transform: translateY(-1px);
+  box-shadow: 0 10px 28px rgba(238, 186, 125, 0.24);
+}
+
+.tool-page .tool-hero-cta-arrow {
+  display: inline-block;
+  font-size: 1rem;
+  line-height: 1;
+  transition: transform 0.2s ease;
+}
+
+.tool-page .tool-hero-cta:hover .tool-hero-cta-arrow {
+  transform: translateY(2px);
+}
+
+.tool-page #tool-start {
+  scroll-margin-top: 88px;
+}
+
+@media (max-width: 768px) {
+  .tool-page .tool-hero-action {
+    margin-top: 1rem;
+  }
+
+  .tool-page .tool-hero-cta {
+    min-height: 43px;
+    padding: 0.7rem 1.05rem;
+    font-size: 0.85rem;
+  }
+
+  .tool-page #tool-start {
+    scroll-margin-top: 76px;
+  }
+}
+
+@media (max-width: 480px) {
+  .tool-page .tool-hero-action {
+    width: 100%;
+    margin-top: 0.9rem;
+  }
+
+  .tool-page .tool-hero-cta {
+    width: 100%;
+    min-height: 44px;
+    padding: 0.72rem 0.95rem;
+    font-size: 0.84rem;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .tool-page .tool-hero-cta,
+  .tool-page .tool-hero-cta-arrow {
+    transition: none !important;
+    transform: none !important;
+  }
+}
+
+
+/* ==========================================================================
+   FREE TOOLS HERO — FINAL VIEWPORT FILL + CTA TEXT FIX
+   Keeps the hero background through the bottom of the first viewport.
+   min-height does NOT clip longer content; the section can still grow.
+   ========================================================================== */
+
+.tool-page .tool-hero {
+  min-height: 100vh;
+  min-height: 100svh;
+  box-sizing: border-box;
+}
+
+/* Keep the complete hero group vertically balanced inside the viewport
+   while preserving the existing fixed-navbar top spacing. */
+.tool-page .tool-hero > .wrap {
+  min-height: calc(100vh - 9.6rem);
+  min-height: calc(100svh - 9.6rem);
+  display: flex;
+  align-items: center;
+}
+
+.tool-page .tool-hero-grid {
+  width: 100%;
+}
+
+/* Primary Free Tool CTA: dark text on the cream button. */
+.tool-page .tool-hero-cta,
+.tool-page .tool-hero-cta:link,
+.tool-page .tool-hero-cta:visited,
+.tool-page .tool-hero-cta:hover,
+.tool-page .tool-hero-cta:focus-visible,
+.tool-page .tool-hero-cta:active {
+  color: #000000 !important;
+}
+
+/* Tablet/mobile content is naturally taller; do not force vertical
+   centering when the hero stacks. The min-height still fills short screens. */
+@media (max-width: 900px) {
+  .tool-page .tool-hero > .wrap {
+    min-height: auto;
+    display: block;
+  }
+}
+
+@media (max-width: 768px) {
+  .tool-page .tool-hero {
+    min-height: auto;
+  }
+}
+

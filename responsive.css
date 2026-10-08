@@ -755,3 +755,348 @@
   .home-page .faq-question::before { width:28px; height:28px; flex-basis:28px; margin-right:.5rem; }
   .home-page .faq-icon { width:28px; height:28px; flex-basis:28px; }
 }
+
+/* ==========================================================================
+   HOME CONTACT — FINAL RESPONSIVE REFINEMENT
+   ========================================================================== */
+
+@media (max-width: 1024px) {
+  .home-page .section-contact .container,
+  .home-page .contact-head,
+  .home-page .contact-grid,
+  .home-page .contact-form-area,
+  .home-page .contact-info-area {
+    min-width: 0;
+    max-width: 100%;
+  }
+
+  .home-page .contact-grid {
+    grid-template-columns: minmax(0, 1.1fr) minmax(260px, 0.9fr);
+    gap: 1.5rem;
+    align-items: stretch;
+  }
+
+  .home-page .contact-form {
+    width: 100%;
+    min-width: 0;
+    max-width: 100%;
+    padding: 1.75rem;
+  }
+
+  .home-page .contact-form .form-row,
+  .home-page .contact-form .form-group,
+  .home-page .contact-form .form-group input,
+  .home-page .contact-form .form-group select,
+  .home-page .contact-form .form-group textarea {
+    min-width: 0;
+    max-width: 100%;
+  }
+
+  .home-page .contact-info-area {
+    width: 100%;
+    gap: 0.9rem;
+  }
+
+  .home-page .info-block {
+    min-width: 0;
+    max-width: 100%;
+  }
+
+  .home-page .info-block p {
+    overflow-wrap: anywhere;
+  }
+}
+
+@media (max-width: 992px) {
+  .home-page .contact-grid {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 1.5rem;
+  }
+
+  .home-page .contact-form {
+    height: auto;
+  }
+
+  .home-page .contact-info-area {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 1rem;
+  }
+
+  .home-page .info-block {
+    min-height: 112px;
+  }
+
+  .home-page .info-office {
+    grid-column: 1 / -1;
+  }
+}
+
+@media (max-width: 768px) {
+  .home-page .section-contact {
+    padding: 3.75rem 0;
+    margin: 0;
+    overflow: hidden;
+  }
+
+  .home-page .section-contact > .container {
+    width: 100%;
+    max-width: 100%;
+    padding-left: 1.25rem;
+    padding-right: 1.25rem;
+  }
+
+  .home-page .contact-head {
+    width: 100%;
+    max-width: 760px;
+    margin-bottom: 1.75rem;
+  }
+
+  .home-page .section-contact .section-heading {
+    max-width: 100%;
+    font-size: clamp(1.8rem, 7vw, 2.45rem);
+    line-height: 1.15;
+  }
+
+  .home-page .section-contact .contact-intro {
+    max-width: 100%;
+    font-size: 0.95rem;
+    line-height: 1.65;
+  }
+
+  .home-page .contact-assurance {
+    width: 100%;
+    gap: 0.55rem;
+  }
+
+  .home-page .contact-assurance span {
+    max-width: 100%;
+    white-space: normal;
+    line-height: 1.35;
+  }
+
+  .home-page .contact-grid {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    gap: 1.35rem;
+    width: 100%;
+  }
+
+  .home-page .contact-form-area,
+  .home-page .contact-info-area {
+    width: 100%;
+    min-width: 0;
+    max-width: 100%;
+  }
+
+  .home-page .contact-form {
+    width: 100%;
+    max-width: 100%;
+    height: auto;
+    padding: 1.35rem;
+    gap: 1rem;
+    border-radius: 18px;
+  }
+
+  .home-page .contact-form .form-row {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    gap: 1rem;
+    width: 100%;
+  }
+
+  .home-page .contact-form .form-group {
+    width: 100%;
+    min-width: 0;
+  }
+
+  .home-page .contact-form .form-group input,
+  .home-page .contact-form .form-group select,
+  .home-page .contact-form .form-group textarea {
+    display: block;
+    width: 100%;
+    min-width: 0;
+    max-width: 100%;
+    box-sizing: border-box;
+  }
+
+  .home-page .contact-form .form-group textarea {
+    min-height: 110px;
+  }
+
+  .home-page .contact-form > .btn-secondary {
+    width: 100%;
+    max-width: 100%;
+    min-height: 46px;
+  }
+
+  .home-page .contact-form .form-footer {
+    width: 100%;
+  }
+
+  .home-page .contact-info-area {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 0.85rem;
+    padding-top: 0;
+  }
+
+  .home-page .info-block,
+  .home-page a.info-block {
+    display: block;
+    width: 100%;
+    min-width: 0;
+    max-width: 100%;
+    min-height: 108px;
+    padding: 1.05rem 0.95rem 1rem 3.9rem;
+    border-radius: 14px;
+  }
+
+  .home-page .info-block::before {
+    top: 1rem;
+    left: 0.9rem;
+    width: 36px;
+    height: 36px;
+    border-radius: 10px;
+    background-size: 16px 16px;
+  }
+
+  .home-page .info-block h6 {
+    font-size: 0.68rem;
+    letter-spacing: 0.09em;
+  }
+
+  .home-page .info-block p {
+    font-size: 0.88rem;
+    line-height: 1.5;
+    overflow-wrap: anywhere;
+  }
+
+  .home-page .info-office {
+    grid-column: 1 / -1;
+  }
+}
+
+@media (max-width: 480px) {
+  .home-page .section-contact {
+    padding: 3.25rem 0;
+  }
+
+  .home-page .section-contact > .container {
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
+
+  .home-page .contact-head {
+    margin-bottom: 1.5rem;
+  }
+
+  .home-page .section-contact .pre-title {
+    margin-bottom: 0.65rem;
+    font-size: 0.76rem;
+  }
+
+  .home-page .section-contact .section-heading {
+    font-size: clamp(1.65rem, 8.5vw, 2.1rem);
+    margin-bottom: 0.75rem;
+  }
+
+  .home-page .section-contact .contact-intro {
+    font-size: 0.9rem;
+    line-height: 1.6;
+  }
+
+  .home-page .contact-assurance {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    gap: 0.5rem;
+    margin-top: 1.1rem;
+  }
+
+  .home-page .contact-assurance span {
+    width: 100%;
+    justify-content: flex-start;
+    padding: 0.55rem 0.7rem;
+    border-radius: 12px;
+    font-size: 0.76rem;
+  }
+
+  .home-page .contact-grid {
+    gap: 1rem;
+  }
+
+  .home-page .contact-form {
+    padding: 1rem;
+    border-radius: 15px;
+    gap: 0.9rem;
+  }
+
+  .home-page .contact-form .form-row {
+    gap: 0.9rem;
+  }
+
+  .home-page .contact-form .form-group {
+    gap: 0.4rem;
+  }
+
+  .home-page .contact-form .form-group label {
+    font-size: 0.75rem;
+  }
+
+  .home-page .contact-form .form-group input,
+  .home-page .contact-form .form-group select,
+  .home-page .contact-form .form-group textarea {
+    padding: 0.78rem 0.8rem;
+    border-radius: 9px;
+    font-size: 0.9rem;
+  }
+
+  .home-page .contact-form .form-group textarea {
+    min-height: 105px;
+  }
+
+  .home-page .contact-form > .btn-secondary {
+    min-height: 44px;
+    padding: 0.72rem 0.9rem;
+    font-size: 0.85rem;
+  }
+
+  .home-page .contact-form .form-footer p,
+  .home-page .contact-form .pick-time {
+    font-size: 0.78rem !important;
+    line-height: 1.55;
+  }
+
+  .home-page .contact-info-area {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 0.75rem;
+  }
+
+  .home-page .info-office {
+    grid-column: auto;
+  }
+
+  .home-page .info-block,
+  .home-page a.info-block {
+    min-height: auto;
+    padding: 1rem 0.9rem 1rem 3.75rem;
+    border-radius: 13px;
+  }
+
+  .home-page .info-block::before {
+    top: 0.9rem;
+    left: 0.85rem;
+    width: 34px;
+    height: 34px;
+    background-size: 15px 15px;
+  }
+
+  .home-page .info-block h6 {
+    margin-bottom: 0.25rem;
+    font-size: 0.66rem;
+  }
+
+  .home-page .info-block p {
+    font-size: 0.85rem;
+    line-height: 1.5;
+  }
+}

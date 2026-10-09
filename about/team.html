@@ -26,6 +26,73 @@
     <link href="../style.css" rel="stylesheet" />
     <link href="../responsive.css" rel="stylesheet" />
     <link href="about.css" rel="stylesheet" />
+    <style>
+      /* Real team photos: when a photo exists, show only the photo.
+         Existing placeholder/icon graphics remain available as fallback
+         if the image fails to load. */
+      .about-profile-image {
+        position: relative;
+        z-index: 3;
+        display: block;
+        width: 100%;
+        height: 100%;
+        border: 0;
+        object-fit: cover;
+        object-position: center;
+      }
+
+      /* Founder photo fills the whole 4:5 frame cleanly. */
+      .about-photo-frame.has-image {
+        padding: 0;
+        overflow: hidden;
+        background: none;
+      }
+
+      .about-photo-frame.has-image::before,
+      .about-photo-frame.has-image::after {
+        display: none;
+        content: none;
+      }
+
+      .about-profile-image-founder {
+        object-position: center top;
+      }
+
+      /* Advisory photos fill the circular avatar. */
+      .about-avatar.has-image {
+        overflow: hidden;
+        border: 1px solid rgba(8, 41, 81, 0.10);
+        background: #ffffff;
+        box-shadow: none;
+      }
+
+      .about-avatar.has-image::before {
+        display: none;
+        content: none;
+      }
+
+      .about-avatar.has-image .about-profile-image {
+        border-radius: 50%;
+      }
+
+      /* Person-specific crop refinements. */
+      img[alt="Mukesh Gupta"].about-profile-image {
+        object-position: center 43%;
+      }
+
+      img[alt="Asmita Vagal"].about-profile-image {
+        object-position: center 38%;
+      }
+
+      img[alt="Satyanarayan Patro"].about-profile-image {
+        object-position: center 42%;
+      }
+
+      /* Fallback behaviour:
+         if image fails, JS removes .has-image and the existing about.css
+         placeholder/person icon becomes visible again. */
+    </style>
+
   </head>
   <body class="about-page" data-page="team">
     <a class="about-skip" href="#main"> Skip to content </a>
@@ -940,14 +1007,15 @@
       <section class="about-section">
         <div class="about-wrap about-founder">
           <figure class="about-photo">
-            <div
-              aria-label="Photo placeholder"
-              class="about-photo-frame"
-              role="img"
-            >
-              <span class="about-placeholder">
-                [Founder photo, 4:5 portrait]
-              </span>
+            <div class="about-photo-frame has-image">
+              <img
+                src="../images/sudhirgawandi.png"
+                alt="Sudhir Gawandi"
+                class="about-profile-image about-profile-image-founder"
+                onerror="this.style.display='none'; this.parentElement.classList.remove('has-image');"
+                loading="lazy"
+                decoding="async"
+              />
             </div>
           </figure>
           <div class="about-bio">
@@ -988,7 +1056,7 @@
                 <dd>Malad West, Mumbai</dd>
               </div>
             </dl>
-            <a class="about-linkedin" href="LINKEDIN_URL_SUDHIR">
+            <a class="about-linkedin" href="https://www.linkedin.com/in/sudhir-gawandi-1a65b739/?originalSubdomain=in" target="_blank" rel="noopener noreferrer">
               View LinkedIn profile
             </a>
           </div>
@@ -1002,55 +1070,136 @@
           </p>
           <ul class="about-people">
             <li>
-              <div aria-hidden="true" class="about-avatar">
-                <span class="about-placeholder"> [Photo] </span>
+              <div class="about-avatar has-image">
+                <img
+                  src="../images/mukeshgupta.png"
+                  alt="Mukesh Gupta"
+                  class="about-profile-image"
+                  onerror="this.style.display='none'; this.parentElement.classList.remove('has-image');"
+                  loading="lazy"
+                  decoding="async"
+                />
               </div>
-              <h3>
-                <span class="about-placeholder"> [Name] </span>
-              </h3>
-              <p class="about-role-label">
-                <span class="about-placeholder"> [Designation] </span>
+              <h3>Mukesh Gupta</h3>
+              <p class="about-role-label">Director - Assurance</p>
+              <p>
+                Mukesh Gupta is a senior accounting and regulatory professional
+                with over 30 years of experience in different industries, such as
+                financial services, telecom &amp; media, infrastructure, EPC,
+                manufacturing, and IT.
               </p>
               <p>
-                <span class="about-placeholder">
-                  [Qualification and years of experience. 50–70 words on sector
-                  background and what this person handles on an engagement.]
-                </span>
+                He has strong international accounting and auditing skill sets,
+                with in-depth knowledge of business processes and internal
+                controls. His technical skills include statutory audits, IFRS and
+                US GAAP, COSO framework, IGAAP and Ind-AS, Companies Act, PCAOB,
+                ISA, SEBI regulations, business valuations, and Indian Income Tax.
+                Mukesh has led various complex audits, including audits of
+                prestigious listed companies. He also advises clients on
+                accounting issues relating to IFRS, regulatory matters, and
+                improvement of internal control processes.
               </p>
+              <p>
+                Prior to his current position with the firm, Mukesh held various
+                senior positions at Big Four audit firms. He holds a degree in
+                Commerce from Mumbai University (India) and is a qualified
+                Chartered Accountant from ICAI.
+              </p>
+              <a
+                class="about-linkedin"
+                href="https://in.linkedin.com/in/mukesh-gupta-21119b1"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                View LinkedIn profile
+              </a>
             </li>
+
             <li>
-              <div aria-hidden="true" class="about-avatar">
-                <span class="about-placeholder"> [Photo] </span>
+              <div class="about-avatar has-image">
+                <img
+                  src="../images/asmitavagal.png"
+                  alt="Asmita Vagal"
+                  class="about-profile-image"
+                  onerror="this.style.display='none'; this.parentElement.classList.remove('has-image');"
+                  loading="lazy"
+                  decoding="async"
+                />
               </div>
-              <h3>
-                <span class="about-placeholder"> [Name] </span>
-              </h3>
-              <p class="about-role-label">
-                <span class="about-placeholder"> [Designation] </span>
+              <h3>Asmita Vagal</h3>
+              <p class="about-role-label">Principal Consultant</p>
+              <p>
+                Asmita Vagal, a highly motivated finance professional with over
+                18 years of extensive experience in financial management,
+                accounting, and reporting.
               </p>
               <p>
-                <span class="about-placeholder">
-                  [Qualification and years of experience. 50–70 words on sector
-                  background and what this person handles on an engagement.]
-                </span>
+                Having worked across multiple geographies including Canada,
+                India, and the Asia-Pacific region, Asmita brings a wealth of
+                international experience to the table. Her exposure to diverse
+                business environments has equipped her with a deep understanding
+                of global markets and cultural nuances. Asmita’s ability to adapt
+                her strategies to suit different contexts makes her a versatile
+                consultant capable of delivering results in any setting.
               </p>
+              <p>
+                One of Asmita’s greatest strengths lies in her operational
+                leadership experience. She has a proven track record of
+                implementing controls and processes that enhance operational
+                efficiency and drive organizational excellence. Asmita’s hands-on
+                approach to leadership ensures that her strategies are not just
+                theoretical but also practical, delivering tangible results on
+                the ground.
+              </p>
+              <a
+                class="about-linkedin"
+                href="https://www.linkedin.com/in/asmitavagal/"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                View LinkedIn profile
+              </a>
             </li>
+
             <li>
-              <div aria-hidden="true" class="about-avatar">
-                <span class="about-placeholder"> [Photo] </span>
+              <div class="about-avatar has-image">
+                <img
+                  src="../images/satyanarayanpathro.png"
+                  alt="Satyanarayan Patro"
+                  class="about-profile-image"
+                  onerror="this.style.display='none'; this.parentElement.classList.remove('has-image');"
+                  loading="lazy"
+                  decoding="async"
+                />
               </div>
-              <h3>
-                <span class="about-placeholder"> [Name] </span>
-              </h3>
-              <p class="about-role-label">
-                <span class="about-placeholder"> [Designation] </span>
+              <h3>Satyanarayan Patro</h3>
+              <p class="about-role-label">Principal Consultant</p>
+              <p>
+                Satyanarayan Patro, M.Com, MBA (Corporate Finance), is a seasoned
+                finance professional with over 23 years of experience in
+                corporate finance, accounting, and project management.
               </p>
               <p>
-                <span class="about-placeholder">
-                  [Qualification and years of experience. 50–70 words on sector
-                  background and what this person handles on an engagement.]
-                </span>
+                He has worked with leading organizations including Motherson
+                Sumi, JBM Auto, Enkei/Alican Group, Sanden Vikas, and Xolertic
+                Asia.
               </p>
+              <p>
+                His expertise spans financial planning, budgeting, costing, cash
+                flow management, and project financing. Skilled in ERP
+                implementation, MIS reporting, and stakeholder management, he
+                brings deep experience in structuring industrial projects,
+                raising capital, and driving financial efficiency for sustainable
+                business growth.
+              </p>
+              <a
+                class="about-linkedin"
+                href="https://www.linkedin.com/in/snpatro/"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                View LinkedIn profile
+              </a>
             </li>
           </ul>
         </div>

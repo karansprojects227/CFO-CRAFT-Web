@@ -358,6 +358,10 @@ h6,
   gap: 0.5rem;
 }
 
+.two-col-with-promo .dropdown-items-grid > .dropdown-item:last-child {
+  grid-column: 1 / -1;
+}
+
 .dropdown-item {
   display: flex;
   align-items: flex-start;

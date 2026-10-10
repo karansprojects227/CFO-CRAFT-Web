@@ -673,8 +673,12 @@
     font-size: 1.85rem;
   }
 
-  .nav-right .nav-signin {
+  .nav-right .nav-cta {
     display: none;
+  }
+
+  .nav-right .nav-signin {
+    margin-right:-4rem;
   }
 
   .why-card,

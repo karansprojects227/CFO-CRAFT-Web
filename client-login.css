@@ -781,10 +781,6 @@ a:focus-visible {
   .login-utility-links a {
     min-height: 32px;
   }
-
-  .login-utility-links a:first-child {
-    display: none;
-  }
 }
 
 @media (max-width: 420px) {

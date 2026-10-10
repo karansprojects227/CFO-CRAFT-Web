@@ -119,7 +119,7 @@ a:focus-visible {
   cursor: default;
   user-select: none;
   z-index: 5;
-  top: 1.3rem;
+  top: .75rem;
   left: 2rem;
   width: 92px;
   min-height: 48px;
@@ -128,11 +128,10 @@ a:focus-visible {
 }
 
 .login-logo img {
-  display: block;
+  max-height: 50px;
   width: auto;
-  max-width: 92px;
-  max-height: 52px;
   object-fit: contain;
+  display: block;
   filter: invert(1);
 }
 

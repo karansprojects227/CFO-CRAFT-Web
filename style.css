@@ -2966,7 +2966,8 @@ h6,
 .home-page .home-plan-feats li.lead-in::before { display:none; }
 .home-page .home-plan-more { color:var(--primary-blue); font-weight:700; font-size:.9rem; }
 .home-page .home-bookends { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:24px; margin-top:24px; }
-.home-page .home-bookend { display:grid; grid-template-columns:minmax(0,1fr) auto; gap:.65rem 1.5rem; align-items:center; padding:1.7rem 1.8rem; border:1px solid var(--gray-200); border-radius:16px; background:#fff; box-shadow:var(--shadow-sm); }
+.home-page .home-bookend { box-shadow: var(--shadow-sm);transition: transform .24s ease, box-shadow .24s ease, border-color .24s ease;display:grid; grid-template-columns:minmax(0,1fr) auto; gap:.65rem 1.5rem; align-items:center; padding:1.7rem 1.8rem; border:1px solid var(--gray-200); border-radius:16px; background:#fff; box-shadow:var(--shadow-sm); }
+.home-page .home-bookend:hover {transform: translateY(-4px);border-color: rgba(43, 109, 178, .2);box-shadow: var(--shadow-md);}
 .home-page .home-tier-muted { color:var(--gray-600); }
 .home-page .home-bookend h3 { font-size:1.2rem; }
 .home-page .home-bookend-desc { grid-column:1; color:var(--gray-600); line-height:1.6; }
@@ -3593,3 +3594,539 @@ h6,
 .feature-visual:has(.feature-dashboard-embed) {
   background: transparent;
 }
+
+/* ==========================================================================
+   HOME HERO — CFO DECISION DESK UPGRADE
+   Scoped to .home-page so internal pages are not affected.
+   The existing hero background, navbar, global palette and page sections remain unchanged.
+   ========================================================================== */
+.home-page .hero-dashboard {
+  max-width: 1120px;
+  margin: 2.25rem auto 0;
+}
+
+.home-page .hero-advisory-shell {
+  display: grid;
+  grid-template-columns: minmax(0, 0.88fr) minmax(0, 1.32fr);
+  overflow: hidden;
+  min-height: 430px;
+  background: var(--white);
+  border: 1px solid rgba(166, 203, 247, 0.24);
+  border-radius: 20px;
+  box-shadow: 0 24px 70px rgba(2, 12, 27, 0.24);
+  text-align: left;
+}
+
+.home-page .hero-advisory-copy {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 3.1rem 2.75rem;
+  background:
+    radial-gradient(circle at 0% 0%, rgba(166, 203, 247, 0.16), transparent 35%),
+    linear-gradient(180deg, #ffffff 0%, #fbfdff 100%);
+  border-right: 1px solid var(--gray-200);
+}
+
+.home-page .hero-advisory-copy::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 4px;
+  background: linear-gradient(90deg, var(--primary-blue), var(--light-blue), transparent 82%);
+}
+
+.home-page .hero-advisory-eyebrow,
+.home-page .decision-desk-eyebrow,
+.home-page .decision-panel-label {
+  display: inline-block;
+  color: var(--primary-blue);
+  font-family: var(--font-primary);
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  line-height: 1.2;
+  text-transform: uppercase;
+}
+
+.home-page .hero-advisory-eyebrow {
+  margin-bottom: 1rem;
+}
+
+.home-page .hero-advisory-title {
+  margin: 0 0 1.15rem;
+  color: var(--dark-blue);
+  font-family: var(--font-heading);
+  font-size: clamp(2rem, 3.1vw, 3rem);
+  font-weight: 700;
+  letter-spacing: -0.035em;
+  line-height: 1.06;
+}
+
+.home-page .hero-advisory-title span {
+  display: block;
+  margin-top: 0.18em;
+  color: var(--primary-blue);
+}
+
+.home-page .hero-advisory-text {
+  max-width: 480px;
+  margin: 0 0 1.8rem;
+  color: var(--gray-600);
+  font-size: 1rem;
+  line-height: 1.7;
+}
+
+.home-page .hero-advisory-actions {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.home-page .hero-value-strip {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.55rem;
+  margin-top: 1.6rem;
+}
+
+.home-page .hero-value-strip span {
+  position: relative;
+  padding: 0.42rem 0.65rem 0.42rem 1.45rem;
+  color: var(--dark-blue);
+  background: rgba(166, 203, 247, 0.14);
+  border: 1px solid rgba(43, 109, 178, 0.12);
+  border-radius: 999px;
+  font-size: 0.72rem;
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.home-page .hero-value-strip span::before {
+  content: "✓";
+  position: absolute;
+  left: 0.58rem;
+  top: 50%;
+  color: var(--primary-blue);
+  font-weight: 800;
+  transform: translateY(-50%);
+}
+
+.home-page .hero-decision-desk {
+  position: relative;
+  padding: 1.65rem;
+  background:
+    linear-gradient(180deg, rgba(166, 203, 247, 0.08), rgba(255, 255, 255, 0) 34%),
+    #ffffff;
+  text-align: left;
+}
+
+.home-page .decision-desk-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 1.2rem;
+  margin-bottom: 1.1rem;
+}
+
+.home-page .decision-desk-header h3 {
+  margin: 0.28rem 0 0;
+  color: var(--dark-blue);
+  font-family: var(--font-heading);
+  font-size: 1.28rem;
+  font-weight: 700;
+  line-height: 1.25;
+}
+
+.home-page .decision-desk-status {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  flex: 0 0 auto;
+  padding: 0.42rem 0.7rem;
+  color: var(--gray-600);
+  background: var(--gray-100);
+  border: 1px solid var(--gray-200);
+  border-radius: 999px;
+  font-size: 0.68rem;
+  font-weight: 500;
+}
+
+.home-page .decision-status-dot {
+  width: 7px;
+  height: 7px;
+  background: var(--primary-blue);
+  border-radius: 50%;
+  box-shadow: 0 0 0 3px rgba(43, 109, 178, 0.10);
+}
+
+.home-page .decision-kpi-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 0.75rem;
+  margin-bottom: 0.75rem;
+}
+
+.home-page .decision-kpi-card {
+  position: relative;
+  min-width: 0;
+  padding: 0.9rem 0.95rem;
+  background: #ffffff;
+  border: 1px solid var(--gray-200);
+  border-radius: 12px;
+  box-shadow: 0 4px 14px rgba(8, 41, 81, 0.04);
+}
+
+.home-page .decision-kpi-card.attention {
+  border-color: rgba(238, 186, 125, 0.65);
+  background: linear-gradient(180deg, rgba(238, 186, 125, 0.12), #ffffff 72%);
+}
+
+.home-page .decision-kpi-label {
+  display: block;
+  min-height: 2.1em;
+  margin-bottom: 0.38rem;
+  color: var(--gray-600);
+  font-size: 0.68rem;
+  line-height: 1.35;
+}
+
+.home-page .decision-kpi-card strong {
+  display: block;
+  margin-bottom: 0.22rem;
+  color: var(--dark-blue);
+  font-family: var(--font-heading);
+  font-size: 1.22rem;
+  font-weight: 700;
+  line-height: 1.1;
+}
+
+.home-page .decision-kpi-meta {
+  color: var(--gray-400);
+  font-size: 0.62rem;
+  line-height: 1.25;
+}
+
+.home-page .decision-kpi-meta.positive {
+  color: #2f7d5b;
+}
+
+.home-page .decision-middle-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1.08fr) minmax(0, 0.92fr);
+  gap: 0.75rem;
+  margin-bottom: 0.75rem;
+}
+
+.home-page .decision-panel {
+  min-width: 0;
+  padding: 0.9rem 0.95rem;
+  background: #ffffff;
+  border: 1px solid var(--gray-200);
+  border-radius: 12px;
+}
+
+.home-page .decision-panel-head {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 0.75rem;
+  margin-bottom: 0.7rem;
+}
+
+.home-page .decision-panel-head h4 {
+  margin: 0.18rem 0 0;
+  color: var(--dark-blue);
+  font-family: var(--font-heading);
+  font-size: 0.86rem;
+  font-weight: 700;
+  line-height: 1.2;
+}
+
+.home-page .decision-panel-label {
+  font-size: 0.56rem;
+  letter-spacing: 0.1em;
+}
+
+.home-page .decision-period {
+  color: var(--gray-400);
+  font-size: 0.6rem;
+  white-space: nowrap;
+}
+
+.home-page .decision-chart {
+  display: flex;
+  align-items: flex-end;
+  gap: 0.62rem;
+  height: 92px;
+  padding: 0.45rem 0.15rem 0;
+  border-bottom: 1px solid var(--gray-200);
+  background: repeating-linear-gradient(
+    to top,
+    rgba(8, 41, 81, 0.04) 0,
+    rgba(8, 41, 81, 0.04) 1px,
+    transparent 1px,
+    transparent 28px
+  );
+}
+
+.home-page .decision-chart-col {
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  gap: 3px;
+  flex: 1;
+  height: 100%;
+}
+
+.home-page .decision-bar {
+  display: block;
+  width: 9px;
+  min-height: 12px;
+  border-radius: 4px 4px 0 0;
+}
+
+.home-page .decision-bar.revenue,
+.home-page .legend-swatch.revenue {
+  background: var(--dark-blue);
+}
+
+.home-page .decision-bar.margin,
+.home-page .legend-swatch.margin {
+  background: var(--light-blue);
+}
+
+.home-page .decision-chart .h34 { height: 34%; }
+.home-page .decision-chart .h38 { height: 38%; }
+.home-page .decision-chart .h41 { height: 41%; }
+.home-page .decision-chart .h46 { height: 46%; }
+.home-page .decision-chart .h49 { height: 49%; }
+.home-page .decision-chart .h52 { height: 52%; }
+.home-page .decision-chart .h55 { height: 55%; }
+.home-page .decision-chart .h59 { height: 59%; }
+.home-page .decision-chart .h64 { height: 64%; }
+.home-page .decision-chart .h73 { height: 73%; }
+.home-page .decision-chart .h82 { height: 82%; }
+.home-page .decision-chart .h90 { height: 90%; }
+
+.home-page .decision-chart-legend {
+  display: flex;
+  gap: 0.8rem;
+  margin-top: 0.55rem;
+  color: var(--gray-600);
+  font-size: 0.6rem;
+}
+
+.home-page .decision-chart-legend span {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+}
+
+.home-page .legend-swatch {
+  width: 7px;
+  height: 7px;
+  border-radius: 2px;
+}
+
+.home-page .cash-driver-list {
+  display: grid;
+  gap: 0.8rem;
+  padding-top: 0.12rem;
+}
+
+.home-page .cash-driver-row {
+  display: grid;
+  grid-template-columns: 72px minmax(0, 1fr) 30px;
+  align-items: center;
+  gap: 0.55rem;
+  color: var(--gray-600);
+  font-size: 0.65rem;
+}
+
+.home-page .cash-driver-row strong {
+  color: var(--dark-blue);
+  font-size: 0.65rem;
+  text-align: right;
+}
+
+.home-page .cash-driver-track {
+  height: 7px;
+  overflow: hidden;
+  background: var(--gray-100);
+  border-radius: 999px;
+}
+
+.home-page .cash-driver-track i {
+  display: block;
+  height: 100%;
+  background: linear-gradient(90deg, var(--light-blue), var(--primary-blue));
+  border-radius: inherit;
+}
+
+.home-page .cfo-priority-card {
+  display: flex;
+  gap: 0.9rem;
+  align-items: flex-start;
+  padding: 0.95rem 1rem;
+  background: linear-gradient(135deg, rgba(8, 41, 81, 0.98), rgba(43, 109, 178, 0.96));
+  border: 1px solid rgba(166, 203, 247, 0.22);
+  border-radius: 12px;
+  box-shadow: 0 10px 24px rgba(8, 41, 81, 0.14);
+}
+
+.home-page .cfo-priority-copy {
+  flex: 1;
+  min-width: 0;
+}
+
+.home-page .cfo-priority-topline {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+  margin-bottom: 0.32rem;
+}
+
+.home-page .cfo-priority-topline span {
+  color: var(--light-blue);
+  font-size: 0.62rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.home-page .cfo-priority-topline strong {
+  padding: 0.22rem 0.5rem;
+  color: #fff5e7;
+  background: rgba(238, 186, 125, 0.18);
+  border: 1px solid rgba(238, 186, 125, 0.34);
+  border-radius: 999px;
+  font-size: 0.55rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+.home-page .cfo-priority-card h4 {
+  margin: 0 0 0.22rem;
+  color: var(--white);
+  font-family: var(--font-heading);
+  font-size: 0.9rem;
+  font-weight: 700;
+  line-height: 1.25;
+}
+
+.home-page .cfo-priority-card p {
+  margin: 0;
+  color: rgba(255, 255, 255, 0.76);
+  font-size: 0.66rem;
+  line-height: 1.45;
+}
+
+.home-page .decision-disclaimer {
+  margin: 0.55rem 0 0;
+  color: var(--gray-400);
+  font-size: 0.56rem;
+  line-height: 1.3;
+  text-align: right;
+}
+
+@media (max-width: 980px) {
+  .home-page .hero-dashboard {
+    max-width: 760px;
+    margin-top: 1.75rem;
+  }
+
+  .home-page .hero-advisory-shell {
+    grid-template-columns: 1fr;
+  }
+
+  .home-page .hero-advisory-copy {
+    padding: 2.4rem 2rem;
+    border-right: 0;
+    border-bottom: 1px solid var(--gray-200);
+  }
+
+  .home-page .hero-advisory-title {
+    max-width: 650px;
+  }
+
+  .home-page .hero-advisory-text {
+    max-width: 650px;
+  }
+
+  .home-page .hero-decision-desk {
+    padding: 1.4rem;
+  }
+}
+
+@media (max-width: 640px) {
+  .home-page .hero-dashboard {
+    margin-top: 1.35rem;
+  }
+
+  .home-page .hero-advisory-shell {
+    border-radius: 16px;
+  }
+
+  .home-page .hero-advisory-copy {
+    padding: 2rem 1.2rem;
+  }
+
+  .home-page .hero-advisory-title {
+    font-size: 2rem;
+  }
+
+  .home-page .hero-advisory-text {
+    font-size: 0.94rem;
+    line-height: 1.6;
+  }
+
+  .home-page .hero-advisory-actions {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .home-page .hero-value-strip {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .home-page .hero-decision-desk {
+    padding: 1rem;
+  }
+
+  .home-page .decision-desk-header {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .home-page .decision-kpi-grid,
+  .home-page .decision-middle-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .home-page .decision-kpi-label {
+    min-height: 0;
+  }
+
+  .home-page .decision-chart {
+    height: 110px;
+  }
+
+  .home-page .cfo-priority-topline {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .home-page .decision-disclaimer {
+    text-align: left;
+  }
+}
+

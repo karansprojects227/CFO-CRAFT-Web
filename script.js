@@ -309,6 +309,183 @@ document.addEventListener("DOMContentLoaded", () => {
     updateCaseStory();
   }
 
+
+  // ===== HERO CFO MANAGEMENT VIEW — slow KPI + chart animation =====
+  // Animates only the hero dashboard numbers and bars. Existing HTML/CSS remains untouched.
+  const heroDecisionDesk = document.querySelector(".hero-decision-desk");
+
+  if (heroDecisionDesk && !window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+    const heroNumberEls = [
+      ...heroDecisionDesk.querySelectorAll(".decision-kpi-card strong"),
+      ...heroDecisionDesk.querySelectorAll(".cash-driver-row > strong"),
+    ];
+    const heroVerticalBars = [
+      ...heroDecisionDesk.querySelectorAll(".decision-chart .decision-bar"),
+    ];
+    const heroHorizontalBars = [
+      ...heroDecisionDesk.querySelectorAll(".cash-driver-track > i"),
+    ];
+
+    const numberStates = heroNumberEls.map((el) => {
+      const finalText = el.textContent.trim();
+      const match = finalText.match(/-?[\d,]+(?:\.\d+)?/);
+
+      if (!match) return null;
+
+      const rawNumber = match[0];
+      const target = Number(rawNumber.replace(/,/g, ""));
+      const decimalPart = rawNumber.split(".")[1];
+      const decimals = decimalPart ? decimalPart.length : 0;
+      const startIndex = match.index ?? finalText.indexOf(rawNumber);
+      const prefix = finalText.slice(0, startIndex);
+      const suffix = finalText.slice(startIndex + rawNumber.length);
+
+      return { el, finalText, target, decimals, prefix, suffix };
+    }).filter(Boolean);
+
+    const horizontalStates = heroHorizontalBars.map((el) => ({
+      el,
+      finalWidth: el.style.width || getComputedStyle(el).width,
+    }));
+
+    let heroAnimations = [];
+    let heroCounterRaf = 0;
+    let heroVisible = false;
+
+    const formatHeroNumber = (value, decimals) =>
+      value.toLocaleString("en-IN", {
+        minimumFractionDigits: decimals,
+        maximumFractionDigits: decimals,
+      });
+
+    const easeOutCubic = (t) => 1 - Math.pow(1 - t, 3);
+
+    const cancelHeroAnimations = () => {
+      heroAnimations.forEach((animation) => animation.cancel());
+      heroAnimations = [];
+      if (heroCounterRaf) {
+        cancelAnimationFrame(heroCounterRaf);
+        heroCounterRaf = 0;
+      }
+    };
+
+    const resetHeroDashboard = () => {
+      cancelHeroAnimations();
+
+      numberStates.forEach(({ el, decimals, prefix, suffix }) => {
+        el.textContent = `${prefix}${formatHeroNumber(0, decimals)}${suffix}`;
+      });
+
+      heroVerticalBars.forEach((bar) => {
+        bar.style.transformOrigin = "50% 100%";
+        bar.style.transform = "scaleY(0)";
+        bar.style.opacity = "0.28";
+      });
+
+      horizontalStates.forEach(({ el }) => {
+        el.style.width = "0%";
+        el.style.opacity = "0.35";
+      });
+    };
+
+    const playHeroDashboard = () => {
+      cancelHeroAnimations();
+
+      // Slow counters: readable, finance-dashboard feel rather than a quick gimmick.
+      const counterDuration = 2700;
+      const counterStart = performance.now();
+
+      const tickCounters = (now) => {
+        const elapsed = now - counterStart;
+
+        numberStates.forEach((state, index) => {
+          const delay = index * 120;
+          const local = Math.max(0, Math.min(1, (elapsed - delay) / counterDuration));
+          const p = easeOutCubic(local);
+          const value = state.target * p;
+          state.el.textContent =
+            `${state.prefix}${formatHeroNumber(value, state.decimals)}${state.suffix}`;
+        });
+
+        const total = counterDuration + Math.max(0, numberStates.length - 1) * 120;
+        if (elapsed < total) {
+          heroCounterRaf = requestAnimationFrame(tickCounters);
+        } else {
+          heroCounterRaf = 0;
+          numberStates.forEach(({ el, finalText }) => {
+            el.textContent = finalText;
+          });
+        }
+      };
+
+      heroCounterRaf = requestAnimationFrame(tickCounters);
+
+      heroVerticalBars.forEach((bar, index) => {
+        bar.style.transformOrigin = "50% 100%";
+        const animation = bar.animate(
+          [
+            { transform: "scaleY(0)", opacity: 0.28 },
+            { transform: "scaleY(1)", opacity: 1 },
+          ],
+          {
+            duration: 2500,
+            delay: 260 + index * 130,
+            easing: "cubic-bezier(0.22, 1, 0.36, 1)",
+            fill: "forwards",
+          },
+        );
+        animation.onfinish = () => {
+          bar.style.transform = "scaleY(1)";
+          bar.style.opacity = "1";
+        };
+        heroAnimations.push(animation);
+      });
+
+      horizontalStates.forEach(({ el, finalWidth }, index) => {
+        const animation = el.animate(
+          [
+            { width: "0%", opacity: 0.35 },
+            { width: finalWidth, opacity: 1 },
+          ],
+          {
+            duration: 2600,
+            delay: 520 + index * 220,
+            easing: "cubic-bezier(0.22, 1, 0.36, 1)",
+            fill: "forwards",
+          },
+        );
+        animation.onfinish = () => {
+          el.style.width = finalWidth;
+          el.style.opacity = "1";
+        };
+        heroAnimations.push(animation);
+      });
+    };
+
+    resetHeroDashboard();
+
+    if ("IntersectionObserver" in window) {
+      const heroDashboardObserver = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            if (entry.intersectionRatio >= 0.25 && !heroVisible) {
+              heroVisible = true;
+              playHeroDashboard();
+            } else if (entry.intersectionRatio <= 0.02 && heroVisible) {
+              heroVisible = false;
+              resetHeroDashboard();
+            }
+          });
+        },
+        { threshold: [0, 0.02, 0.25] },
+      );
+
+      heroDashboardObserver.observe(heroDecisionDesk);
+    } else {
+      playHeroDashboard();
+    }
+  }
+
 });
 
 /* ==========================================================================
@@ -4413,7 +4590,7 @@ text{font-family:Inter,Arial,sans-serif}.t{font-weight:800;fill:#123654}.s{font-
 `,
 };
 
-function cr3t24NpUrJMNunMMASmhAM953bFGeLXzN7(host) {
+function cr3nP5oFahNL86vESFrkKjmuupsQa1mPzN7(host) {
   if (!host || host.dataset.dashboardMounted === "true") return;
 
   const key = host.dataset.dashboard;
@@ -4432,7 +4609,7 @@ function cr3t24NpUrJMNunMMASmhAM953bFGeLXzN7(host) {
   host.dataset.dashboardMounted = "true";
 }
 
-function destr3t24NpUrJMNunMMASmhAM953bFGeLXzN7(host) {
+function destr3nP5oFahNL86vESFrkKjmuupsQa1mPzN7(host) {
   if (!host || host.dataset.dashboardMounted !== "true") return;
 
   const frame = host.querySelector(".feature-dashboard-frame");
@@ -4455,7 +4632,7 @@ function initCfoCraftAnimatedDashboards() {
 
   if (!("IntersectionObserver" in window)) {
     // Conservative fallback: do not load every animated dashboard at once.
-    cr3t24NpUrJMNunMMASmhAM953bFGeLXzN7(hosts[0]);
+    cr3nP5oFahNL86vESFrkKjmuupsQa1mPzN7(hosts[0]);
     return;
   }
 
@@ -4463,9 +4640,9 @@ function initCfoCraftAnimatedDashboards() {
     (entries) => {
       entries.forEach((entry) => {
         if (entry.isIntersecting) {
-          cr3t24NpUrJMNunMMASmhAM953bFGeLXzN7(entry.target);
+          cr3nP5oFahNL86vESFrkKjmuupsQa1mPzN7(entry.target);
         } else {
-          destr3t24NpUrJMNunMMASmhAM953bFGeLXzN7(entry.target);
+          destr3nP5oFahNL86vESFrkKjmuupsQa1mPzN7(entry.target);
         }
       });
     },
@@ -4480,7 +4657,7 @@ function initCfoCraftAnimatedDashboards() {
 
   document.addEventListener("visibilitychange", () => {
     if (document.hidden) {
-      hosts.forEach(destr3t24NpUrJMNunMMASmhAM953bFGeLXzN7);
+      hosts.forEach(destr3nP5oFahNL86vESFrkKjmuupsQa1mPzN7);
     }
   });
 }

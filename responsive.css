@@ -1239,3 +1239,210 @@
     border-radius: 10px;
   }
 }
+
+
+/* ==========================================================================
+   HOME FINAL — MOBILE/TABLET SAFETY OVERRIDES
+   ========================================================================== */
+@media (max-width: 1024px) {
+  .home-page #how-it-works.section-how,
+  .home-page #outcome.section-outcome,
+  .home-page #metrics.section-metrics,
+  .home-page #pricing.section-pricing,
+  .home-page #story.section-story,
+  .home-page #contact.section-contact {
+    height: auto;
+    min-height: 0;
+    max-height: none;
+    overflow: visible;
+  }
+}
+
+@media (max-width: 768px) {
+  .home-page #how-it-works .how-journey-svg {
+    display: none;
+  }
+
+  .home-page #case-studies.case-scroll-story {
+    height: auto !important;
+  }
+
+  .home-page #case-studies .cs-sticky-frame {
+    position: relative;
+    height: auto;
+    min-height: 0;
+  }
+
+  .home-page #case-studies .cs-slider-container {
+    scroll-behavior: smooth;
+  }
+}
+
+
+/* ==========================================================================
+   CFO CRAFT — FINAL RESPONSIVE POLISH V8
+   1024 / 992 / 768 / 480 safeguards for the updated homepage sections.
+   ========================================================================== */
+
+@media (max-width: 1024px) {
+  .home-page #how-it-works.section-how,
+  .home-page #outcome.section-outcome,
+  .home-page #pricing.section-pricing,
+  .home-page #story.section-story,
+  .home-page #contact.section-contact {
+    height: auto !important;
+    min-height: 0 !important;
+    max-height: none !important;
+    overflow: visible !important;
+    padding: 4rem 0 !important;
+  }
+
+  .home-page #how-it-works .how-journey-container,
+  .home-page #outcome > .container,
+  .home-page #pricing > .container,
+  .home-page #story > .container,
+  .home-page #contact > .container {
+    height: auto !important;
+    max-height: none !important;
+  }
+
+  .home-page #metrics.section-metrics {
+    padding: 3.5rem 0 !important;
+  }
+
+  .home-page #case-studies.case-scroll-story {
+    height: auto !important;
+  }
+
+  .home-page #case-studies .cs-sticky-frame {
+    position: relative !important;
+    height: auto !important;
+    min-height: 0 !important;
+    padding: 4rem 0 !important;
+    overflow: visible !important;
+  }
+
+  .home-page #case-studies .cs-sticky-content {
+    height: auto !important;
+  }
+
+  .home-page #case-studies .cs-slider-container {
+    max-height: none;
+  }
+
+  .home-page #contact .contact-info-area {
+    height: auto;
+  }
+}
+
+@media (max-width: 992px) {
+  .home-page #pricing .home-plans {
+    grid-template-columns: 1fr;
+  }
+
+  .home-page #pricing .home-plan {
+    padding: 1.35rem;
+  }
+
+  .home-page #pricing .home-bookends {
+    grid-template-columns: 1fr;
+  }
+
+  .home-page #story .story-grid {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+
+  .home-page #contact .contact-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .home-page #contact .contact-info-area {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    grid-template-rows: auto;
+  }
+}
+
+@media (max-width: 768px) {
+  .home-page #how-it-works .how-journey {
+    display: block;
+  }
+
+  .home-page #how-it-works .how-journey-stage {
+    height: auto;
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 0.9rem;
+  }
+
+  .home-page #how-it-works .how-step-journey {
+    position: relative;
+    inset: auto !important;
+    transform: none !important;
+    width: 100%;
+    max-width: none;
+    min-height: 0;
+    padding: 1.15rem 1.1rem;
+  }
+
+  .home-page #how-it-works .how-step-journey::before {
+    display: none;
+  }
+
+  .home-page #outcome .outcome-list {
+    display: block;
+  }
+
+  .home-page #outcome .outcome-list li {
+    margin-bottom: 0.85rem;
+  }
+
+  .home-page #metrics .metrics-grid {
+    padding: 1.6rem 1.25rem;
+  }
+
+  .home-page #case-studies .cs-slider-container {
+    aspect-ratio: auto;
+    border-radius: 14px;
+  }
+
+  .home-page #case-studies .cs-slide {
+    height: auto;
+    aspect-ratio: 16 / 9;
+  }
+
+  .home-page #contact .contact-info-area {
+    grid-template-columns: 1fr;
+  }
+
+  .home-page #contact .info-block,
+  .home-page #contact a.info-block {
+    height: auto;
+    min-height: 100px;
+  }
+}
+
+@media (max-width: 480px) {
+  .home-page #how-it-works.section-how,
+  .home-page #outcome.section-outcome,
+  .home-page #pricing.section-pricing,
+  .home-page #story.section-story,
+  .home-page #contact.section-contact,
+  .home-page #case-studies .cs-sticky-frame {
+    padding-top: 3.25rem !important;
+    padding-bottom: 3.25rem !important;
+  }
+
+  .home-page #metrics.section-metrics {
+    padding: 3rem 0 !important;
+  }
+
+  .home-page #pricing .home-plan,
+  .home-page #story .founder-card {
+    padding: 1.1rem;
+  }
+
+  .home-page #contact .contact-form {
+    padding: 1rem;
+  }
+}

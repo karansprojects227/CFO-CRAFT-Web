@@ -2010,24 +2010,6 @@ body.tool-page {
   line-height: 1.48;
   overflow-wrap: anywhere;
 }
-
-.tool-page .tool-demo-badge {
-  display: inline-flex;
-  align-items: center;
-  gap: .35rem;
-  padding: .42rem .6rem;
-  border: 1px solid rgba(166,203,247,.18);
-  border-radius: 999px;
-  background: rgba(166,203,247,.10);
-  color: var(--light-blue);
-  font-family: var(--font-primary);
-  font-size: .68rem;
-  font-weight: 700;
-  line-height: 1;
-  white-space: nowrap;
-}
-
-
 .tool-page .tool-hero-copy .crumb {
   font-size: .83rem;
 }

@@ -132,58 +132,183 @@ document.addEventListener("DOMContentLoaded", () => {
       revealObserver.observe(el);
     });
 
-  // ===== Case Studies Modal & Slider =====
-  const csModal = document.getElementById("case-studies-modal");
-  const openCsModalBtn = document.getElementById("open-cs-modal");
-  const closeCsModalBtn = document.querySelector(".cs-modal-close");
-  const csSlider = document.getElementById("cs-slider");
-  const csPrevBtn = document.getElementById("cs-prev");
-  const csNextBtn = document.getElementById("cs-next");
+  // ===== How It Works — responsive scroll progress, immediate step changes =====
+  const howSection = document.getElementById("how-it-works");
+  const howJourney = howSection?.querySelector("[data-how-journey]");
+  const howProgressPath = howSection?.querySelector("[data-how-progress-path]");
+  const howTraveller = howSection?.querySelector("[data-how-traveller]");
+  const howNodes = howSection ? [...howSection.querySelectorAll("[data-node-index]")] : [];
+  const howCards = howSection ? [...howSection.querySelectorAll("[data-step-index]")] : [];
 
-  let currentSlide = 0;
-  const totalSlides = 9;
+  if (howSection && howJourney && howProgressPath && howNodes.length && howCards.length) {
+    let howRaf = 0;
+    const pathLength = howProgressPath.getTotalLength
+      ? howProgressPath.getTotalLength()
+      : 900;
 
-  function updateSliderPosition() {
-    if (csSlider) {
-      csSlider.style.transform = `translateX(-${currentSlide * 100}%)`;
-    }
-  }
+    howProgressPath.style.strokeDasharray = `${pathLength} ${pathLength}`;
+    howProgressPath.style.strokeDashoffset = `${pathLength}`;
 
-  if (openCsModalBtn && csModal) {
-    openCsModalBtn.addEventListener("click", (e) => {
-      e.preventDefault();
-      csModal.classList.add("show");
-      updateSliderPosition();
-    });
-  }
+    const setHowProgress = () => {
+      howRaf = 0;
 
-  if (closeCsModalBtn && csModal) {
-    closeCsModalBtn.addEventListener("click", () => {
-      csModal.classList.remove("show");
-    });
-  }
-
-  if (csModal) {
-    window.addEventListener("click", (e) => {
-      if (e.target === csModal) {
-        csModal.classList.remove("show");
+      if (window.innerWidth <= 768) {
+        howCards.forEach((card, i) => {
+          card.classList.toggle("is-active", i === 0);
+          card.classList.remove("is-complete");
+        });
+        howNodes.forEach((node, i) => {
+          node.classList.toggle("is-active", i === 0);
+          node.classList.remove("is-complete");
+        });
+        return;
       }
-    });
+
+      const rect = howSection.getBoundingClientRect();
+      const navOffset = 76;
+
+      // Complete the 4-step progression within ~72% of one viewport.
+      // This removes the old "late" highlight feeling.
+      const travel = Math.max(1, howSection.offsetHeight * 0.72);
+      const raw = (navOffset - rect.top) / travel;
+      const progress = Math.max(0, Math.min(1, raw));
+
+      const active = Math.min(
+        howCards.length - 1,
+        Math.floor(progress * howCards.length + 0.0001),
+      );
+
+      howJourney.style.setProperty("--how-progress", progress.toFixed(4));
+      howProgressPath.style.strokeDashoffset =
+        `${(pathLength * (1 - progress)).toFixed(2)}`;
+
+      if (howTraveller && howProgressPath.getPointAtLength) {
+        const point = howProgressPath.getPointAtLength(pathLength * progress);
+        howTraveller.setAttribute("cx", point.x.toFixed(2));
+        howTraveller.setAttribute("cy", point.y.toFixed(2));
+        howTraveller.style.opacity =
+          progress > 0.015 && progress < 0.995 ? "1" : "0";
+      }
+
+      howNodes.forEach((node, i) => {
+        node.classList.toggle("is-complete", i < active);
+        node.classList.toggle("is-active", i === active);
+      });
+
+      howCards.forEach((card, i) => {
+        card.classList.toggle("is-complete", i < active);
+        card.classList.toggle("is-active", i === active);
+      });
+    };
+
+    const requestHowUpdate = () => {
+      if (!howRaf) howRaf = requestAnimationFrame(setHowProgress);
+    };
+
+    window.addEventListener("scroll", requestHowUpdate, { passive: true });
+    window.addEventListener("resize", requestHowUpdate);
+    setHowProgress();
   }
 
-  if (csNextBtn) {
-    csNextBtn.addEventListener("click", () => {
-      currentSlide = (currentSlide + 1) % totalSlides;
-      updateSliderPosition();
+  // ===== Case Studies — Sticky Scroll Story =====
+  const caseSection = document.querySelector("[data-case-scroll]");
+  const caseTrack = document.getElementById("cs-slider");
+
+  if (caseSection && caseTrack) {
+    const caseSlides = [...caseTrack.querySelectorAll("[data-case-slide]")];
+    const caseSegments = [...caseSection.querySelectorAll("[data-case-progress]")];
+    const caseCount = document.getElementById("case-study-count");
+    const caseProgressText = document.getElementById("case-study-progress-text");
+    const caseScroller = caseSection.querySelector(".cs-slider-container");
+
+    let activeCase = -1;
+    let caseRaf = 0;
+
+    const setCase = (index) => {
+      const safe = Math.max(0, Math.min(caseSlides.length - 1, index));
+      if (safe === activeCase) return;
+      activeCase = safe;
+
+      if (window.innerWidth > 768) {
+        caseTrack.style.transform = `translate3d(-${safe * 100}%, 0, 0)`;
+      }
+
+      caseSegments.forEach((segment, i) => {
+        segment.classList.toggle("is-complete", i < safe);
+        segment.classList.toggle("is-current", i === safe);
+      });
+
+      if (caseCount) {
+        caseCount.textContent =
+          `${String(safe + 1).padStart(2, "0")} / ${String(caseSlides.length).padStart(2, "0")}`;
+      }
+
+      if (caseProgressText) {
+        caseProgressText.textContent =
+          `Case study ${safe + 1} of ${caseSlides.length}`;
+      }
+    };
+
+    const sizeCaseStory = () => {
+      if (window.innerWidth > 768) {
+        // One clear scrolling interval per case study, plus the pinned viewport.
+        caseSection.style.height = `${(caseSlides.length + 1) * 100}svh`;
+      } else {
+        caseSection.style.height = "";
+      }
+    };
+
+    const updateCaseStory = () => {
+      caseRaf = 0;
+
+      if (window.innerWidth <= 768) {
+        caseTrack.style.transform = "";
+        return;
+      }
+
+      const rect = caseSection.getBoundingClientRect();
+      const viewport = window.innerHeight || document.documentElement.clientHeight;
+      const scrollable = Math.max(1, caseSection.offsetHeight - viewport);
+      const travelled = Math.max(0, Math.min(scrollable, -rect.top));
+      const progress = travelled / scrollable;
+
+      // Guarantees every slide from 1 through the last one receives a full range.
+      const index = Math.min(
+        caseSlides.length - 1,
+        Math.floor(progress * caseSlides.length),
+      );
+
+      setCase(index);
+    };
+
+    const requestCaseUpdate = () => {
+      if (!caseRaf) caseRaf = requestAnimationFrame(updateCaseStory);
+    };
+
+    sizeCaseStory();
+    window.addEventListener("scroll", requestCaseUpdate, { passive: true });
+    window.addEventListener("resize", () => {
+      sizeCaseStory();
+      requestCaseUpdate();
     });
+
+    // Mobile/tablet: native horizontal swipe with counter sync.
+    if (caseScroller) {
+      let mobileRaf = 0;
+      caseScroller.addEventListener("scroll", () => {
+        if (window.innerWidth > 768 || mobileRaf) return;
+        mobileRaf = requestAnimationFrame(() => {
+          mobileRaf = 0;
+          const width = caseScroller.clientWidth || 1;
+          setCase(Math.round(caseScroller.scrollLeft / width));
+        });
+      }, { passive: true });
+    }
+
+    setCase(0);
+    updateCaseStory();
   }
 
-  if (csPrevBtn) {
-    csPrevBtn.addEventListener("click", () => {
-      currentSlide = (currentSlide - 1 + totalSlides) % totalSlides;
-      updateSliderPosition();
-    });
-  }
 });
 
 /* ==========================================================================
@@ -2309,428 +2434,304 @@ svg{display:block;width:100%;height:auto;overflow:hidden}text{font-family:Inter,
 `,
   diagnostic: String.raw`<!doctype html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width,initial-scale=1" />
-    <title>CFO CRAFT — Finance Diagnostic Dashboard</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
-    <style>
-      * { box-sizing: border-box; }
-      html, body { margin: 0; padding: 0; background: #fff; }
-      body { font-family: Poppins, Inter, Arial, Helvetica, sans-serif; }
-      .stage { width: 800px; max-width: 100vw; margin: 0 auto; }
-      svg { display: block; width: 100%; height: auto; overflow: hidden; }
-      text { text-rendering: geometricPrecision; font-family: Poppins, Inter, Arial, Helvetica, sans-serif; }
-      .title { font-weight: 700; fill: #10233f; }
-      .semi { font-weight: 700; fill: #183a58; }
-      .muted { font-weight: 500; fill: #5f7285; }
-      .lab { fill: #1b3a57; }
-      .micro { font-size: 4.8px; font-weight: 400; fill: #7a8896; }
-      .tiny { font-size: 4.35px; font-weight: 400; fill: #7a8896; }
-      .th text { font-size: 5.1px; font-weight: 500; fill: #5f7285; }
-      .td text { font-size: 5.4px; font-weight: 500; fill: #1b3a57; }
-      .counter { font-variant-numeric: tabular-nums; }
-      .bar { transform-box: fill-box; transform-origin: bottom; }
-      .barN { transform-box: fill-box; transform-origin: top; }
-      @media (prefers-reduced-motion: reduce) {
-        .bar, .barN, .spark, .floatA, .floatB { animation: none !important; }
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>CFO CRAFT — Finance Diagnostic Dashboard</title>
+<style>
+*{box-sizing:border-box}html,body{margin:0;background:#fff}body{font-family:Inter,Arial,sans-serif}
+.stage{width:800px;max-width:100vw;margin:0 auto}.stage svg{display:block;width:100%;height:auto}
+text{font-family:Inter,Arial,sans-serif}.t{font-weight:800;fill:#123654}.s{font-weight:700;fill:#173957}
+.m{font-weight:500;fill:#6e8091}.micro{font-size:4.7px;fill:#81909d;font-weight:500}.tiny{font-size:4.25px;fill:#83919e}
+.good{fill:#239b70}.warn{fill:#dc8a28}.bad{fill:#d94c46}.blue{fill:#2879ca}
+.anim-bar{transform-box:fill-box;transform-origin:bottom}.anim-hbar{transform-box:fill-box;transform-origin:left center}.status-dot,.metric-orb{transform-box:fill-box;transform-origin:center}.float{animation:float 7.5s ease-in-out infinite alternate}
+@keyframes float{to{transform:translateY(-3px)}}
+@keyframes slowBarY{0%,100%{transform:scaleY(1)}50%{transform:scaleY(.93)}}
+@keyframes slowBarX{0%,100%{transform:scaleX(1)}50%{transform:scaleX(.95)}}
+@keyframes softPulse{0%,100%{transform:scale(1);opacity:1}50%{transform:scale(.88);opacity:.72}}
+.stage.is-live .anim-bar{animation:slowBarY 8.5s ease-in-out infinite}
+.stage.is-live .anim-hbar{animation:slowBarX 9.5s ease-in-out infinite}
+.stage.is-live .status-dot{animation:softPulse 7.2s ease-in-out infinite}
+.stage.is-live .metric-orb{animation:softPulse 8.4s ease-in-out infinite}
+@media(prefers-reduced-motion:reduce){.float,.stage.is-live .anim-bar,.stage.is-live .anim-hbar,.stage.is-live .status-dot,.stage.is-live .metric-orb{animation:none!important}}
+</style>
+</head>
+<body>
+<div class="stage">
+<svg viewBox="0 0 800 450" xmlns="http://www.w3.org/2000/svg" aria-label="Illustrative Finance Diagnostic dashboard aligned to working capital, margin analysis and prioritised action planning">
+<defs>
+  <linearGradient id="bgFD" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#064395"/><stop offset=".52" stop-color="#07397d"/><stop offset="1" stop-color="#082e65"/></linearGradient>
+  <linearGradient id="paperFD" x1="0" y1="0" x2="0" y2="1"><stop stop-color="#fff"/><stop offset="1" stop-color="#f8fbff"/></linearGradient>
+  <filter id="shFD" x="-20%" y="-20%" width="150%" height="160%"><feDropShadow dx="0" dy="6" stdDeviation="8" flood-color="#04285e" flood-opacity=".28"/></filter>
+  <filter id="smFD" x="-30%" y="-30%" width="170%" height="180%"><feDropShadow dx="0" dy="3" stdDeviation="4" flood-color="#082951" flood-opacity=".18"/></filter>
+  <clipPath id="clipFD"><rect x="75" y="42" width="650" height="368" rx="14"/></clipPath>
+</defs>
+
+<rect width="800" height="450" rx="23" fill="url(#bgFD)"/>
+<g fill="none" stroke="#a8d0ff" stroke-opacity=".15" stroke-width="1">
+  <path d="M-95 72C73-20 248-18 384 82"/><path d="M-90 122C80 37 269 42 410 146"/>
+  <path d="M438-24C613 10 747 84 834 198"/><path d="M-35 365C105 305 228 322 339 414"/>
+</g>
+
+<rect x="75" y="42" width="650" height="368" rx="14" fill="url(#paperFD)" filter="url(#shFD)"/>
+<g clip-path="url(#clipFD)">
+  <!-- Header -->
+  <rect x="91" y="57" width="29" height="29" rx="6" fill="#eaf3ff"/>
+  <path d="M98 78V68h5v6h5v-9h5v13z" fill="#2879ca"/>
+  <text x="127" y="69" class="t" font-size="14.1">Finance Diagnostic</text>
+  <text x="127" y="80.5" class="m" font-size="6.4">Cash, margins and action priorities — one evidence-based health check</text>
+  <rect x="491" y="55" width="112" height="22" rx="5" fill="#fff" stroke="#e3eaf1"/>
+  <text x="500" y="65.7" font-size="5.45" font-weight="700" fill="#566b7e">Q1 FY27 (Apr–Jun 2026)</text>
+  <path d="M593 64l2 2 2-2" fill="none" stroke="#83909d" stroke-width=".8"/>
+  <rect x="435" y="78" width="168" height="12" rx="4" fill="#f2f6fb"/>
+  <text x="519" y="86" text-anchor="middle" class="tiny">Illustrative sample data only — not client results</text>
+
+  <!-- KPI row -->
+  <g>
+    <rect x="91" y="96" width="150" height="58" rx="8" fill="#fff" stroke="#e2e9f0"/>
+    <circle cx="106" cy="111" r="9" fill="#eaf3ff"/><circle cx="106" cy="111" r="4.5" fill="none" stroke="#2879ca" stroke-width="1"/><path d="M106 108v3l2.4 1.5" fill="none" stroke="#2879ca" stroke-width=".9"/>
+    <text x="120" y="108" class="m" font-size="6">Cash conversion cycle</text>
+    <text x="120" y="124" class="t" font-size="14"><tspan data-count="102" data-decimals="0">102</tspan> days</text>
+    <text x="120" y="136" font-size="5.1" font-weight="700" class="good">↓ 16 days vs Mar</text>
+    <text x="120" y="145" class="micro">Mar 2026: 118 days</text>
+
+    <rect x="246" y="96" width="150" height="58" rx="8" fill="#fff" stroke="#e2e9f0"/>
+    <circle cx="261" cy="111" r="9" fill="#fff2df"/><path d="M257 108h8v6h-8zM259 106h4v2h-4z" fill="#e89c31"/>
+    <text x="275" y="108" class="m" font-size="6">Working capital tied up</text>
+    <text x="275" y="124" class="t" font-size="14">₹<tspan data-count="12.5" data-decimals="1">12.5</tspan> Cr</text>
+    <text x="275" y="136" class="good" font-size="5.1" font-weight="700">cash-cycle view</text>
+    <text x="275" y="145" class="micro">Inventory + debtors − supplier credit</text>
+
+    <rect x="401" y="96" width="150" height="58" rx="8" fill="#fff" stroke="#e2e9f0"/>
+    <circle cx="416" cy="111" r="9" fill="#fdecec"/><path d="M412 115l3-7 3 4 3-6" fill="none" stroke="#d94c46" stroke-width="1.1"/>
+    <text x="430" y="108" class="m" font-size="6">Margin leakage identified</text>
+    <text x="430" y="124" class="t" font-size="14">₹<tspan data-count=".74" data-decimals="2">0.74</tspan> Cr</text>
+    <text x="430" y="136" class="bad" font-size="5.1" font-weight="700">products + customers + channels</text>
+    <text x="430" y="145" class="micro">Illustrative annualised opportunity</text>
+
+    <rect x="556" y="96" width="156" height="58" rx="8" fill="#fff" stroke="#e2e9f0"/>
+    <circle cx="571" cy="111" r="9" fill="#f0eaff"/><path d="M568 106h6v10h-6zM569.5 109h3M569.5 112h3" fill="none" stroke="#7950d6" stroke-width="1"/>
+    <text x="585" y="108" class="m" font-size="6">Prioritised action plan</text>
+    <text x="585" y="124" class="t" font-size="14"><tspan data-count="4" data-decimals="0">4</tspan> weeks</text>
+    <text x="585" y="136" class="blue" font-size="5.1" font-weight="700">priority • owner • timing</text>
+    <text x="585" y="145" class="micro">No long-term lock-in</text>
+  </g>
+
+  <!-- Lower panels -->
+  <rect x="91" y="164" width="205" height="139" rx="8" fill="#fff" stroke="#e2e9f0"/>
+  <text x="102" y="179" class="t" font-size="8">Cash-cycle diagnostic</text>
+  <text x="102" y="190" class="micro">Days — inventory + receivables − payables</text>
+  <g stroke="#edf2f6" stroke-width=".8">
+    <line x1="115" y1="216" x2="279" y2="216"/><line x1="115" y1="237" x2="279" y2="237"/><line x1="115" y1="258" x2="279" y2="258"/><line x1="115" y1="279" x2="279" y2="279"/>
+  </g>
+  <g>
+    <rect class="anim-bar" data-h="53" data-y0="282" x="126" y="282" width="18" height="0" rx="2" fill="#2a79c9"/>
+    <rect class="anim-bar" data-h="48" data-y0="282" x="153" y="282" width="18" height="0" rx="2" fill="#3e88d0"/>
+    <rect class="anim-bar" data-h="43" data-y0="282" x="180" y="282" width="18" height="0" rx="2" fill="#5b9bd8"/>
+    <rect class="anim-bar" data-h="39" data-y0="282" x="207" y="282" width="18" height="0" rx="2" fill="#72a9df"/>
+    <rect class="anim-bar" data-h="35" data-y0="282" x="234" y="282" width="18" height="0" rx="2" fill="#8ab8e5"/>
+  </g>
+  <polyline points="135,218 162,226 189,234 216,242 243,250 270,257" fill="none" stroke="#173957" stroke-width="1.3"/>
+  <g fill="#173957"><circle cx="135" cy="218" r="1.8"/><circle cx="162" cy="226" r="1.8"/><circle cx="189" cy="234" r="1.8"/><circle cx="216" cy="242" r="1.8"/><circle cx="243" cy="250" r="1.8"/><circle cx="270" cy="257" r="1.8"/></g>
+  <text x="135" y="294" text-anchor="middle" class="micro">Jan</text><text x="162" y="294" text-anchor="middle" class="micro">Feb</text><text x="189" y="294" text-anchor="middle" class="micro">Mar</text><text x="216" y="294" text-anchor="middle" class="micro">Apr</text><text x="243" y="294" text-anchor="middle" class="micro">May</text><text x="270" y="294" text-anchor="middle" class="micro">Jun</text>
+
+  <rect x="304" y="164" width="204" height="139" rx="8" fill="#fff" stroke="#e2e9f0"/>
+  <text x="315" y="179" class="t" font-size="8">Margin leakage map</text>
+  <text x="315" y="190" class="micro">Illustrative leakage by source (₹ L)</text>
+  <g>
+    <text x="316" y="211" class="m" font-size="5.6">Products / services</text><rect x="376" y="204" width="105" height="8" rx="4" fill="#eef3f7"/><rect x="376" y="204" width="84" height="8" rx="4" fill="#d94c46"/><text x="486" y="211" text-anchor="end" class="s" font-size="5.6"><tspan data-count="28" data-decimals="0">28</tspan></text>
+    <text x="316" y="233" class="m" font-size="5.6">Customer mix</text><rect x="376" y="226" width="105" height="8" rx="4" fill="#eef3f7"/><rect x="376" y="226" width="57" height="8" rx="4" fill="#e58b43"/><text x="486" y="233" text-anchor="end" class="s" font-size="5.6"><tspan data-count="19" data-decimals="0">19</tspan></text>
+    <text x="316" y="255" class="m" font-size="5.6">Channel economics</text><rect x="376" y="248" width="105" height="8" rx="4" fill="#eef3f7"/><rect x="376" y="248" width="45" height="8" rx="4" fill="#e9ad55"/><text x="486" y="255" text-anchor="end" class="s" font-size="5.6"><tspan data-count="15" data-decimals="0">15</tspan></text>
+    <text x="316" y="277" class="m" font-size="5.6">Creeping costs</text><rect x="376" y="270" width="105" height="8" rx="4" fill="#eef3f7"/><rect x="376" y="270" width="36" height="8" rx="4" fill="#f0c276"/><text x="486" y="277" text-anchor="end" class="s" font-size="5.6"><tspan data-count="12" data-decimals="0">12</tspan></text>
+  </g>
+
+  <rect x="516" y="164" width="196" height="139" rx="8" fill="#fff" stroke="#e2e9f0"/>
+  <text x="527" y="179" class="t" font-size="8">Diagnostic coverage</text>
+  <text x="527" y="190" class="micro">What the review connects</text>
+  <g font-size="5.5" font-weight="650" fill="#173957">
+    <circle cx="532" cy="207" r="3.2" fill="#27a071"/><path d="M530.5 207l1.2 1.2 2.2-2.3" fill="none" stroke="#fff" stroke-width=".8"/><text x="540" y="209">Cash conversion cycle</text>
+    <circle cx="532" cy="226" r="3.2" fill="#27a071"/><path d="M530.5 226l1.2 1.2 2.2-2.3" fill="none" stroke="#fff" stroke-width=".8"/><text x="540" y="228">Product / service margins</text>
+    <circle cx="532" cy="245" r="3.2" fill="#27a071"/><path d="M530.5 245l1.2 1.2 2.2-2.3" fill="none" stroke="#fff" stroke-width=".8"/><text x="540" y="247">Customer &amp; channel economics</text>
+    <circle cx="532" cy="264" r="3.2" fill="#27a071"/><path d="M530.5 264l1.2 1.2 2.2-2.3" fill="none" stroke="#fff" stroke-width=".8"/><text x="540" y="266">Rupee-value leakage</text>
+    <circle cx="532" cy="283" r="3.2" fill="#27a071"/><path d="M530.5 283l1.2 1.2 2.2-2.3" fill="none" stroke="#fff" stroke-width=".8"/><text x="540" y="285">Prioritised action plan</text>
+  </g>
+
+  <!-- Insight strip -->
+  <rect x="178" y="313" width="452" height="79" rx="8" fill="#fff" stroke="#e2e9f0"/>
+  <text x="189" y="328" class="t" font-size="8">Key findings</text>
+  <g>
+    <rect x="189" y="337" width="101" height="45" rx="6" fill="#f5f9fd"/><circle cx="198" cy="346" r="3" fill="#2879ca"/><text x="205" y="347" class="s" font-size="4.8">Cash cycle is still</text><text x="205" y="353" class="s" font-size="4.8">102 days</text><text x="205" y="365" class="micro">Focus collections and</text><text x="205" y="371" class="micro">inventory first.</text>
+    <rect x="296" y="337" width="101" height="45" rx="6" fill="#f5f9fd"/><circle cx="305" cy="346" r="3" fill="#d94c46"/><text x="312" y="347" class="s" font-size="4.8">₹74 L margin leakage</text><text x="312" y="353" class="s" font-size="4.8">identified</text><text x="312" y="365" class="micro">Across products, clients,</text><text x="312" y="371" class="micro">channels and costs.</text>
+    <rect x="403" y="337" width="101" height="45" rx="6" fill="#f5f9fd"/><circle cx="412" cy="346" r="3" fill="#e89c31"/><text x="419" y="347" class="s" font-size="4.8">Leakage converted to</text><text x="419" y="353" class="s" font-size="4.8">rupee values</text><text x="419" y="365" class="micro">So priorities are ranked</text><text x="419" y="371" class="micro">by financial impact.</text>
+    <rect x="510" y="337" width="110" height="45" rx="6" fill="#f5f9fd"/><circle cx="519" cy="346" r="3" fill="#7950d6"/><text x="526" y="347" class="s" font-size="4.8">Action plan in 4 weeks</text><text x="526" y="353" class="s" font-size="4.8">with owners</text><text x="526" y="365" class="micro">Prioritised, sequenced</text><text x="526" y="371" class="micro">and practical.</text>
+  </g>
+</g>
+
+<!-- Floating cards -->
+<g class="float" filter="url(#smFD)">
+  <rect x="630" y="17" width="157" height="68" rx="11" fill="#f3fbf7"/>
+  <circle cx="648" cy="37" r="9" fill="#dff4e9"/><text x="648" y="40" text-anchor="middle" font-size="8" font-weight="800" fill="#26996c">₹</text>
+  <text x="665" y="32" font-size="5.6" font-weight="700" fill="#50687b">Potential cash release</text>
+  <text x="665" y="50" font-size="15.5" font-weight="800" fill="#1d9e73">₹<tspan data-count="4.85" data-decimals="2">4.85</tspan> Cr</text>
+  <text x="665" y="61" font-size="4.9" fill="#73818e">Illustrative opportunity from</text><text x="665" y="69" font-size="4.9" fill="#73818e">working-capital actions.</text>
+</g>
+<g class="float" filter="url(#smFD)">
+  <rect x="14" y="357" width="150" height="72" rx="11" fill="#fff8ec"/>
+  <circle cx="32" cy="379" r="9" fill="#fdebcf"/><path d="M28 383l3-8 3 4 3-6" fill="none" stroke="#e38b1a" stroke-width="1.2"/>
+  <text x="50" y="374" font-size="5.7" font-weight="700" fill="#50687b">Margin opportunity</text>
+  <text x="50" y="393" font-size="15.5" font-weight="800" fill="#e38b1a">₹<tspan data-count=".74" data-decimals="2">0.74</tspan> Cr</text>
+  <text x="50" y="405" font-size="4.9" fill="#73818e">Products, services, customers</text><text x="50" y="413" font-size="4.9" fill="#73818e">and channels combined.</text>
+</g>
+</svg>
+</div>
+
+<script>
+(function () {
+  const reduce =
+    window.matchMedia &&
+    window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+  const stage = document.querySelector(".stage");
+  if (!stage) return;
+
+  const counters = [...document.querySelectorAll("[data-count]")].map((el) => ({
+    el,
+    target: Number(el.dataset.count || 0),
+    decimals: Number(el.dataset.decimals || 0),
+  }));
+
+  const verticalBars = [...document.querySelectorAll(".anim-bar")].map((el) => ({
+    el,
+    height: Number(el.dataset.h || el.getAttribute("height") || 0),
+    y0: Number(el.dataset.y0 || (Number(el.getAttribute("y") || 0) + Number(el.getAttribute("height") || 0))),
+  }));
+
+  // Coloured 8px horizontal bars are the live graph values; grey bars are tracks.
+  const horizontalBars = [...document.querySelectorAll("rect")].filter((el) => {
+    const height = Number(el.getAttribute("height") || 0);
+    const width = Number(el.getAttribute("width") || 0);
+    const fill = (el.getAttribute("fill") || "").toLowerCase();
+    return height === 8 &&
+      width > 10 &&
+      !["#eef3f7", "#edf2f6", "#e2e9f0", "#f2f6fb"].includes(fill);
+  }).map((el, i) => {
+    el.classList.add("anim-hbar");
+    el.style.animationDelay = (i * 0.45).toFixed(2) + "s";
+    return { el, width: Number(el.getAttribute("width") || 0) };
+  });
+
+  const lines = [...document.querySelectorAll("polyline")].map((el) => {
+    const length = el.getTotalLength ? el.getTotalLength() : 0;
+    if (length > 0) {
+      el.setAttribute("stroke-dasharray", length + " " + length);
+      el.setAttribute("stroke-dashoffset", String(length));
+    }
+    return { el, length };
+  });
+
+  const smallDots = [...document.querySelectorAll("circle")].filter((el) => {
+    const r = Number(el.getAttribute("r") || 0);
+    const fill = (el.getAttribute("fill") || "").toLowerCase();
+    return r > 0 && r <= 4.5 && fill && fill !== "none" && fill !== "#fff";
+  });
+  smallDots.forEach((el, i) => {
+    el.classList.add("status-dot");
+    el.style.animationDelay = (i * 0.35).toFixed(2) + "s";
+  });
+
+  const iconOrbs = [...document.querySelectorAll("circle")].filter((el) => {
+    const r = Number(el.getAttribute("r") || 0);
+    return r >= 8 && r <= 13;
+  });
+  iconOrbs.forEach((el, i) => {
+    el.classList.add("metric-orb");
+    el.style.animationDelay = (i * 0.55).toFixed(2) + "s";
+  });
+
+  const format = (value, decimals) =>
+    Math.abs(value).toLocaleString("en-IN", {
+      minimumFractionDigits: decimals,
+      maximumFractionDigits: decimals,
+    });
+
+  const ease = (p) =>
+    p < 0.5
+      ? 4 * p * p * p
+      : 1 - Math.pow(-2 * p + 2, 3) / 2;
+
+  const render = (p) => {
+    counters.forEach(({ el, target, decimals }) => {
+      const value = target * p;
+      el.textContent = (target < 0 ? "−" : "") + format(value, decimals);
+    });
+
+    verticalBars.forEach(({ el, height, y0 }) => {
+      const h = height * p;
+      el.setAttribute("height", h.toFixed(2));
+      el.setAttribute("y", (y0 - h).toFixed(2));
+    });
+
+    horizontalBars.forEach(({ el, width }) => {
+      el.setAttribute("width", (width * p).toFixed(2));
+    });
+
+    lines.forEach(({ el, length }) => {
+      if (length > 0) {
+        el.setAttribute("stroke-dashoffset", (length * (1 - p)).toFixed(2));
       }
-    </style>
-  </head>
-  <body>
-    <div class="stage">
-      <svg viewBox="0 0 800 450" xmlns="http://www.w3.org/2000/svg" aria-label="CFO CRAFT finance diagnostic dashboard">
-        <defs>
-          <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
-            <stop offset="0" stop-color="#073f91" />
-            <stop offset=".50" stop-color="#063778" />
-            <stop offset="1" stop-color="#082e65" />
-          </linearGradient>
-          <linearGradient id="paper" x1="0" y1="0" x2="0" y2="1">
-            <stop offset="0" stop-color="#ffffff" />
-            <stop offset="1" stop-color="#f9fbfd" />
-          </linearGradient>
-          <radialGradient id="orb" cx=".35" cy=".3" r=".8">
-            <stop offset="0" stop-color="#2f78d8" stop-opacity=".75" />
-            <stop offset="1" stop-color="#0a3f8f" stop-opacity=".15" />
-          </radialGradient>
-          <linearGradient id="gold" x1="0" y1="0" x2="0" y2="1">
-            <stop offset="0" stop-color="#7fb4ff" stop-opacity=".7" />
-            <stop offset=".6" stop-color="#e3b25a" stop-opacity=".85" />
-            <stop offset="1" stop-color="#e3b25a" stop-opacity="0" />
-          </linearGradient>
-          <pattern id="dots" width="6" height="6" patternUnits="userSpaceOnUse">
-            <circle cx="1" cy="1" r=".6" fill="#8fbaf0" fill-opacity=".45" />
-          </pattern>
-          <pattern id="hatch" width="5" height="5" patternUnits="userSpaceOnUse" patternTransform="rotate(-40)">
-            <line x1="0" y1="0" x2="0" y2="5" stroke="#8fbaf0" stroke-opacity=".12" stroke-width=".7" />
-          </pattern>
-          <filter id="shadow" x="-20%" y="-20%" width="140%" height="150%">
-            <feDropShadow dx="0" dy="5" stdDeviation="7" flood-color="#03265c" flood-opacity=".26" />
-          </filter>
-          <filter id="smallShadow" x="-20%" y="-20%" width="150%" height="160%">
-            <feDropShadow dx="0" dy="3" stdDeviation="4" flood-color="#0a315b" flood-opacity=".18" />
-          </filter>
-          <clipPath id="dashboardClip">
-            <rect x="76" y="42" width="650" height="370" rx="14" />
-          </clipPath>
-        </defs>
+    });
 
-        <!-- ===================== BACKGROUND ===================== -->
-        <rect width="800" height="450" rx="23" fill="url(#bg)" />
-        <circle cx="68" cy="70" r="52" fill="url(#orb)" />
-        <circle cx="35" cy="300" r="58" fill="url(#orb)" opacity=".7" />
-        <circle cx="770" cy="330" r="55" fill="url(#orb)" opacity=".8" />
-        <g stroke="#a8d0ff" stroke-opacity=".22"><path d="M0 330L70 270M0 350L80 280" /><path d="M735 200L800 140M745 225L800 175" /></g>
-        <rect x="12" y="92" width="50" height="46" fill="url(#dots)" />
-        <rect x="740" y="224" width="48" height="44" fill="url(#dots)" />
-        <rect x="64" y="28" width="674" height="394" rx="18" fill="none" stroke="#7fb4ff" stroke-opacity=".35" />
+    smallDots.forEach((el, i) => {
+      const local = Math.max(0, Math.min(1, p * 1.35 - i * 0.025));
+      el.style.opacity = (0.2 + 0.8 * local).toFixed(2);
+    });
+  };
 
-        <!-- ===================== MAIN DASHBOARD ===================== -->
-        <rect x="76" y="42" width="650" height="370" rx="14" fill="url(#paper)" filter="url(#shadow)" />
+  const finish = () => {
+    render(1);
+    smallDots.forEach((el) => { el.style.opacity = ""; });
+    stage.classList.add("is-live");
+  };
 
-        <g clip-path="url(#dashboardClip)">
-          <!-- HEADER -->
-          <rect x="89" y="52" width="29" height="29" rx="6" fill="#eaf3ff" />
-          <g transform="translate(103.5 66.5) scale(1.45) translate(-103.5 -66.5)"><g fill="#1f6fd0"><rect x="99.1" y="66.9" width="2.3" height="3.6" rx=".5"/><rect x="102.35" y="64.6" width="2.3" height="5.9" rx=".5"/><rect x="105.6" y="62.1" width="2.3" height="8.4" rx=".5"/></g></g>
-          <text x="126" y="66" class="title" font-size="14.4">Finance Diagnostic</text>
-          <text x="126" y="77.5" class="muted" font-size="6.4">Know exactly where your cash and profit are stuck</text>
+  if (reduce) {
+    finish();
+    return;
+  }
 
-          <rect x="497" y="48" width="107" height="20" rx="5" fill="#fff" stroke="#e7edf2" />
-          <text x="504" y="60"  font-size="5.55" font-weight="600" fill="#33495d">Q1 FY27 (Apr–Jun 2026)</text>
-          <path d="M594 57.5l1.8 1.8 1.8-1.8" fill="none" stroke="#83909d" stroke-width=".8" />
-          <rect x="428" y="72" width="176" height="15" rx="4" fill="#f1f5fb" />
-          <text x="516" y="81.5" text-anchor="middle" class="tiny">Illustrative dashboard with sample data, not client results</text>
+  const DURATION = 4200; // deliberately slow enough to read
+  let raf = 0;
+  let start = 0;
 
-          <!-- ================= KPI ROW ================= -->
-          <rect x="91" y="93" width="151" height="58" rx="8" fill="#fff" stroke="#e4eaf0"/>
-<rect x="97" y="99" width="23" height="23" rx="6" fill="#eaf3ff"/>
-<circle cx="108.5" cy="110.5" r="4.6" fill="none" stroke="#1f6fd0" stroke-width="1.2"/><path d="M108.5 108.1V110.5l1.8 1.3" fill="none" stroke="#1f6fd0" stroke-width="1.1" stroke-linecap="round"/>
-<text x="127" y="107" class="muted lab" font-size="6.05">Cash cycle</text>
-<text x="127" y="123" class="title" font-size="14.2"><tspan class="counter" data-target="102" data-decimals="0">102</tspan> days</text>
-<path d="M127 132.2h4.2l-2.1 3.4z" fill="#299d73"/>
-<text x="133" y="135.6" font-size="5.25" font-weight="700" fill="#299d73">16 days vs Mar</text>
-<text x="127" y="144" class="micro">Mar 2026: 118 days</text>
-<g class="sparkChart"><path d="M198 124C207.3 125 210.4 129.0 213.5 130.5S222.8 136 229 137V138.5H198z" fill="#e3f5ec"/><path d="M198 124C207.3 125 210.4 129.0 213.5 130.5S222.8 136 229 137" fill="none" stroke="#2f9e6c" stroke-width="1.2" class="spark"/><circle cx="229" cy="137" r="1.6" fill="#2f9e6c"/></g>
-          <rect x="247" y="93" width="151" height="58" rx="8" fill="#fff" stroke="#e4eaf0"/>
-<rect x="253" y="99" width="23" height="23" rx="6" fill="#fff3df"/>
-<g fill="#eaa044"><ellipse cx="264.5" cy="106.9" rx="4.4" ry="1.7"/><path d="M260.1 108.1c0 1 2 1.8 4.4 1.8s4.4-.8 4.4-1.8v2.2c0 1-2 1.8-4.4 1.8s-4.4-.8-4.4-1.8z"/><path d="M260.1 111.7c0 1 2 1.8 4.4 1.8s4.4-.8 4.4-1.8v2.2c0 1-2 1.8-4.4 1.8s-4.4-.8-4.4-1.8z"/></g>
-<text x="283" y="107" class="muted lab" font-size="6.05">Net working capital</text>
-<text x="283" y="123" class="title" font-size="14.2">₹<tspan class="counter" data-target="12.5" data-decimals="1">12.5</tspan> Cr</text>
-<path d="M283 132.2h4.2l-2.1 3.4z" fill="#299d73"/>
-<text x="289" y="135.6" font-size="5.25" font-weight="700" fill="#299d73">2.7% vs Mar</text>
-<text x="283" y="144" class="micro">Mar 2026: ₹12.85 Cr</text>
-<g class="sparkChart"><path d="M354 124C363.3 125 366.4 129.0 369.5 130.5S378.8 136 385 137V138.5H354z" fill="#e3f5ec"/><path d="M354 124C363.3 125 366.4 129.0 369.5 130.5S378.8 136 385 137" fill="none" stroke="#2f9e6c" stroke-width="1.2" class="spark"/><circle cx="385" cy="137" r="1.6" fill="#2f9e6c"/></g>
-          <rect x="403" y="93" width="151" height="58" rx="8" fill="#fff" stroke="#e4eaf0"/>
-<rect x="409" y="99" width="23" height="23" rx="6" fill="#e7f7ef"/>
-<circle cx="420.5" cy="110.5" r="5" fill="none" stroke="#2e9e6e" stroke-width="1.1"/><circle cx="420.5" cy="110.5" r="2.7" fill="none" stroke="#2e9e6e" stroke-width="1.1"/><circle cx="420.5" cy="110.5" r=".9" fill="#2e9e6e"/>
-<text x="439" y="107" class="muted lab" font-size="6.05">Potential cash release</text>
-<text x="439" y="123" class="title" font-size="14.2">₹<tspan class="counter" data-target="4.85" data-decimals="2">4.85</tspan> Cr</text>
-<text x="439" y="135.6" font-size="5.25" font-weight="700" fill="#4d6275">Estimated, 3 levers</text>
-<text x="439" y="144" class="micro">Stock, debtors, suppliers</text>
+  const frame = (now) => {
+    if (!start) start = now;
+    const raw = Math.min(1, (now - start) / DURATION);
+    render(ease(raw));
 
-          <rect x="559" y="93" width="153" height="58" rx="8" fill="#fff" stroke="#e4eaf0"/>
-<rect x="565" y="99" width="23" height="23" rx="6" fill="#f1ecfe"/>
-<path d="M573.1 105.9h4.4l2.4 2.4v6.8h-6.8z" fill="#7a4fe0"/><path d="M574.7 110.5h3.6M574.7 112.3h3.6" stroke="#fff" stroke-width=".6"/>
-<text x="595" y="107" class="muted lab" font-size="6.05">Action plan</text>
-<text x="595" y="123" class="title" font-size="14.2"><tspan class="counter" data-target="4" data-decimals="0">4</tspan> weeks</text>
-<text x="595" y="135.6" font-size="5.25" font-weight="700" fill="#4d6275">Delivered with the diagnostic</text>
-<text x="595" y="144" class="micro">Prioritised, with owners</text>
+    if (raw < 1) {
+      raf = requestAnimationFrame(frame);
+    } else {
+      raf = 0;
+      finish();
+    }
+  };
 
-          <!-- ================= CASH CYCLE TREND ================= -->
-          <rect x="90" y="158" width="224" height="145" rx="8" fill="#fff" stroke="#e4eaf0"/>
-          <text x="98" y="173" class="title" font-size="8.05">Cash cycle trend</text>
-          <circle cx="219" cy="171.3" r="2" fill="#5b9be8"/><text x="223" y="173.0" class="micro" font-weight="600" fill="#6f8094">Cash cycle (days)</text>
-          <circle cx="283" cy="171.3" r="2" fill="#10233f"/><text x="287" y="173.0" class="micro" font-weight="600" fill="#6f8094">Trend</text>
-          <line x1="117" y1="268.0" x2="306" y2="268.0" stroke="#eef1f4" stroke-width=".7"/>
-          <text x="112" y="269.6" text-anchor="end" class="micro">0</text>
-          <line x1="117" y1="252.0" x2="306" y2="252.0" stroke="#eef1f4" stroke-width=".7"/>
-          <text x="112" y="253.6" text-anchor="end" class="micro">30</text>
-          <line x1="117" y1="236.0" x2="306" y2="236.0" stroke="#eef1f4" stroke-width=".7"/>
-          <text x="112" y="237.6" text-anchor="end" class="micro">60</text>
-          <line x1="117" y1="220.0" x2="306" y2="220.0" stroke="#eef1f4" stroke-width=".7"/>
-          <text x="112" y="221.6" text-anchor="end" class="micro">90</text>
-          <line x1="117" y1="204.0" x2="306" y2="204.0" stroke="#eef1f4" stroke-width=".7"/>
-          <text x="112" y="205.6" text-anchor="end" class="micro">120</text>
-          <line x1="117" y1="188.0" x2="306" y2="188.0" stroke="#eef1f4" stroke-width=".7"/>
-          <text x="112" y="189.6" text-anchor="end" class="micro">150</text>
-          <text transform="translate(102 232) rotate(-90)" text-anchor="middle" class="micro">Days</text>
-          <g class="bar"><rect x="122" y="198.7" width="16" height="69.3" rx="1.6" fill="#5b9be8"/><rect x="153.5" y="201.9" width="16" height="66.1" rx="1.6" fill="#5b9be8"/><rect x="185" y="205.1" width="16" height="62.9" rx="1.6" fill="#5b9be8"/><rect x="216" y="208.3" width="16" height="59.7" rx="1.6" fill="#5b9be8"/><rect x="247.5" y="210.9" width="16" height="57.1" rx="1.6" fill="#5b9be8"/><rect x="279" y="213.6" width="16" height="54.4" rx="1.6" fill="#5b9be8"/></g>
-          <line x1="124" y1="198.3" x2="293" y2="214.5" stroke="#10233f" stroke-width=".8" stroke-dasharray="2 1.4"/>
-          <text x="130" y="195.7" text-anchor="middle" font-size="4.9" font-weight="800" fill="#173957">130</text>
-          <text x="130" y="278" text-anchor="middle" class="micro">Jan</text>
-          <text x="161.5" y="198.9" text-anchor="middle" font-size="4.9" font-weight="800" fill="#173957">124</text>
-          <text x="161.5" y="278" text-anchor="middle" class="micro">Feb</text>
-          <text x="193" y="202.1" text-anchor="middle" font-size="4.9" font-weight="800" fill="#173957">118</text>
-          <text x="193" y="278" text-anchor="middle" class="micro">Mar</text>
-          <text x="224" y="205.3" text-anchor="middle" font-size="4.9" font-weight="800" fill="#173957">112</text>
-          <text x="224" y="278" text-anchor="middle" class="micro">Apr</text>
-          <text x="255.5" y="207.9" text-anchor="middle" font-size="4.9" font-weight="800" fill="#173957">107</text>
-          <text x="255.5" y="278" text-anchor="middle" class="micro">May</text>
-          <text x="287" y="210.6" text-anchor="middle" font-size="4.9" font-weight="800" fill="#173957">102</text>
-          <text x="287" y="278" text-anchor="middle" class="micro">Jun</text>
-          <!-- ================= WORKING CAPITAL BREAKDOWN ================= -->
-          <rect x="322" y="158" width="168" height="145" rx="8" fill="#fff" stroke="#e4eaf0"/>
-          <text x="330" y="173" class="title" font-size="8.05">Working capital breakdown</text>
-          <rect x="330" y="184.0" width="20" height="20" rx="5" fill="#eaf3ff"/>
-          <g fill="none" stroke="#1f6fd0" stroke-width="1.05" stroke-linejoin="round"><path d="M340 189.2l4.2 2.4v4.8l-4.2 2.4-4.2-2.4v-4.8z"/><path d="M335.8 191.6l4.2 2.4 4.2-2.4M340 194.0v4.8"/></g>
-          <text x="356" y="191.8" font-size="5.6" font-weight="500" fill="#1b3a57">Inventory</text>
-          <text x="356" y="200.6" class="micro" font-size="4.6">51% of gross working capital</text>
-          <text x="483" y="197.0" text-anchor="end" class="title" font-size="8.4">₹<tspan class="counter" data-target="9.0" data-decimals="1">9.0</tspan> Cr</text>
-          <line x1="330" y1="208.0" x2="483" y2="208.0" stroke="#edf1f4" stroke-width=".7"/>
-          <rect x="330" y="212.7" width="20" height="20" rx="5" fill="#e7f7ef"/>
-          <g fill="#2e9e6e"><circle cx="337.8" cy="220.7" r="2.1"/><circle cx="342.8" cy="221.29999999999998" r="1.7"/><path d="M334 227.1c0-3 1.8-4.4 3.8-4.4s3.8 1.4 3.8 4.4z"/><path d="M342.2 227.1c0-1.4-.3-2.5-.9-3.3.4-.4 1-.6 1.5-.6 1.7 0 3.2 1.2 3.2 3.9z"/></g>
-          <text x="356" y="220.5" font-size="5.6" font-weight="500" fill="#1b3a57">Receivables</text>
-          <text x="356" y="229.3" class="micro" font-size="4.6">49% of gross working capital</text>
-          <text x="483" y="225.7" text-anchor="end" class="title" font-size="8.4">₹<tspan class="counter" data-target="8.5" data-decimals="1">8.5</tspan> Cr</text>
-          <line x1="330" y1="236.7" x2="483" y2="236.7" stroke="#edf1f4" stroke-width=".7"/>
-          <rect x="330" y="241.4" width="20" height="20" rx="5" fill="#fff3df"/>
-          <g fill="#eaa044"><rect x="335.2" y="248.20000000000002" width="5.8" height="4.8" rx=".6"/><path d="M341.4 249.8h2l1.6 1.8v1.4h-3.6z"/><circle cx="337.2" cy="253.8" r="1.1"/><circle cx="342.6" cy="253.8" r="1.1"/></g>
-          <text x="356" y="249.2" font-size="5.6" font-weight="500" fill="#1b3a57">Less: supplier credit</text>
-          <text x="356" y="258.0" class="micro" font-size="4.6">Payables</text>
-          <text x="483" y="254.4" text-anchor="end" class="title" font-size="8.4">(₹<tspan class="counter" data-target="5.0" data-decimals="1">5.0</tspan> Cr)</text>
-          <line x1="330" y1="265.4" x2="483" y2="265.4" stroke="#edf1f4" stroke-width=".7"/>
-          <text x="330" y="279" class="title" font-size="7.6">Net working capital</text>
-          <text x="483" y="279" text-anchor="end" class="title" font-size="8.4">₹<tspan class="counter" data-target="12.5" data-decimals="1">12.5</tspan> Cr</text>
-          <!-- ================= CASH CYCLE BY COMPONENT ================= -->
-          <rect x="499" y="158" width="211" height="145" rx="8" fill="#fff" stroke="#e4eaf0"/>
-          <text x="507" y="173" class="title" font-size="8.05">Cash cycle by component</text>
-          <text x="702" y="173" text-anchor="end" class="micro">days</text>
-          <line x1="524" y1="266.0" x2="700" y2="266.0" stroke="#eef1f4" stroke-width=".7"/>
-          <text x="520" y="267.6" text-anchor="end" class="micro">-60</text>
-          <line x1="524" y1="253.0" x2="700" y2="253.0" stroke="#eef1f4" stroke-width=".7"/>
-          <text x="520" y="254.6" text-anchor="end" class="micro">-30</text>
-          <line x1="524" y1="240.0" x2="700" y2="240.0" stroke="#eef1f4" stroke-width=".7"/>
-          <text x="520" y="241.6" text-anchor="end" class="micro">0</text>
-          <line x1="524" y1="227.0" x2="700" y2="227.0" stroke="#eef1f4" stroke-width=".7"/>
-          <text x="520" y="228.6" text-anchor="end" class="micro">30</text>
-          <line x1="524" y1="214.0" x2="700" y2="214.0" stroke="#eef1f4" stroke-width=".7"/>
-          <text x="520" y="215.6" text-anchor="end" class="micro">60</text>
-          <line x1="524" y1="201.0" x2="700" y2="201.0" stroke="#eef1f4" stroke-width=".7"/>
-          <text x="520" y="202.6" text-anchor="end" class="micro">90</text>
-          <line x1="524" y1="188.0" x2="700" y2="188.0" stroke="#eef1f4" stroke-width=".7"/>
-          <text x="520" y="189.6" text-anchor="end" class="micro">120</text>
-          <g class="bar"><rect x="534" y="200.6" width="16" height="39.4" rx="1.6" fill="#1a5fd6"/></g>
-          <text x="542" y="197.6" text-anchor="middle" font-size="4.9" font-weight="800" fill="#173957">91</text>
-          <text x="542" y="276" text-anchor="middle" class="micro">Inventory</text>
-          <g class="bar"><rect x="569.5" y="213.1" width="16" height="26.9" rx="1.6" fill="#5b9be8"/></g>
-          <text x="577.5" y="210.1" text-anchor="middle" font-size="4.9" font-weight="800" fill="#173957">62</text>
-          <text x="577.5" y="276" text-anchor="middle" class="micro">Receivables</text>
-          <g class="barN"><rect x="605" y="240" width="16" height="22.1" rx="1.6" fill="#6a3fe0"/></g>
-          <text x="613" y="267.7" text-anchor="middle" font-size="4.9" font-weight="800" fill="#173957">−51</text>
-          <text x="613" y="276" text-anchor="middle" class="micro">Payables</text>
-          <g class="bar"><rect x="641" y="195.8" width="16" height="44.2" rx="1.6" fill="#1d9e5f"/></g>
-          <text x="649" y="192.8" text-anchor="middle" font-size="4.9" font-weight="800" fill="#173957">102</text>
-          <text x="649" y="276" text-anchor="middle" class="micro">Cash cycle</text>
-          <!-- ================= DIAGNOSTIC COVERAGE ================= -->
-          <rect x="174" y="311" width="168" height="87" rx="8" fill="#fff" stroke="#e4eaf0"/>
-          <text x="182" y="325" class="title" font-size="8.05">Diagnostic coverage</text>
-          <text x="334" y="325" text-anchor="end" class="micro">4 of 4 complete</text>
-          <circle cx="186" cy="340.0" r="3.2" fill="#1d9e5f"/><path d="M184.5 340.0l1.1 1.1 2-2.1" fill="none" stroke="#fff" stroke-width=".8" stroke-linecap="round" stroke-linejoin="round"/>
-          <text x="194" y="341.9" font-size="5.4" font-weight="500" fill="#1b3a57">Cash conversion cycle</text>
-          <rect x="299" y="335.4" width="35" height="9.2" rx="2" fill="#e2f6ea"/><text x="316.5" y="341.76" text-anchor="middle" font-size="4.9" font-weight="700" fill="#1f9a5f">Complete</text>
-          <circle cx="186" cy="354.7" r="3.2" fill="#1d9e5f"/><path d="M184.5 354.7l1.1 1.1 2-2.1" fill="none" stroke="#fff" stroke-width=".8" stroke-linecap="round" stroke-linejoin="round"/>
-          <text x="194" y="356.6" font-size="5.4" font-weight="500" fill="#1b3a57">Working capital analysis</text>
-          <rect x="299" y="350.09999999999997" width="35" height="9.2" rx="2" fill="#e2f6ea"/><text x="316.5" y="356.46" text-anchor="middle" font-size="4.9" font-weight="700" fill="#1f9a5f">Complete</text>
-          <circle cx="186" cy="369.4" r="3.2" fill="#1d9e5f"/><path d="M184.5 369.4l1.1 1.1 2-2.1" fill="none" stroke="#fff" stroke-width=".8" stroke-linecap="round" stroke-linejoin="round"/>
-          <text x="194" y="371.3" font-size="5.4" font-weight="500" fill="#1b3a57">Rupee-value insights</text>
-          <rect x="299" y="364.79999999999995" width="35" height="9.2" rx="2" fill="#e2f6ea"/><text x="316.5" y="371.16" text-anchor="middle" font-size="4.9" font-weight="700" fill="#1f9a5f">Complete</text>
-          <circle cx="186" cy="384.1" r="3.2" fill="#1d9e5f"/><path d="M184.5 384.1l1.1 1.1 2-2.1" fill="none" stroke="#fff" stroke-width=".8" stroke-linecap="round" stroke-linejoin="round"/>
-          <text x="194" y="386.0" font-size="5.4" font-weight="500" fill="#1b3a57">Prioritised action plan</text>
-          <rect x="299" y="379.5" width="35" height="9.2" rx="2" fill="#e2f6ea"/><text x="316.5" y="385.86" text-anchor="middle" font-size="4.9" font-weight="700" fill="#1f9a5f">Complete</text>
-          <!-- ================= KEY INSIGHTS ================= -->
-          <rect x="351" y="311" width="280" height="87" rx="8" fill="#fff" stroke="#e4eaf0"/>
-          <text x="358" y="325" class="title" font-size="8.05">Key insights</text>
-          <rect x="359" y="333" width="84" height="56" rx="6" fill="#f3f7fc"/>
-          <circle cx="366.5" cy="343" r="2.4" fill="#1f6fd0"/>
-          <text x="374" y="345" font-size="5.5" font-weight="700" fill="#173957">Cash cycle is 102</text>
-          <text x="374" y="353.8" font-size="5.5" font-weight="700" fill="#173957">days</text>
-          <text x="374" y="363.0" class="micro" font-size="4.7">₹12.5 Cr is tied up in</text>
-          <text x="374" y="371.0" class="micro" font-size="4.7">net working capital.</text>
-          <rect x="449" y="333" width="84" height="56" rx="6" fill="#f3f7fc"/>
-          <circle cx="456.5" cy="343" r="2.4" fill="#f08c1a"/>
-          <text x="464" y="345" font-size="5.5" font-weight="700" fill="#173957">₹4.85 Cr can be</text>
-          <text x="464" y="353.8" font-size="5.5" font-weight="700" fill="#173957">released</text>
-          <text x="464" y="363.0" class="micro" font-size="4.7">Inventory ₹1.80 Cr,</text>
-          <text x="464" y="371.0" class="micro" font-size="4.7">collections ₹2.06 Cr,</text>
-          <text x="464" y="379.0" class="micro" font-size="4.7">suppliers ₹0.99 Cr.</text>
-          <rect x="539" y="333" width="84" height="56" rx="6" fill="#f3f7fc"/>
-          <circle cx="546.5" cy="343" r="2.4" fill="#1d9e5f"/>
-          <text x="554" y="345" font-size="5.5" font-weight="700" fill="#173957">Action plan in 4</text>
-          <text x="554" y="353.8" font-size="5.5" font-weight="700" fill="#173957">weeks</text>
-          <text x="554" y="363.0" class="micro" font-size="4.7">Prioritised steps with</text>
-          <text x="554" y="371.0" class="micro" font-size="4.7">clear owners.</text>
-        </g>
+  render(0);
+  raf = requestAnimationFrame(frame);
 
-        <!-- ================= FLOATING CARDS — OUTSIDE CLIP ON PURPOSE ================= -->
-        <g class="floatA" filter="url(#smallShadow)">
-        <rect x="622" y="12" width="164" height="66" rx="11" fill="#f2fbf6"/>
-        <circle cx="645" cy="35" r="12.5" fill="#dff3e8"/>
-        <circle cx="645" cy="35" r="5" fill="none" stroke="#1d9e5f" stroke-width="1.1"/><circle cx="645" cy="35" r="2.7" fill="none" stroke="#1d9e5f" stroke-width="1.1"/><circle cx="645" cy="35" r=".9" fill="#1d9e5f"/>
-        <text x="665" y="28" font-size="6.2" font-weight="700" fill="#173957">Potential to free cash</text>
-        <text x="665" y="46" font-size="16" font-weight="800" fill="#1d9e5f">₹<tspan class="counter" data-target="4.85" data-decimals="2">4.85</tspan> Cr</text>
-        <text x="665" y="57" font-size="5.1" fill="#4d6275">estimated from the three working-</text>
-        <text x="665" y="66" font-size="5.1" fill="#4d6275">capital levers.</text>
-        </g>
-        <g class="floatB" filter="url(#smallShadow)">
-        <rect x="12" y="370" width="150" height="57" rx="11" fill="#f1f6fe"/>
-        <circle cx="35" cy="393" r="12.5" fill="#e1ecfb"/>
-        <circle cx="35" cy="393" r="4.6" fill="none" stroke="#1f6fd0" stroke-width="1.2"/><path d="M35 390.6V393l1.8 1.3" fill="none" stroke="#1f6fd0" stroke-width="1.1" stroke-linecap="round"/>
-        <text x="55" y="386" font-size="6.2" font-weight="700" fill="#173957">Cash cycle</text>
-        <text x="55" y="404.5" font-size="17" font-weight="800" fill="#1f6fd0"><tspan class="counter" data-target="102" data-decimals="0">102</tspan> days</text>
-        <text x="55" y="415" font-size="5.1" fill="#4d6275">▼ 16 days vs Mar 2026.</text>
-        </g>
-        <g class="floatA" filter="url(#smallShadow)">
-        <rect x="643" y="352" width="145" height="75" rx="11" fill="#fff8ec"/>
-        <circle cx="666" cy="374" r="12.5" fill="#fdeccf"/>
-        <path d="M666 368.2a3.9 3.9 0 0 0-2.3 7.1v1.6h4.6v-1.6a3.9 3.9 0 0 0-2.3-7.1zM664.3 378.1h3.4v1.2h-3.4z" fill="#e68a1a"/>
-        <text x="686" y="367" font-size="6.2" font-weight="700" fill="#173957">CFO CRAFT advisor</text>
-        <text x="686" y="386" font-size="16" font-weight="800" fill="#10233f"><tspan class="counter" data-target="59" data-decimals="0">59</tspan> days</text>
-        <text x="686" y="397" font-size="5.1" fill="#4d6275">achievable cash cycle, from</text>
-        <text x="686" y="406" font-size="5.1" fill="#4d6275">102 days today, releasing</text>
-        <text x="686" y="415" font-size="5.1" fill="#4d6275">₹4.85 Cr.</text>
-        </g>
+  document.addEventListener("visibilitychange", () => {
+    if (document.hidden && raf) {
+      cancelAnimationFrame(raf);
+      raf = 0;
+    } else if (!document.hidden && !stage.classList.contains("is-live") && !raf) {
+      start = 0;
+      raf = requestAnimationFrame(frame);
+    }
+  });
+})();
+</script>
 
-      </svg>
-    </div>
-    <script>
-      /*
-        CFO CRAFT dashboard animation (shared by every dashboard file).
-        Cycle: grow -> hold at real values -> ease back -> short rest -> repeat.
-        - Markup always holds the FINAL values, so no-JS and reduced-motion users see correct data.
-        - Donuts (.circleBar) sweep clockwise from 12 o'clock, segment after segment,
-          keeping the original gaps and proportions from the markup.
-        - Restarts from zero each time the dashboard scrolls into view; pauses when off-screen.
-      */
-      (function () {
-        const RISE = 1600, HOLD = 3600, FALL = 1000, REST = 500;
-        const CYCLE = RISE + HOLD + FALL + REST;
-        if (window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
-
-        const ease = (p) => (p < 0.5 ? 4 * p * p * p : 1 - Math.pow(-2 * p + 2, 3) / 2);
-        const num = (v, d) => parseFloat(v === null || v === undefined || v === "" ? d : v);
-
-        const counters = Array.from(document.querySelectorAll(".counter")).map((el) => ({
-          el,
-          target: num(el.dataset.target, 0),
-          dec: num(el.dataset.decimals, 0)
-        }));
-        const bars = Array.from(document.querySelectorAll(".bar, .barN"));
-        const hBars = Array.from(document.querySelectorAll(".hBar")).map((el) => ({
-          el,
-          w: num(el.getAttribute("width"), 0)
-        }));
-
-        // Group donut segments by their parent ring so each ring sweeps as one circle.
-        const rings = new Map();
-        document.querySelectorAll(".circleBar").forEach((c) => {
-          const C = 2 * Math.PI * num(c.getAttribute("r"), 0);
-          const len = num((c.getAttribute("stroke-dasharray") || "0").trim().split(/[\s,]+/)[0], 0);
-          const start = -num(c.getAttribute("stroke-dashoffset"), 0);
-          if (!rings.has(c.parentNode)) rings.set(c.parentNode, []);
-          rings.get(c.parentNode).push({ c, C, len, start });
-        });
-
-        // Line charts: <g class="lineChart"> holding one polyline + its dots.
-        // The line draws left to right; each dot appears as the line reaches it.
-        const lines = Array.from(document.querySelectorAll(".lineChart")).map((g) => {
-          const pl = g.querySelector("polyline");
-          const xs = pl.getAttribute("points").trim().split(/\s+/).map((pt) => num(pt.split(",")[0], 0));
-          const x0 = Math.min.apply(null, xs), x1 = Math.max.apply(null, xs);
-          const L = pl.getTotalLength ? pl.getTotalLength() : 1000;
-          pl.setAttribute("stroke-dasharray", L.toFixed(2) + " " + L.toFixed(2));
-          const dots = Array.from(g.querySelectorAll("circle")).map((c) => ({
-            c, at: x1 > x0 ? (num(c.getAttribute("cx"), 0) - x0) / (x1 - x0) : 0
-          }));
-          return { pl, L, dots };
-        });
-
-        // KPI sparklines: <g class="sparkChart"> with an area path, a line path and an end dot.
-        // Line draws left to right, area fills behind it, dot lands at the end.
-        const sparks = Array.from(document.querySelectorAll(".sparkChart")).map((g, i) => {
-          const paths = Array.from(g.querySelectorAll("path"));
-          const line = paths.find((p) => p.getAttribute("fill") === "none");
-          const area = paths.find((p) => p !== line);
-          const dot = g.querySelector("circle");
-          const L = line.getTotalLength();
-          line.setAttribute("stroke-dasharray", L.toFixed(2) + " " + L.toFixed(2));
-          let clip = null, bb = null;
-          if (area) {
-            bb = area.getBBox();
-            const ns = "http://www.w3.org/2000/svg";
-            const cp = document.createElementNS(ns, "clipPath");
-            cp.setAttribute("id", "sparkClip" + i);
-            clip = document.createElementNS(ns, "rect");
-            clip.setAttribute("x", bb.x); clip.setAttribute("y", bb.y - 2);
-            clip.setAttribute("height", bb.height + 4); clip.setAttribute("width", 0);
-            cp.appendChild(clip); g.appendChild(cp);
-            area.setAttribute("clip-path", "url(#sparkClip" + i + ")");
-          }
-          return { line, L, clip, bb, dot };
-        });
-
-        function fmt(v, d) {
-          const s = Math.abs(v).toLocaleString("en-IN", { minimumFractionDigits: d, maximumFractionDigits: d });
-          return (v < 0 && Number(s.replace(/,/g, "")) !== 0 ? "\u2212" : "") + s;
-        }
-
-        function progressAt(t) {
-          const x = t % CYCLE;
-          if (x < RISE) return ease(x / RISE);
-          if (x < RISE + HOLD) return 1;
-          if (x < RISE + HOLD + FALL) return 1 - ease((x - RISE - HOLD) / FALL);
-          return 0;
-        }
-
-        function render(p) {
-          counters.forEach((k) => { k.el.textContent = fmt(k.target * p, k.dec); });
-          bars.forEach((b) => { b.style.transform = "scaleY(" + p + ")"; });
-          hBars.forEach((h) => { h.el.setAttribute("width", (h.w * p).toFixed(2)); });
-          sparks.forEach((sp) => {
-            sp.line.setAttribute("stroke-dashoffset", (sp.L * (1 - p)).toFixed(2));
-            if (sp.clip) sp.clip.setAttribute("width", (sp.bb.width * p).toFixed(2));
-            if (sp.dot) sp.dot.style.opacity = Math.max(0, Math.min(1, (p - 0.94) / 0.06)).toFixed(2);
-          });
-          lines.forEach((ln) => {
-            ln.pl.setAttribute("stroke-dashoffset", (ln.L * (1 - p)).toFixed(2));
-            ln.dots.forEach((d) => {
-              d.c.style.opacity = Math.max(0, Math.min(1, (p - d.at) / 0.06 + 1)).toFixed(2);
-            });
-          });
-          rings.forEach((segs) => {
-            const sweep = p * segs[0].C;
-            segs.forEach((s) => {
-              const visible = Math.max(0, Math.min(s.len, sweep - s.start));
-              s.c.setAttribute("stroke-dasharray", visible.toFixed(2) + " " + s.C.toFixed(2));
-            });
-          });
-        }
-
-        let raf = null, t0 = null;
-        function frame(now) {
-          if (t0 === null) t0 = now;
-          render(progressAt(now - t0));
-          raf = requestAnimationFrame(frame);
-        }
-        function play() { if (raf === null) { t0 = null; raf = requestAnimationFrame(frame); } }
-        function stop() { if (raf !== null) { cancelAnimationFrame(raf); raf = null; } }
-
-        render(0);
-        const target = document.querySelector(".stage") || document.body;
-        if ("IntersectionObserver" in window) {
-          new IntersectionObserver((entries) => {
-            entries.forEach((e) => (e.isIntersecting ? play() : stop()));
-          }, { threshold: 0.25 }).observe(target);
-        } else {
-          play();
-        }
-      })();
-    </script>
 </body>
-</html>
-`,
+</html>`,
   cashflow: String.raw`<!doctype html>
 <html lang="en">
   <head>
@@ -2991,445 +2992,296 @@ svg{display:block;width:100%;height:auto;overflow:hidden}text{font-family:Inter,
 `,
   "working-capital": String.raw`<!doctype html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width,initial-scale=1" />
-    <title>CFO CRAFT — Working Capital Optimisation Dashboard</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
-    <style>
-      * { box-sizing: border-box; }
-      html, body { margin: 0; padding: 0; background: #fff; }
-      body { font-family: Poppins, Inter, Arial, Helvetica, sans-serif; }
-      .stage { width: 800px; max-width: 100vw; margin: 0 auto; }
-      svg { display: block; width: 100%; height: auto; overflow: hidden; }
-      text { text-rendering: geometricPrecision; font-family: Poppins, Inter, Arial, Helvetica, sans-serif; }
-      .title { font-weight: 700; fill: #10233f; }
-      .semi { font-weight: 700; fill: #183a58; }
-      .muted { font-weight: 500; fill: #5f7285; }
-      .lab { fill: #1b3a57; }
-      .micro { font-size: 4.8px; font-weight: 400; fill: #7a8896; }
-      .tiny { font-size: 4.35px; font-weight: 400; fill: #7a8896; }
-      .th text { font-size: 5.1px; font-weight: 500; fill: #5f7285; }
-      .td text { font-size: 5.4px; font-weight: 500; fill: #1b3a57; }
-      .counter { font-variant-numeric: tabular-nums; }
-      .bar { transform-box: fill-box; transform-origin: bottom; }
-      .barN { transform-box: fill-box; transform-origin: top; }
-      @media (prefers-reduced-motion: reduce) {
-        .bar, .barN, .spark, .floatA, .floatB { animation: none !important; }
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>CFO CRAFT — Working Capital Optimization Dashboard</title>
+<style>
+*{box-sizing:border-box}html,body{margin:0;background:#fff}body{font-family:Inter,Arial,sans-serif}
+.stage{width:800px;max-width:100vw;margin:0 auto}.stage svg{display:block;width:100%;height:auto}
+text{font-family:Inter,Arial,sans-serif}.t{font-weight:800;fill:#123654}.s{font-weight:700;fill:#173957}
+.m{font-weight:500;fill:#6e8091}.micro{font-size:4.7px;fill:#81909d;font-weight:500}.tiny{font-size:4.25px;fill:#83919e}
+.good{fill:#239b70}.warn{fill:#dc8a28}.bad{fill:#d94c46}.blue{fill:#2879ca}
+.anim-bar{transform-box:fill-box;transform-origin:bottom}.anim-hbar{transform-box:fill-box;transform-origin:left center}.status-dot,.metric-orb{transform-box:fill-box;transform-origin:center}.float{animation:float 7.5s ease-in-out infinite alternate}
+@keyframes float{to{transform:translateY(-3px)}}
+@keyframes slowBarY{0%,100%{transform:scaleY(1)}50%{transform:scaleY(.93)}}
+@keyframes slowBarX{0%,100%{transform:scaleX(1)}50%{transform:scaleX(.95)}}
+@keyframes softPulse{0%,100%{transform:scale(1);opacity:1}50%{transform:scale(.88);opacity:.72}}
+.stage.is-live .anim-bar{animation:slowBarY 8.5s ease-in-out infinite}
+.stage.is-live .anim-hbar{animation:slowBarX 9.5s ease-in-out infinite}
+.stage.is-live .status-dot{animation:softPulse 7.2s ease-in-out infinite}
+.stage.is-live .metric-orb{animation:softPulse 8.4s ease-in-out infinite}
+@media(prefers-reduced-motion:reduce){.float,.stage.is-live .anim-bar,.stage.is-live .anim-hbar,.stage.is-live .status-dot,.stage.is-live .metric-orb{animation:none!important}}
+</style>
+</head>
+<body>
+<div class="stage">
+<svg viewBox="0 0 800 450" xmlns="http://www.w3.org/2000/svg" aria-label="Illustrative Working Capital Optimization dashboard aligned to inventory, WIP, billing, receivables, supplier terms and cash-cycle benchmarking">
+<defs>
+  <linearGradient id="bgWC" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#064395"/><stop offset=".52" stop-color="#07397d"/><stop offset="1" stop-color="#082e65"/></linearGradient>
+  <linearGradient id="paperWC" x1="0" y1="0" x2="0" y2="1"><stop stop-color="#fff"/><stop offset="1" stop-color="#f8fbff"/></linearGradient>
+  <filter id="shWC" x="-20%" y="-20%" width="150%" height="160%"><feDropShadow dx="0" dy="6" stdDeviation="8" flood-color="#04285e" flood-opacity=".28"/></filter>
+  <filter id="smWC" x="-30%" y="-30%" width="170%" height="180%"><feDropShadow dx="0" dy="3" stdDeviation="4" flood-color="#082951" flood-opacity=".18"/></filter>
+  <clipPath id="clipWC"><rect x="75" y="42" width="650" height="368" rx="14"/></clipPath>
+</defs>
+
+<rect width="800" height="450" rx="23" fill="url(#bgWC)"/>
+<g fill="none" stroke="#a8d0ff" stroke-opacity=".15" stroke-width="1">
+  <path d="M-95 72C73-20 248-18 384 82"/><path d="M-90 122C80 37 269 42 410 146"/>
+  <path d="M438-24C613 10 747 84 834 198"/><path d="M-35 365C105 305 228 322 339 414"/>
+</g>
+
+<rect x="75" y="42" width="650" height="368" rx="14" fill="url(#paperWC)" filter="url(#shWC)"/>
+<g clip-path="url(#clipWC)">
+  <!-- Header -->
+  <rect x="91" y="57" width="29" height="29" rx="6" fill="#eaf3ff"/>
+  <path d="M98 65h15v4H98zm2 7h11v6h-11z" fill="#2879ca"/>
+  <text x="127" y="69" class="t" font-size="14.1">Working Capital Optimization</text>
+  <text x="127" y="80.5" class="m" font-size="6.35">Inventory, WIP, billing, receivables and supplier-term discipline</text>
+  <rect x="491" y="55" width="112" height="22" rx="5" fill="#fff" stroke="#e3eaf1"/>
+  <text x="500" y="65.7" font-size="5.45" font-weight="700" fill="#566b7e">Q1 FY27 (Apr–Jun 2026)</text>
+  <path d="M593 64l2 2 2-2" fill="none" stroke="#83909d" stroke-width=".8"/>
+  <rect x="435" y="78" width="168" height="12" rx="4" fill="#f2f6fb"/>
+  <text x="519" y="86" text-anchor="middle" class="tiny">Illustrative sample data only — not client results</text>
+
+  <!-- KPI row -->
+  <rect x="91" y="96" width="150" height="58" rx="8" fill="#fff" stroke="#e2e9f0"/>
+  <circle cx="106" cy="111" r="9" fill="#eaf3ff"/><path d="M101 108h10v7h-10zm2-3h6v3h-6z" fill="#2879ca"/>
+  <text x="120" y="108" class="m" font-size="6">Inventory + WIP days</text>
+  <text x="120" y="124" class="t" font-size="14"><tspan data-count="74" data-decimals="0">74</tspan> days</text>
+  <text x="120" y="136" class="warn" font-size="5.1" font-weight="700">slow stock + stalled milestones</text>
+  <text x="120" y="145" class="micro">Focus on ageing and conversion</text>
+
+  <rect x="246" y="96" width="150" height="58" rx="8" fill="#fff" stroke="#e2e9f0"/>
+  <circle cx="261" cy="111" r="9" fill="#fff2df"/><path d="M257 106h8v10h-8zM259 109h4M259 112h4" fill="none" stroke="#e89c31" stroke-width="1"/>
+  <text x="275" y="108" class="m" font-size="6">Billing lag</text>
+  <text x="275" y="124" class="t" font-size="14"><tspan data-count="12" data-decimals="0">12</tspan> days</text>
+  <text x="275" y="136" class="warn" font-size="5.1" font-weight="700">work done → invoice raised</text>
+  <text x="275" y="145" class="micro">Unbilled work needs conversion</text>
+
+  <rect x="401" y="96" width="150" height="58" rx="8" fill="#fff" stroke="#e2e9f0"/>
+  <circle cx="416" cy="111" r="9" fill="#e7f7ef"/><path d="M412 107h8v8h-8zM414 105h4v2h-4" fill="#2ca06f"/>
+  <text x="430" y="108" class="m" font-size="6">Receivables ageing</text>
+  <text x="430" y="124" class="t" font-size="14"><tspan data-count="58" data-decimals="0">58</tspan> days</text>
+  <text x="430" y="136" class="good" font-size="5.1" font-weight="700">collections opportunity</text>
+  <text x="430" y="145" class="micro">Policy + follow-up discipline</text>
+
+  <rect x="556" y="96" width="156" height="58" rx="8" fill="#fff" stroke="#e2e9f0"/>
+  <circle cx="571" cy="111" r="9" fill="#f0eaff"/><path d="M566 109h10v6h-10zM568 106h6v3h-6z" fill="#7950d6"/>
+  <text x="585" y="108" class="m" font-size="6">Supplier / subcontractor terms</text>
+  <text x="585" y="124" class="t" font-size="14"><tspan data-count="35" data-decimals="0">35</tspan> days</text>
+  <text x="585" y="136" class="blue" font-size="5.1" font-weight="700">renegotiation lever</text>
+  <text x="585" y="145" class="micro">Protect the cash cycle</text>
+
+  <!-- Lower panels -->
+  <rect x="91" y="164" width="209" height="139" rx="8" fill="#fff" stroke="#e2e9f0"/>
+  <text x="102" y="179" class="t" font-size="8">Cash-cycle drivers</text>
+  <text x="102" y="190" class="micro">Illustrative contribution in days</text>
+  <g>
+    <text x="103" y="211" class="m" font-size="5.5">Inventory + WIP</text><rect x="160" y="204" width="118" height="8" rx="4" fill="#edf2f6"/><rect x="160" y="204" width="95" height="8" rx="4" fill="#2879ca"/><text x="285" y="211" text-anchor="end" class="s" font-size="5.5"><tspan data-count="74" data-decimals="0">74</tspan></text>
+    <text x="103" y="233" class="m" font-size="5.5">Billing lag</text><rect x="160" y="226" width="118" height="8" rx="4" fill="#edf2f6"/><rect x="160" y="226" width="23" height="8" rx="4" fill="#e9a64b"/><text x="285" y="233" text-anchor="end" class="s" font-size="5.5"><tspan data-count="12" data-decimals="0">12</tspan></text>
+    <text x="103" y="255" class="m" font-size="5.5">Receivables</text><rect x="160" y="248" width="118" height="8" rx="4" fill="#edf2f6"/><rect x="160" y="248" width="76" height="8" rx="4" fill="#53a1dd"/><text x="285" y="255" text-anchor="end" class="s" font-size="5.5"><tspan data-count="58" data-decimals="0">58</tspan></text>
+    <text x="103" y="277" class="m" font-size="5.5">Supplier credit</text><rect x="160" y="270" width="118" height="8" rx="4" fill="#edf2f6"/><rect x="160" y="270" width="47" height="8" rx="4" fill="#7950d6"/><text x="285" y="277" text-anchor="end" class="s" font-size="5.5"><tspan data-count="35" data-decimals="0">35</tspan></text>
+  </g>
+  <text x="103" y="293" class="micro">74 + 12 + 58 − 35 = 109 days before other timing effects</text>
+
+  <rect x="308" y="164" width="198" height="139" rx="8" fill="#fff" stroke="#e2e9f0"/>
+  <text x="319" y="179" class="t" font-size="8">Trapped cash analysis</text>
+  <text x="319" y="190" class="micro">Where cash is sitting today</text>
+  <g>
+    <rect x="319" y="199" width="176" height="24" rx="5" fill="#f5f9fd"/><circle cx="329" cy="211" r="4" fill="#2879ca"/><text x="339" y="208" class="m" font-size="5">Slow-moving inventory</text><text x="487" y="214" text-anchor="end" class="s" font-size="7">₹<tspan data-count="1.30" data-decimals="2">1.30</tspan> Cr</text>
+    <rect x="319" y="228" width="176" height="24" rx="5" fill="#f5f9fd"/><circle cx="329" cy="240" r="4" fill="#e89c31"/><text x="339" y="237" class="m" font-size="5">WIP / unbilled work</text><text x="487" y="243" text-anchor="end" class="s" font-size="7">₹<tspan data-count="0.80" data-decimals="2">0.80</tspan> Cr</text>
+    <rect x="319" y="257" width="176" height="24" rx="5" fill="#f5f9fd"/><circle cx="329" cy="269" r="4" fill="#d94c46"/><text x="339" y="266" class="m" font-size="5">Overdue receivables</text><text x="487" y="272" text-anchor="end" class="s" font-size="7">₹<tspan data-count="1.40" data-decimals="2">1.40</tspan> Cr</text>
+  </g>
+  <text x="319" y="293" class="micro">Each item maps to a specific owner and cash-release action</text>
+
+  <rect x="514" y="164" width="198" height="139" rx="8" fill="#fff" stroke="#e2e9f0"/>
+  <text x="525" y="179" class="t" font-size="8">Optimization levers</text>
+  <text x="525" y="190" class="micro">What the review works through</text>
+  <g font-size="5.35" font-weight="650" fill="#173957">
+    <circle cx="530" cy="207" r="3.2" fill="#27a071"/><path d="M528.5 207l1.2 1.2 2.2-2.3" fill="none" stroke="#fff" stroke-width=".8"/><text x="538" y="209">Slow-moving SKU / WIP ageing</text>
+    <circle cx="530" cy="226" r="3.2" fill="#27a071"/><path d="M528.5 226l1.2 1.2 2.2-2.3" fill="none" stroke="#fff" stroke-width=".8"/><text x="538" y="228">Billing-cycle gap closure</text>
+    <circle cx="530" cy="245" r="3.2" fill="#27a071"/><path d="M528.5 245l1.2 1.2 2.2-2.3" fill="none" stroke="#fff" stroke-width=".8"/><text x="538" y="247">Receivables policy &amp; follow-up</text>
+    <circle cx="530" cy="264" r="3.2" fill="#27a071"/><path d="M528.5 264l1.2 1.2 2.2-2.3" fill="none" stroke="#fff" stroke-width=".8"/><text x="538" y="266">Supplier / subcontractor terms</text>
+    <circle cx="530" cy="283" r="3.2" fill="#27a071"/><path d="M528.5 283l1.2 1.2 2.2-2.3" fill="none" stroke="#fff" stroke-width=".8"/><text x="538" y="285">Relevant peer benchmarking</text>
+  </g>
+
+  <!-- Recommended action strip -->
+  <rect x="178" y="313" width="452" height="79" rx="8" fill="#fff" stroke="#e2e9f0"/>
+  <text x="189" y="328" class="t" font-size="8">Recommended actions</text>
+  <g>
+    <rect x="189" y="337" width="101" height="45" rx="6" fill="#f5f9fd"/><circle cx="198" cy="346" r="3" fill="#2879ca"/><text x="205" y="347" class="s" font-size="4.8">Age slow-moving</text><text x="205" y="353" class="s" font-size="4.8">stock &amp; WIP</text><text x="205" y="365" class="micro">Release or re-plan</text><text x="205" y="371" class="micro">stalled capital.</text>
+    <rect x="296" y="337" width="101" height="45" rx="6" fill="#f5f9fd"/><circle cx="305" cy="346" r="3" fill="#e89c31"/><text x="312" y="347" class="s" font-size="4.8">Close billing lag</text><text x="312" y="353" class="s" font-size="4.8">from 12 days</text><text x="312" y="365" class="micro">Invoice sooner after</text><text x="312" y="371" class="micro">work is delivered.</text>
+    <rect x="403" y="337" width="101" height="45" rx="6" fill="#f5f9fd"/><circle cx="412" cy="346" r="3" fill="#d94c46"/><text x="419" y="347" class="s" font-size="4.8">Tighten overdue</text><text x="419" y="353" class="s" font-size="4.8">collections</text><text x="419" y="365" class="micro">Policy + owner +</text><text x="419" y="371" class="micro">weekly review.</text>
+    <rect x="510" y="337" width="110" height="45" rx="6" fill="#f5f9fd"/><circle cx="519" cy="346" r="3" fill="#7950d6"/><text x="526" y="347" class="s" font-size="4.8">Renegotiate supplier</text><text x="526" y="353" class="s" font-size="4.8">terms</text><text x="526" y="365" class="micro">Protect cycle without</text><text x="526" y="371" class="micro">damaging supply.</text>
+  </g>
+</g>
+
+<!-- Floating cards -->
+<g class="float" filter="url(#smWC)">
+  <rect x="630" y="17" width="157" height="68" rx="11" fill="#f3fbf7"/>
+  <circle cx="648" cy="37" r="9" fill="#dff4e9"/><text x="648" y="40" text-anchor="middle" font-size="8" font-weight="800" fill="#26996c">₹</text>
+  <text x="665" y="32" font-size="5.6" font-weight="700" fill="#50687b">Potential cash unlock</text>
+  <text x="665" y="50" font-size="15.5" font-weight="800" fill="#1d9e73">₹<tspan data-count="3.50" data-decimals="2">3.50</tspan> Cr</text>
+  <text x="665" y="61" font-size="4.9" fill="#73818e">Illustrative opportunity across</text><text x="665" y="69" font-size="4.9" fill="#73818e">stock, billing and collections.</text>
+</g>
+<g class="float" filter="url(#smWC)">
+  <rect x="14" y="357" width="150" height="72" rx="11" fill="#eef6ff"/>
+  <circle cx="32" cy="379" r="9" fill="#dcecff"/><path d="M28 381l4 4 5-8" fill="none" stroke="#2879ca" stroke-width="1.2"/>
+  <text x="50" y="374" font-size="5.7" font-weight="700" fill="#50687b">Cycle improvement</text>
+  <text x="50" y="393" font-size="15.5" font-weight="800" fill="#2879ca">−<tspan data-count="24" data-decimals="0">24</tspan> days</text>
+  <text x="50" y="405" font-size="4.9" fill="#73818e">Illustrative target from</text><text x="50" y="413" font-size="4.9" fill="#73818e">priority working-capital actions.</text>
+</g>
+</svg>
+</div>
+
+<script>
+(function () {
+  const reduce =
+    window.matchMedia &&
+    window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+  const stage = document.querySelector(".stage");
+  if (!stage) return;
+
+  const counters = [...document.querySelectorAll("[data-count]")].map((el) => ({
+    el,
+    target: Number(el.dataset.count || 0),
+    decimals: Number(el.dataset.decimals || 0),
+  }));
+
+  const verticalBars = [...document.querySelectorAll(".anim-bar")].map((el) => ({
+    el,
+    height: Number(el.dataset.h || el.getAttribute("height") || 0),
+    y0: Number(el.dataset.y0 || (Number(el.getAttribute("y") || 0) + Number(el.getAttribute("height") || 0))),
+  }));
+
+  // Coloured 8px horizontal bars are the live graph values; grey bars are tracks.
+  const horizontalBars = [...document.querySelectorAll("rect")].filter((el) => {
+    const height = Number(el.getAttribute("height") || 0);
+    const width = Number(el.getAttribute("width") || 0);
+    const fill = (el.getAttribute("fill") || "").toLowerCase();
+    return height === 8 &&
+      width > 10 &&
+      !["#eef3f7", "#edf2f6", "#e2e9f0", "#f2f6fb"].includes(fill);
+  }).map((el, i) => {
+    el.classList.add("anim-hbar");
+    el.style.animationDelay = (i * 0.45).toFixed(2) + "s";
+    return { el, width: Number(el.getAttribute("width") || 0) };
+  });
+
+  const lines = [...document.querySelectorAll("polyline")].map((el) => {
+    const length = el.getTotalLength ? el.getTotalLength() : 0;
+    if (length > 0) {
+      el.setAttribute("stroke-dasharray", length + " " + length);
+      el.setAttribute("stroke-dashoffset", String(length));
+    }
+    return { el, length };
+  });
+
+  const smallDots = [...document.querySelectorAll("circle")].filter((el) => {
+    const r = Number(el.getAttribute("r") || 0);
+    const fill = (el.getAttribute("fill") || "").toLowerCase();
+    return r > 0 && r <= 4.5 && fill && fill !== "none" && fill !== "#fff";
+  });
+  smallDots.forEach((el, i) => {
+    el.classList.add("status-dot");
+    el.style.animationDelay = (i * 0.35).toFixed(2) + "s";
+  });
+
+  const iconOrbs = [...document.querySelectorAll("circle")].filter((el) => {
+    const r = Number(el.getAttribute("r") || 0);
+    return r >= 8 && r <= 13;
+  });
+  iconOrbs.forEach((el, i) => {
+    el.classList.add("metric-orb");
+    el.style.animationDelay = (i * 0.55).toFixed(2) + "s";
+  });
+
+  const format = (value, decimals) =>
+    Math.abs(value).toLocaleString("en-IN", {
+      minimumFractionDigits: decimals,
+      maximumFractionDigits: decimals,
+    });
+
+  const ease = (p) =>
+    p < 0.5
+      ? 4 * p * p * p
+      : 1 - Math.pow(-2 * p + 2, 3) / 2;
+
+  const render = (p) => {
+    counters.forEach(({ el, target, decimals }) => {
+      const value = target * p;
+      el.textContent = (target < 0 ? "−" : "") + format(value, decimals);
+    });
+
+    verticalBars.forEach(({ el, height, y0 }) => {
+      const h = height * p;
+      el.setAttribute("height", h.toFixed(2));
+      el.setAttribute("y", (y0 - h).toFixed(2));
+    });
+
+    horizontalBars.forEach(({ el, width }) => {
+      el.setAttribute("width", (width * p).toFixed(2));
+    });
+
+    lines.forEach(({ el, length }) => {
+      if (length > 0) {
+        el.setAttribute("stroke-dashoffset", (length * (1 - p)).toFixed(2));
       }
-    </style>
-  </head>
-  <body>
-    <div class="stage">
-      <svg viewBox="0 0 800 450" xmlns="http://www.w3.org/2000/svg" aria-label="CFO CRAFT working capital optimisation dashboard">
-        <defs>
-          <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
-            <stop offset="0" stop-color="#073f91" />
-            <stop offset=".50" stop-color="#063778" />
-            <stop offset="1" stop-color="#082e65" />
-          </linearGradient>
-          <linearGradient id="paper" x1="0" y1="0" x2="0" y2="1">
-            <stop offset="0" stop-color="#ffffff" />
-            <stop offset="1" stop-color="#f9fbfd" />
-          </linearGradient>
-          <radialGradient id="orb" cx=".35" cy=".3" r=".8">
-            <stop offset="0" stop-color="#2f78d8" stop-opacity=".75" />
-            <stop offset="1" stop-color="#0a3f8f" stop-opacity=".15" />
-          </radialGradient>
-          <linearGradient id="gold" x1="0" y1="0" x2="0" y2="1">
-            <stop offset="0" stop-color="#7fb4ff" stop-opacity=".7" />
-            <stop offset=".6" stop-color="#e3b25a" stop-opacity=".85" />
-            <stop offset="1" stop-color="#e3b25a" stop-opacity="0" />
-          </linearGradient>
-          <pattern id="dots" width="6" height="6" patternUnits="userSpaceOnUse">
-            <circle cx="1" cy="1" r=".6" fill="#8fbaf0" fill-opacity=".45" />
-          </pattern>
-          <pattern id="hatch" width="5" height="5" patternUnits="userSpaceOnUse" patternTransform="rotate(-40)">
-            <line x1="0" y1="0" x2="0" y2="5" stroke="#8fbaf0" stroke-opacity=".12" stroke-width=".7" />
-          </pattern>
-          <filter id="shadow" x="-20%" y="-20%" width="140%" height="150%">
-            <feDropShadow dx="0" dy="5" stdDeviation="7" flood-color="#03265c" flood-opacity=".26" />
-          </filter>
-          <filter id="smallShadow" x="-20%" y="-20%" width="150%" height="160%">
-            <feDropShadow dx="0" dy="3" stdDeviation="4" flood-color="#0a315b" flood-opacity=".18" />
-          </filter>
-          <clipPath id="dashboardClip">
-            <rect x="76" y="42" width="650" height="370" rx="14" />
-          </clipPath>
-        </defs>
+    });
 
-        <!-- ===================== BACKGROUND ===================== -->
-        <rect width="800" height="450" rx="23" fill="url(#bg)" />
-        <circle cx="40" cy="60" r="45" fill="url(#orb)" opacity=".85" />
-        <circle cx="25" cy="80" r="72" fill="none" stroke="#7fb4ff" stroke-opacity=".3" />
-        <circle cx="30" cy="330" r="55" fill="url(#orb)" opacity=".6" />
-        <circle cx="30" cy="330" r="60" fill="none" stroke="#7fb4ff" stroke-opacity=".35" />
-        <path d="M760 150C800 190 810 300 740 360" fill="none" stroke="#7fb4ff" stroke-opacity=".45" />
-        <circle cx="800" cy="330" r="70" fill="url(#orb)" opacity=".45" />
-        <rect x="10" y="185" width="32" height="36" fill="url(#dots)" />
-        <rect x="388" y="4" width="36" height="22" fill="url(#dots)" />
-        <rect x="758" y="258" width="30" height="36" fill="url(#dots)" />
-        <rect x="64" y="28" width="674" height="394" rx="18" fill="none" stroke="#7fb4ff" stroke-opacity=".35" />
+    smallDots.forEach((el, i) => {
+      const local = Math.max(0, Math.min(1, p * 1.35 - i * 0.025));
+      el.style.opacity = (0.2 + 0.8 * local).toFixed(2);
+    });
+  };
 
-        <!-- ===================== MAIN DASHBOARD ===================== -->
-        <rect x="76" y="42" width="650" height="370" rx="14" fill="url(#paper)" filter="url(#shadow)" />
+  const finish = () => {
+    render(1);
+    smallDots.forEach((el) => { el.style.opacity = ""; });
+    stage.classList.add("is-live");
+  };
 
-        <g clip-path="url(#dashboardClip)">
-          <!-- HEADER -->
-          <rect x="89" y="52" width="29" height="29" rx="6" fill="#eaf3ff" />
-          <g transform="translate(103.5 66.5) scale(1.45) translate(-103.5 -66.5)"><g fill="#1f6fd0"><ellipse cx="103.5" cy="62.9" rx="4.4" ry="1.7"/><path d="M99.1 64.1c0 1 2 1.8 4.4 1.8s4.4-.8 4.4-1.8v2.2c0 1-2 1.8-4.4 1.8s-4.4-.8-4.4-1.8z"/><path d="M99.1 67.7c0 1 2 1.8 4.4 1.8s4.4-.8 4.4-1.8v2.2c0 1-2 1.8-4.4 1.8s-4.4-.8-4.4-1.8z"/></g></g>
-          <text x="126" y="66" class="title" font-size="14.4">Working Capital Optimisation</text>
-          <text x="126" y="77.5" class="muted" font-size="6.4">Unlock the cash trapped in your business</text>
+  if (reduce) {
+    finish();
+    return;
+  }
 
-          <rect x="497" y="48" width="107" height="20" rx="5" fill="#fff" stroke="#e7edf2" />
-          <text x="504" y="60"  font-size="5.55" font-weight="600" fill="#33495d">Q1 FY27 (Apr–Jun 2026)</text>
-          <path d="M594 57.5l1.8 1.8 1.8-1.8" fill="none" stroke="#83909d" stroke-width=".8" />
-          <rect x="428" y="72" width="176" height="15" rx="4" fill="#f1f5fb" />
-          <text x="516" y="81.5" text-anchor="middle" class="tiny">Illustrative dashboard with sample data, not client results</text>
+  const DURATION = 4200; // deliberately slow enough to read
+  let raf = 0;
+  let start = 0;
 
-          <!-- ================= KPI ROW ================= -->
-          <rect x="91" y="93" width="151" height="58" rx="8" fill="#fff" stroke="#e4eaf0"/>
-<rect x="97" y="99" width="23" height="23" rx="6" fill="#eaf3ff"/>
-<g fill="none" stroke="#1f6fd0" stroke-width="1.05" stroke-linejoin="round"><path d="M108.5 105.7l4.2 2.4v4.8l-4.2 2.4-4.2-2.4v-4.8z"/><path d="M104.3 108.1l4.2 2.4 4.2-2.4M108.5 110.5v4.8"/></g>
-<text x="127" y="107" class="muted lab" font-size="6.05">Inventory days (DIO)</text>
-<text x="127" y="123" class="title" font-size="14.2"><tspan class="counter" data-target="91" data-decimals="0">91</tspan> days</text>
-<path d="M127 132.2h4.2l-2.1 3.4z" fill="#299d73"/>
-<text x="133" y="135.6" font-size="5.25" font-weight="700" fill="#299d73">4 days vs Mar</text>
-<text x="127" y="144" class="micro">Mar 2026: 95 days</text>
-<g class="sparkChart"><path d="M198 124C207.3 125 210.4 129.0 213.5 130.5S222.8 136 229 137V138.5H198z" fill="#e3f5ec"/><path d="M198 124C207.3 125 210.4 129.0 213.5 130.5S222.8 136 229 137" fill="none" stroke="#2f9e6c" stroke-width="1.2" class="spark"/><circle cx="229" cy="137" r="1.6" fill="#2f9e6c"/></g>
-          <rect x="247" y="93" width="151" height="58" rx="8" fill="#fff" stroke="#e4eaf0"/>
-<rect x="253" y="99" width="23" height="23" rx="6" fill="#fff3df"/>
-<path d="M261.1 105.9h4.4l2.4 2.4v6.8h-6.8z" fill="#eaa044"/><path d="M262.7 110.5h3.6M262.7 112.3h3.6" stroke="#fff" stroke-width=".6"/>
-<text x="283" y="107" class="muted lab" font-size="6.05">Collection days (DSO)</text>
-<text x="283" y="123" class="title" font-size="14.2"><tspan class="counter" data-target="62" data-decimals="0">62</tspan> days</text>
-<path d="M283 132.2h4.2l-2.1 3.4z" fill="#299d73"/>
-<text x="289" y="135.6" font-size="5.25" font-weight="700" fill="#299d73">8 days vs Mar</text>
-<text x="283" y="144" class="micro">Mar 2026: 70 days</text>
-<g class="sparkChart"><path d="M354 124C363.3 125 366.4 129.0 369.5 130.5S378.8 136 385 137V138.5H354z" fill="#e3f5ec"/><path d="M354 124C363.3 125 366.4 129.0 369.5 130.5S378.8 136 385 137" fill="none" stroke="#2f9e6c" stroke-width="1.2" class="spark"/><circle cx="385" cy="137" r="1.6" fill="#2f9e6c"/></g>
-          <rect x="403" y="93" width="151" height="58" rx="8" fill="#fff" stroke="#e4eaf0"/>
-<rect x="409" y="99" width="23" height="23" rx="6" fill="#f1ecfe"/>
-<g fill="#7a4fe0"><rect x="415.7" y="107.3" width="5.8" height="4.8" rx=".6"/><path d="M421.9 108.9h2l1.6 1.8v1.4h-3.6z"/><circle cx="417.7" cy="112.9" r="1.1"/><circle cx="423.1" cy="112.9" r="1.1"/></g>
-<text x="439" y="107" class="muted lab" font-size="6.05">Payable days (DPO)</text>
-<text x="439" y="123" class="title" font-size="14.2"><tspan class="counter" data-target="51" data-decimals="0">51</tspan> days</text>
-<path d="M439 135.6l2.1-3.4 2.1 3.4z" fill="#299d73"/>
-<text x="445" y="135.6" font-size="5.25" font-weight="700" fill="#299d73">4 days vs Mar</text>
-<text x="439" y="144" class="micro">Mar 2026: 47 days</text>
-<g class="sparkChart"><path d="M510 134C515 134 518 137 522 136S529 128 534 127S540 124 541 123V139H510z" fill="#e3f5ec"/><path d="M510 134C515 134 518 137 522 136S529 128 534 127S540 124 541 123" fill="none" stroke="#2f9e6c" stroke-width="1.2" class="spark"/><circle cx="541" cy="123" r="1.6" fill="#2f9e6c"/></g>
-          <rect x="559" y="93" width="153" height="58" rx="8" fill="#fff" stroke="#e4eaf0"/>
-<rect x="565" y="99" width="23" height="23" rx="6" fill="#e7f7ef"/>
-<text x="576.5" y="113.9" text-anchor="middle" font-size="9.6" font-weight="600" fill="#2e9e6e">₹</text>
-<text x="595" y="107" class="muted lab" font-size="6.05">Net working capital</text>
-<text x="595" y="123" class="title" font-size="14.2">₹<tspan class="counter" data-target="12.5" data-decimals="1">12.5</tspan> Cr</text>
-<path d="M595 132.2h4.2l-2.1 3.4z" fill="#299d73"/>
-<text x="601" y="135.6" font-size="5.25" font-weight="700" fill="#299d73">2.7% vs Mar</text>
-<text x="595" y="144" class="micro">Mar 2026: ₹12.85 Cr</text>
-<g class="sparkChart"><path d="M670 125C679.3 126 682.4 129.5 685.5 131.0S694.8 136 701 137V138.5H670z" fill="#e3f5ec"/><path d="M670 125C679.3 126 682.4 129.5 685.5 131.0S694.8 136 701 137" fill="none" stroke="#2f9e6c" stroke-width="1.2" class="spark"/><circle cx="701" cy="137" r="1.6" fill="#2f9e6c"/></g>
-          <!-- ================= CASH CYCLE BREAKDOWN ================= -->
-          <rect x="90" y="157" width="234" height="143" rx="8" fill="#fff" stroke="#e4eaf0"/>
-          <text x="98" y="172" class="title" font-size="8.05">Cash cycle breakdown</text>
-          <text x="316" y="172" text-anchor="end" class="micro">month-end days</text>
-          <circle cx="99" cy="183" r="2" fill="#1f5fd6"/><text x="103" y="184.7" class="micro" fill="#6f8094">DIO</text>
-          <circle cx="120" cy="183" r="2" fill="#f59a3c"/><text x="124" y="184.7" class="micro" fill="#6f8094">DSO</text>
-          <circle cx="145" cy="183" r="2" fill="#7048e0"/><text x="149" y="184.7" class="micro" fill="#6f8094">DPO (reduces cycle)</text>
-          <circle cx="212" cy="183" r="2" fill="#1d9e5f"/><text x="216" y="184.7" class="micro" fill="#6f8094">Cash cycle</text>
-          <line x1="116" y1="280.6" x2="316" y2="280.6" stroke="#eef1f4" stroke-width=".7"/>
-          <text x="111" y="282.2" text-anchor="end" class="micro">-60</text>
-          <line x1="116" y1="269.8" x2="316" y2="269.8" stroke="#eef1f4" stroke-width=".7"/>
-          <text x="111" y="271.4" text-anchor="end" class="micro">-30</text>
-          <line x1="116" y1="259.0" x2="316" y2="259.0" stroke="#eef1f4" stroke-width=".7"/>
-          <text x="111" y="260.6" text-anchor="end" class="micro">0</text>
-          <line x1="116" y1="248.2" x2="316" y2="248.2" stroke="#eef1f4" stroke-width=".7"/>
-          <text x="111" y="249.8" text-anchor="end" class="micro">30</text>
-          <line x1="116" y1="237.4" x2="316" y2="237.4" stroke="#eef1f4" stroke-width=".7"/>
-          <text x="111" y="239.0" text-anchor="end" class="micro">60</text>
-          <line x1="116" y1="226.6" x2="316" y2="226.6" stroke="#eef1f4" stroke-width=".7"/>
-          <text x="111" y="228.2" text-anchor="end" class="micro">90</text>
-          <line x1="116" y1="215.8" x2="316" y2="215.8" stroke="#eef1f4" stroke-width=".7"/>
-          <text x="111" y="217.4" text-anchor="end" class="micro">120</text>
-          <line x1="116" y1="205.0" x2="316" y2="205.0" stroke="#eef1f4" stroke-width=".7"/>
-          <text x="111" y="206.6" text-anchor="end" class="micro">150</text>
-          <line x1="116" y1="194.2" x2="316" y2="194.2" stroke="#eef1f4" stroke-width=".7"/>
-          <text x="111" y="195.8" text-anchor="end" class="micro">180</text>
-          <text transform="translate(101 232) rotate(-90)" text-anchor="middle" class="micro">Days</text>
-          <g class="bar"><rect x="123" y="223.7" width="16" height="35.3" fill="#1f5fd6"/><path d="M123 223.7V198.3q0-1.6 1.6-1.6h12.8q1.6 0 1.6 1.6V223.7z" fill="#f59a3c"/></g>
-          <g class="barN"><path d="M123 259V272.9q0 1.6 1.6 1.6h12.8q1.6 0 1.6-1.6V259z" fill="#7048e0"/></g>
-          <g class="bar"><rect x="155.4" y="224.1" width="16" height="34.9" fill="#1f5fd6"/><path d="M155.4 224.1V199.8q0-1.6 1.6-1.6h12.8q1.6 0 1.6 1.6V224.1z" fill="#f59a3c"/></g>
-          <g class="barN"><path d="M155.4 259V273.6q0 1.6 1.6 1.6h12.8q1.6 0 1.6-1.6V259z" fill="#7048e0"/></g>
-          <g class="bar"><rect x="187.8" y="224.8" width="16" height="34.2" fill="#1f5fd6"/><path d="M187.8 224.8V201.2q0-1.6 1.6-1.6h12.8q1.6 0 1.6 1.6V224.8z" fill="#f59a3c"/></g>
-          <g class="barN"><path d="M187.8 259V274.3q0 1.6 1.6 1.6h12.8q1.6 0 1.6-1.6V259z" fill="#7048e0"/></g>
-          <g class="bar"><rect x="220.2" y="225.2" width="16" height="33.8" fill="#1f5fd6"/><path d="M220.2 225.2V202.6q0-1.6 1.6-1.6h12.8q1.6 0 1.6 1.6V225.2z" fill="#f59a3c"/></g>
-          <g class="barN"><path d="M220.2 259V275.0q0 1.6 1.6 1.6h12.8q1.6 0 1.6-1.6V259z" fill="#7048e0"/></g>
-          <g class="bar"><rect x="252.60000000000002" y="225.9" width="16" height="33.1" fill="#1f5fd6"/><path d="M252.60000000000002 225.9V204.4q0-1.6 1.6-1.6h12.8q1.6 0 1.6 1.6V225.9z" fill="#f59a3c"/></g>
-          <g class="barN"><path d="M252.60000000000002 259V275.0q0 1.6 1.6 1.6h12.8q1.6 0 1.6-1.6V259z" fill="#7048e0"/></g>
-          <g class="bar"><rect x="285" y="226.2" width="16" height="32.8" fill="#1f5fd6"/><path d="M285 226.2V205.5q0-1.6 1.6-1.6h12.8q1.6 0 1.6 1.6V226.2z" fill="#f59a3c"/></g>
-          <g class="barN"><path d="M285 259V275.8q0 1.6 1.6 1.6h12.8q1.6 0 1.6-1.6V259z" fill="#7048e0"/></g>
-          <g class="lineChart">
-            <polyline points="131,212.2 163.4,214.4 195.8,216.5 228.2,218.7 260.6,220.5 293,222.3" fill="none" stroke="#1d9e5f" stroke-width="1"/>
-            <circle cx="131" cy="212.2" r="1.8" fill="#fff" stroke="#1d9e5f" stroke-width=".9"/>
-            <rect x="124.0" y="203.6" width="14" height="6.2" rx="3.1" fill="#fff" stroke="#d7eee2" stroke-width=".5"/>
-            <text x="131" y="208.6" text-anchor="middle" font-size="4.8" font-weight="800" fill="#173957">130</text>
-            <circle cx="163.4" cy="214.4" r="1.8" fill="#fff" stroke="#1d9e5f" stroke-width=".9"/>
-            <rect x="156.4" y="205.8" width="14" height="6.2" rx="3.1" fill="#fff" stroke="#d7eee2" stroke-width=".5"/>
-            <text x="163.4" y="210.8" text-anchor="middle" font-size="4.8" font-weight="800" fill="#173957">124</text>
-            <circle cx="195.8" cy="216.5" r="1.8" fill="#fff" stroke="#1d9e5f" stroke-width=".9"/>
-            <rect x="188.8" y="207.9" width="14" height="6.2" rx="3.1" fill="#fff" stroke="#d7eee2" stroke-width=".5"/>
-            <text x="195.8" y="212.9" text-anchor="middle" font-size="4.8" font-weight="800" fill="#173957">118</text>
-            <circle cx="228.2" cy="218.7" r="1.8" fill="#fff" stroke="#1d9e5f" stroke-width=".9"/>
-            <rect x="221.2" y="210.1" width="14" height="6.2" rx="3.1" fill="#fff" stroke="#d7eee2" stroke-width=".5"/>
-            <text x="228.2" y="215.1" text-anchor="middle" font-size="4.8" font-weight="800" fill="#173957">112</text>
-            <circle cx="260.6" cy="220.5" r="1.8" fill="#fff" stroke="#1d9e5f" stroke-width=".9"/>
-            <rect x="253.6" y="211.9" width="14" height="6.2" rx="3.1" fill="#fff" stroke="#d7eee2" stroke-width=".5"/>
-            <text x="260.6" y="216.9" text-anchor="middle" font-size="4.8" font-weight="800" fill="#173957">107</text>
-            <circle cx="293" cy="222.3" r="1.8" fill="#fff" stroke="#1d9e5f" stroke-width=".9"/>
-            <rect x="286.0" y="213.7" width="14" height="6.2" rx="3.1" fill="#fff" stroke="#d7eee2" stroke-width=".5"/>
-            <text x="293" y="218.7" text-anchor="middle" font-size="4.8" font-weight="800" fill="#173957">102</text>
-          </g>
-          <text x="131" y="291" text-anchor="middle" class="micro">Jan</text>
-          <text x="163.4" y="291" text-anchor="middle" class="micro">Feb</text>
-          <text x="195.8" y="291" text-anchor="middle" class="micro">Mar</text>
-          <text x="228.2" y="291" text-anchor="middle" class="micro">Apr</text>
-          <text x="260.6" y="291" text-anchor="middle" class="micro">May</text>
-          <text x="293" y="291" text-anchor="middle" class="micro">Jun</text>
-          <!-- ================= TRAPPED CASH ANALYSIS ================= -->
-          <rect x="332" y="157" width="173" height="143" rx="8" fill="#fff" stroke="#e4eaf0"/>
-          <text x="340" y="172" class="title" font-size="8.05">Trapped cash analysis</text>
-          <text x="497" y="172" text-anchor="end" class="micro">30 Jun 2026</text>
-          <rect x="340" y="188.0" width="20" height="20" rx="5" fill="#eaf3ff"/>
-          <g fill="none" stroke="#1f6fd0" stroke-width="1.05" stroke-linejoin="round"><path d="M350 193.2l4.2 2.4v4.8l-4.2 2.4-4.2-2.4v-4.8z"/><path d="M345.8 195.6l4.2 2.4 4.2-2.4M350 198.0v4.8"/></g>
-          <text x="366" y="187.5" font-size="5.2" font-weight="500" fill="#1b3a57">Inventory</text>
-          <text x="366" y="200.2" class="title" font-size="9.4">₹<tspan class="counter" data-target="9.0" data-decimals="1">9.0</tspan> Cr</text>
-          <text x="366" y="209.0" class="micro" font-size="4.6">Locked in stock</text>
-          <text x="497" y="200.0" text-anchor="end" font-size="6.2" font-weight="700" fill="#173957">91 days</text>
-          <line x1="340" y1="217.5" x2="497" y2="217.5" stroke="#edf1f4" stroke-width=".7"/>
-          <rect x="340" y="226.5" width="20" height="20" rx="5" fill="#fff3df"/>
-          <path d="M346.6 231.9h4.4l2.4 2.4v6.8h-6.8z" fill="#eaa044"/><path d="M348.2 236.5h3.6M348.2 238.3h3.6" stroke="#fff" stroke-width=".6"/>
-          <text x="366" y="226.0" font-size="5.2" font-weight="500" fill="#1b3a57">Receivables</text>
-          <text x="366" y="238.7" class="title" font-size="9.4">₹<tspan class="counter" data-target="8.5" data-decimals="1">8.5</tspan> Cr</text>
-          <text x="366" y="247.5" class="micro" font-size="4.6">Owed by customers</text>
-          <text x="497" y="238.5" text-anchor="end" font-size="6.2" font-weight="700" fill="#173957">62 days</text>
-          <line x1="340" y1="256.0" x2="497" y2="256.0" stroke="#edf1f4" stroke-width=".7"/>
-          <rect x="340" y="265.0" width="20" height="20" rx="5" fill="#f1ecfe"/>
-          <g fill="#7a4fe0"><rect x="345.2" y="271.8" width="5.8" height="4.8" rx=".6"/><path d="M351.4 273.4h2l1.6 1.8v1.4h-3.6z"/><circle cx="347.2" cy="277.4" r="1.1"/><circle cx="352.6" cy="277.4" r="1.1"/></g>
-          <text x="366" y="264.5" font-size="5.2" font-weight="500" fill="#1b3a57">Less: payables</text>
-          <text x="366" y="277.2" class="title" font-size="9.4">(₹<tspan class="counter" data-target="5.0" data-decimals="1">5.0</tspan> Cr)</text>
-          <text x="366" y="286.0" class="micro" font-size="4.6">Supplier credit</text>
-          <text x="497" y="277.0" text-anchor="end" font-size="6.2" font-weight="700" fill="#173957">51 days</text>
-          <!-- ================= ANALYSIS SCOPE ================= -->
-          <rect x="514" y="157" width="191" height="143" rx="8" fill="#fff" stroke="#e4eaf0"/>
-          <text x="521" y="172" class="title" font-size="8.05">Analysis scope</text>
-          <circle cx="525" cy="185.0" r="3.2" fill="#1d9e5f"/><path d="M523.5 185.0l1.1 1.1 2-2.1" fill="none" stroke="#fff" stroke-width=".8" stroke-linecap="round" stroke-linejoin="round"/>
-          <text x="534" y="186.9" font-size="5.4" font-weight="500" fill="#1b3a57">Inventory ageing</text>
-          <rect x="662" y="180.4" width="35" height="9.2" rx="2" fill="#e2f6ea"/><text x="679.5" y="186.76" text-anchor="middle" font-size="4.9" font-weight="700" fill="#1f9a5f">Complete</text>
-          <circle cx="525" cy="199.6" r="3.2" fill="#1d9e5f"/><path d="M523.5 199.6l1.1 1.1 2-2.1" fill="none" stroke="#fff" stroke-width=".8" stroke-linecap="round" stroke-linejoin="round"/>
-          <text x="534" y="201.5" font-size="5.4" font-weight="500" fill="#1b3a57">Receivables ageing</text>
-          <rect x="662" y="195.0" width="35" height="9.2" rx="2" fill="#e2f6ea"/><text x="679.5" y="201.36" text-anchor="middle" font-size="4.9" font-weight="700" fill="#1f9a5f">Complete</text>
-          <circle cx="525" cy="214.2" r="3.2" fill="#1d9e5f"/><path d="M523.5 214.2l1.1 1.1 2-2.1" fill="none" stroke="#fff" stroke-width=".8" stroke-linecap="round" stroke-linejoin="round"/>
-          <text x="534" y="216.1" font-size="5.4" font-weight="500" fill="#1b3a57">Supplier terms review</text>
-          <rect x="662" y="209.6" width="35" height="9.2" rx="2" fill="#e2f6ea"/><text x="679.5" y="215.96" text-anchor="middle" font-size="4.9" font-weight="700" fill="#1f9a5f">Complete</text>
-          <circle cx="525" cy="228.8" r="3.2" fill="#1d9e5f"/><path d="M523.5 228.8l1.1 1.1 2-2.1" fill="none" stroke="#fff" stroke-width=".8" stroke-linecap="round" stroke-linejoin="round"/>
-          <text x="534" y="230.7" font-size="5.4" font-weight="500" fill="#1b3a57">Peer benchmarking</text>
-          <rect x="662" y="224.20000000000002" width="35" height="9.2" rx="2" fill="#e2f6ea"/><text x="679.5" y="230.56" text-anchor="middle" font-size="4.9" font-weight="700" fill="#1f9a5f">Complete</text>
-          <rect x="522" y="241" width="175" height="34" rx="5" fill="#f3f7fc"/>
-          <text x="526" y="251" class="micro">Formula</text>
-          <text x="526" y="261" font-size="5.6" font-weight="700" fill="#173957">Cash cycle = DIO + DSO − DPO</text>
-          <text x="526" y="270" class="micro">91 + 62 − 51 = 102 days</text>
-          <!-- ================= RECOMMENDED ACTIONS ================= -->
-          <rect x="170" y="307" width="457" height="84" rx="8" fill="#fff" stroke="#e4eaf0"/>
-          <text x="178" y="321" class="title" font-size="8.05">Recommended actions</text>
-          <text x="619" y="321" text-anchor="end" class="micro">estimated cash released</text>
-          <rect x="178" y="329" width="105" height="45" rx="6" fill="#f3f7fc"/>
-          <circle cx="186" cy="339.2" r="2.3" fill="#1f5fd6"/>
-          <text x="193" y="341" font-size="5.5" font-weight="700" fill="#173957">Reduce inventory by 20%</text>
-          <text x="193" y="355" font-size="8.4" font-weight="800" fill="#1d9e5f">₹<tspan class="counter" data-target="1.80" data-decimals="2">1.80</tspan> Cr</text>
-          <text x="193" y="366" class="micro" font-size="4.7">Clear slow-moving SKUs.</text>
-          <rect x="291" y="329" width="105" height="45" rx="6" fill="#f3f7fc"/>
-          <circle cx="299" cy="339.2" r="2.3" fill="#f08c1a"/>
-          <text x="306" y="341" font-size="5.5" font-weight="700" fill="#173957">Cut DSO by 15 days</text>
-          <text x="306" y="355" font-size="8.4" font-weight="800" fill="#1d9e5f">₹<tspan class="counter" data-target="2.06" data-decimals="2">2.06</tspan> Cr</text>
-          <text x="306" y="366" class="micro" font-size="4.7">Enforce credit policy.</text>
-          <rect x="402" y="329" width="105" height="45" rx="6" fill="#f3f7fc"/>
-          <circle cx="410" cy="339.2" r="2.3" fill="#7048e0"/>
-          <text x="417" y="341" font-size="5.5" font-weight="700" fill="#173957">Extend DPO by 10 days</text>
-          <text x="417" y="355" font-size="8.4" font-weight="800" fill="#1d9e5f">₹<tspan class="counter" data-target="0.99" data-decimals="2">0.99</tspan> Cr</text>
-          <text x="417" y="366" class="micro" font-size="4.7">Renegotiate supplier terms.</text>
-          <rect x="514" y="329" width="105" height="45" rx="6" fill="#f3f7fc"/>
-          <circle cx="522" cy="339.2" r="2.3" fill="#1d9e5f"/>
-          <text x="529" y="341" font-size="5.5" font-weight="700" fill="#173957">Total: cycle ~59 days</text>
-          <text x="529" y="355" font-size="8.4" font-weight="800" fill="#1d9e5f">₹<tspan class="counter" data-target="4.85" data-decimals="2">4.85</tspan> Cr</text>
-          <text x="529" y="366" class="micro" font-size="4.7">Down from 102 days.</text>
-        </g>
+  const frame = (now) => {
+    if (!start) start = now;
+    const raw = Math.min(1, (now - start) / DURATION);
+    render(ease(raw));
 
-        <!-- ================= FLOATING CARDS — OUTSIDE CLIP ON PURPOSE ================= -->
-        <g class="floatA" filter="url(#smallShadow)">
-        <rect x="620" y="15" width="166" height="67" rx="11" fill="#f2fbf6"/>
-        <circle cx="643" cy="38" r="12.5" fill="#dff3e8"/>
-        <g fill="none" stroke="#1d9e5f" stroke-width="1.2" stroke-linecap="round"><path d="M647.2 36.8a4.4 4.4 0 0 0-8-1.4M638.8 39.2a4.4 4.4 0 0 0 8 1.4"/><path d="M638.8 33.8v1.6h1.6M647.2 42.2v-1.6h-1.6"/></g>
-        <text x="663" y="31" font-size="6.2" font-weight="700" fill="#173957">Cash conversion cycle</text>
-        <text x="663" y="49" font-size="16" font-weight="800" fill="#1d9e5f"><tspan class="counter" data-target="102" data-decimals="0">102</tspan> days</text>
-        <text x="663" y="60" font-size="5.1" fill="#4d6275">DIO 91 + DSO 62 − DPO 51. Net</text>
-        <text x="663" y="70" font-size="5.1" fill="#4d6275">working capital ₹12.5 Cr.</text>
-        </g>
-        <g class="floatB" filter="url(#smallShadow)">
-        <rect x="12" y="359" width="150" height="67" rx="11" fill="#f1f6fe"/>
-        <circle cx="35" cy="382" r="12.5" fill="#e1ecfb"/>
-        <g fill="#1f6fd0"><rect x="30.6" y="382.4" width="2.3" height="3.6" rx=".5"/><rect x="33.85" y="380.1" width="2.3" height="5.9" rx=".5"/><rect x="37.1" y="377.6" width="2.3" height="8.4" rx=".5"/></g>
-        <text x="55" y="375" font-size="6.2" font-weight="700" fill="#173957">Net working capital</text>
-        <text x="55" y="395" font-size="16.5" font-weight="800" fill="#1f6fd0">₹<tspan class="counter" data-target="12.5" data-decimals="1">12.5</tspan> Cr</text>
-        <text x="55" y="406" font-size="5.1" fill="#4d6275">▼ 2.7% vs Mar 2026, while</text>
-        <text x="55" y="415.5" font-size="5.1" fill="#4d6275">revenue grew 12.6%.</text>
-        </g>
-        <g class="floatA" filter="url(#smallShadow)">
-        <rect x="642" y="359" width="146" height="67" rx="11" fill="#fff8ec"/>
-        <circle cx="665" cy="381" r="12.5" fill="#fdeccf"/>
-        <path d="M665 375.2a3.9 3.9 0 0 0-2.3 7.1v1.6h4.6v-1.6a3.9 3.9 0 0 0-2.3-7.1zM663.3 385.1h3.4v1.2h-3.4z" fill="#e68a1a"/>
-        <text x="685" y="374" font-size="6.2" font-weight="700" fill="#173957">Potential cash unlock</text>
-        <text x="685" y="394" font-size="16.5" font-weight="800" fill="#e68a1a">₹<tspan class="counter" data-target="4.85" data-decimals="2">4.85</tspan> Cr</text>
-        <text x="685" y="406" font-size="5.1" fill="#4d6275">from inventory, collections</text>
-        <text x="685" y="415.5" font-size="5.1" fill="#4d6275">and supplier terms.</text>
-        </g>
+    if (raw < 1) {
+      raf = requestAnimationFrame(frame);
+    } else {
+      raf = 0;
+      finish();
+    }
+  };
 
-      </svg>
-    </div>
-    <script>
-      /*
-        CFO CRAFT dashboard animation (shared by every dashboard file).
-        Cycle: grow -> hold at real values -> ease back -> short rest -> repeat.
-        - Markup always holds the FINAL values, so no-JS and reduced-motion users see correct data.
-        - Donuts (.circleBar) sweep clockwise from 12 o'clock, segment after segment,
-          keeping the original gaps and proportions from the markup.
-        - Restarts from zero each time the dashboard scrolls into view; pauses when off-screen.
-      */
-      (function () {
-        const RISE = 1600, HOLD = 3600, FALL = 1000, REST = 500;
-        const CYCLE = RISE + HOLD + FALL + REST;
-        if (window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+  render(0);
+  raf = requestAnimationFrame(frame);
 
-        const ease = (p) => (p < 0.5 ? 4 * p * p * p : 1 - Math.pow(-2 * p + 2, 3) / 2);
-        const num = (v, d) => parseFloat(v === null || v === undefined || v === "" ? d : v);
+  document.addEventListener("visibilitychange", () => {
+    if (document.hidden && raf) {
+      cancelAnimationFrame(raf);
+      raf = 0;
+    } else if (!document.hidden && !stage.classList.contains("is-live") && !raf) {
+      start = 0;
+      raf = requestAnimationFrame(frame);
+    }
+  });
+})();
+</script>
 
-        const counters = Array.from(document.querySelectorAll(".counter")).map((el) => ({
-          el,
-          target: num(el.dataset.target, 0),
-          dec: num(el.dataset.decimals, 0)
-        }));
-        const bars = Array.from(document.querySelectorAll(".bar, .barN"));
-        const hBars = Array.from(document.querySelectorAll(".hBar")).map((el) => ({
-          el,
-          w: num(el.getAttribute("width"), 0)
-        }));
-
-        // Group donut segments by their parent ring so each ring sweeps as one circle.
-        const rings = new Map();
-        document.querySelectorAll(".circleBar").forEach((c) => {
-          const C = 2 * Math.PI * num(c.getAttribute("r"), 0);
-          const len = num((c.getAttribute("stroke-dasharray") || "0").trim().split(/[\s,]+/)[0], 0);
-          const start = -num(c.getAttribute("stroke-dashoffset"), 0);
-          if (!rings.has(c.parentNode)) rings.set(c.parentNode, []);
-          rings.get(c.parentNode).push({ c, C, len, start });
-        });
-
-        // Line charts: <g class="lineChart"> holding one polyline + its dots.
-        // The line draws left to right; each dot appears as the line reaches it.
-        const lines = Array.from(document.querySelectorAll(".lineChart")).map((g) => {
-          const pl = g.querySelector("polyline");
-          const xs = pl.getAttribute("points").trim().split(/\s+/).map((pt) => num(pt.split(",")[0], 0));
-          const x0 = Math.min.apply(null, xs), x1 = Math.max.apply(null, xs);
-          const L = pl.getTotalLength ? pl.getTotalLength() : 1000;
-          pl.setAttribute("stroke-dasharray", L.toFixed(2) + " " + L.toFixed(2));
-          const dots = Array.from(g.querySelectorAll("circle, text, rect")).map((c) => {
-            const x = c.hasAttribute("cx") ? num(c.getAttribute("cx"), 0)
-              : num(c.getAttribute("x"), 0) + (c.tagName === "rect" ? num(c.getAttribute("width"), 0) / 2 : 0);
-            return { c, at: x1 > x0 ? (x - x0) / (x1 - x0) : 0 };
-          });
-          return { pl, L, dots };
-        });
-
-        // KPI sparklines: <g class="sparkChart"> with an area path, a line path and an end dot.
-        // Line draws left to right, area fills behind it, dot lands at the end.
-        const sparks = Array.from(document.querySelectorAll(".sparkChart")).map((g, i) => {
-          const paths = Array.from(g.querySelectorAll("path"));
-          const line = paths.find((p) => p.getAttribute("fill") === "none");
-          const area = paths.find((p) => p !== line);
-          const dot = g.querySelector("circle");
-          const L = line.getTotalLength();
-          line.setAttribute("stroke-dasharray", L.toFixed(2) + " " + L.toFixed(2));
-          let clip = null, bb = null;
-          if (area) {
-            bb = area.getBBox();
-            const ns = "http://www.w3.org/2000/svg";
-            const cp = document.createElementNS(ns, "clipPath");
-            cp.setAttribute("id", "sparkClip" + i);
-            clip = document.createElementNS(ns, "rect");
-            clip.setAttribute("x", bb.x); clip.setAttribute("y", bb.y - 2);
-            clip.setAttribute("height", bb.height + 4); clip.setAttribute("width", 0);
-            cp.appendChild(clip); g.appendChild(cp);
-            area.setAttribute("clip-path", "url(#sparkClip" + i + ")");
-          }
-          return { line, L, clip, bb, dot };
-        });
-
-        function fmt(v, d) {
-          const s = Math.abs(v).toLocaleString("en-IN", { minimumFractionDigits: d, maximumFractionDigits: d });
-          return (v < 0 && Number(s.replace(/,/g, "")) !== 0 ? "\u2212" : "") + s;
-        }
-
-        function progressAt(t) {
-          const x = t % CYCLE;
-          if (x < RISE) return ease(x / RISE);
-          if (x < RISE + HOLD) return 1;
-          if (x < RISE + HOLD + FALL) return 1 - ease((x - RISE - HOLD) / FALL);
-          return 0;
-        }
-
-        function render(p) {
-          counters.forEach((k) => { k.el.textContent = fmt(k.target * p, k.dec); });
-          bars.forEach((b) => { b.style.transform = "scaleY(" + p + ")"; });
-          hBars.forEach((h) => { h.el.setAttribute("width", (h.w * p).toFixed(2)); });
-          sparks.forEach((sp) => {
-            sp.line.setAttribute("stroke-dashoffset", (sp.L * (1 - p)).toFixed(2));
-            if (sp.clip) sp.clip.setAttribute("width", (sp.bb.width * p).toFixed(2));
-            if (sp.dot) sp.dot.style.opacity = Math.max(0, Math.min(1, (p - 0.94) / 0.06)).toFixed(2);
-          });
-          lines.forEach((ln) => {
-            ln.pl.setAttribute("stroke-dashoffset", (ln.L * (1 - p)).toFixed(2));
-            ln.dots.forEach((d) => {
-              d.c.style.opacity = Math.max(0, Math.min(1, (p - d.at) / 0.06 + 1)).toFixed(2);
-            });
-          });
-          rings.forEach((segs) => {
-            const sweep = p * segs[0].C;
-            segs.forEach((s) => {
-              const visible = Math.max(0, Math.min(s.len, sweep - s.start));
-              s.c.setAttribute("stroke-dasharray", visible.toFixed(2) + " " + s.C.toFixed(2));
-            });
-          });
-        }
-
-        let raf = null, t0 = null;
-        function frame(now) {
-          if (t0 === null) t0 = now;
-          render(progressAt(now - t0));
-          raf = requestAnimationFrame(frame);
-        }
-        function play() { if (raf === null) { t0 = null; raf = requestAnimationFrame(frame); } }
-        function stop() { if (raf !== null) { cancelAnimationFrame(raf); raf = null; } }
-
-        render(0);
-        const target = document.querySelector(".stage") || document.body;
-        if ("IntersectionObserver" in window) {
-          new IntersectionObserver((entries) => {
-            entries.forEach((e) => (e.isIntersecting ? play() : stop()));
-          }, { threshold: 0.25 }).observe(target);
-        } else {
-          play();
-        }
-      })();
-    </script>
 </body>
-</html>
-`,
+</html>`,
   mis: String.raw`<!doctype html>
 <html lang="en">
   <head>
@@ -4561,37 +4413,84 @@ svg{display:block;width:100%;height:auto;overflow:hidden}text{font-family:Inter,
 `,
 };
 
-function mountCfoCraftAnimatedDashboards() {
-  const hosts = document.querySelectorAll(
+function cr3t24NpUrJMNunMMASmhAM953bFGeLXzN7(host) {
+  if (!host || host.dataset.dashboardMounted === "true") return;
+
+  const key = host.dataset.dashboard;
+  const dashboardDocument = CFOCRAFT_DASHBOARD_DOCUMENTS[key];
+  if (!dashboardDocument) return;
+
+  const frame = document.createElement("iframe");
+  frame.className = "feature-dashboard-frame";
+  frame.title = host.dataset.dashboardTitle || "Animated CFO CRAFT dashboard";
+  frame.setAttribute("scrolling", "no");
+  frame.setAttribute("tabindex", "-1");
+  frame.setAttribute("aria-hidden", "true");
+  frame.srcdoc = dashboardDocument;
+
+  host.replaceChildren(frame);
+  host.dataset.dashboardMounted = "true";
+}
+
+function destr3t24NpUrJMNunMMASmhAM953bFGeLXzN7(host) {
+  if (!host || host.dataset.dashboardMounted !== "true") return;
+
+  const frame = host.querySelector(".feature-dashboard-frame");
+  if (frame) {
+    try {
+      frame.srcdoc = "<!doctype html><html><body></body></html>";
+    } catch (_) {}
+    frame.remove();
+  }
+
+  delete host.dataset.dashboardMounted;
+}
+
+function initCfoCraftAnimatedDashboards() {
+  const hosts = [...document.querySelectorAll(
     ".feature-dashboard-embed[data-dashboard]",
+  )];
+
+  if (!hosts.length) return;
+
+  if (!("IntersectionObserver" in window)) {
+    // Conservative fallback: do not load every animated dashboard at once.
+    cr3t24NpUrJMNunMMASmhAM953bFGeLXzN7(hosts[0]);
+    return;
+  }
+
+  const observer = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          cr3t24NpUrJMNunMMASmhAM953bFGeLXzN7(entry.target);
+        } else {
+          destr3t24NpUrJMNunMMASmhAM953bFGeLXzN7(entry.target);
+        }
+      });
+    },
+    {
+      root: null,
+      rootMargin: "260px 0px 260px 0px",
+      threshold: 0.01,
+    },
   );
 
-  hosts.forEach((host) => {
-    if (host.dataset.dashboardMounted === "true") return;
+  hosts.forEach((host) => observer.observe(host));
 
-    const key = host.dataset.dashboard;
-    const dashboardDocument = CFOCRAFT_DASHBOARD_DOCUMENTS[key];
-    if (!dashboardDocument) return;
-
-    const frame = document.createElement("iframe");
-    frame.className = "feature-dashboard-frame";
-    frame.title = host.dataset.dashboardTitle || "Animated CFO CRAFT dashboard";
-    frame.loading = "lazy";
-    frame.setAttribute("scrolling", "no");
-    frame.setAttribute("tabindex", "-1");
-    frame.setAttribute("aria-hidden", "true");
-    frame.srcdoc = dashboardDocument;
-
-    host.replaceChildren(frame);
-    host.dataset.dashboardMounted = "true";
+  document.addEventListener("visibilitychange", () => {
+    if (document.hidden) {
+      hosts.forEach(destr3t24NpUrJMNunMMASmhAM953bFGeLXzN7);
+    }
   });
 }
 
 if (document.readyState === "loading") {
   document.addEventListener(
     "DOMContentLoaded",
-    mountCfoCraftAnimatedDashboards,
+    initCfoCraftAnimatedDashboards,
+    { once: true },
   );
 } else {
-  mountCfoCraftAnimatedDashboards();
+  initCfoCraftAnimatedDashboards();
 }

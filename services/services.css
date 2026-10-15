@@ -1653,23 +1653,6 @@ body.service-page {
   overflow-wrap: anywhere;
 }
 
-.service-page .service-demo-badge {
-  display: inline-flex;
-  align-items: center;
-  gap: .35rem;
-  padding: .42rem .6rem;
-  border: 1px solid rgba(166,203,247,.18);
-  border-radius: 999px;
-  background: rgba(166,203,247,.10);
-  color: var(--light-blue);
-  font-family: var(--font-primary);
-  font-size: .68rem;
-  font-weight: 700;
-  line-height: 1;
-  white-space: nowrap;
-}
-
-
 .service-page .service-tier {
   margin-bottom: .7rem;
   font-size: .72rem;

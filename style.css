@@ -108,7 +108,7 @@ h6,
   letter-spacing: 0.1em;
   text-transform: uppercase;
   font-weight: 700;
-  margin-bottom: 1rem;
+  margin-bottom: .5rem;
 }
 
 .section-header {
@@ -624,7 +624,7 @@ h6,
 .hero-content {
   max-width: 100%;
   margin: 0 auto;
-  padding: 4rem 0 3rem;
+  padding: 2rem 0 0;
 }
 
 .hero-title {
@@ -669,33 +669,6 @@ h6,
 
 .hero-input::placeholder {
   color: var(--gray-400);
-}
-
-.hero-trust {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 0.75rem;
-  font-size: 0.875rem;
-  color: rgba(250, 250, 250, 0.8);
-}
-
-.trust-stars {
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-}
-
-.g2-icon {
-  flex-shrink: 0;
-}
-
-.trust-divider {
-  opacity: 0.4;
-}
-
-.trust-link {
-  font-weight: 500;
 }
 
 /* ==========================================================================
@@ -976,15 +949,15 @@ h6,
 }
 
 .section-subheading {
-  font-size: clamp(0.95rem, 1.5vw, 1.15rem);
+  font-size: clamp(0.95rem, 1.8vw, 1.15rem);
   font-weight: 300;
-  margin-bottom: 3rem;
+  margin-bottom: 0rem;
   line-height: 1.5;
 }
 
 .section-platform {
   background-color: var(--white);
-  padding: 6rem 0;
+  padding: 2.5rem 0 1rem;
 }
 
 .platform-split {
@@ -995,14 +968,14 @@ h6,
 }
 
 .platform-header {
-  margin-bottom: 3rem;
+  margin-bottom: 1rem;
 }
 
 .platform-left .platform-title {
   font-size: 2.75rem;
   font-family: var(--font-heading);
   line-height: 1.2;
-  margin-bottom: 1.5rem;
+  margin-bottom: .5rem;
   color: var(--dark-blue);
 }
 
@@ -1016,24 +989,27 @@ h6,
 .platform-features-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: 1.5rem;
-  margin-bottom: 2rem;
+  gap: .8rem;
 }
 
 .p-feature-card {
   background: var(--white);
-  padding: 1.5rem;
+  padding: 1rem;
   border-radius: 8px;
   border: 1px solid var(--gray-200);
 }
 
+.p-feature-card h4{
+  font-size: 1.2rem;
+}
+
 .p-feature-num {
   color: var(--primary-blue);
-  font-size: 0.75rem;
+  font-size: 1rem;
   font-weight: 700;
   letter-spacing: 0.1em;
   display: block;
-  margin-bottom: 0.75rem;
+  margin-bottom: 0.2rem;
   text-transform: uppercase;
 }
 
@@ -1045,9 +1021,10 @@ h6,
 }
 
 .p-feature-card p {
-  font-size: 0.9rem;
+  font-size: 0.75rem;
   color: var(--gray-600);
   line-height: 1.5;
+  text-align: justify;
 }
 
 .platform-footer-text {
@@ -1069,15 +1046,16 @@ h6,
   position: relative;
   overflow: hidden;
   border: 1px solid rgba(0, 0, 0, 0.05);
+  padding-bottom: 1rem;
 }
 
 .md-header {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 2rem;
+  margin-bottom: .5rem;
   border-bottom: 1px solid var(--gray-200);
-  padding-bottom: 1rem;
+  padding-bottom: .5rem;
 }
 
 .md-title {
@@ -1099,7 +1077,7 @@ h6,
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 1.5rem;
-  margin-bottom: 2rem;
+  margin-bottom: .5rem;
 }
 
 .md-kpi-card {
@@ -1482,7 +1460,7 @@ h6,
    ========================================================================== */
 /* --- Why CFO Craft --- */
 .section-why {
-  padding: 6rem 0;
+  padding: 0rem 0;
   background-color: var(--white);
 }
 
@@ -2559,7 +2537,7 @@ h6,
    ========================================================================== */
 /* ===== FOOTER ===== */
 .footer {
-  padding: 4rem 0 0;
+  padding: 2rem 0 0;
   background: var(--white);
   border-top: 1px solid var(--gray-200);
 }
@@ -2876,8 +2854,8 @@ h6,
 }
 
 /* --- Section rhythm --- */
-.home-page .section-suite-heading { padding: 5rem 0 2.25rem; }
-.home-page .section-feature { padding: 4.5rem 0; }
+.home-page .section-suite-heading { padding: 1.5rem 0 2.25rem;}
+.home-page .section-feature { padding:0;}
 .home-page .section-why,
 .home-page .section-how,
 .home-page .section-outcome,
@@ -2886,7 +2864,7 @@ h6,
 .home-page .section-pricing,
 .home-page .section-story,
 .home-page .section-faq,
-.home-page .section-contact { padding: 5.5rem 0; }
+.home-page .section-contact { padding: 2.5rem 0; }
 
 /* --- Industry/service rows --- */
 .home-page .feature-visual {
@@ -2979,7 +2957,7 @@ h6,
 .home-page .home-pricing-bottom strong { color:var(--dark-blue); }
 
 /* --- Stop-deciding CTA follows pricing --- */
-.home-page .section-banner-cta { padding:5rem 0; }
+.home-page .section-banner-cta { padding:2rem 0; }
 .home-page .section-banner-cta h2 { font-size:clamp(1.9rem,3.5vw,2.75rem); max-width:760px; }
 .home-page .section-banner-cta p { font-size:1rem; line-height:1.7; margin-bottom:2rem; }
 
@@ -3614,7 +3592,8 @@ h6,
   border: 1px solid rgba(166, 203, 247, 0.24);
   border-radius: 20px;
   box-shadow: 0 24px 70px rgba(2, 12, 27, 0.24);
-  text-align: left;
+  text-align: left;    
+  margin-bottom: 1rem;
 }
 
 .home-page .hero-advisory-copy {
@@ -3660,7 +3639,7 @@ h6,
   margin: 0 0 1.15rem;
   color: var(--dark-blue);
   font-family: var(--font-heading);
-  font-size: clamp(2rem, 3.1vw, 3rem);
+  font-size: clamp(2rem, 3.0vw, 3rem);
   font-weight: 700;
   letter-spacing: -0.035em;
   line-height: 1.06;
@@ -4127,6 +4106,4057 @@ h6,
 
   .home-page .decision-disclaimer {
     text-align: left;
+  }
+}
+
+/* ==========================================================================
+   HOME — WHY CFO CRAFT + HOW IT WORKS FINAL POLISH V4
+   Scope: only these two homepage sections.
+   Goal: match existing homepage heading rhythm, remove forced viewport height,
+   improve natural spacing, and keep the journey visual aligned.
+   ========================================================================== */
+
+/* --------------------------------------------------------------------------
+   WHY CFO CRAFT
+   -------------------------------------------------------------------------- */
+.home-page #why.section-why {
+  margin: 0;
+  height: auto;
+  min-height: 0;
+  padding: 2.6rem 0 2.8rem;
+  background: var(--white);
+  scroll-margin-top: 80px;
+}
+
+.home-page #why .why-compact-container {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.home-page #why .why-compact-header {
+  max-width: 100%;
+  margin: 0 0 1.45rem;
+}
+
+.home-page #why .why-compact-header .pre-title {
+  margin: 0 0 0.5rem;
+  color: var(--primary-blue);
+  font-size: 0.95rem;
+  line-height: 1.35;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  font-weight: 700;
+}
+
+/* Exact desktop rhythm of the WHAT WE DO .platform-title */
+.home-page #why .why-compact-header .section-heading {
+  max-width: 100%;
+  margin: 0;
+  color: var(--dark-blue);
+  font-family: var(--font-heading);
+  font-size: 2.75rem;
+  font-weight: 400;
+  line-height: 1.2;
+  letter-spacing: -0.02em;
+}
+
+.home-page #why .why-grid-compact {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 0.9rem 1rem;
+  align-items: stretch;
+}
+
+.home-page #why .why-card-compact {
+  position: relative;
+  min-width: 0;
+  min-height: 142px;
+  height: auto;
+  padding: 0.95rem 1.05rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  overflow: hidden;
+  background:
+    linear-gradient(180deg, rgba(166, 203, 247, 0.055), rgba(255, 255, 255, 0) 52%),
+    var(--white);
+  border: 1px solid rgba(8, 41, 81, 0.11);
+  border-radius: 16px;
+  box-shadow:
+    0 8px 24px rgba(8, 41, 81, 0.045),
+    0 1px 2px rgba(8, 41, 81, 0.025);
+  transition:
+    transform 0.24s ease,
+    box-shadow 0.24s ease,
+    border-color 0.24s ease;
+}
+
+.home-page #why .why-card-compact::before {
+  content: "";
+  position: absolute;
+  inset: 0 auto 0 0;
+  width: 3px;
+  background: linear-gradient(180deg, var(--primary-blue), var(--light-blue));
+  opacity: 0;
+  transition: opacity 0.24s ease;
+}
+
+.home-page #why .why-card-compact:hover {
+  transform: translateY(-2px);
+  border-color: rgba(43, 109, 178, 0.22);
+  box-shadow:
+    0 13px 30px rgba(8, 41, 81, 0.075),
+    0 2px 4px rgba(8, 41, 81, 0.03);
+}
+
+.home-page #why .why-card-compact:hover::before {
+  opacity: 1;
+}
+
+.home-page #why .why-card-head {
+  display: grid;
+  grid-template-columns: 40px minmax(0, 1fr);
+  gap: 0.72rem;
+  align-items: center;
+  margin: 0 0 0.68rem;
+}
+
+.home-page #why .why-icon {
+  width: 40px;
+  height: 40px;
+  margin: 0;
+  display: grid;
+  place-items: center;
+  border: 1px solid rgba(43, 109, 178, 0.12);
+  border-radius: 11px;
+  background: rgba(166, 203, 247, 0.58);
+  color: var(--primary-blue);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.72);
+}
+
+.home-page #why .why-icon svg {
+  width: 20px;
+  height: 20px;
+}
+
+.home-page #why .why-title {
+  margin: 0;
+  color: var(--dark-blue);
+  font-family: var(--font-heading);
+  font-size: 0.98rem;
+  font-weight: 700;
+  line-height: 1.28;
+}
+
+.home-page #why .why-card-number {
+  display: none !important;
+}
+
+.home-page #why .why-desc {
+  margin: 0;
+  color: var(--gray-600);
+  font-size: 0.8rem;
+  line-height: 1.56;
+}
+
+/* --------------------------------------------------------------------------
+   HOW IT WORKS
+   Keep the existing visual concept, but remove forced one-screen stretching.
+   -------------------------------------------------------------------------- */
+.home-page #how-it-works.section-how {
+  position: relative;
+  height: auto;
+  min-height: 0;
+  margin: 0;
+  padding: 2.9rem 0 3.15rem;
+  overflow: hidden;
+  background: linear-gradient(110deg, var(--dark-blue-gradient));
+  scroll-margin-top: 80px;
+}
+
+.home-page #how-it-works.section-how::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background:
+    radial-gradient(circle at 15% 20%, rgba(166, 203, 247, 0.075), transparent 30%),
+    radial-gradient(circle at 84% 70%, rgba(43, 109, 178, 0.12), transparent 32%);
+}
+
+.home-page #how-it-works .how-journey-container {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.home-page #how-it-works .how-journey-header {
+  max-width: 100%;
+  margin: 0 0 1.25rem;
+}
+
+.home-page #how-it-works .how-journey-header .pre-title {
+  margin: 0 0 0.5rem;
+  color: var(--light-blue);
+  font-size: 0.95rem;
+  line-height: 1.35;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  font-weight: 700;
+}
+
+.home-page #how-it-works .how-journey-header .section-heading {
+  max-width: 100%;
+  margin: 0 0 0.45rem;
+  color: var(--white);
+  font-family: var(--font-heading);
+  font-size: 2.75rem;
+  font-weight: 400;
+  line-height: 1.2;
+  letter-spacing: -0.02em;
+}
+
+.home-page #how-it-works .how-journey-header .section-desc {
+  margin: 0;
+  max-width: 760px;
+  color: rgba(255, 255, 255, 0.72) !important;
+  font-size: 1rem;
+  line-height: 1.55;
+}
+
+.home-page #how-it-works .how-journey {
+  --how-progress: 0;
+  position: relative;
+  width: 100%;
+}
+
+.home-page #how-it-works .how-journey-stage {
+  position: relative;
+  width: 100%;
+  height: 320px;
+}
+
+.home-page #how-it-works .how-journey-svg {
+  position: absolute;
+  z-index: 1;
+  top: 50%;
+  left: 0;
+  width: 100%;
+  height: 150px;
+  overflow: visible;
+  pointer-events: none;
+  transform: translateY(-50%);
+}
+
+.home-page #how-it-works .how-track-base,
+.home-page #how-it-works .how-track-progress {
+  fill: none;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke-width: 4;
+  vector-effect: non-scaling-stroke;
+}
+
+.home-page #how-it-works .how-track-base {
+  stroke: rgba(255, 255, 255, 0.15);
+}
+
+.home-page #how-it-works .how-track-progress {
+  stroke: url(#howProgressGradient);
+  filter: drop-shadow(0 0 8px rgba(166, 203, 247, 0.3));
+  transition: stroke-dashoffset 0.06s linear;
+}
+
+.home-page #how-it-works .how-svg-node .how-node-halo {
+  fill: rgba(166, 203, 247, 0.065);
+  stroke: rgba(166, 203, 247, 0.16);
+  stroke-width: 1;
+  vector-effect: non-scaling-stroke;
+  transition: fill 0.25s ease, stroke 0.25s ease;
+}
+
+.home-page #how-it-works .how-svg-node .how-node-core {
+  fill: #071f3f;
+  stroke: rgba(166, 203, 247, 0.58);
+  stroke-width: 2;
+  vector-effect: non-scaling-stroke;
+  transition: fill 0.25s ease, stroke 0.25s ease, filter 0.25s ease;
+}
+
+.home-page #how-it-works .how-svg-node text {
+  fill: rgba(255, 255, 255, 0.8);
+  font-family: var(--font-heading);
+  font-size: 13px;
+  font-weight: 800;
+  letter-spacing: 0.03em;
+  transition: fill 0.25s ease;
+}
+
+.home-page #how-it-works .how-svg-node.is-active .how-node-halo {
+  fill: rgba(166, 203, 247, 0.15);
+  stroke: rgba(166, 203, 247, 0.34);
+}
+
+.home-page #how-it-works .how-svg-node.is-active .how-node-core {
+  fill: var(--white);
+  stroke: var(--light-blue);
+  filter: drop-shadow(0 0 10px rgba(166, 203, 247, 0.42));
+}
+
+.home-page #how-it-works .how-svg-node.is-active text {
+  fill: var(--dark-blue);
+}
+
+.home-page #how-it-works .how-scroll-traveller {
+  fill: var(--creamish);
+  stroke: var(--white);
+  stroke-width: 2;
+  opacity: 0;
+  filter: drop-shadow(0 0 8px rgba(238, 186, 125, 0.58));
+  vector-effect: non-scaling-stroke;
+  transition: opacity 0.16s ease;
+}
+
+.home-page #how-it-works .how-step-journey {
+  position: absolute;
+  z-index: 2;
+  width: calc(25% - 24px);
+  max-width: 270px;
+  min-height: 118px;
+  padding: 0.85rem 0.95rem 0.9rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  overflow: visible;
+  background: linear-gradient(145deg, rgba(23, 70, 119, 0.38), rgba(8, 41, 81, 0.3));
+  border: 1px solid rgba(166, 203, 247, 0.19);
+  border-radius: 15px;
+  box-shadow:
+    0 13px 32px rgba(2, 12, 27, 0.18),
+    inset 0 1px 0 rgba(255, 255, 255, 0.035);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  transform: translateX(-50%);
+  transition:
+    transform 0.24s ease,
+    background 0.24s ease,
+    border-color 0.24s ease,
+    box-shadow 0.24s ease;
+}
+
+.home-page #how-it-works .how-step-journey::before {
+  content: "";
+  position: absolute;
+  left: 50%;
+  width: 1px;
+  background: linear-gradient(180deg, rgba(166, 203, 247, 0.5), rgba(166, 203, 247, 0.12));
+  transform: translateX(-50%);
+  pointer-events: none;
+}
+
+.home-page #how-it-works .how-step-journey::after {
+  content: "";
+  position: absolute;
+  left: 0.95rem;
+  right: 0.95rem;
+  top: 0;
+  height: 2px;
+  border-radius: 99px;
+  background: linear-gradient(90deg, var(--light-blue), transparent);
+  opacity: 0.35;
+}
+
+.home-page #how-it-works .how-step-01 {
+  left: 12.5%;
+  top: 8px;
+}
+
+.home-page #how-it-works .how-step-01::before {
+  top: 100%;
+  height: 30px;
+}
+
+.home-page #how-it-works .how-step-02 {
+  left: 37.5%;
+  bottom: 8px;
+}
+
+.home-page #how-it-works .how-step-02::before {
+  bottom: 100%;
+  height: 22px;
+  background: linear-gradient(0deg, rgba(166, 203, 247, 0.5), rgba(166, 203, 247, 0.12));
+}
+
+.home-page #how-it-works .how-step-03 {
+  left: 62.5%;
+  top: 8px;
+}
+
+.home-page #how-it-works .how-step-03::before {
+  top: 100%;
+  height: 22px;
+}
+
+.home-page #how-it-works .how-step-04 {
+  left: 87.5%;
+  bottom: 8px;
+}
+
+.home-page #how-it-works .how-step-04::before {
+  bottom: 100%;
+  height: 30px;
+  background: linear-gradient(0deg, rgba(166, 203, 247, 0.5), rgba(166, 203, 247, 0.12));
+}
+
+.home-page #how-it-works .how-step-journey .step-num {
+  display: none;
+}
+
+.home-page #how-it-works .how-step-journey .step-title {
+  margin: 0 0 0.38rem;
+  color: var(--white);
+  font-family: var(--font-heading);
+  font-size: 1.02rem;
+  font-weight: 700;
+  line-height: 1.2;
+}
+
+.home-page #how-it-works .how-step-journey .step-desc {
+  margin: 0;
+  color: rgba(255, 255, 255, 0.72);
+  font-size: 0.72rem;
+  line-height: 1.48;
+}
+
+.home-page #how-it-works .how-step-journey.is-active {
+  transform: translateX(-50%) translateY(-2px);
+  background: linear-gradient(145deg, rgba(43, 109, 178, 0.42), rgba(8, 41, 81, 0.34));
+  border-color: rgba(166, 203, 247, 0.42);
+  box-shadow:
+    0 17px 38px rgba(2, 12, 27, 0.24),
+    0 0 0 1px rgba(166, 203, 247, 0.04);
+}
+
+.home-page #how-it-works .how-step-journey.is-active::after {
+  background: linear-gradient(90deg, var(--creamish), var(--light-blue), transparent);
+  opacity: 0.95;
+}
+
+.home-page #how-it-works .how-step-journey.is-complete {
+  border-color: rgba(166, 203, 247, 0.28);
+}
+
+/* --------------------------------------------------------------------------
+   LAPTOP / SMALL DESKTOP
+   -------------------------------------------------------------------------- */
+@media (min-width: 1024px) and (max-width: 1439px) {
+  .home-page #why.section-why {
+    padding: 2.35rem 0 2.55rem;
+  }
+
+  .home-page #why .why-compact-header {
+    margin-bottom: 1.3rem;
+  }
+
+  .home-page #why .why-card-head {
+    margin-bottom: 0.64rem;
+  }
+
+  .home-page #how-it-works.section-how {
+    padding: 2.55rem 0 2.8rem;
+  }
+
+  .home-page #how-it-works .how-journey-stage {
+    height: 300px;
+  }
+
+  .home-page #how-it-works .how-journey-svg {
+    height: 142px;
+  }
+
+  .home-page #how-it-works .how-step-journey {
+    max-width: 245px;
+    min-height: 110px;
+    padding: 0.78rem 0.85rem 0.82rem;
+  }
+
+  .home-page #how-it-works .how-step-journey .step-title {
+    font-size: 0.98rem;
+  }
+
+  .home-page #how-it-works .how-step-journey .step-desc {
+    font-size: 0.69rem;
+    line-height: 1.44;
+  }
+}
+
+/* --------------------------------------------------------------------------
+   TABLET
+   -------------------------------------------------------------------------- */
+@media (min-width: 768px) and (max-width: 1023px) {
+  .home-page #why.section-why,
+  .home-page #how-it-works.section-how {
+    height: auto;
+    min-height: 0;
+    padding: 2.5rem 0;
+  }
+
+  .home-page #why .why-compact-header,
+  .home-page #how-it-works .how-journey-header {
+    margin-bottom: 1.2rem;
+  }
+
+  .home-page #why .why-compact-header .section-heading,
+  .home-page #how-it-works .how-journey-header .section-heading {
+    font-size: 2.25rem;
+  }
+
+  .home-page #why .why-grid-compact {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 0.9rem;
+  }
+
+  .home-page #why .why-card-compact {
+    min-height: 148px;
+    padding: 1rem 1.05rem;
+  }
+
+  .home-page #how-it-works .how-journey-svg {
+    display: none;
+  }
+
+  .home-page #how-it-works .how-journey-stage {
+    position: relative;
+    height: auto;
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 0.85rem;
+    padding: 0 0 0 4.25rem;
+  }
+
+  .home-page #how-it-works .how-journey-stage::before,
+  .home-page #how-it-works .how-journey-stage::after {
+    content: "";
+    position: absolute;
+    left: 1.35rem;
+    top: 1.25rem;
+    bottom: 1.25rem;
+    width: 3px;
+    border-radius: 99px;
+  }
+
+  .home-page #how-it-works .how-journey-stage::before {
+    background: rgba(255, 255, 255, 0.14);
+  }
+
+  .home-page #how-it-works .how-journey-stage::after {
+    background: linear-gradient(180deg, var(--light-blue), var(--primary-blue), var(--creamish));
+    transform: scaleY(var(--how-progress));
+    transform-origin: top;
+  }
+
+  .home-page #how-it-works .how-step-journey {
+    position: relative;
+    inset: auto;
+    left: auto;
+    top: auto;
+    bottom: auto;
+    width: auto;
+    max-width: none;
+    min-height: 0;
+    padding: 1rem 1.1rem;
+    transform: none;
+  }
+
+  .home-page #how-it-works .how-step-journey.is-active {
+    transform: translateY(-2px);
+  }
+
+  .home-page #how-it-works .how-step-journey::before {
+    position: absolute;
+    left: -3.92rem;
+    top: 50%;
+    bottom: auto;
+    display: grid;
+    width: 40px;
+    height: 40px;
+    place-items: center;
+    transform: translateY(-50%);
+    border: 2px solid rgba(166, 203, 247, 0.52);
+    border-radius: 50%;
+    background: #071f3f;
+    color: rgba(255, 255, 255, 0.8);
+    font-family: var(--font-heading);
+    font-size: 0.76rem;
+    font-weight: 800;
+    box-shadow: 0 0 0 6px rgba(7, 31, 63, 0.94);
+  }
+
+  .home-page #how-it-works .how-step-journey:nth-of-type(1)::before { content: "01"; }
+  .home-page #how-it-works .how-step-journey:nth-of-type(2)::before { content: "02"; }
+  .home-page #how-it-works .how-step-journey:nth-of-type(3)::before { content: "03"; }
+  .home-page #how-it-works .how-step-journey:nth-of-type(4)::before { content: "04"; }
+
+  .home-page #how-it-works .how-step-journey.is-active::before,
+  .home-page #how-it-works .how-step-journey.is-complete::before {
+    background: var(--white);
+    border-color: var(--light-blue);
+    color: var(--dark-blue);
+  }
+}
+
+/* --------------------------------------------------------------------------
+   MOBILE
+   -------------------------------------------------------------------------- */
+@media (max-width: 767px) {
+  .home-page #why.section-why,
+  .home-page #how-it-works.section-how {
+    height: auto;
+    min-height: 0;
+    margin: 0;
+    padding: 2rem 0;
+  }
+
+  .home-page #why .why-compact-header,
+  .home-page #how-it-works .how-journey-header {
+    margin-bottom: 1.05rem;
+  }
+
+  .home-page #why .why-compact-header .pre-title,
+  .home-page #how-it-works .how-journey-header .pre-title {
+    font-size: 0.82rem;
+  }
+
+  .home-page #why .why-compact-header .section-heading,
+  .home-page #how-it-works .how-journey-header .section-heading {
+    font-size: clamp(1.75rem, 8vw, 2.15rem);
+    line-height: 1.14;
+  }
+
+  .home-page #why .why-grid-compact {
+    grid-template-columns: 1fr;
+    gap: 0.72rem;
+  }
+
+  .home-page #why .why-card-compact {
+    min-height: 0;
+    padding: 0.95rem;
+    border-radius: 14px;
+  }
+
+  .home-page #why .why-card-head {
+    grid-template-columns: 38px minmax(0, 1fr);
+    gap: 0.7rem;
+    margin-bottom: 0.58rem;
+  }
+
+  .home-page #why .why-icon {
+    width: 38px;
+    height: 38px;
+    border-radius: 10px;
+  }
+
+  .home-page #why .why-title {
+    font-size: 0.96rem;
+  }
+
+  .home-page #why .why-desc {
+    font-size: 0.81rem;
+    line-height: 1.5;
+  }
+
+  .home-page #how-it-works .how-journey-header .section-desc {
+    font-size: 0.88rem;
+  }
+
+  .home-page #how-it-works .how-journey-svg {
+    display: none;
+  }
+
+  .home-page #how-it-works .how-journey-stage {
+    position: relative;
+    height: auto;
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 0.72rem;
+    padding: 0 0 0 3.15rem;
+  }
+
+  .home-page #how-it-works .how-journey-stage::before,
+  .home-page #how-it-works .how-journey-stage::after {
+    content: "";
+    position: absolute;
+    left: 0.95rem;
+    top: 1.15rem;
+    bottom: 1.15rem;
+    width: 3px;
+    border-radius: 99px;
+  }
+
+  .home-page #how-it-works .how-journey-stage::before {
+    background: rgba(255, 255, 255, 0.14);
+  }
+
+  .home-page #how-it-works .how-journey-stage::after {
+    background: linear-gradient(180deg, var(--light-blue), var(--primary-blue), var(--creamish));
+    transform: scaleY(var(--how-progress));
+    transform-origin: top;
+  }
+
+  .home-page #how-it-works .how-step-journey {
+    position: relative;
+    inset: auto;
+    left: auto;
+    top: auto;
+    bottom: auto;
+    width: auto;
+    max-width: none;
+    min-height: 0;
+    padding: 0.9rem 0.95rem;
+    border-radius: 13px;
+    transform: none;
+  }
+
+  .home-page #how-it-works .how-step-journey.is-active {
+    transform: translateY(-2px);
+  }
+
+  .home-page #how-it-works .how-step-journey::before {
+    position: absolute;
+    left: -2.86rem;
+    top: 0.95rem;
+    bottom: auto;
+    display: grid;
+    width: 33px;
+    height: 33px;
+    place-items: center;
+    transform: none;
+    border: 2px solid rgba(166, 203, 247, 0.52);
+    border-radius: 50%;
+    background: #071f3f;
+    color: rgba(255, 255, 255, 0.8);
+    font-family: var(--font-heading);
+    font-size: 0.68rem;
+    font-weight: 800;
+    box-shadow: 0 0 0 5px rgba(7, 31, 63, 0.94);
+  }
+
+  .home-page #how-it-works .how-step-journey:nth-of-type(1)::before { content: "01"; }
+  .home-page #how-it-works .how-step-journey:nth-of-type(2)::before { content: "02"; }
+  .home-page #how-it-works .how-step-journey:nth-of-type(3)::before { content: "03"; }
+  .home-page #how-it-works .how-step-journey:nth-of-type(4)::before { content: "04"; }
+
+  .home-page #how-it-works .how-step-journey.is-active::before,
+  .home-page #how-it-works .how-step-journey.is-complete::before {
+    background: var(--white);
+    border-color: var(--light-blue);
+    color: var(--dark-blue);
+  }
+
+  .home-page #how-it-works .how-step-journey .step-title {
+    font-size: 1rem;
+  }
+
+  .home-page #how-it-works .how-step-journey .step-desc {
+    font-size: 0.78rem;
+    line-height: 1.5;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .home-page #why .why-card-compact,
+  .home-page #how-it-works .how-step-journey,
+  .home-page #how-it-works .how-track-progress,
+  .home-page #how-it-works .how-svg-node circle,
+  .home-page #how-it-works .how-svg-node text {
+    transition: none !important;
+  }
+}
+
+
+/* ==========================================================================
+   HOME FINAL POLISH V5
+   Scoped homepage refinements requested after V4:
+   - updated Finance Diagnostic / Working Capital SVG dashboard embeds
+   - straight, aligned How It Works journey
+   - one-screen desktop rhythm for Outcome, Metrics, Pricing, Story, Contact
+   - scroll-driven sticky Case Studies with top progress bars
+   ========================================================================== */
+
+.home-page {
+  --home-nav-offset: 76px;
+}
+
+/* Accessibility helper for case-study progress text. */
+.home-page .sr-only {
+  position: absolute !important;
+  width: 1px !important;
+  height: 1px !important;
+  padding: 0 !important;
+  margin: -1px !important;
+  overflow: hidden !important;
+  clip: rect(0, 0, 0, 0) !important;
+  white-space: nowrap !important;
+  border: 0 !important;
+}
+
+/* --------------------------------------------------------------------------
+   UPDATED SVG DASHBOARD EMBEDS
+   -------------------------------------------------------------------------- */
+.home-page #diagnostic .feature-dashboard-embed,
+.home-page #working-capital .feature-dashboard-embed {
+  border-radius: 18px;
+  background: #073b83;
+  box-shadow:
+    0 18px 48px rgba(8, 41, 81, 0.16),
+    0 2px 8px rgba(8, 41, 81, 0.06);
+}
+
+.home-page #diagnostic .feature-dashboard-frame,
+.home-page #working-capital .feature-dashboard-frame {
+  width: 100%;
+  height: 100%;
+}
+
+/* --------------------------------------------------------------------------
+   HOW IT WORKS — STRAIGHT JOURNEY, SYMMETRICAL POSITIONING
+   -------------------------------------------------------------------------- */
+.home-page #how-it-works.section-how {
+  padding: 2.65rem 0 2.9rem;
+}
+
+.home-page #how-it-works .how-journey-header {
+  margin-bottom: 1.05rem;
+}
+
+.home-page #how-it-works .how-journey-stage {
+  height: 300px;
+}
+
+.home-page #how-it-works .how-journey-svg {
+  top: 50%;
+  height: 140px;
+}
+
+.home-page #how-it-works .how-step-journey {
+  width: calc(25% - 28px);
+  max-width: 248px;
+  min-height: 108px;
+  padding: 0.78rem 0.88rem 0.82rem;
+}
+
+.home-page #how-it-works .how-step-01,
+.home-page #how-it-works .how-step-03 {
+  top: 5px;
+  bottom: auto;
+}
+
+.home-page #how-it-works .how-step-02,
+.home-page #how-it-works .how-step-04 {
+  top: auto;
+  bottom: 5px;
+}
+
+.home-page #how-it-works .how-step-01 { left: 12.5%; }
+.home-page #how-it-works .how-step-02 { left: 37.5%; }
+.home-page #how-it-works .how-step-03 { left: 62.5%; }
+.home-page #how-it-works .how-step-04 { left: 87.5%; }
+
+.home-page #how-it-works .how-step-01::before,
+.home-page #how-it-works .how-step-03::before {
+  top: 100%;
+  bottom: auto;
+  height: 39px;
+  background: linear-gradient(180deg, rgba(166, 203, 247, 0.55), rgba(166, 203, 247, 0.14));
+}
+
+.home-page #how-it-works .how-step-02::before,
+.home-page #how-it-works .how-step-04::before {
+  top: auto;
+  bottom: 100%;
+  height: 39px;
+  background: linear-gradient(0deg, rgba(166, 203, 247, 0.55), rgba(166, 203, 247, 0.14));
+}
+
+/* --------------------------------------------------------------------------
+   ONE-SCREEN DESKTOP SECTION RHYTHM
+   Uses min-height instead of hard height so content never gets clipped.
+   -------------------------------------------------------------------------- */
+@media (min-width: 1025px) {
+  .home-page #outcome.section-outcome,
+  .home-page #metrics.section-metrics,
+  .home-page #pricing.section-pricing,
+  .home-page #story.section-story,
+  .home-page #contact.section-contact {
+    min-height: calc(100svh - var(--home-nav-offset));
+    margin: 0;
+    padding: 1.65rem 0;
+    display: flex;
+    align-items: center;
+    scroll-margin-top: var(--home-nav-offset);
+  }
+
+  .home-page #outcome > .container,
+  .home-page #metrics > .container,
+  .home-page #pricing > .container,
+  .home-page #story > .container,
+  .home-page #contact > .container {
+    width: 100%;
+  }
+
+  /* ---- Outcome ---- */
+  .home-page #outcome .section-header {
+    margin: 0 0 1.25rem;
+  }
+
+  .home-page #outcome .section-heading {
+    margin: 0;
+    font-size: 2.75rem;
+  }
+
+  .home-page #outcome .outcome-split {
+    grid-template-columns: 1fr 1fr;
+    border-radius: 18px;
+  }
+
+  .home-page #outcome .outcome-before,
+  .home-page #outcome .outcome-after {
+    padding: 1.7rem 2.2rem;
+  }
+
+  .home-page #outcome .outcome-title {
+    margin-bottom: 1rem;
+    font-size: 0.78rem;
+  }
+
+  .home-page #outcome .outcome-list li {
+    gap: 0.72rem;
+    margin-bottom: 0.72rem;
+    font-size: 0.86rem;
+    line-height: 1.42;
+  }
+
+  .home-page #outcome .outcome-footer-text {
+    margin-top: 0.9rem;
+    font-size: 0.88rem;
+  }
+
+  /* ---- Metrics ---- */
+  .home-page #metrics.section-metrics {
+    text-align: center;
+    padding-top: 1.5rem;
+    padding-bottom: 1.5rem;
+  }
+
+  .home-page #metrics .metrics-heading {
+    margin-bottom: 0.55rem;
+    font-size: 2.75rem;
+    line-height: 1.16;
+  }
+
+  .home-page #metrics .metrics-subheading {
+    margin-bottom: 1.65rem;
+    font-size: 0.98rem;
+  }
+
+  .home-page #metrics .metrics-grid {
+    max-width: 1030px;
+    gap: 1rem;
+    padding: 2.1rem 1.7rem;
+    border-radius: 20px;
+  }
+
+  .home-page #metrics .metric-value {
+    margin-bottom: 0.5rem;
+    font-size: 3rem;
+  }
+
+  .home-page #metrics .metric-label {
+    font-size: 0.82rem;
+  }
+
+  /* ---- Pricing ---- */
+  .home-page #pricing.section-pricing {
+    padding-top: 1.25rem;
+    padding-bottom: 1.25rem;
+  }
+
+  .home-page #pricing .pre-title {
+    margin-bottom: 0.35rem;
+  }
+
+  .home-page #pricing .section-heading {
+    max-width: 980px;
+    margin-bottom: 0.45rem;
+    font-size: 2.75rem;
+    line-height: 1.16;
+  }
+
+  .home-page #pricing > .container > .home-pricing-lead {
+    max-width: 900px;
+    margin-bottom: 0.9rem;
+    font-size: 0.88rem;
+    line-height: 1.5;
+  }
+
+  .home-page #pricing .home-plans {
+    gap: 0.85rem;
+  }
+
+  .home-page #pricing .home-plan {
+    padding: 1rem 1.05rem;
+    border-radius: 15px;
+  }
+
+  .home-page #pricing .home-plan h3 {
+    margin-bottom: 0.35rem;
+    font-size: 1rem;
+    line-height: 1.25;
+  }
+
+  .home-page #pricing .home-tier {
+    padding: 0.22rem 0.45rem;
+    font-size: 0.78rem;
+  }
+
+  .home-page #pricing .home-plan-desc {
+    min-height: 2.55rem;
+    font-size: 0.76rem;
+    line-height: 1.42;
+  }
+
+  .home-page #pricing .home-plan-price {
+    margin-top: 0.6rem;
+    font-size: 1.08rem;
+  }
+
+  .home-page #pricing .home-plan-unit {
+    margin: 0.12rem 0 0.55rem;
+    font-size: 0.69rem;
+  }
+
+  .home-page #pricing .home-plan-btn {
+    min-height: 36px;
+    padding: 0.48rem 0.9rem !important;
+    font-size: 0.78rem !important;
+  }
+
+  .home-page #pricing .home-plan-feats {
+    margin: 0.62rem 0 0.55rem;
+    padding-top: 0.62rem;
+  }
+
+  .home-page #pricing .home-plan-feats li {
+    margin-bottom: 0.3rem;
+    padding-left: 1.12rem;
+    font-size: 0.71rem;
+    line-height: 1.35;
+  }
+
+  .home-page #pricing .home-plan-feats li.lead-in {
+    font-size: 0.69rem;
+  }
+
+  .home-page #pricing .home-plan-more {
+    font-size: 0.73rem;
+  }
+
+  .home-page #pricing .home-bookends {
+    gap: 0.85rem;
+    margin-top: 0.85rem;
+  }
+
+  .home-page #pricing .home-bookend {
+    gap: 0.4rem 0.9rem;
+    padding: 0.72rem 0.9rem;
+    border-radius: 14px;
+  }
+
+  .home-page #pricing .home-bookend h3 {
+    font-size: 0.9rem;
+  }
+
+  .home-page #pricing .home-bookend .home-tier {
+    font-size: 0.62rem;
+    padding: 0.16rem 0.38rem;
+  }
+
+  .home-page #pricing .home-bookend-desc {
+    font-size: 0.69rem;
+    line-height: 1.38;
+  }
+
+  .home-page #pricing .home-bookend-price .home-plan-price {
+    font-size: 0.96rem;
+  }
+
+  .home-page #pricing .home-bookend-price .home-plan-unit,
+  .home-page #pricing .home-bookend-price a {
+    font-size: 0.66rem;
+  }
+
+  .home-page #pricing .home-pricing-bottom {
+    margin-top: 0.75rem;
+    padding-top: 0.7rem;
+    font-size: 0.75rem;
+  }
+
+  .home-page #pricing .home-pricing-bottom .btn-secondary {
+    padding: 0.48rem 1rem;
+    font-size: 0.78rem;
+  }
+
+  /* ---- Our Story ---- */
+  .home-page #story.section-story {
+    padding-top: 1.6rem;
+    padding-bottom: 1.6rem;
+  }
+
+  .home-page #story .pre-title {
+    margin-bottom: 0.38rem;
+  }
+
+  .home-page #story .section-heading {
+    max-width: 900px;
+    margin-bottom: 1.15rem;
+    font-size: 2.75rem;
+  }
+
+  .home-page #story .story-grid {
+    grid-template-columns: 1.08fr 0.92fr;
+    gap: 2rem;
+    align-items: center;
+  }
+
+  .home-page #story .story-left p {
+    margin-bottom: 0.65rem;
+    font-size: 0.84rem;
+    line-height: 1.5;
+  }
+
+  .home-page #story .story-list {
+    margin-top: 0.8rem;
+  }
+
+  .home-page #story .story-list li {
+    margin-bottom: 0.48rem;
+    padding-left: 1.35rem;
+    font-size: 0.8rem;
+    line-height: 1.4;
+  }
+
+  .home-page #story .founder-card {
+    padding: 1.4rem 1.55rem;
+    border-radius: 16px;
+  }
+
+  .home-page #story .founder-name {
+    font-size: 1.4rem;
+  }
+
+  .home-page #story .founder-title {
+    margin-bottom: 0.8rem;
+    font-size: 0.68rem;
+  }
+
+  .home-page #story .founder-card p {
+    margin-bottom: 0.72rem;
+    font-size: 0.8rem;
+    line-height: 1.5;
+  }
+
+  /* ---- Get in Touch ---- */
+  .home-page #contact.section-contact {
+    padding-top: 1.35rem;
+    padding-bottom: 1.35rem;
+  }
+
+  .home-page #contact .contact-head {
+    max-width: 100%;
+    margin-bottom: 0.85rem;
+  }
+
+  .home-page #contact .section-heading {
+    max-width: 860px;
+    margin-bottom: 0.45rem;
+    font-size: 2.75rem;
+  }
+
+  .home-page #contact .contact-intro {
+    max-width: 860px;
+    font-size: 0.84rem;
+    line-height: 1.48;
+  }
+
+  .home-page #contact .contact-assurance {
+    gap: 0.48rem;
+    margin-top: 0.65rem;
+  }
+
+  .home-page #contact .contact-assurance span {
+    padding: 0.38rem 0.58rem;
+    font-size: 0.7rem;
+  }
+
+  .home-page #contact .contact-grid {
+    grid-template-columns: minmax(0, 1.45fr) minmax(270px, 0.55fr);
+    gap: 1rem;
+  }
+
+  .home-page #contact .contact-form {
+    padding: 1rem 1.05rem;
+    gap: 0.58rem;
+    border-radius: 17px;
+  }
+
+  .home-page #contact .contact-form .form-row {
+    gap: 0.7rem;
+  }
+
+  .home-page #contact .contact-form .form-group {
+    gap: 0.28rem;
+  }
+
+  .home-page #contact .contact-form .form-group label {
+    font-size: 0.69rem;
+  }
+
+  .home-page #contact .contact-form .form-group input,
+  .home-page #contact .contact-form .form-group select,
+  .home-page #contact .contact-form .form-group textarea {
+    padding: 0.52rem 0.65rem;
+    border-radius: 8px;
+    font-size: 0.8rem;
+  }
+
+  .home-page #contact .contact-form .form-group textarea {
+    min-height: 68px;
+  }
+
+  .home-page #contact .contact-form > .btn-secondary {
+    min-height: 38px;
+    padding: 0.5rem 1rem;
+    font-size: 0.78rem;
+  }
+
+  .home-page #contact .contact-form .form-footer p {
+    font-size: 0.68rem;
+    line-height: 1.4;
+  }
+
+  .home-page #contact .contact-form .form-divider {
+    margin: 0.48rem 0;
+  }
+
+  .home-page #contact .contact-form .pick-time {
+    font-size: 0.72rem !important;
+  }
+
+  .home-page #contact .contact-info-area {
+    gap: 0.65rem;
+  }
+
+  .home-page #contact .info-block {
+    min-height: 78px;
+    padding: 0.75rem 0.8rem 0.75rem 3.65rem;
+    border-radius: 14px;
+  }
+
+  .home-page #contact .info-block::before {
+    top: 0.9rem;
+    left: 0.85rem;
+    width: 34px;
+    height: 34px;
+    border-radius: 10px;
+    background-size: 16px 16px;
+  }
+
+  .home-page #contact .info-block h6 {
+    font-size: 0.62rem;
+  }
+
+  .home-page #contact .info-block p {
+    font-size: 0.8rem;
+    line-height: 1.42;
+  }
+}
+
+/* Short desktop windows: keep sections natural instead of clipping. */
+@media (min-width: 1025px) and (max-height: 690px) {
+  .home-page #outcome.section-outcome,
+  .home-page #metrics.section-metrics,
+  .home-page #pricing.section-pricing,
+  .home-page #story.section-story,
+  .home-page #contact.section-contact {
+    min-height: 0;
+  }
+}
+
+/* --------------------------------------------------------------------------
+   CASE STUDIES — SCROLL-DRIVEN STICKY SHOWCASE
+   -------------------------------------------------------------------------- */
+@media (min-width: 769px) {
+  .home-page #case-studies.case-scroll-story {
+    position: relative;
+    height: 540svh;
+    margin: 0;
+    padding: 0;
+    background: var(--gray-100);
+  }
+
+  .home-page #case-studies .cs-sticky-frame {
+    position: sticky;
+    top: 0;
+    height: 100svh;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    padding: calc(var(--home-nav-offset) + 0.6rem) 0 0.85rem;
+    background:
+      radial-gradient(circle at 50% 20%, rgba(166, 203, 247, 0.13), transparent 35%),
+      var(--gray-100);
+  }
+
+  .home-page #case-studies .cs-sticky-content {
+    width: 100%;
+  }
+
+  .home-page #case-studies .cs-progress-wrap {
+    display: flex;
+    justify-content: center;
+    margin: 0 0 0.55rem;
+  }
+
+  .home-page #case-studies .cs-progress-track {
+    display: flex;
+    align-items: center;
+    gap: 0.42rem;
+  }
+
+  .home-page #case-studies .cs-progress-segment {
+    width: 24px;
+    height: 4px;
+    border-radius: 999px;
+    background: #cfd5dc;
+    box-shadow: inset 0 0 0 1px rgba(8, 41, 81, 0.04);
+    transition:
+      width 0.25s ease,
+      background 0.25s ease,
+      transform 0.25s ease;
+  }
+
+  .home-page #case-studies .cs-progress-segment.is-complete {
+    background: var(--light-blue);
+  }
+
+  .home-page #case-studies .cs-progress-segment.is-current {
+    width: 36px;
+    background: var(--primary-blue);
+    transform: scaleY(1.12);
+  }
+
+  .home-page #case-studies .case-study-header {
+    max-width: 900px;
+    margin: 0 auto 0.75rem;
+  }
+
+  .home-page #case-studies .case-study-header .pre-title {
+    margin-bottom: 0.25rem;
+  }
+
+  .home-page #case-studies .section-heading {
+    margin-bottom: 0.28rem;
+    font-size: 2.75rem;
+    line-height: 1.16;
+  }
+
+  .home-page #case-studies .section-subheading {
+    margin: 0;
+    font-size: 0.86rem;
+  }
+
+  .home-page #case-studies .cs-showcase {
+    max-width: 1040px;
+  }
+
+  .home-page #case-studies .cs-slider-container {
+    border-radius: 16px;
+    box-shadow: 0 15px 40px rgba(8, 41, 81, 0.12);
+  }
+
+  .home-page #case-studies .cs-slider-wrapper {
+    transition: transform 0.5s cubic-bezier(.2,.7,.2,1);
+  }
+
+  .home-page #case-studies .cs-slide {
+    height: min(50svh, 455px);
+  }
+
+  .home-page #case-studies .cs-slide img {
+    width: 100%;
+    height: 100%;
+    max-height: none;
+    object-fit: contain;
+    background: #fff;
+  }
+
+  .home-page #case-studies .cs-showcase-footer {
+    margin-top: 0.55rem;
+    font-size: 0.75rem;
+  }
+
+  .home-page #case-studies .cs-scroll-hint {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+
+  .home-page #case-studies .cs-scroll-dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: var(--creamish);
+    box-shadow: 0 0 0 4px rgba(238, 186, 125, 0.16);
+  }
+
+  .home-page #case-studies #case-study-count {
+    color: var(--dark-blue);
+    font-family: var(--font-heading);
+    font-weight: 800;
+    letter-spacing: 0.05em;
+  }
+}
+
+/* Mobile: swipe horizontally; do not create a long sticky scroll trap. */
+@media (max-width: 768px) {
+  .home-page #case-studies.case-scroll-story {
+    height: auto;
+    margin: 2rem 0;
+    padding: 0;
+    background: var(--gray-100);
+  }
+
+  .home-page #case-studies .cs-sticky-frame {
+    position: relative;
+    height: auto;
+    padding: 2rem 0;
+    overflow: visible;
+  }
+
+  .home-page #case-studies .cs-progress-wrap {
+    display: none;
+  }
+
+  .home-page #case-studies .case-study-header {
+    margin-bottom: 1rem;
+  }
+
+  .home-page #case-studies .cs-slider-container {
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    scrollbar-width: none;
+  }
+
+  .home-page #case-studies .cs-slider-container::-webkit-scrollbar {
+    display: none;
+  }
+
+  .home-page #case-studies .cs-slider-wrapper {
+    transform: none !important;
+    transition: none;
+  }
+
+  .home-page #case-studies .cs-slide {
+    scroll-snap-align: center;
+  }
+
+  .home-page #case-studies .cs-slide img {
+    min-height: 220px;
+    object-fit: contain;
+  }
+
+  .home-page #case-studies .cs-showcase-footer {
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 0.55rem;
+    font-size: 0.78rem;
+  }
+}
+
+
+/* ==========================================================================
+   HOME FINAL — CURRENT + UPDATED AUTHORITATIVE OVERRIDES
+   15 Oct 2026
+   ========================================================================== */
+
+.home-page {
+  --home-nav-offset: 76px;
+}
+
+/* Snap only the requested full-screen homepage sections; "proximity" keeps
+   normal page browsing comfortable while preventing awkward half-sections. */
+@media (min-width: 1025px) {
+  html:has(body.home-page) {
+    scroll-snap-type: y proximity;
+  }
+
+  .home-page #how-it-works,
+  .home-page #outcome,
+  .home-page #metrics,
+  .home-page #pricing,
+  .home-page #story,
+  .home-page #contact {
+    scroll-snap-align: start;
+    scroll-snap-stop: always;
+  }
+}
+
+/* ----- Inline dashboard hosts ----- */
+.home-page #diagnostic .feature-dashboard-embed,
+.home-page #working-capital .feature-dashboard-embed {
+  aspect-ratio: 16 / 9;
+  border-radius: 18px;
+  overflow: hidden;
+  background: #073b83;
+  box-shadow:
+    0 18px 48px rgba(8, 41, 81, 0.16),
+    0 2px 8px rgba(8, 41, 81, 0.06);
+}
+
+/* ----- HOW IT WORKS: exact one-screen desktop, true circles, no delay ----- */
+@media (min-width: 1025px) {
+  .home-page #how-it-works.section-how {
+    height: 100svh;
+    min-height: 100svh;
+    padding: calc(var(--home-nav-offset) + 0.7rem) 0 1rem;
+    margin: 0;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+  }
+
+  .home-page #how-it-works .how-journey-container {
+    width: 100%;
+    max-width: 1200px;
+  }
+
+  .home-page #how-it-works .how-journey-header {
+    margin: 0 0 0.95rem;
+  }
+
+  .home-page #how-it-works .how-journey-header .pre-title {
+    margin-bottom: 0.38rem;
+  }
+
+  .home-page #how-it-works .how-journey-header .section-heading {
+    margin-bottom: 0.35rem;
+    font-size: clamp(2.3rem, 3vw, 2.75rem);
+  }
+
+  .home-page #how-it-works .how-journey-header .section-desc {
+    font-size: 0.96rem;
+  }
+
+  .home-page #how-it-works .how-journey-stage {
+    height: 320px;
+  }
+
+  .home-page #how-it-works .how-journey-svg {
+    top: 50%;
+    width: 100%;
+    height: auto;
+    aspect-ratio: 1200 / 140;
+    transform: translateY(-50%);
+    overflow: visible;
+  }
+
+  .home-page #how-it-works .how-svg-node .how-node-halo,
+  .home-page #how-it-works .how-svg-node .how-node-core {
+    transform-box: fill-box;
+    transform-origin: center;
+  }
+
+  .home-page #how-it-works .how-svg-node.is-complete .how-node-core {
+    fill: #123a68;
+    stroke: rgba(166, 203, 247, 0.82);
+  }
+
+  .home-page #how-it-works .how-svg-node.is-complete text {
+    fill: #ffffff;
+  }
+
+  .home-page #how-it-works .how-step-journey {
+    width: calc(25% - 26px);
+    max-width: 250px;
+    min-height: 112px;
+    padding: 0.82rem 0.92rem;
+  }
+
+  .home-page #how-it-works .how-step-01,
+  .home-page #how-it-works .how-step-03 {
+    top: 4px;
+  }
+
+  .home-page #how-it-works .how-step-02,
+  .home-page #how-it-works .how-step-04 {
+    bottom: 4px;
+  }
+
+  .home-page #how-it-works .how-step-01::before,
+  .home-page #how-it-works .how-step-03::before,
+  .home-page #how-it-works .how-step-02::before,
+  .home-page #how-it-works .how-step-04::before {
+    height: 43px;
+  }
+
+  .home-page #how-it-works .how-step-journey.is-active {
+    border-color: rgba(166, 203, 247, 0.58);
+    background: linear-gradient(145deg, rgba(43, 109, 178, 0.5), rgba(8, 41, 81, 0.42));
+    box-shadow:
+      0 18px 42px rgba(2, 12, 27, 0.26),
+      0 0 0 1px rgba(166, 203, 247, 0.08),
+      0 0 30px rgba(43, 109, 178, 0.12);
+  }
+
+  .home-page #how-it-works .how-step-journey.is-complete {
+    border-color: rgba(166, 203, 247, 0.34);
+    background: linear-gradient(145deg, rgba(24, 77, 128, 0.38), rgba(8, 41, 81, 0.32));
+  }
+}
+
+/* ----- FULL-VIEWPORT SECTIONS: no next/previous section peeking ----- */
+@media (min-width: 1025px) {
+  .home-page #outcome.section-outcome,
+  .home-page #metrics.section-metrics,
+  .home-page #pricing.section-pricing,
+  .home-page #story.section-story,
+  .home-page #contact.section-contact {
+    box-sizing: border-box;
+    width: 100%;
+    height: 100svh;
+    min-height: 100svh;
+    max-height: 100svh;
+    margin: 0;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    padding-top: 2rem !important;
+  }
+
+  .home-page #outcome > .container,
+  .home-page #metrics > .container,
+  .home-page #pricing > .container,
+  .home-page #story > .container,
+  .home-page #contact > .container {
+    width: 100%;
+    max-height: calc(100svh - var(--home-nav-offset) - 1.7rem);
+  }
+
+  /* Outcome */
+  .home-page #outcome .section-header {
+    margin: 0 0 1rem;
+  }
+
+  .home-page #outcome .pre-title {
+    margin-bottom: 0.35rem;
+  }
+
+  .home-page #outcome .section-heading {
+    margin: 0;
+    font-size: clamp(2.25rem, 3vw, 2.75rem);
+    line-height: 1.15;
+  }
+
+  .home-page #outcome .outcome-split {
+    grid-template-columns: 1fr 1fr;
+    border-radius: 18px;
+  }
+
+  .home-page #outcome .outcome-before,
+  .home-page #outcome .outcome-after {
+    padding: 1.6rem 2rem;
+  }
+
+  .home-page #outcome .outcome-title {
+    margin-bottom: 0.95rem;
+  }
+
+  .home-page #outcome .outcome-list li {
+    margin-bottom: 0.66rem;
+    gap: 0.68rem;
+    font-size: 0.84rem;
+    line-height: 1.35;
+  }
+
+  .home-page #outcome .outcome-footer-text {
+    margin-top: 0.72rem;
+    font-size: 0.84rem;
+  }
+
+  /* Metrics */
+  .home-page #metrics.section-metrics {
+    text-align: center;
+  }
+
+  .home-page #metrics .metrics-heading {
+    margin: 0 0 0.5rem;
+    font-size: clamp(2.25rem, 3vw, 2.75rem);
+    line-height: 1.15;
+  }
+
+  .home-page #metrics .metrics-subheading {
+    margin-bottom: 1.45rem;
+    font-size: 0.95rem;
+  }
+
+  .home-page #metrics .metrics-grid {
+    max-width: 1050px;
+    gap: 1.2rem;
+    padding: 2rem 1.7rem;
+    border-radius: 20px;
+  }
+
+  .home-page #metrics .metric-value {
+    font-size: clamp(2.5rem, 4vw, 3.15rem);
+    margin-bottom: 0.45rem;
+  }
+
+  .home-page #metrics .metric-label {
+    font-size: 0.8rem;
+  }
+
+  /* Pricing: keep all current content, but give it deliberate spacing. */
+  .home-page #pricing.section-pricing {
+    align-items: center;
+  }
+
+  .home-page #pricing .pre-title {
+    margin: 0 0 0.28rem;
+  }
+
+  .home-page #pricing .section-heading {
+    max-width: 1000px;
+    margin: 0 0 0.38rem;
+    font-size: clamp(2.15rem, 2.8vw, 2.6rem);
+    line-height: 1.12;
+  }
+
+  .home-page #pricing > .container > .home-pricing-lead {
+    max-width: 930px;
+    margin: 0 0 0.78rem;
+    font-size: 0.82rem;
+    line-height: 1.45;
+  }
+
+  .home-page #pricing .home-plans {
+    gap: 0.9rem;
+  }
+
+  .home-page #pricing .home-plan {
+    min-height: 0;
+    padding: 0.88rem 1rem;
+    border-radius: 15px;
+  }
+
+  .home-page #pricing .home-plan h3 {
+    margin-bottom: 0.28rem;
+    font-size: 0.98rem;
+  }
+
+  .home-page #pricing .home-plan-desc {
+    min-height: 2.35rem;
+    font-size: 0.73rem;
+    line-height: 1.38;
+  }
+
+  .home-page #pricing .home-plan-price {
+    margin-top: 0.48rem;
+    font-size: 1rem;
+  }
+
+  .home-page #pricing .home-plan-unit {
+    margin: 0.08rem 0 0.45rem;
+    font-size: 0.66rem;
+  }
+
+  .home-page #pricing .home-plan-btn {
+    min-height: 34px;
+    padding: 0.43rem 0.8rem !important;
+    font-size: 0.75rem !important;
+  }
+
+  .home-page #pricing .home-plan-feats {
+    margin: 0.5rem 0 0.45rem;
+    padding-top: 0.5rem;
+  }
+
+  .home-page #pricing .home-plan-feats li {
+    margin-bottom: 0.24rem;
+    font-size: 0.68rem;
+    line-height: 1.32;
+  }
+
+  .home-page #pricing .home-plan-more {
+    font-size: 0.7rem;
+  }
+
+  .home-page #pricing .home-bookends {
+    gap: 0.75rem;
+    margin-top: 0.72rem;
+  }
+
+  .home-page #pricing .home-bookend {
+    padding: 0.62rem 0.8rem;
+    gap: 0.35rem 0.7rem;
+    border-radius: 13px;
+  }
+
+  .home-page #pricing .home-bookend h3 {
+    font-size: 0.84rem;
+  }
+
+  .home-page #pricing .home-bookend-desc {
+    font-size: 0.65rem;
+    line-height: 1.32;
+  }
+
+  .home-page #pricing .home-bookend-price .home-plan-price {
+    margin: 0;
+    font-size: 0.88rem;
+  }
+
+  .home-page #pricing .home-bookend-price .home-plan-unit,
+  .home-page #pricing .home-bookend-price a {
+    font-size: 0.62rem;
+  }
+
+  .home-page #pricing .home-pricing-bottom {
+    margin-top: 0.58rem;
+    padding-top: 0.55rem;
+    font-size: 0.7rem;
+  }
+
+  .home-page #pricing .home-pricing-bottom .btn-secondary {
+    padding: 0.42rem 0.88rem;
+    font-size: 0.72rem;
+  }
+
+  /* Our Story — vertically balanced to fill one screen without FAQ peeking in. */
+  .home-page #story.section-story {
+    align-items: center;
+  }
+
+  .home-page #story .pre-title {
+    margin-bottom: 0.35rem;
+  }
+
+  .home-page #story .section-heading {
+    max-width: 920px;
+    margin: 0 0 1rem;
+    font-size: clamp(2.25rem, 3vw, 2.75rem);
+    line-height: 1.15;
+  }
+
+  .home-page #story .story-grid {
+    grid-template-columns: 1.08fr 0.92fr;
+    gap: 2.1rem;
+    align-items: center;
+  }
+
+  .home-page #story .story-left p {
+    margin-bottom: 0.62rem;
+    font-size: 0.82rem;
+    line-height: 1.48;
+  }
+
+  .home-page #story .story-list {
+    margin-top: 0.72rem;
+  }
+
+  .home-page #story .story-list li {
+    margin-bottom: 0.42rem;
+    padding-left: 1.25rem;
+    font-size: 0.78rem;
+    line-height: 1.35;
+  }
+
+  .home-page #story .founder-card {
+    padding: 1.35rem 1.5rem;
+    border-radius: 17px;
+  }
+
+  .home-page #story .founder-name {
+    font-size: 1.38rem;
+  }
+
+  .home-page #story .founder-title {
+    margin-bottom: 0.7rem;
+  }
+
+  .home-page #story .founder-card p {
+    margin-bottom: 0.68rem;
+    font-size: 0.78rem;
+    line-height: 1.48;
+  }
+
+  /* Get in Touch — compact, premium, balanced one-screen layout. */
+  .home-page #contact.section-contact {
+    align-items: center;
+  }
+
+  .home-page #contact .contact-head {
+    max-width: 100%;
+    margin-bottom: 0.72rem;
+  }
+
+  .home-page #contact .pre-title {
+    margin-bottom: 0.3rem;
+  }
+
+  .home-page #contact .section-heading {
+    max-width: 850px;
+    margin-bottom: 0.38rem;
+    font-size: clamp(2.2rem, 3vw, 2.65rem);
+    line-height: 1.14;
+  }
+
+  .home-page #contact .contact-intro {
+    max-width: 880px;
+    font-size: 0.8rem;
+    line-height: 1.45;
+  }
+
+  .home-page #contact .contact-assurance {
+    margin-top: 0.5rem;
+    gap: 0.42rem;
+  }
+
+  .home-page #contact .contact-assurance span {
+    padding: 0.32rem 0.52rem;
+    font-size: 0.67rem;
+  }
+
+  .home-page #contact .contact-grid {
+    grid-template-columns: minmax(0, 1.5fr) minmax(270px, 0.5fr);
+    gap: 0.9rem;
+    align-items: stretch;
+  }
+
+  .home-page #contact .contact-form {
+    padding: 0.9rem 1rem;
+    gap: 0.5rem;
+    border-radius: 17px;
+  }
+
+  .home-page #contact .contact-form .form-row {
+    gap: 0.62rem;
+  }
+
+  .home-page #contact .contact-form .form-group {
+    gap: 0.24rem;
+  }
+
+  .home-page #contact .contact-form .form-group label {
+    font-size: 0.66rem;
+  }
+
+  .home-page #contact .contact-form .form-group input,
+  .home-page #contact .contact-form .form-group select,
+  .home-page #contact .contact-form .form-group textarea {
+    padding: 0.46rem 0.62rem;
+    border-radius: 8px;
+    font-size: 0.76rem;
+  }
+
+  .home-page #contact .contact-form .form-group textarea {
+    min-height: 62px;
+  }
+
+  .home-page #contact .contact-form > .btn-secondary {
+    min-height: 35px;
+    padding: 0.44rem 0.85rem;
+    font-size: 0.74rem;
+  }
+
+  .home-page #contact .contact-form .form-footer p {
+    font-size: 0.64rem;
+    line-height: 1.35;
+  }
+
+  .home-page #contact .contact-form .form-divider {
+    margin: 0.38rem 0;
+  }
+
+  .home-page #contact .contact-form .pick-time {
+    font-size: 0.68rem !important;
+  }
+
+  .home-page #contact .contact-info-area {
+    gap: 0.55rem;
+  }
+
+  .home-page #contact .info-block {
+    min-height: 70px;
+    padding: 0.68rem 0.72rem 0.68rem 3.35rem;
+    border-radius: 13px;
+  }
+
+  .home-page #contact .info-block::before {
+    top: 0.75rem;
+    left: 0.72rem;
+    width: 32px;
+    height: 32px;
+    border-radius: 9px;
+    background-size: 15px 15px;
+  }
+
+  .home-page #contact .info-block h6 {
+    font-size: 0.59rem;
+  }
+
+  .home-page #contact .info-block p {
+    font-size: 0.73rem;
+    line-height: 1.36;
+  }
+}
+
+/* ----- CASE STUDIES: one viewport fixed while scrolling through all 9 ----- */
+@media (min-width: 769px) {
+  .home-page #case-studies.case-scroll-story {
+    position: relative;
+    height: 1000svh; /* 9 slides + one viewport hold = ~1 viewport per case */
+    margin: 0;
+    padding: 0;
+    background: var(--gray-100);
+  }
+
+  .home-page #case-studies .cs-sticky-frame {
+    position: sticky;
+    top: 0;
+    width: 100%;
+    height: 100svh;
+    min-height: 100svh;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    padding: calc(var(--home-nav-offset) + 0.5rem) 0 0.75rem;
+    background:
+      radial-gradient(circle at 50% 18%, rgba(166, 203, 247, 0.14), transparent 34%),
+      var(--gray-100);
+  }
+
+  .home-page #case-studies .cs-sticky-content {
+    width: 100%;
+  }
+
+  .home-page #case-studies .cs-progress-wrap {
+    margin-bottom: 0.45rem;
+  }
+
+  .home-page #case-studies .cs-progress-track {
+    gap: 0.38rem;
+  }
+
+  .home-page #case-studies .cs-progress-segment {
+    width: 23px;
+    height: 4px;
+    border-radius: 999px;
+    background: #d0d6dd;
+  }
+
+  .home-page #case-studies .cs-progress-segment.is-complete {
+    background: #7fb9ef;
+  }
+
+  .home-page #case-studies .cs-progress-segment.is-current {
+    width: 36px;
+    background: #0e7858;
+    transform: scaleY(1.12);
+  }
+
+  .home-page #case-studies .case-study-header {
+    margin-bottom: 0.58rem;
+  }
+
+  .home-page #case-studies .case-study-header .pre-title {
+    margin-bottom: 0.2rem;
+  }
+
+  .home-page #case-studies .section-heading {
+    margin-bottom: 0.2rem;
+    font-size: clamp(2.25rem, 3vw, 2.7rem);
+  }
+
+  .home-page #case-studies .section-subheading {
+    font-size: 0.82rem;
+  }
+
+  .home-page #case-studies .cs-showcase {
+    max-width: 1060px;
+  }
+
+  .home-page #case-studies .cs-slide {
+    height: min(50svh, 450px);
+  }
+
+  .home-page #case-studies .cs-slider-wrapper {
+    will-change: transform;
+    transition: transform 0.36s cubic-bezier(.2,.7,.2,1);
+  }
+
+  .home-page #case-studies .cs-showcase-footer {
+    margin-top: 0.46rem;
+  }
+}
+
+/* Do not force one-screen clipping on shorter laptop heights. Instead scale
+   typography/padding while preserving the exact viewport section height. */
+@media (min-width: 1025px) and (max-height: 720px) {
+  .home-page #how-it-works .how-journey-header .section-heading,
+  .home-page #outcome .section-heading,
+  .home-page #metrics .metrics-heading,
+  .home-page #story .section-heading,
+  .home-page #contact .section-heading {
+    font-size: 2.2rem;
+  }
+
+  .home-page #how-it-works .how-journey-stage {
+    height: 270px;
+  }
+
+  .home-page #pricing .section-heading {
+    font-size: 2.05rem;
+  }
+
+  .home-page #pricing .home-plan {
+    padding: 0.7rem 0.8rem;
+  }
+
+  .home-page #pricing .home-bookends {
+    margin-top: 0.5rem;
+  }
+
+  .home-page #story .story-left p,
+  .home-page #story .founder-card p {
+    font-size: 0.72rem;
+  }
+
+  .home-page #contact .contact-form {
+    padding: 0.72rem 0.82rem;
+  }
+
+  .home-page #case-studies .cs-slide {
+    height: min(45svh, 390px);
+  }
+}
+
+
+/* ==========================================================================
+   CFO CRAFT — FINAL VISUAL POLISH V8
+   Corrects spacing/alignment without changing the established page theme.
+   ========================================================================== */
+
+@media (min-width: 1025px) {
+  /* Normal page scrolling. Sticky Case Studies handles its own progression. */
+  html:has(body.home-page) {
+    scroll-snap-type: none !important;
+  }
+
+  .home-page #metrics {
+    scroll-snap-align: none !important;
+    scroll-snap-stop: normal !important;
+  }
+
+  /* ----------------------------------------------------------------------
+     HOW IT WORKS
+     Keep the successful one-screen visual, but give cards real breathing room
+     around the numbered circles.
+     ---------------------------------------------------------------------- */
+  .home-page #how-it-works.section-how {
+    height: 100svh;
+    min-height: 100svh;
+    max-height: 100svh;
+    padding: calc(var(--home-nav-offset) + 0.85rem) 0 0.8rem;
+    display: block;
+    overflow: hidden;
+  }
+
+  .home-page #how-it-works .how-journey-container {
+    height: calc(100svh - var(--home-nav-offset) - 1.65rem);
+    display: flex;
+    flex-direction: column;
+  }
+
+  .home-page #how-it-works .how-journey-header {
+    flex: 0 0 auto;
+    margin: 0 0 1.05rem;
+  }
+
+  .home-page #how-it-works .how-journey-header .pre-title {
+    margin-bottom: 0.42rem;
+  }
+
+  .home-page #how-it-works .how-journey-header .section-heading {
+    margin-bottom: 0.42rem;
+    font-size: clamp(2.35rem, 3vw, 2.8rem);
+  }
+
+  .home-page #how-it-works .how-journey-header .section-desc {
+    font-size: 0.98rem;
+    line-height: 1.5;
+  }
+
+  .home-page #how-it-works .how-journey {
+    flex: 1 1 auto;
+    min-height: 0;
+    display: flex;
+    align-items: center;
+  }
+
+  .home-page #how-it-works .how-journey-stage {
+    width: 100%;
+    height: 330px;
+    flex: 0 0 330px;
+  }
+
+  .home-page #how-it-works .how-journey-svg {
+    top: 52%;
+    width: 100%;
+    height: auto;
+    aspect-ratio: 1200 / 140;
+    transform: translateY(-50%);
+    overflow: visible;
+  }
+
+  .home-page #how-it-works .how-step-journey {
+    width: calc(25% - 30px);
+    max-width: 248px;
+    min-height: 106px;
+    padding: 0.9rem 1rem;
+    justify-content: flex-start;
+  }
+
+  .home-page #how-it-works .how-step-01,
+  .home-page #how-it-works .how-step-03 {
+    top: 0;
+  }
+
+  .home-page #how-it-works .how-step-02,
+  .home-page #how-it-works .how-step-04 {
+    bottom: 0;
+  }
+
+  /* Connector lengths stop at the circle halo, leaving a clear visual gap. */
+  .home-page #how-it-works .how-step-01::before,
+  .home-page #how-it-works .how-step-03::before {
+    top: 100%;
+    height: 34px;
+  }
+
+  .home-page #how-it-works .how-step-02::before,
+  .home-page #how-it-works .how-step-04::before {
+    bottom: 100%;
+    height: 23px;
+  }
+
+  .home-page #how-it-works .how-step-journey .step-title {
+    font-size: 1.04rem;
+    margin-bottom: 0.42rem;
+  }
+
+  .home-page #how-it-works .how-step-journey .step-desc {
+    font-size: 0.73rem;
+    line-height: 1.48;
+  }
+
+  /* ----------------------------------------------------------------------
+     THE OUTCOME
+     One screen, but use the screen for content instead of empty padding.
+     ---------------------------------------------------------------------- */
+  .home-page #outcome.section-outcome {
+    height: 100svh;
+    min-height: 100svh;
+    max-height: 100svh;
+    padding: calc(var(--home-nav-offset) + 1rem) 0 0.9rem;
+    margin: 0;
+    overflow: hidden;
+    display: block;
+  }
+
+  .home-page #outcome > .container {
+    height: calc(100svh - var(--home-nav-offset) - 1.9rem);
+    max-height: none;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .home-page #outcome .section-header {
+    flex: 0 0 auto;
+    margin: 0 0 1.05rem;
+  }
+
+  .home-page #outcome .pre-title {
+    margin-bottom: 0.42rem;
+  }
+
+  .home-page #outcome .section-heading {
+    margin: 0;
+    font-size: clamp(2.3rem, 3vw, 2.8rem);
+    line-height: 1.14;
+  }
+
+  .home-page #outcome .outcome-split {
+    flex: 1 1 auto;
+    min-height: 0;
+    grid-template-columns: 1fr 1fr;
+    border-radius: 18px;
+  }
+
+  .home-page #outcome .outcome-before,
+  .home-page #outcome .outcome-after {
+    min-height: 0;
+    padding: 1.55rem 2rem;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .home-page #outcome .outcome-title {
+    flex: 0 0 auto;
+    margin-bottom: 0.75rem;
+  }
+
+  .home-page #outcome .outcome-list {
+    flex: 1 1 auto;
+    display: grid;
+    align-content: space-evenly;
+    gap: 0.35rem;
+  }
+
+  .home-page #outcome .outcome-list li {
+    margin: 0;
+    gap: 0.72rem;
+    font-size: clamp(0.84rem, 1vw, 0.95rem);
+    line-height: 1.4;
+  }
+
+  .home-page #outcome .outcome-footer-text {
+    flex: 0 0 auto;
+    margin-bottom: -2.5rem;
+    font-size: 0.86rem;
+  }
+
+  /* ----------------------------------------------------------------------
+     METRICS
+     This section does NOT need to be forced to one viewport.
+     ---------------------------------------------------------------------- */
+  .home-page #metrics.section-metrics {
+    height: auto !important;
+    min-height: 0 !important;
+    max-height: none !important;
+    display: block !important;
+    overflow: visible !important;
+    padding: 3.6rem 0 3.75rem !important;
+  }
+
+  .home-page #metrics > .container {
+    max-height: none !important;
+  }
+
+  .home-page #metrics .metrics-heading {
+    margin: 0 0 0.65rem;
+    font-size: clamp(2.35rem, 3.25vw, 3rem);
+    line-height: 1.15;
+  }
+
+  .home-page #metrics .metrics-subheading {
+    margin: 0 0 1.8rem;
+    font-size: 1rem;
+    line-height: 1.55;
+  }
+
+  .home-page #metrics .metrics-grid {
+    max-width: 1040px;
+    gap: 1.5rem;
+    padding: 2.35rem 2rem;
+  }
+
+  .home-page #metrics .metric-value {
+    font-size: clamp(2.65rem, 4vw, 3.35rem);
+    margin-bottom: 0.55rem;
+  }
+
+  .home-page #metrics .metric-label {
+    font-size: 0.84rem;
+    line-height: 1.5;
+  }
+
+  /* ----------------------------------------------------------------------
+     CASE STUDIES
+     Sticky one-screen showcase. The white slider box now hugs the image.
+     ---------------------------------------------------------------------- */
+  .home-page #case-studies .cs-sticky-frame {
+    padding: calc(var(--home-nav-offset) + 0.7rem) 0 0.7rem;
+    align-items: flex-start;
+  }
+
+  .home-page #case-studies .cs-sticky-content {
+    height: calc(100svh - var(--home-nav-offset) - 1.4rem);
+    display: flex;
+    flex-direction: column;
+  }
+
+  .home-page #case-studies .cs-progress-wrap {
+    flex: 0 0 auto;
+    margin: 0 0 0.5rem;
+  }
+
+  .home-page #case-studies .case-study-header {
+    flex: 0 0 auto;
+    max-width: 920px;
+    margin: 0 auto 0.7rem;
+  }
+
+  .home-page #case-studies .case-study-header .pre-title {
+    margin-bottom: 0.25rem;
+  }
+
+  .home-page #case-studies .section-heading {
+    margin-bottom: 0.25rem;
+    font-size: clamp(2.25rem, 3vw, 2.75rem);
+    line-height: 1.14;
+  }
+
+  .home-page #case-studies .section-subheading {
+    font-size: 0.85rem;
+    line-height: 1.45;
+  }
+
+  .home-page #case-studies .cs-showcase {
+    width: min(1120px, 100%);
+    max-width: 1120px;
+    margin: 0 auto;
+    flex: 1 1 auto;
+    min-height: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+
+  .home-page #case-studies .cs-slider-container {
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    max-height: 55svh;
+    border-radius: 18px;
+    overflow: hidden;
+    background: transparent;
+    box-shadow: 0 14px 38px rgba(8, 41, 81, 0.12);
+  }
+
+  .home-page #case-studies .cs-slider-wrapper {
+    height: 100%;
+  }
+
+  .home-page #case-studies .cs-slide {
+    min-width: 100%;
+    height: 100%;
+    aspect-ratio: auto;
+    background: transparent;
+  }
+
+  .home-page #case-studies .cs-slide img {
+    width: 100%;
+    height: 100%;
+    max-height: none;
+    object-fit: contain;
+    display: block;
+    background: #fff;
+  }
+
+  .home-page #case-studies .cs-showcase-footer {
+    flex: 0 0 auto;
+    margin-top: 0.55rem;
+    font-size: 0.76rem;
+  }
+
+  /* ----------------------------------------------------------------------
+     PRICING
+     One-screen desktop without shrinking everything into a "khichdi".
+     ---------------------------------------------------------------------- */
+  .home-page #pricing.section-pricing {
+    height: 100svh;
+    min-height: 100svh;
+    max-height: 100svh;
+    padding: calc(var(--home-nav-offset) + 0.85rem) 0 0.8rem;
+    margin: 0;
+    overflow: hidden;
+    display: block;
+  }
+
+  .home-page #pricing > .container {
+    height: calc(100svh - var(--home-nav-offset) - 1.65rem);
+    max-height: none;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .home-page #pricing .pre-title {
+    margin: 0 0 0.28rem;
+  }
+
+  .home-page #pricing .section-heading {
+    max-width: 1050px;
+    margin: 0 0 0.42rem;
+    font-size: clamp(2.25rem, 2.9vw, 2.7rem);
+    line-height: 1.12;
+  }
+
+  .home-page #pricing > .container > .home-pricing-lead {
+    max-width: 960px;
+    margin: 0 0 0.85rem;
+    font-size: 0.84rem;
+    line-height: 1.48;
+  }
+
+  .home-page #pricing .home-plans {
+    flex: 1 1 auto;
+    min-height: 0;
+    gap: 1rem;
+    align-items: stretch;
+  }
+
+  .home-page #pricing .home-plan {
+    min-height: 0;
+    padding: 1.05rem 1.1rem;
+    border-radius: 16px;
+  }
+
+  .home-page #pricing .home-plan h3 {
+    margin-bottom: 0.45rem;
+    font-size: 1.08rem;
+    line-height: 1.3;
+  }
+
+  .home-page #pricing .home-plan-desc {
+    min-height: 2.7rem;
+    font-size: 0.78rem;
+    line-height: 1.46;
+  }
+
+  .home-page #pricing .home-plan-price {
+    margin-top: 0.65rem;
+    font-size: 1.15rem;
+  }
+
+  .home-page #pricing .home-plan-unit {
+    margin: 0.12rem 0 0.55rem;
+    font-size: 0.69rem;
+  }
+
+  .home-page #pricing .home-plan-btn {
+    min-height: 37px;
+    padding: 0.5rem 0.9rem !important;
+    font-size: 0.77rem !important;
+  }
+
+  .home-page #pricing .home-plan-feats {
+    margin: 0.6rem 0 0.5rem;
+    padding-top: 0.62rem;
+  }
+
+  .home-page #pricing .home-plan-feats li {
+    margin-bottom: 0.28rem;
+    font-size: 0.71rem;
+    line-height: 1.35;
+  }
+
+  .home-page #pricing .home-plan-feats li.lead-in {
+    margin-bottom: 0.36rem;
+    font-size: 0.7rem;
+  }
+
+  .home-page #pricing .home-plan-more {
+    font-size: 0.72rem;
+  }
+
+  .home-page #pricing .home-bookends {
+    flex: 0 0 auto;
+    gap: 0.9rem;
+    margin-top: 0.8rem;
+  }
+
+  .home-page #pricing .home-bookend {
+    min-height: 78px;
+    padding: 0.72rem 0.9rem;
+    gap: 0.35rem 0.9rem;
+    border-radius: 14px;
+  }
+
+  .home-page #pricing .home-bookend h3 {
+    font-size: 0.9rem;
+    line-height: 1.3;
+  }
+
+  .home-page #pricing .home-bookend-desc {
+    font-size: 0.68rem;
+    line-height: 1.36;
+  }
+
+  .home-page #pricing .home-bookend-price .home-plan-price {
+    font-size: 0.95rem;
+  }
+
+  .home-page #pricing .home-bookend-price .home-plan-unit,
+  .home-page #pricing .home-bookend-price a {
+    font-size: 0.64rem;
+  }
+
+  .home-page #pricing .home-pricing-bottom {
+    flex: 0 0 auto;
+    margin-top: 0.65rem;
+    padding-top: 0.55rem;
+    font-size: 0.72rem;
+  }
+
+  .home-page #pricing .home-pricing-bottom .btn-secondary {
+    padding: 0.44rem 0.9rem;
+    font-size: 0.73rem;
+  }
+
+  /* ----------------------------------------------------------------------
+     OUR STORY
+     Full viewport, but content begins directly after the nav rather than
+     floating in the middle of a large empty area.
+     ---------------------------------------------------------------------- */
+  .home-page #story.section-story {
+    height: 100svh;
+    min-height: 100svh;
+    max-height: 100svh;
+    padding: calc(var(--home-nav-offset) + 1rem) 0 0.85rem;
+    margin: 0;
+    overflow: hidden;
+    display: block;
+  }
+
+  .home-page #story > .container {
+    height: calc(100svh - var(--home-nav-offset) - 1.85rem);
+    max-height: none;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .home-page #story .pre-title {
+    margin-bottom: 0.38rem;
+  }
+
+  .home-page #story .section-heading {
+    flex: 0 0 auto;
+    max-width: 980px;
+    margin: 0 0 0.95rem;
+    font-size: clamp(2.35rem, 3vw, 2.8rem);
+    line-height: 1.14;
+  }
+
+  .home-page #story .story-grid {
+    min-height: 0;
+    grid-template-columns: 1.08fr 0.92fr;
+    gap: 2.3rem;
+    align-items: center;
+  }
+
+  .home-page #story .story-left p {
+    margin-bottom: 0.75rem;
+    font-size: 0.86rem;
+    line-height: 1.55;
+  }
+
+  .home-page #story .story-list {
+    margin-top: 0.85rem;
+  }
+
+  .home-page #story .story-list li {
+    margin-bottom: 0.48rem;
+    padding-left: 1.25rem;
+    font-size: 0.82rem;
+    line-height: 1.4;
+  }
+
+  .home-page #story .founder-card {
+    padding: 1.55rem 1.7rem;
+    border-radius: 18px;
+  }
+
+  .home-page #story .founder-name {
+    font-size: 1.5rem;
+    line-height: 1.2;
+  }
+
+  .home-page #story .founder-title {
+    margin-bottom: 0.75rem;
+  }
+
+  .home-page #story .founder-card p {
+    margin-bottom: 0.75rem;
+    font-size: 0.82rem;
+    line-height: 1.5;
+  }
+
+  /* ----------------------------------------------------------------------
+     GET IN TOUCH
+     Proper two-column composition. Contact info is a 2x2 grid so the section
+     fits without tiny text or vertical overflow.
+     ---------------------------------------------------------------------- */
+  .home-page #contact.section-contact {
+    height: 100svh;
+    min-height: 100svh;
+    max-height: 100svh;
+    padding: calc(var(--home-nav-offset) + 0.85rem) 0 0.75rem;
+    margin: 0;
+    overflow: hidden;
+    display: block;
+  }
+
+  .home-page #contact > .container {
+    height: calc(100svh - var(--home-nav-offset) - 1.6rem);
+    max-height: none;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .home-page #contact .contact-head {
+    flex: 0 0 auto;
+    max-width: 100%;
+    margin: 0 0 0.85rem;
+  }
+
+  .home-page #contact .pre-title {
+    margin-bottom: 0.32rem;
+  }
+
+  .home-page #contact .section-heading {
+    max-width: 880px;
+    margin-bottom: 0.42rem;
+    font-size: clamp(2.25rem, 3vw, 2.7rem);
+    line-height: 1.13;
+  }
+
+  .home-page #contact .contact-intro {
+    max-width: 980px;
+    font-size: 0.84rem;
+    line-height: 1.5;
+  }
+
+  .home-page #contact .contact-assurance {
+    margin-top: 0.58rem;
+    gap: 0.5rem;
+  }
+
+  .home-page #contact .contact-assurance span {
+    padding: 0.36rem 0.58rem;
+    font-size: 0.7rem;
+  }
+
+  .home-page #contact .contact-grid {
+    flex: 1 1 auto;
+    min-height: 0;
+    grid-template-columns: minmax(0, 1.35fr) minmax(360px, 0.65fr);
+    gap: 1rem;
+    align-items: stretch;
+  }
+
+  .home-page #contact .contact-form-area {
+    min-height: 0;
+  }
+
+  .home-page #contact .contact-form {
+    height: 100%;
+    min-height: 0;
+    padding: 1rem 1.1rem;
+    gap: 0.58rem;
+    border-radius: 18px;
+  }
+
+  .home-page #contact .contact-form .form-row {
+    gap: 0.7rem;
+  }
+
+  .home-page #contact .contact-form .form-group {
+    gap: 0.3rem;
+  }
+
+  .home-page #contact .contact-form .form-group label {
+    font-size: 0.69rem;
+  }
+
+  .home-page #contact .contact-form .form-group input,
+  .home-page #contact .contact-form .form-group select,
+  .home-page #contact .contact-form .form-group textarea {
+    padding: 0.5rem 0.65rem;
+    border-radius: 9px;
+    font-size: 0.78rem;
+  }
+
+  .home-page #contact .contact-form .form-group textarea {
+    min-height: 66px;
+    max-height: 82px;
+  }
+
+  .home-page #contact .contact-form > .btn-secondary {
+    min-height: 37px;
+    padding: 0.47rem 0.85rem;
+    font-size: 0.76rem;
+  }
+
+  .home-page #contact .contact-form .form-footer {
+    margin-top: 0.05rem;
+  }
+
+  .home-page #contact .contact-form .form-footer p {
+    font-size: 0.66rem;
+    line-height: 1.38;
+  }
+
+  .home-page #contact .contact-form .form-divider {
+    margin: 0.42rem 0;
+  }
+
+  .home-page #contact .contact-form .pick-time {
+    font-size: 0.69rem !important;
+  }
+
+  .home-page #contact .contact-info-area {
+    height: 100%;
+    min-height: 0;
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    grid-template-rows: repeat(2, minmax(0, 1fr));
+    gap: 0.75rem;
+    padding: 0;
+  }
+
+  .home-page #contact .info-block,
+  .home-page #contact a.info-block {
+    min-width: 0;
+    min-height: 0;
+    height: 100%;
+    padding: 0.9rem 0.75rem 0.8rem 3.45rem;
+    border-radius: 14px;
+    display: block;
+  }
+
+  .home-page #contact .info-block::before {
+    top: 0.9rem;
+    left: 0.8rem;
+    width: 34px;
+    height: 34px;
+    border-radius: 9px;
+    background-size: 16px 16px;
+  }
+
+  .home-page #contact .info-block h6 {
+    font-size: 0.62rem;
+    margin-bottom: 0.28rem;
+  }
+
+  .home-page #contact .info-block p {
+    font-size: 0.73rem;
+    line-height: 1.38;
+    overflow-wrap: anywhere;
+  }
+}
+
+/* Short laptop heights: keep the same composition but tighten only what is
+   necessary. Do not force sections into microscopic text. */
+@media (min-width: 1025px) and (max-height: 760px) {
+  .home-page #how-it-works .how-journey-stage {
+    height: 285px;
+    flex-basis: 285px;
+  }
+
+  .home-page #how-it-works .how-step-journey {
+    min-height: 94px;
+    padding: 0.7rem 0.82rem;
+  }
+
+  .home-page #how-it-works .how-step-journey .step-desc {
+    font-size: 0.67rem;
+  }
+
+  .home-page #outcome .outcome-before,
+  .home-page #outcome .outcome-after {
+    padding: 1.15rem 1.55rem;
+  }
+
+  .home-page #outcome .outcome-list li {
+    font-size: 0.79rem;
+  }
+
+  .home-page #pricing .section-heading {
+    font-size: 2.05rem;
+  }
+
+  .home-page #pricing .home-plan {
+    padding: 0.8rem 0.88rem;
+  }
+
+  .home-page #pricing .home-plan-desc {
+    font-size: 0.7rem;
+  }
+
+  .home-page #pricing .home-plan-feats li {
+    font-size: 0.65rem;
+  }
+
+  .home-page #pricing .home-bookend {
+    min-height: 68px;
+    padding: 0.58rem 0.72rem;
+  }
+
+  .home-page #story .story-left p,
+  .home-page #story .founder-card p {
+    font-size: 1rem;
+  }
+
+  .home-page #contact .section-heading {
+    font-size: 2.15rem;
+  }
+
+  .home-page #contact .contact-assurance {
+    margin-top: 0.42rem;
+  }
+
+  .home-page #contact .contact-form {
+    padding: 0.78rem 0.88rem;
+    gap: 0.45rem;
+  }
+
+  .home-page #contact .contact-form .form-group input,
+  .home-page #contact .contact-form .form-group select,
+  .home-page #contact .contact-form .form-group textarea {
+    padding: 0.4rem 0.55rem;
+  }
+
+  .home-page #contact .contact-form .form-group textarea {
+    min-height: 54px;
+  }
+
+  .home-page #case-studies .cs-slider-container {
+    max-height: 49svh;
+  }
+}
+
+/* Dashboard host layout stability while lazy iframes mount/unmount. */
+.home-page .feature-dashboard-embed[data-dashboard] {
+  contain: layout paint;
+}
+
+/* ==========================================================================
+   CFO CRAFT — THREE SECTION UI/UX FIX V9
+   15 Oct 2026
+   Scope: How It Works, Pricing, Get in Touch
+   These sections use natural document height — no forced one-screen clipping.
+   ========================================================================== */
+
+@media (min-width: 1025px) {
+  html:has(body.home-page) {
+    scroll-snap-type: none !important;
+  }
+
+  .home-page #how-it-works,
+  .home-page #pricing,
+  .home-page #contact {
+    scroll-snap-align: none !important;
+    scroll-snap-stop: normal !important;
+  }
+
+  /* ----------------------------------------------------------------------
+     HOW IT WORKS
+     Timeline stays horizontal; every card sits below its own circle with a
+     deliberate connector gap. No absolute card crowding and no viewport lock.
+     ---------------------------------------------------------------------- */
+  .home-page #how-it-works.section-how {
+    display: block !important;
+    height: auto !important;
+    min-height: 0 !important;
+    max-height: none !important;
+    margin: 0 !important;
+    padding: 5rem 0 5.5rem !important;
+    overflow: hidden !important;
+    align-items: initial !important;
+  }
+
+  .home-page #how-it-works .how-journey-container {
+    width: 100% !important;
+    height: auto !important;
+    min-height: 0 !important;
+    max-height: none !important;
+    max-width: 1200px !important;
+    margin: 0 auto !important;
+  }
+
+  .home-page #how-it-works .how-journey-header {
+    max-width: 880px !important;
+    margin: 0 0 2.35rem !important;
+  }
+
+  .home-page #how-it-works .how-journey-header .pre-title {
+    margin-bottom: 0.6rem !important;
+    font-size: 0.92rem !important;
+  }
+
+  .home-page #how-it-works .how-journey-header .section-heading {
+    max-width: 900px !important;
+    margin: 0 0 0.7rem !important;
+    font-size: clamp(2.35rem, 3.25vw, 3.05rem) !important;
+    line-height: 1.14 !important;
+  }
+
+  .home-page #how-it-works .how-journey-header .section-desc {
+    max-width: 760px !important;
+    font-size: 1rem !important;
+    line-height: 1.6 !important;
+  }
+
+  .home-page #how-it-works .how-journey {
+    width: 100% !important;
+    min-height: 0 !important;
+  }
+
+  .home-page #how-it-works .how-journey-stage {
+    position: relative !important;
+    display: grid !important;
+    grid-template-columns: repeat(4, minmax(0, 1fr)) !important;
+    grid-auto-flow: column !important;
+    width: 100% !important;
+    height: auto !important;
+    min-height: 365px !important;
+    padding-top: 155px !important;
+    align-items: start !important;
+  }
+
+  .home-page #how-it-works .how-journey-svg {
+    position: absolute !important;
+    z-index: 1 !important;
+    top: 0 !important;
+    left: 0 !important;
+    width: 100% !important;
+    height: 140px !important;
+    aspect-ratio: auto !important;
+    transform: none !important;
+    overflow: visible !important;
+  }
+
+  .home-page #how-it-works .how-step-journey,
+  .home-page #how-it-works .how-step-01,
+  .home-page #how-it-works .how-step-02,
+  .home-page #how-it-works .how-step-03,
+  .home-page #how-it-works .how-step-04 {
+    position: relative !important;
+    top: auto !important;
+    right: auto !important;
+    bottom: auto !important;
+    left: auto !important;
+    transform: none !important;
+    width: calc(100% - 28px) !important;
+    max-width: none !important;
+    min-height: 190px !important;
+    margin: 0 auto !important;
+    padding: 1.35rem 1.35rem 1.45rem !important;
+    justify-self: center !important;
+    justify-content: flex-start !important;
+    border-radius: 18px !important;
+    background: linear-gradient(145deg, rgba(27, 78, 132, 0.52), rgba(8, 41, 81, 0.46)) !important;
+    border: 1px solid rgba(166, 203, 247, 0.22) !important;
+    box-shadow: 0 18px 42px rgba(2, 12, 27, 0.2), inset 0 1px 0 rgba(255, 255, 255, 0.04) !important;
+    backdrop-filter: blur(8px) !important;
+    -webkit-backdrop-filter: blur(8px) !important;
+  }
+
+  /* A short connector ends before the card, so the circle never feels glued. */
+  .home-page #how-it-works .how-step-journey::before,
+  .home-page #how-it-works .how-step-01::before,
+  .home-page #how-it-works .how-step-02::before,
+  .home-page #how-it-works .how-step-03::before,
+  .home-page #how-it-works .how-step-04::before {
+    top: -42px !important;
+    bottom: auto !important;
+    left: 50% !important;
+    width: 1px !important;
+    height: 26px !important;
+    transform: translateX(-50%) !important;
+    background: linear-gradient(180deg, rgba(166, 203, 247, 0.5), rgba(166, 203, 247, 0.14)) !important;
+  }
+
+  .home-page #how-it-works .how-step-journey::after {
+    left: 1.35rem !important;
+    right: 1.35rem !important;
+  }
+
+  .home-page #how-it-works .how-step-journey .step-title {
+    margin: 0 0 0.6rem !important;
+    font-size: 1.18rem !important;
+    line-height: 1.25 !important;
+  }
+
+  .home-page #how-it-works .how-step-journey .step-desc {
+    margin: 0 !important;
+    font-size: 0.85rem !important;
+    line-height: 1.58 !important;
+    color: rgba(255, 255, 255, 0.82) !important;
+  }
+
+  .home-page #how-it-works .how-step-journey.is-active {
+    transform: translateY(-4px) !important;
+    border-color: rgba(166, 203, 247, 0.58) !important;
+    box-shadow: 0 22px 50px rgba(2, 12, 27, 0.28), 0 0 0 1px rgba(166, 203, 247, 0.08) !important;
+  }
+
+  /* ----------------------------------------------------------------------
+     PRICING
+     Natural section height. Three plan cards keep readable typography and
+     complete feature lists; lower cards and CTA have clear separation.
+     ---------------------------------------------------------------------- */
+  .home-page #pricing.section-pricing {
+    display: block !important;
+    height: auto !important;
+    min-height: 0 !important;
+    max-height: none !important;
+    margin: 0 !important;
+    padding: 5.25rem 0 5.5rem !important;
+    overflow: visible !important;
+    align-items: initial !important;
+    background: var(--gray-100) !important;
+  }
+
+  .home-page #pricing > .container {
+    width: 100% !important;
+    height: auto !important;
+    min-height: 0 !important;
+    max-height: none !important;
+  }
+
+  .home-page #pricing .pre-title {
+    margin: 0 0 0.55rem !important;
+  }
+
+  .home-page #pricing .section-heading {
+    max-width: 1050px !important;
+    margin: 0 0 0.75rem !important;
+    font-size: clamp(2.35rem, 3vw, 2.95rem) !important;
+    line-height: 1.14 !important;
+  }
+
+  .home-page #pricing > .container > .home-pricing-lead {
+    max-width: 980px !important;
+    margin: 0 0 2rem !important;
+    font-size: 1rem !important;
+    line-height: 1.6 !important;
+  }
+
+  .home-page #pricing .home-plans {
+    display: grid !important;
+    grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
+    gap: 1.4rem !important;
+    align-items: stretch !important;
+  }
+
+  .home-page #pricing .home-plan {
+    min-height: 0 !important;
+    padding: 1.65rem 1.55rem 1.5rem !important;
+    border-radius: 18px !important;
+    overflow: hidden !important;
+  }
+
+  .home-page #pricing .home-plan h3 {
+    margin-bottom: 0.7rem !important;
+    font-size: 1.23rem !important;
+    line-height: 1.35 !important;
+  }
+
+  .home-page #pricing .home-tier {
+    padding: 0.28rem 0.55rem !important;
+    font-size: 0.82rem !important;
+    line-height: 1 !important;
+  }
+
+  .home-page #pricing .home-plan-desc {
+    min-height: 4.15rem !important;
+    margin: 0 !important;
+    font-size: 0.9rem !important;
+    line-height: 1.55 !important;
+  }
+
+  .home-page #pricing .home-plan-price {
+    margin-top: 1.15rem !important;
+    font-size: 1.42rem !important;
+  }
+
+  .home-page #pricing .home-plan-unit {
+    margin: 0.2rem 0 1rem !important;
+    font-size: 0.78rem !important;
+  }
+
+  .home-page #pricing .home-plan-btn {
+    min-height: 44px !important;
+    padding: 0.68rem 1rem !important;
+    font-size: 0.87rem !important;
+  }
+
+  .home-page #pricing .home-plan-feats {
+    margin: 1rem 0 1rem !important;
+    padding-top: 1rem !important;
+  }
+
+  .home-page #pricing .home-plan-feats li {
+    margin-bottom: 0.55rem !important;
+    padding-left: 1.35rem !important;
+    font-size: 0.84rem !important;
+    line-height: 1.45 !important;
+  }
+
+  .home-page #pricing .home-plan-feats li.lead-in {
+    margin-bottom: 0.55rem !important;
+    font-size: 0.82rem !important;
+  }
+
+  .home-page #pricing .home-plan-more {
+    margin-top: auto !important;
+    padding-top: 0.15rem !important;
+    font-size: 0.83rem !important;
+  }
+
+  .home-page #pricing .home-bookends {
+    display: grid !important;
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+    gap: 1.25rem !important;
+    margin-top: 1.45rem !important;
+  }
+
+  .home-page #pricing .home-bookend {
+    min-height: 132px !important;
+    padding: 1.25rem 1.3rem !important;
+    gap: 0.55rem 1.25rem !important;
+    border-radius: 16px !important;
+    align-items: center !important;
+  }
+
+  .home-page #pricing .home-bookend h3 {
+    font-size: 1.04rem !important;
+    line-height: 1.35 !important;
+  }
+
+  .home-page #pricing .home-bookend .home-tier {
+    padding: 0.22rem 0.48rem !important;
+    font-size: 0.7rem !important;
+  }
+
+  .home-page #pricing .home-bookend-desc {
+    font-size: 0.81rem !important;
+    line-height: 1.5 !important;
+  }
+
+  .home-page #pricing .home-bookend-price .home-plan-price {
+    margin: 0 !important;
+    font-size: 1.18rem !important;
+  }
+
+  .home-page #pricing .home-bookend-price .home-plan-unit,
+  .home-page #pricing .home-bookend-price a {
+    font-size: 0.75rem !important;
+  }
+
+  .home-page #pricing .home-pricing-bottom {
+    margin-top: 1.5rem !important;
+    padding-top: 1.25rem !important;
+    gap: 1.5rem !important;
+    font-size: 0.9rem !important;
+  }
+
+  .home-page #pricing .home-pricing-bottom .btn-secondary {
+    min-height: 42px !important;
+    padding: 0.62rem 1.2rem !important;
+    font-size: 0.84rem !important;
+  }
+
+  /* ----------------------------------------------------------------------
+     GET IN TOUCH
+     Natural height and calm spacing. The information cards stay in a single
+     readable column; long office details never get squeezed into narrow tiles.
+     ---------------------------------------------------------------------- */
+  .home-page #contact.section-contact {
+    display: block !important;
+    height: auto !important;
+    min-height: 0 !important;
+    max-height: none !important;
+    margin: 0 !important;
+    padding: 1.5rem 0 1.75rem !important;
+    overflow: hidden !important;
+    align-items: initial !important;
+  }
+
+  .home-page #contact > .container {
+    width: 100% !important;
+    height: auto !important;
+    min-height: 0 !important;
+    max-height: none !important;
+  }
+
+  .home-page #contact .contact-head {
+    max-width: 980px !important;
+    margin: 0 0 2.15rem !important;
+  }
+
+  .home-page #contact .pre-title {
+    margin-bottom: 0.72rem !important;
+  }
+
+  .home-page #contact .section-heading {
+    max-width: 900px !important;
+    margin: 0 0 0.75rem !important;
+    font-size: clamp(2.45rem, 3.2vw, 3.1rem) !important;
+    line-height: 1.12 !important;
+  }
+
+  .home-page #contact .contact-intro {
+    max-width: 920px !important;
+    font-size: 0.98rem !important;
+    line-height: 1.65 !important;
+  }
+
+  .home-page #contact .contact-assurance {
+    margin-top: 1.15rem !important;
+    gap: 0.65rem !important;
+  }
+
+  .home-page #contact .contact-assurance span {
+    padding: 0.55rem 0.75rem !important;
+    font-size: 0.8rem !important;
+    line-height: 1.2 !important;
+  }
+
+  .home-page #contact .contact-grid {
+    display: grid !important;
+    grid-template-columns: minmax(0, 1.35fr) minmax(330px, 0.65fr) !important;
+    gap: 2rem !important;
+    align-items: start !important;
+  }
+
+  .home-page #contact .contact-form-area {
+    min-width: 0 !important;
+  }
+
+  .home-page #contact .contact-form {
+    width: 100% !important;
+    height: auto !important;
+    min-height: 0 !important;
+    padding: 1.8rem !important;
+    gap: 1.05rem !important;
+    border-radius: 20px !important;
+  }
+
+  .home-page #contact .contact-form .form-row {
+    gap: 1rem !important;
+  }
+
+  .home-page #contact .contact-form .form-group {
+    gap: 0.42rem !important;
+  }
+
+  .home-page #contact .contact-form .form-group label {
+    font-size: 0.76rem !important;
+  }
+
+  .home-page #contact .contact-form .form-group input,
+  .home-page #contact .contact-form .form-group select,
+  .home-page #contact .contact-form .form-group textarea {
+    min-height: 46px !important;
+    padding: 0.78rem 0.85rem !important;
+    border-radius: 10px !important;
+    font-size: 0.9rem !important;
+  }
+
+  .home-page #contact .contact-form .form-group textarea {
+    min-height: 125px !important;
+    max-height: none !important;
+  }
+
+  .home-page #contact .contact-form > .btn-secondary {
+    min-height: 48px !important;
+    padding: 0.72rem 1rem !important;
+    font-size: 0.88rem !important;
+  }
+
+  .home-page #contact .contact-form .form-footer {
+    margin-top: 0.2rem !important;
+  }
+
+  .home-page #contact .contact-form .form-footer p {
+    font-size: 0.78rem !important;
+    line-height: 1.55 !important;
+  }
+
+  .home-page #contact .contact-form .form-divider {
+    margin: 0.8rem 0 !important;
+  }
+
+  .home-page #contact .contact-form .pick-time {
+    font-size: 0.82rem !important;
+  }
+
+  .home-page #contact .contact-info-area {
+    display: grid !important;
+    grid-template-columns: 1fr !important;
+    grid-template-rows: none !important;
+    gap: 1rem !important;
+    height: auto !important;
+    min-height: 0 !important;
+    padding: 0 !important;
+  }
+
+  .home-page #contact .info-block,
+  .home-page #contact a.info-block {
+    display: block !important;
+    width: 100% !important;
+    height: auto !important;
+    min-height: 112px !important;
+    padding: 1.2rem 1.15rem 1.2rem 4.55rem !important;
+    border-radius: 16px !important;
+  }
+
+  .home-page #contact .info-block::before {
+    top: 1.15rem !important;
+    left: 1.05rem !important;
+    width: 42px !important;
+    height: 42px !important;
+    border-radius: 11px !important;
+    background-size: 18px 18px !important;
+  }
+
+  .home-page #contact .info-block h6 {
+    margin-bottom: 0.35rem !important;
+    font-size: 0.7rem !important;
+  }
+
+  .home-page #contact .info-block p {
+    font-size: 0.9rem !important;
+    line-height: 1.52 !important;
+  }
+}
+
+/* Tablet: keep generous spacing but stack complex structures naturally. */
+@media (min-width: 769px) and (max-width: 1024px) {
+  .home-page #how-it-works.section-how,
+  .home-page #pricing.section-pricing,
+  .home-page #contact.section-contact {
+    height: auto !important;
+    min-height: 0 !important;
+    max-height: none !important;
+    overflow: visible !important;
+    padding-top: 4.25rem !important;
+    padding-bottom: 4.5rem !important;
+  }
+
+  .home-page #pricing .home-plans {
+    grid-template-columns: 1fr !important;
+    gap: 1.1rem !important;
+  }
+
+  .home-page #pricing .home-plan-desc {
+    min-height: 0 !important;
+  }
+
+  .home-page #pricing .home-bookends {
+    grid-template-columns: 1fr !important;
+  }
+
+  .home-page #contact .contact-grid {
+    grid-template-columns: 1fr !important;
+    gap: 1.4rem !important;
+  }
+
+  .home-page #contact .contact-info-area {
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+  }
+}
+
+/* Mobile: no timeline collision; cards become a clean vertical process list. */
+@media (max-width: 768px) {
+  .home-page #how-it-works.section-how,
+  .home-page #pricing.section-pricing,
+  .home-page #contact.section-contact {
+    height: auto !important;
+    min-height: 0 !important;
+    max-height: none !important;
+    overflow: visible !important;
+    padding: 3.5rem 0 !important;
+  }
+
+  .home-page #how-it-works .how-journey-stage {
+    display: grid !important;
+    grid-template-columns: 1fr !important;
+    gap: 0.9rem !important;
+    height: auto !important;
+    min-height: 0 !important;
+    padding-top: 0 !important;
+  }
+
+  .home-page #how-it-works .how-journey-svg {
+    display: none !important;
+  }
+
+  .home-page #how-it-works .how-step-journey,
+  .home-page #how-it-works .how-step-01,
+  .home-page #how-it-works .how-step-02,
+  .home-page #how-it-works .how-step-03,
+  .home-page #how-it-works .how-step-04 {
+    position: relative !important;
+    inset: auto !important;
+    transform: none !important;
+    width: 100% !important;
+    max-width: none !important;
+    min-height: 0 !important;
+    padding: 1.15rem 1.1rem !important;
+  }
+
+  .home-page #how-it-works .how-step-journey::before {
+    display: none !important;
+  }
+
+  .home-page #pricing .home-plans,
+  .home-page #pricing .home-bookends,
+  .home-page #contact .contact-grid,
+  .home-page #contact .contact-info-area {
+    grid-template-columns: 1fr !important;
+  }
+
+  .home-page #pricing .home-plan-desc {
+    min-height: 0 !important;
+  }
+
+  .home-page #pricing .home-bookend {
+    grid-template-columns: 1fr !important;
+  }
+
+  .home-page #pricing .home-bookend-price {
+    grid-column: 1 !important;
+    grid-row: auto !important;
+    text-align: left !important;
+  }
+
+  .home-page #pricing .home-pricing-bottom {
+    align-items: flex-start !important;
+    flex-direction: column !important;
+  }
+
+  .home-page #contact .contact-form {
+    padding: 1.2rem !important;
+  }
+
+  .home-page #contact .contact-form .form-row {
+    grid-template-columns: 1fr !important;
+  }
+}
+
+/* ========================================================================== 
+   CFO CRAFT — HOW IT WORKS + CASE STUDIES FINAL CORRECTION V10
+   15 Oct 2026
+   Restores the proven horizontal journey composition and enlarges the sticky
+   case-study artwork without forcing letterboxed 16:9 panels.
+   ========================================================================== */
+
+@media (min-width: 1025px) {
+  /* ------------------------------------------------------------------------
+     HOW IT WORKS — restore the original alternating-card journey.
+     The four circles stay true circles on the straight progress line; cards
+     sit above/below their own node with visible breathing room.
+     ------------------------------------------------------------------------ */
+  .home-page #how-it-works.section-how {
+    box-sizing: border-box !important;
+    width: 100% !important;
+    height: 100svh !important;
+    min-height: 100svh !important;
+    max-height: 100svh !important;
+    margin: 0 !important;
+    padding: calc(var(--home-nav-offset) + 0.72rem) 0 1rem !important;
+    overflow: hidden !important;
+    display: flex !important;
+    align-items: center !important;
+  }
+
+  .home-page #how-it-works .how-journey-container {
+    position: relative !important;
+    z-index: 1 !important;
+    width: 100% !important;
+    max-width: 1200px !important;
+    margin: 0 auto !important;
+  }
+
+  .home-page #how-it-works .how-journey-header {
+    width: 100% !important;
+    max-width: 980px !important;
+    margin: 0 0 1.05rem !important;
+  }
+
+  .home-page #how-it-works .how-journey-header .pre-title {
+    margin: 0 0 0.42rem !important;
+    font-size: 0.94rem !important;
+  }
+
+  .home-page #how-it-works .how-journey-header .section-heading {
+    max-width: 980px !important;
+    margin: 0 0 0.42rem !important;
+    font-size: clamp(2.35rem, 3.15vw, 2.9rem) !important;
+    line-height: 1.15 !important;
+  }
+
+  .home-page #how-it-works .how-journey-header .section-desc {
+    max-width: 760px !important;
+    margin: 0 !important;
+    font-size: 0.98rem !important;
+    line-height: 1.55 !important;
+  }
+
+  .home-page #how-it-works .how-journey {
+    position: relative !important;
+    display: block !important;
+    width: 100% !important;
+    min-height: 0 !important;
+  }
+
+  .home-page #how-it-works .how-journey-stage {
+    position: relative !important;
+    display: block !important;
+    width: 100% !important;
+    height: 320px !important;
+    min-height: 320px !important;
+    padding: 0 !important;
+    margin: 0 !important;
+  }
+
+  .home-page #how-it-works .how-journey-svg {
+    position: absolute !important;
+    z-index: 1 !important;
+    top: 50% !important;
+    left: 0 !important;
+    width: 100% !important;
+    height: auto !important;
+    aspect-ratio: 1200 / 140 !important;
+    transform: translateY(-50%) !important;
+    overflow: visible !important;
+    pointer-events: none !important;
+  }
+
+  .home-page #how-it-works .how-svg-node .how-node-halo,
+  .home-page #how-it-works .how-svg-node .how-node-core {
+    transform-box: fill-box !important;
+    transform-origin: center !important;
+  }
+
+  .home-page #how-it-works .how-step-journey,
+  .home-page #how-it-works .how-step-01,
+  .home-page #how-it-works .how-step-02,
+  .home-page #how-it-works .how-step-03,
+  .home-page #how-it-works .how-step-04 {
+    position: absolute !important;
+    z-index: 2 !important;
+    display: flex !important;
+    flex-direction: column !important;
+    justify-content: center !important;
+    width: calc(25% - 28px) !important;
+    max-width: 250px !important;
+    min-height: 112px !important;
+    margin: 0 !important;
+    padding: 0.82rem 0.92rem 0.88rem !important;
+    inset: auto !important;
+    border-radius: 15px !important;
+    transform: translateX(-50%) !important;
+    background: linear-gradient(145deg, rgba(23, 70, 119, 0.38), rgba(8, 41, 81, 0.30)) !important;
+    border: 1px solid rgba(166, 203, 247, 0.20) !important;
+    box-shadow: 0 13px 32px rgba(2, 12, 27, 0.18), inset 0 1px 0 rgba(255,255,255,0.035) !important;
+    backdrop-filter: blur(8px) !important;
+    -webkit-backdrop-filter: blur(8px) !important;
+  }
+
+  .home-page #how-it-works .how-step-01 {
+    left: 12.5% !important;
+    top: 4px !important;
+    bottom: auto !important;
+  }
+
+  .home-page #how-it-works .how-step-02 {
+    left: 37.5% !important;
+    top: auto !important;
+    bottom: 4px !important;
+  }
+
+  .home-page #how-it-works .how-step-03 {
+    left: 62.5% !important;
+    top: 4px !important;
+    bottom: auto !important;
+  }
+
+  .home-page #how-it-works .how-step-04 {
+    left: 87.5% !important;
+    top: auto !important;
+    bottom: 4px !important;
+  }
+
+  /* Small connector only: card and circle remain visually separated. */
+  .home-page #how-it-works .how-step-journey::before,
+  .home-page #how-it-works .how-step-01::before,
+  .home-page #how-it-works .how-step-02::before,
+  .home-page #how-it-works .how-step-03::before,
+  .home-page #how-it-works .how-step-04::before {
+    content: "" !important;
+    position: absolute !important;
+    left: 50% !important;
+    width: 1px !important;
+    height: 17px !important;
+    transform: translateX(-50%) !important;
+    pointer-events: none !important;
+  }
+
+  .home-page #how-it-works .how-step-01::before,
+  .home-page #how-it-works .how-step-03::before {
+    top: 100% !important;
+    bottom: auto !important;
+    background: linear-gradient(180deg, rgba(166,203,247,.52), rgba(166,203,247,.10)) !important;
+  }
+
+  .home-page #how-it-works .how-step-02::before,
+  .home-page #how-it-works .how-step-04::before {
+    top: auto !important;
+    bottom: 100% !important;
+    background: linear-gradient(0deg, rgba(166,203,247,.52), rgba(166,203,247,.10)) !important;
+  }
+
+  .home-page #how-it-works .how-step-journey::after {
+    left: 0.92rem !important;
+    right: 0.92rem !important;
+    top: 0 !important;
+    height: 2px !important;
+  }
+
+  .home-page #how-it-works .how-step-journey .step-title {
+    margin: 0 0 0.38rem !important;
+    font-size: 1.02rem !important;
+    line-height: 1.2 !important;
+  }
+
+  .home-page #how-it-works .how-step-journey .step-desc {
+    margin: 0 !important;
+    font-size: 0.72rem !important;
+    line-height: 1.48 !important;
+    color: rgba(255,255,255,.74) !important;
+  }
+
+  .home-page #how-it-works .how-step-journey.is-active {
+    transform: translateX(-50%) translateY(-2px) !important;
+    border-color: rgba(166,203,247,.58) !important;
+    background: linear-gradient(145deg, rgba(43,109,178,.50), rgba(8,41,81,.42)) !important;
+    box-shadow: 0 18px 42px rgba(2,12,27,.26), 0 0 0 1px rgba(166,203,247,.08), 0 0 30px rgba(43,109,178,.12) !important;
+  }
+
+  .home-page #how-it-works .how-step-journey.is-complete {
+    border-color: rgba(166,203,247,.34) !important;
+    background: linear-gradient(145deg, rgba(24,77,128,.38), rgba(8,41,81,.32)) !important;
+  }
+
+  /* ------------------------------------------------------------------------
+     CASE STUDIES — artwork returns to a large readable size.
+     No forced 16:9 frame: the JPG's own ratio decides the height, removing the
+     large blank side bands caused by a short fixed viewport box.
+     ------------------------------------------------------------------------ */
+  .home-page #case-studies.case-scroll-story {
+    height: 760svh !important;
+  }
+
+  .home-page #case-studies .cs-sticky-frame {
+    height: 100svh !important;
+    padding: calc(var(--home-nav-offset) + 0.55rem) 0 0.7rem !important;
+    align-items: flex-start !important;
+    overflow: hidden !important;
+  }
+
+  .home-page #case-studies .cs-sticky-content {
+    width: 100% !important;
+    max-width: 1440px !important;
+    height: calc(100svh - var(--home-nav-offset) - 1.25rem) !important;
+    margin: 0 auto !important;
+    display: flex !important;
+    flex-direction: column !important;
+  }
+
+  .home-page #case-studies .cs-progress-wrap {
+    flex: 0 0 auto !important;
+    margin: 0 0 0.48rem !important;
+  }
+
+  .home-page #case-studies .case-study-header {
+    flex: 0 0 auto !important;
+    max-width: 940px !important;
+    margin: 0 auto 0.72rem !important;
+  }
+
+  .home-page #case-studies .case-study-header .pre-title {
+    margin-bottom: 0.18rem !important;
+  }
+
+  .home-page #case-studies .section-heading {
+    margin-bottom: 0.22rem !important;
+    font-size: clamp(2.25rem, 3vw, 2.65rem) !important;
+    line-height: 1.13 !important;
+  }
+
+  .home-page #case-studies .section-subheading {
+    margin: 0 !important;
+    font-size: 0.88rem !important;
+    line-height: 1.4 !important;
+  }
+
+  .home-page #case-studies .cs-showcase {
+    width: min(1280px, 74vw, calc(100vw - 96px)) !important;
+    max-width: none !important;
+    margin: 0 auto !important;
+    flex: 1 1 auto !important;
+    min-height: 0 !important;
+    display: flex !important;
+    flex-direction: column !important;
+    justify-content: center !important;
+  }
+
+  .home-page #case-studies .cs-slider-container {
+    width: 100% !important;
+    height: auto !important;
+    min-height: 0 !important;
+    max-height: none !important;
+    aspect-ratio: auto !important;
+    overflow: hidden !important;
+    border-radius: 18px !important;
+    background: #ffffff !important;
+    box-shadow: 0 16px 42px rgba(8,41,81,.13) !important;
+  }
+
+  .home-page #case-studies .cs-slider-wrapper {
+    width: 100% !important;
+    height: auto !important;
+  }
+
+  .home-page #case-studies .cs-slide {
+    flex: 0 0 100% !important;
+    min-width: 100% !important;
+    width: 100% !important;
+    height: auto !important;
+    min-height: 0 !important;
+    aspect-ratio: auto !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    background: #ffffff !important;
+  }
+
+  .home-page #case-studies .cs-slide img {
+    display: block !important;
+    width: 100% !important;
+    height: auto !important;
+    min-height: 0 !important;
+    max-height: none !important;
+    object-fit: contain !important;
+    background: #ffffff !important;
+  }
+
+  .home-page #case-studies .cs-showcase-footer {
+    flex: 0 0 auto !important;
+    margin-top: 0.55rem !important;
+    font-size: 0.78rem !important;
+  }
+}
+
+/* Slightly shorter desktop windows: keep the same layout, just trim the stage
+   and case-study width a little so neither section leaks into the next one. */
+@media (min-width: 1025px) and (max-height: 780px) {
+  .home-page #how-it-works .how-journey-stage {
+    height: 285px !important;
+    min-height: 285px !important;
+  }
+
+  .home-page #how-it-works .how-step-journey,
+  .home-page #how-it-works .how-step-01,
+  .home-page #how-it-works .how-step-02,
+  .home-page #how-it-works .how-step-03,
+  .home-page #how-it-works .how-step-04 {
+    min-height: 102px !important;
+    padding: 0.72rem 0.82rem !important;
+  }
+
+  .home-page #case-studies .cs-showcase {
+    width: min(1120px, 70vw, calc(100vw - 96px)) !important;
+  }
+}
+
+/* ========================================================================== 
+   CFO CRAFT — HOW IT WORKS + CASE STUDIES MICRO-FIX V11
+   15 Oct 2026
+   Scope: desktop/laptop only. No HTML/JS changes.
+   - How It Works heading group moved upward.
+   - All four cards moved ~1rem farther from their numbered circles.
+   - Case-study image is constrained by available viewport height so the full
+     artwork remains visible/readable instead of being clipped at the bottom.
+   ========================================================================== */
+
+@media (min-width: 1025px) {
+  /* HOW IT WORKS — bring the heading block upward without changing typography. */
+  .home-page #how-it-works.section-how {
+    padding-top: calc(var(--home-nav-offset) + 0.15rem) !important;
+    padding-bottom: 0.9rem !important;
+  }
+
+  .home-page #how-it-works .how-journey-header {
+    margin-bottom: 0.75rem !important;
+  }
+
+  /* Keep the journey centred, but add breathing room around the circles. */
+  .home-page #how-it-works .how-journey-stage {
+    height: 326px !important;
+    min-height: 326px !important;
+  }
+
+  .home-page #how-it-works .how-step-01,
+  .home-page #how-it-works .how-step-03 {
+    top: -12px !important;
+    bottom: auto !important;
+  }
+
+  .home-page #how-it-works .how-step-02,
+  .home-page #how-it-works .how-step-04 {
+    top: auto !important;
+    bottom: -12px !important;
+  }
+
+  /* Connector stays subtle and intentionally stops before the circle. */
+  .home-page #how-it-works .how-step-01::before,
+  .home-page #how-it-works .how-step-03::before,
+  .home-page #how-it-works .how-step-02::before,
+  .home-page #how-it-works .how-step-04::before {
+    height: 20px !important;
+  }
+
+  /* CASE STUDIES — keep the whole artwork inside the sticky viewport. */
+  .home-page #case-studies .case-study-header {
+    margin-bottom: 0.55rem !important;
+  }
+
+  .home-page #case-studies .cs-showcase {
+    width: min(1100px, 72vw, calc(100vw - 96px)) !important;
+    max-width: 1100px !important;
+  }
+
+  .home-page #case-studies .cs-slider-container,
+  .home-page #case-studies .cs-slider-wrapper,
+  .home-page #case-studies .cs-slide {
+    height: auto !important;
+    max-height: none !important;
+  }
+
+  .home-page #case-studies .cs-slide img {
+    width: auto !important;
+    max-width: 100% !important;
+    height: auto !important;
+    max-height: calc(100svh - var(--home-nav-offset) - 235px) !important;
+    margin: 0 auto !important;
+    object-fit: contain !important;
+  }
+}
+
+/* Shorter laptop windows need a little more vertical compression. */
+@media (min-width: 1025px) and (max-height: 780px) {
+  .home-page #how-it-works.section-how {
+    padding-top: calc(var(--home-nav-offset) + 0.05rem) !important;
+  }
+
+  .home-page #how-it-works .how-journey-stage {
+    height: 292px !important;
+    min-height: 292px !important;
+  }
+
+  .home-page #how-it-works .how-step-01,
+  .home-page #how-it-works .how-step-03 {
+    top: -10px !important;
+  }
+
+  .home-page #how-it-works .how-step-02,
+  .home-page #how-it-works .how-step-04 {
+    bottom: -10px !important;
+  }
+
+  .home-page #case-studies .cs-showcase {
+    width: min(1000px, 68vw, calc(100vw - 96px)) !important;
+  }
+
+  .home-page #case-studies .cs-slide img {
+    max-height: calc(100svh - var(--home-nav-offset) - 205px) !important;
+  }
+}
+
+/* ========================================================================== 
+   CFO CRAFT — HOW IT WORKS + OUTCOME TOP SPACING FIX V12
+   15 Oct 2026
+   Only reduces the excessive blank space above the section headings on desktop.
+   Existing cards, circles, timeline, typography and responsive rules stay intact.
+   ========================================================================== */
+
+@media (min-width: 1025px) {
+  /* HOW IT WORKS — bring heading group closer to the top of the dark section. */
+  .home-page #how-it-works.section-how {
+    padding-top: 2rem !important;
+    padding-bottom: 0.9rem !important;
+  }
+
+  /* Keep the internal title/subtitle rhythm clean and compact. */
+  .home-page #how-it-works .how-journey-header {
+    margin-top: 0 !important;
+    margin-bottom: 0.75rem !important;
+  }
+
+  .home-page #how-it-works .how-journey-header .pre-title {
+    margin-top: 0 !important;
+    margin-bottom: 0.38rem !important;
+  }
+
+  .home-page #how-it-works .how-journey-header .section-heading {
+    margin-top: 0 !important;
+    margin-bottom: 0.38rem !important;
+  }
+
+  .home-page #how-it-works .how-journey-header .section-desc {
+    margin-top: 0 !important;
+  }
+
+  /* THE OUTCOME — remove the oversized blank band above the title. */
+  .home-page #outcome.section-outcome {
+    padding-top: 3rem !important;
+    padding-bottom: 0.9rem !important;
+  }
+
+  .home-page #outcome .section-header {
+    margin-top: 0 !important;
+    margin-bottom: 1.5rem !important;
+  }
+
+  .home-page #outcome .pre-title {
+    margin-top: 0 !important;
+    margin-bottom: 0.38rem !important;
+  }
+
+  .home-page #outcome .section-heading {
+    margin-top: 0 !important;
+  }
+}
+@media (min-width: 1025px) {
+  .home-page #how-it-works .how-journey-header {
+    transform: translateY(-3.5rem);
   }
 }
 

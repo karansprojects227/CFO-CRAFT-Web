@@ -125,7 +125,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   document
     .querySelectorAll(
-      ".feature-row, .team-card, .metric-card, .testimonial-card, .section-heading, .hero-content",
+      ".feature-row:not(.cfo-story-panel), .team-card, .metric-card, .testimonial-card, .section-heading, .hero-content",
     )
     .forEach((el) => {
       el.classList.add("reveal");
@@ -310,181 +310,221 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
 
-  // ===== HERO CFO MANAGEMENT VIEW — slow KPI + chart animation =====
-  // Animates only the hero dashboard numbers and bars. Existing HTML/CSS remains untouched.
-  const heroDecisionDesk = document.querySelector(".hero-decision-desk");
+  // ===== LIVE DASHBOARD ANIMATIONS — continuous, slow and readable =====
+  // Mirrors the looping behaviour used by the service SVG dashboards:
+  // rise -> hold -> ease back -> short rest -> repeat.
+  // The timeline does NOT reset when the user leaves and returns to the section.
+  const dashboardMotionReduced = window.matchMedia(
+    "(prefers-reduced-motion: reduce)",
+  ).matches;
 
-  if (heroDecisionDesk && !window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
-    const heroNumberEls = [
-      ...heroDecisionDesk.querySelectorAll(".decision-kpi-card strong"),
-      ...heroDecisionDesk.querySelectorAll(".cash-driver-row > strong"),
-    ];
-    const heroVerticalBars = [
-      ...heroDecisionDesk.querySelectorAll(".decision-chart .decision-bar"),
-    ];
-    const heroHorizontalBars = [
-      ...heroDecisionDesk.querySelectorAll(".cash-driver-track > i"),
-    ];
+  const cr3t24NpUrJMNunMMASmhAM953bFGeLXzN7 = ({
+    root,
+    numberSelector,
+    verticalBarSelector,
+    horizontalBarSelector,
+  }) => {
+    if (!root || dashboardMotionReduced) return null;
 
-    const numberStates = heroNumberEls.map((el) => {
-      const finalText = el.textContent.trim();
-      const match = finalText.match(/-?[\d,]+(?:\.\d+)?/);
+    const numberStates = [...root.querySelectorAll(numberSelector)]
+      .map((el) => {
+        const finalText = el.textContent.trim();
+        const match = finalText.match(/-?[\d,]+(?:\.\d+)?/);
+        if (!match) return null;
 
-      if (!match) return null;
+        const raw = match[0];
+        const target = Number(raw.replace(/,/g, ""));
+        if (!Number.isFinite(target)) return null;
 
-      const rawNumber = match[0];
-      const target = Number(rawNumber.replace(/,/g, ""));
-      const decimalPart = rawNumber.split(".")[1];
-      const decimals = decimalPart ? decimalPart.length : 0;
-      const startIndex = match.index ?? finalText.indexOf(rawNumber);
-      const prefix = finalText.slice(0, startIndex);
-      const suffix = finalText.slice(startIndex + rawNumber.length);
+        const decimals = raw.includes(".") ? raw.split(".")[1].length : 0;
+        const index = match.index ?? finalText.indexOf(raw);
+        return {
+          el,
+          finalText,
+          target,
+          decimals,
+          prefix: finalText.slice(0, index),
+          suffix: finalText.slice(index + raw.length),
+        };
+      })
+      .filter(Boolean);
 
-      return { el, finalText, target, decimals, prefix, suffix };
-    }).filter(Boolean);
+    const verticalBars = verticalBarSelector
+      ? [...root.querySelectorAll(verticalBarSelector)]
+      : [];
+    const horizontalBars = horizontalBarSelector
+      ? [...root.querySelectorAll(horizontalBarSelector)]
+      : [];
 
-    const horizontalStates = heroHorizontalBars.map((el) => ({
-      el,
-      finalWidth: el.style.width || getComputedStyle(el).width,
-    }));
+    const RISE = 1800;
+    const HOLD = 3400;
+    const FALL = 1200;
+    const REST = 650;
+    const CYCLE = RISE + HOLD + FALL + REST;
+    const epoch = performance.now();
 
-    let heroAnimations = [];
-    let heroCounterRaf = 0;
-    let heroVisible = false;
+    let raf = 0;
+    let visible = true;
 
-    const formatHeroNumber = (value, decimals) =>
-      value.toLocaleString("en-IN", {
+    const ease = (p) =>
+      p < 0.5
+        ? 4 * p * p * p
+        : 1 - Math.pow(-2 * p + 2, 3) / 2;
+
+    const progressAt = (elapsed) => {
+      const x = elapsed % CYCLE;
+      if (x < RISE) return ease(x / RISE);
+      if (x < RISE + HOLD) return 1;
+      if (x < RISE + HOLD + FALL) {
+        return 1 - ease((x - RISE - HOLD) / FALL);
+      }
+      return 0;
+    };
+
+    const formatValue = (value, decimals) =>
+      Math.abs(value).toLocaleString("en-IN", {
         minimumFractionDigits: decimals,
         maximumFractionDigits: decimals,
       });
 
-    const easeOutCubic = (t) => 1 - Math.pow(1 - t, 3);
+    verticalBars.forEach((bar) => {
+      bar.style.transformOrigin = "50% 100%";
+      bar.style.willChange = "transform, opacity";
+    });
 
-    const cancelHeroAnimations = () => {
-      heroAnimations.forEach((animation) => animation.cancel());
-      heroAnimations = [];
-      if (heroCounterRaf) {
-        cancelAnimationFrame(heroCounterRaf);
-        heroCounterRaf = 0;
+    horizontalBars.forEach((bar) => {
+      bar.style.transformOrigin = "0 50%";
+      bar.style.willChange = "transform, opacity";
+    });
+
+    const render = (p) => {
+      numberStates.forEach((state) => {
+        const scaled = state.target * p;
+        const sign = scaled < 0 ? "−" : "";
+        state.el.textContent =
+          `${state.prefix}${sign}${formatValue(scaled, state.decimals)}${state.suffix}`;
+      });
+
+      verticalBars.forEach((bar, index) => {
+        const stagger = Math.max(0, Math.min(1, p * 1.08 - index * 0.012));
+        bar.style.transform = `scaleY(${stagger.toFixed(4)})`;
+        bar.style.opacity = String(0.28 + 0.72 * stagger);
+      });
+
+      horizontalBars.forEach((bar, index) => {
+        const stagger = Math.max(0, Math.min(1, p * 1.06 - index * 0.018));
+        bar.style.transform = `scaleX(${stagger.toFixed(4)})`;
+        bar.style.opacity = String(0.32 + 0.68 * stagger);
+      });
+    };
+
+    const frame = (now) => {
+      raf = 0;
+      if (!visible) return;
+      render(progressAt(now - epoch));
+      raf = requestAnimationFrame(frame);
+    };
+
+    const play = () => {
+      visible = true;
+      if (!raf) raf = requestAnimationFrame(frame);
+    };
+
+    const pause = () => {
+      visible = false;
+      if (raf) {
+        cancelAnimationFrame(raf);
+        raf = 0;
       }
     };
 
-    const resetHeroDashboard = () => {
-      cancelHeroAnimations();
-
-      numberStates.forEach(({ el, decimals, prefix, suffix }) => {
-        el.textContent = `${prefix}${formatHeroNumber(0, decimals)}${suffix}`;
-      });
-
-      heroVerticalBars.forEach((bar) => {
-        bar.style.transformOrigin = "50% 100%";
-        bar.style.transform = "scaleY(0)";
-        bar.style.opacity = "0.28";
-      });
-
-      horizontalStates.forEach(({ el }) => {
-        el.style.width = "0%";
-        el.style.opacity = "0.35";
-      });
-    };
-
-    const playHeroDashboard = () => {
-      cancelHeroAnimations();
-
-      // Slow counters: readable, finance-dashboard feel rather than a quick gimmick.
-      const counterDuration = 2700;
-      const counterStart = performance.now();
-
-      const tickCounters = (now) => {
-        const elapsed = now - counterStart;
-
-        numberStates.forEach((state, index) => {
-          const delay = index * 120;
-          const local = Math.max(0, Math.min(1, (elapsed - delay) / counterDuration));
-          const p = easeOutCubic(local);
-          const value = state.target * p;
-          state.el.textContent =
-            `${state.prefix}${formatHeroNumber(value, state.decimals)}${state.suffix}`;
-        });
-
-        const total = counterDuration + Math.max(0, numberStates.length - 1) * 120;
-        if (elapsed < total) {
-          heroCounterRaf = requestAnimationFrame(tickCounters);
-        } else {
-          heroCounterRaf = 0;
-          numberStates.forEach(({ el, finalText }) => {
-            el.textContent = finalText;
-          });
-        }
-      };
-
-      heroCounterRaf = requestAnimationFrame(tickCounters);
-
-      heroVerticalBars.forEach((bar, index) => {
-        bar.style.transformOrigin = "50% 100%";
-        const animation = bar.animate(
-          [
-            { transform: "scaleY(0)", opacity: 0.28 },
-            { transform: "scaleY(1)", opacity: 1 },
-          ],
-          {
-            duration: 2500,
-            delay: 260 + index * 130,
-            easing: "cubic-bezier(0.22, 1, 0.36, 1)",
-            fill: "forwards",
-          },
-        );
-        animation.onfinish = () => {
-          bar.style.transform = "scaleY(1)";
-          bar.style.opacity = "1";
-        };
-        heroAnimations.push(animation);
-      });
-
-      horizontalStates.forEach(({ el, finalWidth }, index) => {
-        const animation = el.animate(
-          [
-            { width: "0%", opacity: 0.35 },
-            { width: finalWidth, opacity: 1 },
-          ],
-          {
-            duration: 2600,
-            delay: 520 + index * 220,
-            easing: "cubic-bezier(0.22, 1, 0.36, 1)",
-            fill: "forwards",
-          },
-        );
-        animation.onfinish = () => {
-          el.style.width = finalWidth;
-          el.style.opacity = "1";
-        };
-        heroAnimations.push(animation);
-      });
-    };
-
-    resetHeroDashboard();
+    // Correct final values remain in HTML; animation starts from current global phase.
+    render(progressAt(performance.now() - epoch));
 
     if ("IntersectionObserver" in window) {
-      const heroDashboardObserver = new IntersectionObserver(
+      new IntersectionObserver(
         (entries) => {
           entries.forEach((entry) => {
-            if (entry.intersectionRatio >= 0.25 && !heroVisible) {
-              heroVisible = true;
-              playHeroDashboard();
-            } else if (entry.intersectionRatio <= 0.02 && heroVisible) {
-              heroVisible = false;
-              resetHeroDashboard();
-            }
+            if (entry.isIntersecting) play();
+            else pause();
           });
         },
-        { threshold: [0, 0.02, 0.25] },
-      );
-
-      heroDashboardObserver.observe(heroDecisionDesk);
+        { threshold: 0.04 },
+      ).observe(root);
     } else {
-      playHeroDashboard();
+      play();
     }
-  }
+
+    return { play, pause };
+  };
+
+  cr3t24NpUrJMNunMMASmhAM953bFGeLXzN7({
+    root: document.querySelector(".hero-decision-desk"),
+    numberSelector: ".decision-kpi-card strong, .cash-driver-row > strong",
+    verticalBarSelector: ".decision-chart .decision-bar",
+    horizontalBarSelector: ".cash-driver-track > i",
+  });
+
+  cr3t24NpUrJMNunMMASmhAM953bFGeLXzN7({
+    root: document.querySelector(".mock-dashboard-enhanced"),
+    numberSelector: ".md-kpi-value, .md-kpi-trend",
+    verticalBarSelector: ".md-bars .md-bar",
+    horizontalBarSelector: "",
+  });
+
+  // ===== MOBILE DASHBOARD FIT =====
+  // Keep the hero management dashboard and Monthly MIS as complete dashboard
+  // compositions on phones instead of stacking their internal cards vertically.
+  const dashboardViewports = [
+    ...document.querySelectorAll("[data-dashboard-viewport]"),
+  ];
+
+  const fitDashboardCanvases = () => {
+    const shouldFit = window.matchMedia("(max-width: 768px)").matches;
+
+    dashboardViewports.forEach((viewport) => {
+      const canvas = viewport.querySelector("[data-dashboard-fit]");
+      if (!canvas) return;
+
+      if (!shouldFit) {
+        viewport.style.height = "";
+        canvas.style.width = "";
+        canvas.style.maxWidth = "";
+        canvas.style.transform = "";
+        canvas.style.transformOrigin = "";
+        return;
+      }
+
+      const baseWidth = Number(canvas.dataset.dashboardBaseWidth) || 680;
+      const available = Math.max(1, viewport.clientWidth);
+      const scale = Math.min(1, available / baseWidth);
+
+      canvas.style.width = `${baseWidth}px`;
+      canvas.style.maxWidth = "none";
+      canvas.style.transform = "none";
+      canvas.style.transformOrigin = "top left";
+
+      // Read the natural height before scaling so the wrapper collapses exactly
+      // around the scaled dashboard and does not leave a large blank gap.
+      const naturalHeight = canvas.offsetHeight;
+      canvas.style.transform = `scale(${scale})`;
+      viewport.style.height = `${Math.ceil(naturalHeight * scale)}px`;
+    });
+  };
+
+  let dashboardFitRaf = 0;
+  const requestDashboardFit = () => {
+    if (dashboardFitRaf) cancelAnimationFrame(dashboardFitRaf);
+    dashboardFitRaf = requestAnimationFrame(() => {
+      dashboardFitRaf = 0;
+      fitDashboardCanvases();
+    });
+  };
+
+  requestDashboardFit();
+  window.addEventListener("resize", requestDashboardFit, { passive: true });
+  window.addEventListener("load", requestDashboardFit, { once: true });
+
 
 });
 
@@ -4624,44 +4664,69 @@ function destr3nP5oFahNL86vESFrkKjmuupsQa1mPzN7(host) {
 }
 
 function initCfoCraftAnimatedDashboards() {
-  const hosts = [...document.querySelectorAll(
-    ".feature-dashboard-embed[data-dashboard]",
-  )];
+  const allHosts = [...document.querySelectorAll('.feature-dashboard-embed[data-dashboard]')];
+  if (!allHosts.length) return;
 
-  if (!hosts.length) return;
+  const storyRoots = [...document.querySelectorAll('[data-cfo-story]')];
+  const standaloneHosts = allHosts.filter(h => !h.closest('[data-cfo-story]'));
+  const activeRoots = new Set();
+  let visibilityRaf = 0;
 
-  if (!("IntersectionObserver" in window)) {
-    // Conservative fallback: do not load every animated dashboard at once.
-    cr3nP5oFahNL86vESFrkKjmuupsQa1mPzN7(hosts[0]);
-    return;
+  // Only the current dashboard and its neighbours are kept in memory.
+  function refreshStoryDashboards() {
+    visibilityRaf = 0;
+    for (const story of storyRoots) {
+      // Stacked mobile/tablet panels are lazy-mounted by their own visibility observer.
+      if (!story.classList.contains('story-enhanced')) continue;
+      const hosts = [...story.querySelectorAll('.cfo-story-panel .feature-dashboard-embed')];
+      const idx = Number(story.dataset.storyActive || 0);
+      const nearViewport = activeRoots.has(story) && !document.hidden;
+      hosts.forEach((host, i) => {
+        if (nearViewport && (i === idx || i === Math.min(idx+1, hosts.length-1))) {
+          cr3nP5oFahNL86vESFrkKjmuupsQa1mPzN7(host);
+        } else {
+          destr3nP5oFahNL86vESFrkKjmuupsQa1mPzN7(host);
+        }
+      });
+    }
+  }
+  function queueRefresh() {
+    if (!visibilityRaf) visibilityRaf = requestAnimationFrame(refreshStoryDashboards);
   }
 
-  const observer = new IntersectionObserver(
-    (entries) => {
-      entries.forEach((entry) => {
-        if (entry.isIntersecting) {
+  if ('IntersectionObserver' in window) {
+    const storyObserver = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) activeRoots.add(entry.target);
+        else activeRoots.delete(entry.target);
+      });
+      queueRefresh();
+    }, { rootMargin: '200px 0px 200px 0px', threshold: 0 });
+    storyRoots.forEach(story => storyObserver.observe(story));
+
+    const normalObserver = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        const parentStory = entry.target.closest('[data-cfo-story]');
+        if (parentStory?.classList.contains('story-enhanced')) return;
+        if (entry.isIntersecting && !document.hidden) {
           cr3nP5oFahNL86vESFrkKjmuupsQa1mPzN7(entry.target);
         } else {
           destr3nP5oFahNL86vESFrkKjmuupsQa1mPzN7(entry.target);
         }
       });
-    },
-    {
-      root: null,
-      rootMargin: "260px 0px 260px 0px",
-      threshold: 0.01,
-    },
-  );
-
-  hosts.forEach((host) => observer.observe(host));
-
-  document.addEventListener("visibilitychange", () => {
-    if (document.hidden) {
-      hosts.forEach(destr3nP5oFahNL86vESFrkKjmuupsQa1mPzN7);
-    }
+    }, {rootMargin:'220px 0px 220px 0px', threshold:0.01});
+    allHosts.forEach(host => normalObserver.observe(host));
+  } else {
+    storyRoots.forEach(story => activeRoots.add(story));
+    standaloneHosts.forEach(host => cr3nP5oFahNL86vESFrkKjmuupsQa1mPzN7(host));
+    queueRefresh();
+  }
+  window.addEventListener('cfo:storychange', queueRefresh);
+  document.addEventListener('visibilitychange', () => {
+    if (document.hidden) allHosts.forEach(destr3nP5oFahNL86vESFrkKjmuupsQa1mPzN7);
+    else queueRefresh();
   });
 }
-
 if (document.readyState === "loading") {
   document.addEventListener(
     "DOMContentLoaded",
@@ -4671,3 +4736,156 @@ if (document.readyState === "loading") {
 } else {
   initCfoCraftAnimatedDashboards();
 }
+
+
+/* ========================================================================
+   CFO CRAFT — INDUSTRIES + SERVICES ONE-SCREEN SCROLL STORIES
+   Only 2 pinned sections; 4 industry steps and 6 service steps.
+   Scroll input moves the active scene in place (no additional item sections).
+   No scroll hijacking: a normal document scroll controls the timeline.
+   ======================================================================== */
+(function () {
+  function initCfoScrollShowcases() {
+    const roots = [...document.querySelectorAll('[data-cfo-story]')];
+    if (!roots.length) return;
+    const motionPreference = window.matchMedia('(prefers-reduced-motion: reduce)');
+    const pinEnabled = () => !motionPreference.matches && window.innerWidth >= 300;
+    const navHeight = () => {
+      const cssValue = parseFloat(getComputedStyle(document.body).getPropertyValue('--home-nav-offset'));
+      const elementHeight = document.getElementById('navbar')?.getBoundingClientRect().height;
+      return Number.isFinite(elementHeight) && elementHeight > 0
+        ? Math.round(elementHeight)
+        : (Number.isFinite(cssValue) && cssValue > 0 ? cssValue : 76);
+    };
+    let nav = navHeight();
+    let ticking = false;
+    let lastWidth = window.innerWidth;
+    let lastHeight = window.innerHeight;
+
+    function setStep(story, index, force=false) {
+      const panels = story._cfoPanels || [];
+      const buttons = story._cfoButtons || [];
+      const step = Math.max(0, Math.min(panels.length - 1, index));
+      const previous = Number(story.dataset.storyActive ?? -1);
+      if (!force && previous === step) return;
+      story.dataset.storyActive = String(step);
+      panels.forEach((panel, i) => {
+        const active = i === step;
+        panel.classList.toggle('is-active', active);
+        panel.setAttribute('aria-hidden', String(pinEnabled() && !active));
+        panel.inert = pinEnabled() && !active;
+        // On an item change start the new copy from its top (short mobile screens).
+        if (active && previous !== step) panel.scrollTop = 0;
+      });
+      buttons.forEach((button, i) => {
+        button.classList.toggle('is-active', i === step);
+        button.classList.toggle('is-complete', i < step);
+        button.setAttribute('aria-pressed', String(i === step));
+        button.setAttribute('aria-current', i === step ? 'step' : 'false');
+      });
+      const progress = story.querySelector('[data-story-current]');
+      if (progress) {
+        const name = panels[step]?.dataset.storyLabel || panels[step]?.querySelector('.feature-title')?.textContent?.trim() || '';
+        progress.textContent = `${String(step+1).padStart(2,'0')} / ${String(panels.length).padStart(2,'0')} — ${name}`;
+      }
+      if (previous !== step || force) {
+        window.dispatchEvent(new CustomEvent('cfo:storychange', {detail:{story, index:step}}));
+      }
+    }
+
+    function measure() {
+      nav = navHeight();
+      document.body.style.setProperty('--home-nav-offset', `${nav}px`);
+      for (const story of roots) {
+        if (!pinEnabled()) {
+          story.classList.remove('story-enhanced');
+          story.style.removeProperty('--cfo-story-height');
+          story.style.removeProperty('--cfo-step-distance');
+          for (const panel of story._cfoPanels) {
+            panel.inert = false;
+            panel.removeAttribute('aria-hidden');
+          }
+          continue;
+        }
+        const viewportHeight = Math.max(1, window.innerHeight - nav);
+        const stepDistance = Math.max(215, viewportHeight * (window.innerWidth <= 600 ? .72 : .80));
+        const totalHeight = viewportHeight + story._cfoPanels.length * stepDistance;
+        story.style.setProperty('--cfo-story-height', `${Math.round(totalHeight)}px`);
+        story.style.setProperty('--cfo-step-distance', `${stepDistance}px`);
+        story.classList.add('story-enhanced');
+      }
+    }
+
+    function selectFromScroll() {
+      ticking = false;
+      if (!pinEnabled()) return;
+      for (const story of roots) {
+        const bounding = story.getBoundingClientRect();
+        // The full pinned story consumes exactly N equal steps of scroll.
+        const position = Math.max(0, nav - bounding.top);
+        const stepDistance = parseFloat(story.style.getPropertyValue('--cfo-step-distance')) || 1;
+        const step = Math.min(story._cfoPanels.length - 1, Math.floor(position / stepDistance + 1e-6));
+        setStep(story, step);
+      }
+    }
+    function scheduleScroll() {
+      if (!ticking) {
+        ticking = true;
+        requestAnimationFrame(selectFromScroll);
+      }
+    }
+    function scrollToStep(story, step, behavior='smooth') {
+      if (!pinEnabled()) {
+        story._cfoPanels[step]?.scrollIntoView({behavior, block:'start'});
+        return;
+      }
+      const start = story.getBoundingClientRect().top + window.scrollY - nav;
+      const distance = parseFloat(story.style.getPropertyValue('--cfo-step-distance')) || 1;
+      const destination = Math.max(0, start + (step + .12) * distance);
+      window.scrollTo({top:destination, behavior});
+    }
+    function honorHash() {
+      const id = decodeURIComponent(window.location.hash.slice(1));
+      if (!id) return;
+      for (const story of roots) {
+        const index = story._cfoPanels.findIndex(p => p.id === id);
+        if (index >= 0) {
+          requestAnimationFrame(() => scrollToStep(story, index, 'instant'));
+          return;
+        }
+      }
+    }
+    for (const story of roots) {
+      story._cfoPanels = [...story.querySelectorAll('[data-story-step]')];
+      story._cfoButtons = [...story.querySelectorAll('[data-story-go]')];
+      story._cfoButtons.forEach(button => {
+        button.addEventListener('click', () => {
+          const index = Math.max(0, Math.min(story._cfoPanels.length-1, Number(button.dataset.storyGo)||0));
+          setStep(story, index);
+          scrollToStep(story, index, motionPreference.matches ? 'instant' : 'smooth');
+        });
+      });
+    }
+    measure();
+    for (const story of roots) setStep(story, 0, true);
+    selectFromScroll();
+    window.addEventListener('scroll', scheduleScroll, {passive:true});
+    window.addEventListener('resize', () => {
+      if (lastWidth===window.innerWidth && lastHeight===window.innerHeight) return;
+      lastWidth=window.innerWidth;
+      lastHeight=window.innerHeight;
+      measure();
+      for (const story of roots) setStep(story, Number(story.dataset.storyActive||0),true);
+      scheduleScroll();
+    }, {passive:true});
+    motionPreference.addEventListener?.('change', () => {
+      measure();
+      for (const story of roots) setStep(story, Number(story.dataset.storyActive||0),true);
+      scheduleScroll();
+    });
+    window.addEventListener('hashchange', honorHash);
+    if (window.location.hash) honorHash();
+  }
+  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', initCfoScrollShowcases, {once:true});
+  else initCfoScrollShowcases();
+})();

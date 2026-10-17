@@ -20,7 +20,7 @@
   }
 }
 
-@media (max-width: 980px) {
+@media (min-width: 769px) and (max-width: 980px) {
   .home-page .hero-dashboard {
     max-width: 760px;
     margin-top: 1.75rem;
@@ -46,70 +46,6 @@
 
   .home-page .hero-decision-desk {
     padding: 1.4rem;
-  }
-}
-
-@media (max-width: 640px) {
-  .home-page .hero-dashboard {
-    margin-top: 1.35rem;
-  }
-
-  .home-page .hero-advisory-shell {
-    border-radius: 16px;
-  }
-
-  .home-page .hero-advisory-copy {
-    padding: 2rem 1.2rem;
-  }
-
-  .home-page .hero-advisory-title {
-    font-size: 2rem;
-  }
-
-  .home-page .hero-advisory-text {
-    font-size: 0.94rem;
-    line-height: 1.6;
-  }
-
-  .home-page .hero-advisory-actions {
-    align-items: flex-start;
-    flex-direction: column;
-  }
-
-  .home-page .hero-value-strip {
-    align-items: flex-start;
-    flex-direction: column;
-  }
-
-  .home-page .hero-decision-desk {
-    padding: 1rem;
-  }
-
-  .home-page .decision-desk-header {
-    align-items: flex-start;
-    flex-direction: column;
-  }
-
-  .home-page .decision-kpi-grid,
-  .home-page .decision-middle-grid {
-    grid-template-columns: 1fr;
-  }
-
-  .home-page .decision-kpi-label {
-    min-height: 0;
-  }
-
-  .home-page .decision-chart {
-    height: 110px;
-  }
-
-  .home-page .cfo-priority-topline {
-    align-items: flex-start;
-    flex-direction: column;
-  }
-
-  .home-page .decision-disclaimer {
-    text-align: left;
   }
 }
 
@@ -2067,7 +2003,7 @@
   }
 
   .hero-content {
-    padding: 2.75rem 0 1.5rem;
+    padding: 2.75rem 0 0;
   }
 
   .hero-title {
@@ -2657,7 +2593,7 @@
   }
 
   .hero-content {
-    padding: 3.5rem 0 2rem;
+    padding: 3.5rem 0 0;
   }
 
   .hero-title {
@@ -3848,5 +3784,742 @@
   .home-page video,
   .home-page iframe {
     max-width: 100%;
+  }
+}
+
+/* ==========================================================================
+   CFO CRAFT — FINAL RESPONSIVE HERO DASHBOARD + SPACING PASS
+   Desktop composition is preserved on laptop, tablet and phone.
+   On <=768px the existing JS scales only the right management dashboard,
+   while this CSS keeps the LEFT advisory panel beside it instead of stacking.
+   ========================================================================== */
+
+/* ----- Large desktop: 1440px+ ----- */
+@media (min-width: 1440px) {
+  .home-page .hero-decision-viewport,
+  .home-page .mis-dashboard-viewport {
+    height: auto !important;
+    overflow: visible;
+  }
+
+  .home-page .section-suite-heading {
+    height: auto !important;
+    min-height: 0 !important;
+    padding: 2.4rem 0 1.15rem !important;
+  }
+}
+
+/* ----- Laptop / desktop: 1025px–1439px ----- */
+@media (min-width: 1025px) and (max-width: 1439px) {
+  .home-page .hero-decision-viewport,
+  .home-page .mis-dashboard-viewport {
+    height: auto !important;
+    overflow: visible;
+  }
+
+  .home-page .section-platform {
+    padding: 2.9rem 0 2.35rem !important;
+  }
+
+  .home-page .section-suite-heading {
+    height: auto !important;
+    min-height: 0 !important;
+    padding: 2.2rem 0 1rem !important;
+  }
+
+  .home-page .section-suite-heading .section-heading {
+    margin-bottom: 0.55rem !important;
+  }
+
+  .home-page .section-suite-heading .section-subheading {
+    margin-bottom: 0 !important;
+  }
+}
+
+/* ----- Tablet: 769px–1024px ----- */
+@media (min-width: 769px) and (max-width: 1024px) {
+  .home-page .section-platform {
+    padding: 3rem 0 2.5rem !important;
+  }
+
+  .home-page .section-suite-heading {
+    height: auto !important;
+    min-height: 0 !important;
+    padding: 2.2rem 0 0.95rem !important;
+  }
+
+  .home-page .section-suite-heading .section-heading {
+    margin-bottom: 0.55rem !important;
+  }
+
+  .home-page .section-suite-heading .section-subheading {
+    margin-bottom: 0 !important;
+  }
+
+  .home-page .section-feature {
+    padding-top: 2.6rem !important;
+    padding-bottom: 2.6rem !important;
+  }
+
+  /* Keep the complete desktop hero card in one row on tablet. */
+  .home-page .hero-dashboard {
+    width: min(100%, 940px) !important;
+    max-width: 940px !important;
+    min-width: 0 !important;
+    margin: 1.75rem auto 0 !important;
+  }
+
+  .home-page .hero-advisory-shell {
+    display: grid !important;
+    grid-template-columns: minmax(0, 0.40fr) minmax(0, 0.60fr) !important;
+    align-items: stretch !important;
+    width: 100% !important;
+    min-width: 0 !important;
+    max-width: 100% !important;
+    min-height: 0 !important;
+    border-radius: 18px !important;
+  }
+
+  .home-page .hero-advisory-copy {
+    min-width: 0 !important;
+    max-width: none !important;
+    padding: 1.45rem 1.2rem !important;
+    border-right: 1px solid var(--gray-200) !important;
+    border-bottom: 0 !important;
+  }
+
+  .home-page .hero-advisory-eyebrow {
+    margin-bottom: 0.6rem !important;
+    font-size: 0.62rem !important;
+  }
+
+  .home-page .hero-advisory-title {
+    max-width: none !important;
+    margin-bottom: 0.72rem !important;
+    font-size: clamp(1.5rem, 3.4vw, 2rem) !important;
+    line-height: 1.07 !important;
+  }
+
+  .home-page .hero-advisory-text {
+    max-width: none !important;
+    margin-bottom: 1rem !important;
+    font-size: 0.82rem !important;
+    line-height: 1.5 !important;
+  }
+
+  .home-page .hero-advisory-actions {
+    flex-direction: row !important;
+    align-items: center !important;
+    gap: 0.65rem !important;
+  }
+
+  .home-page .hero-advisory-actions .btn-discovery {
+    padding: 0.58rem 0.78rem !important;
+    font-size: 0.72rem !important;
+  }
+
+  .home-page .hero-advisory-actions .link-diagnostic {
+    font-size: 0.7rem !important;
+  }
+
+  .home-page .hero-value-strip {
+    flex-direction: row !important;
+    align-items: center !important;
+    gap: 0.35rem !important;
+    margin-top: 0.9rem !important;
+  }
+
+  .home-page .hero-value-strip span {
+    padding: 0.3rem 0.48rem 0.3rem 1.1rem !important;
+    font-size: 0.58rem !important;
+  }
+
+  .home-page .hero-value-strip span::before {
+    left: 0.42rem !important;
+  }
+
+  .home-page .hero-decision-viewport {
+    width: 100% !important;
+    min-width: 0 !important;
+    max-width: 100% !important;
+    overflow: hidden !important;
+  }
+
+  .home-page .hero-decision-desk,
+  .home-page .hero-decision-desk.dashboard-fit-canvas {
+    width: 100% !important;
+    min-width: 0 !important;
+    max-width: 100% !important;
+    padding: 1rem !important;
+    transform: none !important;
+  }
+
+  .home-page .decision-desk-header {
+    flex-direction: row !important;
+    align-items: flex-start !important;
+    gap: 0.7rem !important;
+    margin-bottom: 0.75rem !important;
+  }
+
+  .home-page .decision-desk-header h3 {
+    font-size: 0.98rem !important;
+  }
+
+  .home-page .decision-desk-status {
+    padding: 0.3rem 0.48rem !important;
+    font-size: 0.54rem !important;
+  }
+
+  .home-page .decision-kpi-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
+    gap: 0.55rem !important;
+    margin-bottom: 0.55rem !important;
+  }
+
+  .home-page .decision-middle-grid {
+    grid-template-columns: minmax(0, 1.08fr) minmax(0, 0.92fr) !important;
+    gap: 0.55rem !important;
+    margin-bottom: 0.55rem !important;
+  }
+
+  .home-page .decision-kpi-card,
+  .home-page .decision-panel {
+    padding: 0.68rem !important;
+    border-radius: 10px !important;
+  }
+
+  .home-page .decision-kpi-label {
+    min-height: 2em !important;
+    font-size: 0.56rem !important;
+  }
+
+  .home-page .decision-kpi-card strong {
+    font-size: 0.96rem !important;
+  }
+
+  .home-page .decision-kpi-meta,
+  .home-page .decision-period,
+  .home-page .decision-chart-legend {
+    font-size: 0.52rem !important;
+  }
+
+  .home-page .decision-panel-head h4 {
+    font-size: 0.72rem !important;
+  }
+
+  .home-page .decision-panel-label {
+    font-size: 0.48rem !important;
+  }
+
+  .home-page .decision-chart {
+    height: 72px !important;
+    gap: 0.42rem !important;
+  }
+
+  .home-page .cash-driver-list {
+    gap: 0.58rem !important;
+  }
+
+  .home-page .cash-driver-row {
+    grid-template-columns: 58px minmax(0, 1fr) 24px !important;
+    gap: 0.38rem !important;
+    font-size: 0.54rem !important;
+  }
+
+  .home-page .cash-driver-row strong {
+    font-size: 0.54rem !important;
+  }
+
+  .home-page .cfo-priority-topline {
+    flex-direction: row !important;
+    align-items: center !important;
+  }
+
+  .home-page .hero-decision-viewport {
+    display: flex !important;
+    align-self: stretch !important;
+    height: auto !important;
+  }
+
+  .home-page .hero-decision-desk,
+  .home-page .hero-decision-desk.dashboard-fit-canvas {
+    display: flex !important;
+    flex: 1 1 auto !important;
+    flex-direction: column !important;
+    justify-content: center !important;
+    height: 100% !important;
+  }
+}
+
+/* ----- Phone / small tablet: 481px–768px ----- */
+@media (min-width: 481px) and (max-width: 768px) {
+  .home-page .section-platform {
+    padding: 2.45rem 0 2.2rem !important;
+  }
+
+  .home-page .section-suite-heading {
+    height: auto !important;
+    min-height: 0 !important;
+    max-height: none !important;
+    padding: 1.7rem 0 0.75rem !important;
+    margin: 0 !important;
+  }
+
+  .home-page .section-suite-heading > .container {
+    padding-top: 0 !important;
+    padding-bottom: 0 !important;
+  }
+
+  .home-page .section-suite-heading .section-heading {
+    margin: 0 0 0.55rem !important;
+    font-size: clamp(1.72rem, 8vw, 2.05rem) !important;
+    line-height: 1.16 !important;
+  }
+
+  .home-page .section-suite-heading .section-subheading {
+    margin: 0 !important;
+    font-size: 0.92rem !important;
+    line-height: 1.55 !important;
+  }
+
+  .home-page .section-feature {
+    padding: 2.15rem 0 !important;
+    margin: 0 !important;
+  }
+
+  .home-page .section-feature .feature-row,
+  .home-page .section-feature .feature-row.reverse {
+    gap: 1.45rem !important;
+    margin-bottom: 0 !important;
+  }
+
+  .home-page .feature-tag {
+    margin-bottom: 0.55rem !important;
+  }
+
+  .home-page .feature-title {
+    margin-bottom: 0.7rem !important;
+  }
+
+  .home-page .feature-desc {
+    margin-bottom: 1rem !important;
+  }
+
+  .home-page .section-why,
+  .home-page .section-how,
+  .home-page .section-outcome,
+  .home-page .section-metrics,
+  .home-page .section-case-studies,
+  .home-page .section-pricing,
+  .home-page .section-story,
+  .home-page .section-faq,
+  .home-page .section-contact {
+    margin-top: 0 !important;
+    margin-bottom: 0 !important;
+  }
+}
+
+/* ----- Small phones: 0–480px ----- */
+@media (max-width: 480px) {
+  .home-page .container {
+    padding-left: 1rem !important;
+    padding-right: 1rem !important;
+  }
+
+  .home-page .section-platform {
+    padding-top: 2rem !important;
+    padding-bottom: 1.9rem !important;
+  }
+
+  .home-page .platform-header {
+    margin-bottom: 1.25rem !important;
+  }
+
+  .home-page .platform-left .platform-title {
+    font-size: clamp(1.75rem, 9vw, 2.05rem) !important;
+    line-height: 1.15 !important;
+  }
+
+  .home-page .platform-desc {
+    font-size: 0.92rem !important;
+    line-height: 1.58 !important;
+  }
+
+  .home-page .platform-features-grid {
+    gap: 0.75rem !important;
+  }
+
+  .home-page .p-feature-card {
+    padding: 1rem !important;
+  }
+
+  .home-page .platform-footer-text {
+    margin-top: 0.9rem !important;
+    font-size: 0.86rem !important;
+  }
+
+  .home-page .section-suite-heading {
+    padding-top: 1.45rem !important;
+    padding-bottom: 0.65rem !important;
+  }
+
+  .home-page .section-feature {
+    padding-top: 1.85rem !important;
+    padding-bottom: 1.85rem !important;
+  }
+
+}
+
+/* =======================================================================
+   HERO ADVISORY CARD — MOBILE/TABLET PORTRAIT, 0–768px
+   The card scales as one complete left+right composition; neither side is
+   hidden, collapsed, cropped, or individually shrunk. The existing JS may
+   set an inline width/transform on the right panel, so the two important
+   overrides below keep that inline fit from breaking the whole-card scale.
+   ======================================================================= */
+@media (max-width: 768px) {
+  .home-page .hero-dashboard {
+    width: 100% !important;
+    max-width: 100% !important;
+    min-width: 0 !important;
+    margin: 1rem auto 0 !important;
+    overflow: visible !important;
+  }
+
+  .home-page .hero-advisory-shell {
+    display: grid !important;
+    width: 1100px !important;
+    min-width: 1100px !important;
+    max-width: none !important;
+    grid-template-columns: minmax(0, 0.88fr) minmax(0, 1.32fr) !important;
+    align-items: stretch !important;
+    min-height: 560px !important;
+    height: auto !important;
+    margin: 0 !important;
+    overflow: hidden !important;
+    border-radius: 20px !important;
+    zoom: calc((100vw - 2rem) / 1100px) !important;
+  }
+
+  .home-page .hero-advisory-copy {
+    width: auto !important;
+    min-width: 0 !important;
+    max-width: none !important;
+    padding: 2.6rem 2.4rem !important;
+    justify-content: center !important;
+    border-right: 1px solid var(--gray-200) !important;
+    border-bottom: 0 !important;
+  }
+
+  .home-page .hero-advisory-eyebrow {
+    margin-bottom: 0.8rem !important;
+    font-size: 0.72rem !important;
+  }
+
+  .home-page .hero-advisory-title {
+    margin: 0 0 1.1rem !important;
+    max-width: none !important;
+    font-size: 2.65rem !important;
+    line-height: 1.1 !important;
+  }
+
+  .home-page .hero-advisory-text {
+    max-width: none !important;
+    margin: 0 0 1.25rem !important;
+    font-size: 1.02rem !important;
+    line-height: 1.65 !important;
+  }
+
+  .home-page .hero-advisory-actions {
+    display: flex !important;
+    flex-direction: row !important;
+    align-items: center !important;
+    flex-wrap: wrap !important;
+    gap: 0.9rem !important;
+  }
+
+  .home-page .hero-advisory-actions .btn-discovery {
+    padding: 0.72rem 1rem !important;
+    font-size: 0.88rem !important;
+  }
+
+  .home-page .hero-advisory-actions .link-diagnostic {
+    font-size: 0.85rem !important;
+  }
+
+  .home-page .hero-value-strip {
+    display: flex !important;
+    flex-direction: row !important;
+    align-items: center !important;
+    flex-wrap: wrap !important;
+    gap: 0.5rem !important;
+    margin-top: 1.25rem !important;
+  }
+
+  .home-page .hero-value-strip span {
+    width: auto !important;
+    max-width: none !important;
+    padding: 0.36rem 0.58rem 0.36rem 1.3rem !important;
+    font-size: 0.72rem !important;
+  }
+
+  .home-page .hero-value-strip span::before {
+    left: 0.5rem !important;
+  }
+
+  /* Neutralize the old JS right-only scaling. Do not hide the dashboard. */
+  .home-page .hero-decision-viewport {
+    display: flex !important;
+    align-self: stretch !important;
+    width: 100% !important;
+    min-width: 0 !important;
+    max-width: none !important;
+    height: auto !important;
+    overflow: visible !important;
+  }
+
+  .home-page .hero-decision-desk,
+  .home-page .hero-decision-desk.dashboard-fit-canvas {
+    display: flex !important;
+    flex-direction: column !important;
+    justify-content: center !important;
+    flex: 1 1 auto !important;
+    width: 100% !important;
+    min-width: 0 !important;
+    max-width: none !important;
+    height: auto !important;
+    padding: 1.65rem !important;
+    transform: none !important;
+    transform-origin: top left !important;
+  }
+
+  .home-page .decision-desk-header {
+    flex-direction: row !important;
+    align-items: flex-start !important;
+    gap: 1rem !important;
+  }
+
+  .home-page .decision-kpi-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
+    gap: 0.75rem !important;
+  }
+
+  .home-page .decision-middle-grid {
+    grid-template-columns: minmax(0, 1.08fr) minmax(0, 0.92fr) !important;
+    gap: 0.75rem !important;
+  }
+
+  .home-page .decision-kpi-label {
+    min-height: 2.1em !important;
+  }
+
+  .home-page .decision-chart {
+    height: 92px !important;
+  }
+
+  .home-page .cfo-priority-topline {
+    flex-direction: row !important;
+    align-items: center !important;
+  }
+
+  .home-page .decision-disclaimer {
+    text-align: right !important;
+  }
+}
+
+/* 481–768px uses 1.25rem outer padding on both sides. */
+@media (min-width: 481px) and (max-width: 768px) {
+  .home-page .hero-advisory-shell {
+    zoom: calc((100vw - 2.5rem) / 1100px) !important;
+  }
+}
+
+
+/* ======================================================================
+   TWO SCROLL SHOWCASES — RESPONSIVE EXTENSIONS
+   Device groups: desktop (>=1440), laptop (1025–1439),
+   tablet (601–1024), mobile (<=600), short screens.
+   All 10 original content panels remain present in one of two sections.
+   ====================================================================== */
+@media (min-width: 1440px) {
+  .home-page .cfo-story.story-enhanced .cfo-story-inner {
+    max-width: 1440px;
+  }
+  .home-page .cfo-story.story-enhanced .cfo-story-panel {
+    grid-template-columns: minmax(0, .92fr) minmax(0, 1.08fr);
+  }
+  .home-page .cfo-story.story-enhanced .feature-visual {
+    max-width: 680px;
+    justify-self: end;
+  }
+}
+@media (min-width: 1025px) and (max-width: 1439px) {
+  .home-page .cfo-story.story-enhanced .cfo-story-inner {
+    padding: .8rem clamp(1.5rem, 4vw, 3rem);
+  }
+  .home-page .cfo-story.story-enhanced .feature-desc {
+    font-size: clamp(.82rem, 1.04vw, .98rem);
+    line-height: 1.47;
+  }
+  .home-page .cfo-story.story-enhanced .feature-title {
+    font-size: clamp(1.6rem, 2.45vw, 2.1rem);
+  }
+}
+@media (min-width: 601px) and (max-width: 1024px) {
+  .home-page .cfo-story.story-enhanced .cfo-story-inner {
+    padding: .8rem clamp(1.1rem, 3vw, 2rem);
+  }
+  .home-page .cfo-story.story-enhanced .cfo-story-heading .section-heading {
+    font-size: clamp(1.5rem, 3.3vw, 2rem) !important;
+    line-height: 1.19;
+  }
+  .home-page .cfo-story.story-enhanced .cfo-story-panel,
+  .home-page .cfo-story.story-enhanced .cfo-story-panel.reverse {
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1.03fr);
+    gap: clamp(.8rem, 2.5vw, 1.6rem);
+  }
+  .home-page .cfo-story.story-enhanced .feature-title {
+    font-size: clamp(1.4rem, 3vw, 1.9rem);
+    margin-bottom: .55rem;
+  }
+  .home-page .cfo-story.story-enhanced .feature-tag {font-size:.76rem;margin-bottom:.4rem;}
+  .home-page .cfo-story.story-enhanced .feature-desc {font-size:clamp(.77rem,1.75vw,.93rem);line-height:1.45;margin-bottom:.65rem;}
+  .home-page .cfo-story.story-enhanced .feature-list {margin-bottom:.65rem;}
+  .home-page .cfo-story.story-enhanced .feature-list li {font-size:.81rem;margin-bottom:.2rem;line-height:1.35;}
+  .home-page .cfo-story.story-enhanced .cfo-story-segment-label {font-size:.62rem;}
+}
+@media (max-width: 600px) {
+  .home-page .cfo-story.story-enhanced .cfo-story-inner {
+    padding: clamp(.4rem, 1.4svh, .75rem) 1rem;
+    gap: .35rem;
+  }
+  .home-page .cfo-story.story-enhanced .cfo-story-heading {
+    max-width: 100%;
+  }
+  .home-page .cfo-story.story-enhanced .cfo-story-heading .section-heading {
+    font-size: clamp(1.1rem, 4.7vw, 1.5rem) !important;
+    line-height: 1.13 !important;
+    margin-bottom: .28rem !important;
+  }
+  .home-page .cfo-story.story-enhanced .cfo-story-heading .section-subheading {
+    font-size: clamp(.65rem, 2.4vw, .78rem) !important;
+    line-height: 1.34 !important;
+  }
+  .home-page .cfo-story.story-enhanced .cfo-story-progress {gap:.28rem;}
+  .home-page .cfo-story.story-enhanced .cfo-story-segment {
+    min-height: 14px;
+    padding: 4px 0;
+  }
+  .home-page .cfo-story.story-enhanced .cfo-story-segment-line {height:4px;}
+  .home-page .cfo-story.story-enhanced .cfo-story-segment-label {display:none;}
+  .home-page .cfo-story.story-enhanced .cfo-story-current {
+    display:flex;
+    justify-content: space-between;
+    flex-wrap:nowrap;
+    margin: .15rem 0 0;
+    font-size:.65rem;
+    gap:.5rem;
+  }
+  .home-page .cfo-story.story-enhanced [data-story-current] {
+    min-width: 0;
+    white-space:nowrap;
+    overflow:hidden;
+    text-overflow:ellipsis;
+  }
+  .home-page .cfo-story.story-enhanced .cfo-story-scroll-hint {
+    flex-shrink:0;
+    font-size:.61rem;
+  }
+  .home-page .cfo-story.story-enhanced .cfo-story-panel,
+  .home-page .cfo-story.story-enhanced .cfo-story-panel.reverse {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    justify-content: safe center;
+    gap: clamp(.3rem,1svh,.75rem);
+    overflow-x:hidden;
+    overflow-y:auto;
+    scrollbar-width:thin;
+    overscroll-behavior:auto;
+    padding:.2rem 0;
+  }
+  .home-page .cfo-story.story-enhanced .cfo-story-panel .feature-text {flex:0 0 auto;}
+  .home-page .cfo-story.story-enhanced .feature-tag {font-size:.66rem;margin:0 0 .28rem;letter-spacing:.08em;}
+  .home-page .cfo-story.story-enhanced .feature-title {font-size:clamp(1.22rem,5vw,1.65rem);line-height:1.12;margin:0 0 .45rem;}
+  .home-page .cfo-story.story-enhanced .feature-desc {font-size:clamp(.71rem,2.45vw,.86rem);line-height:1.37;margin:0 0 .5rem;max-width:none;}
+  .home-page .cfo-story.story-enhanced .feature-list {
+    display:grid;
+    grid-template-columns:repeat(2,minmax(0,1fr));
+    column-gap:1rem;
+    row-gap:.17rem;
+    list-style:disc;
+    margin:0 0 .4rem;
+    padding-left:1rem;
+  }
+  .home-page .cfo-story.story-enhanced .feature-list li {font-size:clamp(.66rem,2.25vw,.77rem);line-height:1.31;margin:0;}
+  .home-page .cfo-story.story-enhanced .feature-link {font-size:.76rem;line-height:1.2;}
+  .home-page .cfo-story.story-enhanced .feature-visual {
+    flex:0 0 auto;
+    width:100%;
+    aspect-ratio:16/9;
+    border-radius:12px;
+    max-height:none;
+  }
+  .home-page .cfo-story.story-enhanced .feature-dashboard-embed {border-radius:12px;}
+}
+@media (max-width: 360px) and (max-height: 650px) {
+  .home-page .cfo-story.story-enhanced .cfo-story-inner {padding:.28rem .75rem;gap:.18rem;}
+  .home-page .cfo-story.story-enhanced .cfo-story-heading .section-heading {font-size:1.05rem !important;}
+  .home-page .cfo-story.story-enhanced .cfo-story-heading .section-subheading {font-size:.64rem !important;line-height:1.25 !important;}
+  .home-page .cfo-story.story-enhanced .cfo-story-scroll-hint {display:none;}
+  .home-page .cfo-story.story-enhanced .feature-visual {border-radius:9px;}
+}
+@media (min-width: 601px) and (max-height: 700px) {
+  .home-page .cfo-story.story-enhanced .cfo-story-inner {padding-top:.35rem;padding-bottom:.35rem;gap:.3rem;}
+  .home-page .cfo-story.story-enhanced .cfo-story-heading .section-heading {font-size:clamp(1.3rem,2.3vw,1.8rem) !important;}
+  .home-page .cfo-story.story-enhanced .cfo-story-heading .section-subheading {font-size:.76rem !important;}
+  .home-page .cfo-story.story-enhanced .feature-title {font-size:1.5rem;}
+  .home-page .cfo-story.story-enhanced .feature-desc {line-height:1.35;}
+  .home-page .cfo-story.story-enhanced .feature-list li {line-height:1.25;margin-bottom:.18rem;}
+}
+
+/* Sticky panels must not sit inside a new scrolling ancestor on phones.
+   overflow-x:hidden coerces overflow-y to auto and silently breaks sticky. */
+@media (max-width: 768px) {
+  html:has(body.home-page),
+  body.home-page,
+  body.home-page .page-wrapper {
+    overflow-x: clip !important;
+    overflow-y: visible !important;
+  }
+}
+
+
+/* Compact phones: keep the complete dashboard preview visible before the
+   long bullet list. Details remain scrollable inside the active scene. */
+@media (max-width: 360px) and (max-height: 650px) {
+  .home-page .cfo-story.story-enhanced .cfo-story-panel,
+  .home-page .cfo-story.story-enhanced .cfo-story-panel.reverse {
+    display: grid;
+    grid-template-columns: minmax(0,1fr);
+    grid-template-areas: "eyebrow" "title" "description" "dashboard" "bullets" "link";
+    grid-template-rows: repeat(3, auto) auto auto auto;
+    align-content: start;
+    justify-items:stretch;
+    gap: .22rem;
+  }
+  .home-page .cfo-story.story-enhanced .feature-text {display: contents;}
+  .home-page .cfo-story.story-enhanced .feature-tag {grid-area:eyebrow;}
+  .home-page .cfo-story.story-enhanced .feature-title {grid-area:title; margin-bottom:.1rem;}
+  .home-page .cfo-story.story-enhanced .feature-desc {grid-area:description; margin-bottom:.25rem;}
+  .home-page .cfo-story.story-enhanced .feature-visual {grid-area:dashboard; margin:.25rem 0 .3rem;}
+  .home-page .cfo-story.story-enhanced .feature-list {grid-area:bullets; margin:.2rem 0 .35rem;}
+  .home-page .cfo-story.story-enhanced .feature-link {grid-area:link; margin:0 0 .3rem;}
+}
+@media (max-width: 360px) and (max-height: 650px) {
+  .home-page .cfo-story.story-enhanced .cfo-story-panel .feature-visual {
+    height: calc((100vw - 1.5rem) * 9 / 16);
+    min-height: calc((100vw - 1.5rem) * 9 / 16);
+    max-height: none;
   }
 }

@@ -4752,3 +4752,354 @@ h6,
 .home-page .feature-dashboard-embed[data-dashboard] {
   contain: layout paint;
 }
+
+/* ==========================================================================
+   CFO CRAFT — DASHBOARD FIT + LIVE MOTION SUPPORT
+   Base rules only. Device-specific sizing lives in responsive.css.
+   ========================================================================== */
+.home-page .dashboard-fit-viewport {
+  width: 100%;
+  min-width: 0;
+  position: relative;
+}
+
+.home-page .dashboard-fit-canvas {
+  transform-origin: top left;
+  will-change: transform;
+}
+
+.home-page .hero-decision-viewport,
+.home-page .mis-dashboard-viewport {
+  min-width: 0;
+}
+
+.home-page .decision-kpi-card strong,
+.home-page .cash-driver-row > strong,
+.home-page .md-kpi-value,
+.home-page .md-kpi-trend {
+  font-variant-numeric: tabular-nums;
+}
+
+.home-page .decision-chart .decision-bar,
+.home-page .cash-driver-track > i,
+.home-page .md-bars .md-bar {
+  will-change: transform, opacity;
+}
+
+.home-page .decision-status-dot {
+  animation: cfoDashboardPulse 4.8s ease-in-out infinite;
+}
+
+@keyframes cfoDashboardPulse {
+  0%, 100% {
+    transform: scale(1);
+    box-shadow: 0 0 0 3px rgba(43, 109, 178, 0.10);
+  }
+  50% {
+    transform: scale(1.18);
+    box-shadow: 0 0 0 6px rgba(43, 109, 178, 0.06);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .home-page .decision-status-dot {
+    animation: none !important;
+  }
+}
+
+
+/* ========================================================================
+   CFO CRAFT | SCROLL STORY — BASE ONLY
+   Existing design, copy, pages and dashboard SVG embeds are untouched.
+   Responsive-only changes are kept in responsive.css.
+   ======================================================================== */
+.home-page .cfo-story {
+  --cfo-story-space: clamp(1.1rem, 3.2vw, 3.25rem);
+  position: relative;
+  isolation: isolate;
+  height: auto;
+  min-height: 0;
+  max-height: none;
+  margin: 0;
+  padding: 0;
+  background: #ffffff;
+  overflow: visible;
+}
+.home-page #services.cfo-story {
+  background: #f6f8fb;
+}
+.home-page .cfo-story-pin {
+  width: 100%;
+  min-width: 0;
+}
+.home-page .cfo-story-inner {
+  width: 100%;
+  max-width: 1360px;
+  padding: 3.25rem 2rem;
+}
+.home-page .cfo-story-heading {
+  max-width: 1000px;
+  margin: 0 auto 1.55rem;
+}
+.home-page .cfo-story-heading .section-heading {
+  font-size: clamp(1.85rem, 3.4vw, 2.85rem);
+  line-height: 1.18;
+  margin: 0 0 .55rem;
+  color: #082951;
+}
+.home-page .cfo-story-heading .section-subheading {
+  color: #55677e;
+  font-size: clamp(.9rem, 1.35vw, 1.04rem);
+  line-height: 1.5;
+  margin: 0;
+}
+.home-page .cfo-story-nav {
+  width: 100%;
+  max-width: 1050px;
+  margin: 0 auto 1.1rem;
+}
+.home-page .cfo-story-progress {
+  display: none;
+  gap: .52rem;
+  width: 100%;
+}
+.home-page .cfo-story-segment {
+  flex: 1 1 0;
+  min-width: 0;
+  background: none;
+  color: #63758e;
+  border: 0;
+  cursor: pointer;
+  text-align: center;
+  font-family: var(--font-primary);
+  padding: 0;
+}
+.home-page .cfo-story-segment-line {
+  display: block;
+  height: 5px;
+  border-radius: 50px;
+  background: #d3dae3;
+  transition: background-color .35s ease, transform .35s ease;
+}
+.home-page .cfo-story-segment.is-complete .cfo-story-segment-line {background: #81b7ed;}
+.home-page .cfo-story-segment.is-active .cfo-story-segment-line {background: #2575bd;transform: scaleY(1.18);}
+.home-page .cfo-story-segment-label {
+  display: block;
+  padding-top: .38rem;
+  font-size: .67rem;
+  font-weight: 500;
+  line-height: 1.25;
+}
+.home-page .cfo-story-segment.is-active .cfo-story-segment-label {color: #082951;font-weight: 700;}
+.home-page .cfo-story-segment:focus-visible {outline: 2px solid #2b6db2;outline-offset: 6px;border-radius: 4px;}
+.home-page .cfo-story-current {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: .45rem 1.5rem;
+  margin: .7rem 0 0;
+  color: #2b6db2;
+  font-size: .76rem;
+  font-weight: 700;
+  line-height: 1.4;
+}
+.home-page .cfo-story-scroll-hint {font-weight: 400;color:#718094;}
+.home-page .cfo-story-stage {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 3.5rem;
+  min-width: 0;
+}
+.home-page .cfo-story .cfo-story-panel,
+.home-page .cfo-story .cfo-story-panel.reverse {
+  position: relative;
+  inset: auto;
+  direction: ltr;
+  display: grid;
+  grid-template-columns: minmax(0, .89fr) minmax(0, 1.11fr);
+  align-items: center;
+  gap: var(--cfo-story-space);
+  width: 100%;
+  min-width: 0;
+  margin: 0;
+  padding: 0;
+  opacity: 1;
+  visibility: visible;
+  transform: none;
+  box-sizing: border-box;
+  scroll-margin-top: calc(var(--home-nav-offset, 76px) + 18px);
+}
+.home-page .cfo-story-panel > * {min-width: 0;direction:ltr;}
+.home-page .cfo-story-panel .feature-text {min-width:0;}
+.home-page .cfo-story-panel .feature-tag {
+  display: block;
+  font-size: clamp(.77rem,1.1vw,.94rem);
+  margin-bottom: .65rem;
+  line-height: 1.3;
+}
+.home-page .cfo-story-panel .feature-title {
+  font-size: clamp(1.65rem,2.75vw,2.6rem);
+  line-height: 1.16;
+  margin: 0 0 .92rem;
+}
+.home-page .cfo-story-panel .feature-desc {
+  font-size: clamp(.87rem,1.1vw,1rem);
+  line-height: 1.59;
+  margin: 0 0 1rem;
+  max-width: 560px;
+}
+.home-page .cfo-story-panel .feature-list {
+  margin: 0 0 1rem;
+  padding-left: 1.3rem;
+}
+.home-page .cfo-story-panel .feature-list li {
+  font-size: clamp(.82rem,1vw,.94rem);
+  line-height: 1.47;
+  margin: 0 0 .42rem;
+}
+.home-page .cfo-story-panel .feature-link {font-size: .9rem;font-weight:700;}
+.home-page .cfo-story-panel .feature-visual {
+  width: 100%;
+  border-radius: 18px;
+  overflow: hidden;
+  line-height: 0;
+  transform: none;
+  background: #073b83;
+}
+.home-page .cfo-story-panel .feature-visual:hover {transform:none;}
+.home-page .cfo-story-panel .feature-dashboard-embed {border-radius: inherit;aspect-ratio:16/9;}
+
+
+/* ======================================================================
+   CFO CRAFT — PINNED CATEGORY SHOWCASES
+   Only two categories (#industries, #services) are pinned. Each retains
+   its original content, links and 16:9 animated finance dashboard.
+   Enhancement is added by JS, so the static page is still readable.
+   ====================================================================== */
+.home-page section.cfo-story.story-enhanced {
+  height: var(--cfo-story-height) !important;
+  min-height: 0 !important;
+  max-height: none !important;
+  padding: 0 !important;
+  margin: 0 !important;
+  overflow: clip !important;
+  scroll-margin-top: var(--home-nav-offset, 76px);
+}
+.home-page section.cfo-story.story-enhanced > .cfo-story-pin {
+  position: sticky;
+  z-index: 1;
+  top: var(--home-nav-offset, 76px);
+  height: calc(100svh - var(--home-nav-offset, 76px));
+  min-height: 0;
+  width: 100%;
+  overflow: hidden;
+  display: flex;
+  align-items: stretch;
+}
+.home-page .cfo-story.story-enhanced .cfo-story-inner {
+  flex: 1 1 auto;
+  display: grid;
+  grid-template-rows: auto auto minmax(0, 1fr);
+  gap: clamp(.4rem, 1.3svh, .8rem);
+  width: 100%;
+  min-height: 0;
+  padding: clamp(.8rem, 2svh, 1.5rem) clamp(1rem, 3.5vw, 3rem);
+}
+.home-page .cfo-story.story-enhanced .cfo-story-heading {
+  margin: 0 auto;
+}
+.home-page .cfo-story.story-enhanced .cfo-story-heading .section-heading {
+  margin-bottom: .3rem;
+  font-size: clamp(1.7rem, 2.75vw, 2.5rem);
+}
+.home-page .cfo-story.story-enhanced .cfo-story-heading .section-subheading {
+  font-size: clamp(.82rem, 1vw, .97rem);
+}
+.home-page .cfo-story.story-enhanced .cfo-story-nav {
+  margin: 0 auto;
+  align-self: center;
+}
+.home-page .cfo-story.story-enhanced .cfo-story-progress {
+  display: flex;
+  align-items: flex-start;
+}
+.home-page .cfo-story.story-enhanced .cfo-story-segment {
+  min-height: 26px;
+}
+.home-page .cfo-story.story-enhanced .cfo-story-current {
+  margin: .15rem 0 0;
+}
+.home-page .cfo-story.story-enhanced .cfo-story-stage {
+  display: block;
+  position: relative;
+  height: 100%;
+  min-height: 0;
+  overflow: hidden;
+  isolation: isolate;
+}
+.home-page .cfo-story.story-enhanced .cfo-story-panel,
+.home-page .cfo-story.story-enhanced .cfo-story-panel.reverse {
+  position: absolute;
+  inset: 0;
+  height: 100%;
+  width: 100%;
+  display: grid;
+  grid-template-columns: minmax(0, .94fr) minmax(0, 1.06fr);
+  align-items: center;
+  gap: clamp(1rem, 3vw, 3rem);
+  min-width: 0;
+  padding: 0;
+  margin: 0;
+  direction: ltr;
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  transform: translate3d(0, 14px, 0);
+  transition: opacity .35s ease, transform .35s ease, visibility .35s;
+}
+.home-page .cfo-story.story-enhanced .cfo-story-panel.is-active {
+  opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
+  z-index: 2;
+  transform: translate3d(0, 0, 0);
+}
+.home-page .cfo-story.story-enhanced .feature-visual {
+  min-width: 0;
+  min-height: 0;
+  width: 100%;
+  max-height: 100%;
+  aspect-ratio: 16/9;
+  background: #073b83;
+}
+.home-page .cfo-story.story-enhanced .feature-dashboard-embed {
+  display: block;
+  width: 100%;
+  height: 100%;
+  aspect-ratio: 16/9;
+  contain: layout paint;
+}
+.home-page .cfo-story.story-enhanced .feature-dashboard-frame {
+  width: 100%;
+  height: 100%;
+}
+.home-page .cfo-story.story-enhanced .feature-text {
+  min-height: 0;
+  overflow-wrap: anywhere;
+}
+.home-page .cfo-story.story-enhanced .feature-title {
+  font-size: clamp(1.5rem, 2.5vw, 2.45rem);
+  margin-bottom: .75rem;
+}
+.home-page .cfo-story.story-enhanced .feature-desc {
+  margin-bottom: .85rem;
+}
+.home-page .cfo-story.story-enhanced .feature-list {
+  margin-bottom: .8rem;
+}
+@media (prefers-reduced-motion: reduce) {
+  .home-page .cfo-story .cfo-story-panel {
+    transition: none !important;
+  }
+}

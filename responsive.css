@@ -4345,17 +4345,26 @@
   .home-page .cfo-story.story-enhanced .cfo-story-inner {
     max-width: 1440px;
   }
-  .home-page .cfo-story.story-enhanced .cfo-story-panel {
-    grid-template-columns: minmax(0, .92fr) minmax(0, 1.08fr);
+  /* More room for the 16:9 finance dashboard, in both scroll showcases. */
+  .home-page .cfo-story.story-enhanced .cfo-story-panel,
+  .home-page .cfo-story.story-enhanced .cfo-story-panel.reverse {
+    grid-template-columns: minmax(0, .78fr) minmax(0, 1.22fr);
+    gap: clamp(1rem, 2.35vw, 2.3rem);
   }
   .home-page .cfo-story.story-enhanced .feature-visual {
-    max-width: 680px;
+    max-width: none; /* remove the former 680px desktop restriction */
     justify-self: end;
   }
 }
 @media (min-width: 1025px) and (max-width: 1439px) {
   .home-page .cfo-story.story-enhanced .cfo-story-inner {
     padding: .8rem clamp(1.5rem, 4vw, 3rem);
+  }
+  /* Balanced desktop-laptop columns keep text readable and dashboards large. */
+  .home-page .cfo-story.story-enhanced .cfo-story-panel,
+  .home-page .cfo-story.story-enhanced .cfo-story-panel.reverse {
+    grid-template-columns: minmax(0, .84fr) minmax(0, 1.16fr);
+    gap: clamp(1rem, 2.4vw, 2.2rem);
   }
   .home-page .cfo-story.story-enhanced .feature-desc {
     font-size: clamp(.82rem, 1.04vw, .98rem);
@@ -4521,5 +4530,243 @@
     height: calc((100vw - 1.5rem) * 9 / 16);
     min-height: calc((100vw - 1.5rem) * 9 / 16);
     max-height: none;
+  }
+}
+
+
+/* ========================================================================
+   CASE STUDIES — larger, fully visible desktop gallery (Oct 2026)
+   Keeps each original image in full (no cropping), scales beyond natural
+   image dimensions, and makes the frame follow the usable screen height.
+   Other homepage sections and mobile/tablet styling are unaffected.
+   ======================================================================== */
+@media (min-width: 1025px) {
+  .home-page #case-studies .cs-sticky-content {
+    /* Leave room for navbar, heading, progress and gallery footer. */
+    --case-slide-height: clamp(
+      280px,
+      calc(100svh - var(--home-nav-offset, 76px) - 195px),
+      690px
+    );
+  }
+
+  .home-page #case-studies .cs-progress-wrap {
+    margin-bottom: 0.3rem !important;
+  }
+
+  .home-page #case-studies .case-study-header {
+    margin-bottom: 0.35rem !important;
+  }
+
+  .home-page #case-studies .cs-showcase {
+    /* A 2:1 gallery frame matches the widest case-study images and avoids
+       the large white side panels caused by a fixed-width slide frame. */
+    width: min(
+      1360px,
+      calc(100vw - 64px),
+      calc(var(--case-slide-height) * 2)
+    ) !important;
+    max-width: none !important;
+    min-width: 0 !important;
+    justify-content: center !important;
+  }
+
+  .home-page #case-studies .cs-slider-container,
+  .home-page #case-studies .cs-slider-wrapper,
+  .home-page #case-studies .cs-slide {
+    height: var(--case-slide-height) !important;
+    min-height: 0 !important;
+    max-height: var(--case-slide-height) !important;
+  }
+
+  .home-page #case-studies .cs-slide {
+    overflow: hidden;
+    align-items: center !important;
+    justify-content: center !important;
+  }
+
+  .home-page #case-studies .cs-slide img {
+    display: block !important;
+    height: var(--case-slide-height) !important;
+    max-height: var(--case-slide-height) !important;
+    width: auto !important;
+    max-width: 100% !important;
+    min-height: 0 !important;
+    object-fit: contain !important;
+    object-position: center !important;
+    margin: 0 auto !important;
+  }
+
+  .home-page #case-studies .cs-showcase-footer {
+    margin-top: 0.48rem !important;
+  }
+}
+
+/* ========================================================================
+   WHAT WE DO — phone and tablet desktop-composition preview (<=1024px)
+   Keep the intro, all three benefit cards, footer and Monthly MIS dashboard
+   in their original left/right columns. Scale the entire composition as a
+   single unit like the existing mobile hero. Desktop >=1025px is unchanged.
+   ======================================================================== */
+@media (max-width: 1024px) {
+  .home-page .section-platform {
+    padding: 1.35rem 0 1.5rem !important;
+    margin: 0 !important;
+    overflow: visible !important;
+  }
+
+  .home-page .section-platform > .container {
+    width: 100% !important;
+    max-width: 100% !important;
+    min-width: 0 !important;
+    padding-left: 1rem !important;
+    padding-right: 1rem !important;
+  }
+
+  /* The three cards are INSIDE .platform-left, not in a separate row. */
+  .home-page .section-platform .platform-split {
+    display: grid !important;
+    grid-template-areas: none !important;
+    grid-template-columns: minmax(0, 1.8fr) minmax(0, 1fr) !important;
+    align-items: stretch !important;
+    gap: 2rem !important;
+    width: 1200px !important;
+    min-width: 1200px !important;
+    max-width: none !important;
+    margin: 0 !important;
+    zoom: calc((100vw - 2rem) / 1200px) !important;
+  }
+
+  .home-page .section-platform .platform-left {
+    display: flex !important;
+    flex-direction: column !important;
+    min-width: 0 !important;
+    max-width: none !important;
+    grid-area: auto !important;
+  }
+
+  .home-page .section-platform .platform-header {
+    display: block !important;
+    grid-area: auto !important;
+    min-width: 0 !important;
+    max-width: none !important;
+    margin: 0 0 1rem !important;
+    padding: 0 !important;
+    background: transparent !important;
+    border: 0 !important;
+    border-radius: 0 !important;
+  }
+
+  .home-page .section-platform .platform-header .pre-title {
+    font-size: 1rem !important;
+    letter-spacing: .1em !important;
+    margin: 0 0 .5rem !important;
+  }
+
+  .home-page .section-platform .platform-left .platform-title {
+    font-size: 2.75rem !important;
+    line-height: 1.2 !important;
+    margin: 0 0 .5rem !important;
+    max-width: none !important;
+  }
+
+  .home-page .section-platform .platform-left .platform-desc {
+    font-size: 1.05rem !important;
+    line-height: 1.6 !important;
+    width: auto !important;
+    max-width: 96% !important;
+    margin: 0 !important;
+    overflow-wrap: normal !important;
+  }
+
+  .home-page .section-platform .platform-features-grid {
+    display: grid !important;
+    grid-area: auto !important;
+    grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
+    width: 100% !important;
+    min-width: 0 !important;
+    gap: .8rem !important;
+    margin: 0 !important;
+  }
+
+  .home-page .section-platform .p-feature-card {
+    min-width: 0 !important;
+    padding: 1rem !important;
+    border-radius: 8px !important;
+  }
+
+  .home-page .section-platform .p-feature-num {
+    font-size: 1rem !important;
+    margin-bottom: .2rem !important;
+  }
+
+  .home-page .section-platform .p-feature-card h4 {
+    font-size: 1.2rem !important;
+    line-height: 1.35 !important;
+  }
+
+  .home-page .section-platform .p-feature-card p {
+    font-size: .75rem !important;
+    line-height: 1.5 !important;
+  }
+
+  .home-page .section-platform .platform-footer-text {
+    grid-area: auto !important;
+    font-size: 1rem !important;
+    margin: 1rem 0 0 !important;
+  }
+
+  .home-page .section-platform .platform-right {
+    grid-area: auto !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    align-self: stretch !important;
+    min-width: 0 !important;
+    width: 100% !important;
+    max-width: none !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    border: 0 !important;
+    border-radius: 0 !important;
+    background: transparent !important;
+  }
+
+  .home-page .section-platform .mis-dashboard-viewport {
+    container-type: normal !important;
+    width: 100% !important;
+    min-width: 0 !important;
+    max-width: none !important;
+    height: auto !important;
+    overflow: visible !important;
+    margin: 0 !important;
+  }
+
+  /* Disable previous dashboard-only zoom; the entire section scales once. */
+  .home-page .section-platform .mock-dashboard-enhanced.dashboard-fit-canvas {
+    width: 100% !important;
+    min-width: 0 !important;
+    max-width: 100% !important;
+    height: auto !important;
+    padding: 1.35rem !important;
+    transform: none !important;
+    transform-origin: top left !important;
+    zoom: 1 !important;
+  }
+
+  .home-page .section-platform .md-kpi-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+    gap: .85rem !important;
+  }
+}
+
+/* More side breathing room on intermediate tablet widths. */
+@media (min-width: 481px) and (max-width: 1024px) {
+  .home-page .section-platform > .container {
+    padding-left: 1.25rem !important;
+    padding-right: 1.25rem !important;
+  }
+  .home-page .section-platform .platform-split {
+    zoom: calc((100vw - 2.5rem) / 1200px) !important;
   }
 }

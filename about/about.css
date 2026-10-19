@@ -1212,3 +1212,90 @@ body.about-page {
   .about-page .about-hero .about-wrap { padding-left: 1rem; padding-right: 1rem; }
   .about-page .about-hero h1 { font-size: clamp(1.9rem, 9vw, 2.2rem); line-height: 1.12; }
 }
+
+
+/* ==========================================================================
+   TEAM PAGE: founder alignment, full-width details and four-person layout
+   ========================================================================== */
+
+/* The portrait occupies only the biography row. The facts card is not
+   allowed to extend the photo's height or remain confined to the right side. */
+.about-page[data-page="team"] .about-founder {
+  align-items: stretch;
+  column-gap: clamp(2.5rem, 5vw, 4.5rem);
+  row-gap: 1.6rem;
+}
+
+.about-page[data-page="team"] .about-founder > .about-photo {
+  margin: 0;
+  min-width: 0;
+  align-self: stretch;
+}
+
+.about-page[data-page="team"] .about-founder > .about-photo .about-photo-frame {
+  width: 100%;
+  height: 100%;
+  min-height: 0;
+  aspect-ratio: auto;
+}
+
+.about-page[data-page="team"] .about-founder > .about-bio {
+  min-width: 0;
+}
+
+.about-page[data-page="team"] .about-founder > .about-bio > p:last-child {
+  margin-bottom: 0;
+}
+
+.about-page[data-page="team"] .about-founder-details {
+  grid-column: 1 / -1;
+  width: 100%;
+  min-width: 0;
+}
+
+.about-page[data-page="team"] .about-founder-details .about-facts {
+  max-width: none;
+  width: 100%;
+  margin: 0 0 1.1rem;
+}
+
+.about-page[data-page="team"] .about-founder-details .about-facts dd {
+  margin: 0;
+}
+
+/* Four advisors: two full cards in each row, in document order. */
+.about-page[data-page="team"] .about-people {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  align-items: stretch;
+}
+
+.about-page[data-page="team"] .about-people > li {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+
+.about-page[data-page="team"] .about-people > li > .about-linkedin {
+  align-self: flex-start;
+  margin-top: auto;
+  padding-top: 1.1rem;
+}
+
+@media (max-width: 960px) {
+  .about-page[data-page="team"] .about-founder > .about-photo {
+    width: 100%;
+    max-width: 380px;
+  }
+
+  .about-page[data-page="team"] .about-founder > .about-photo .about-photo-frame {
+    height: auto;
+    aspect-ratio: 4 / 5;
+    max-width: none;
+  }
+}
+
+@media (max-width: 768px) {
+  .about-page[data-page="team"] .about-people {
+    grid-template-columns: 1fr;
+  }
+}

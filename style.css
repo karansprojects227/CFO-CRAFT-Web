@@ -2496,7 +2496,7 @@ h6,
   display: grid;
   grid-template-columns: 1.5fr 1fr 1fr;
   gap: 4rem;
-  padding-bottom: 3rem;
+  padding-bottom: .5rem;
 }
 
 .footer-logo {
@@ -2528,14 +2528,6 @@ h6,
 
 .footer-contact a:hover {
   color: var(--primary-blue);
-}
-
-.footer-ratings {
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-  font-size: 0.85rem;
-  color: var(--gray-600);
 }
 
 .footer-col h4 {

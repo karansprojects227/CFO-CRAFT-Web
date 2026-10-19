@@ -8,7 +8,7 @@ body.booking-page{background:#fff;color:var(--ink);font-family:var(--font-primar
 .booking-page :focus-visible{outline:3px solid #80b3eb;outline-offset:3px}
 /* Header is the actual site navbar, on its original dark surface until scrolling, with shared dropdowns. */
 .booking-page .navbar:not(.scrolled){background:linear-gradient(110deg,#020c1b 0%,#090f18 50%,#082951 100%);box-shadow:0 1px 0 rgba(255,255,255,.045)}
-.booking-page .navbar .nav-logo{cursor:default}
+.booking-page .navbar .nav-logo{cursor:pointer;display:flex;align-items:center;gap:10px}
 .booking-page .navbar .nav-cta{white-space:nowrap}
 /* Same gradient underline that appears on "Questions promoters ask us" in style.css. */
 .booking-page .intro-title .booking-main-title{position:relative;display:inline-block;padding-bottom:.9rem;font-size:clamp(33px,3.3vw,51px);font-weight:600;line-height:1.16;letter-spacing:-.045em;color:#102c4a}

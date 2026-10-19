@@ -24,8 +24,9 @@
       href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700;800&amp;family=Roboto:wght@300;400;500;700&amp;display=swap"
       rel="stylesheet"
     />
-    <link href="../style.css" rel="stylesheet" />
-    <link href="../responsive.css" rel="stylesheet" />
+
+    <link rel="stylesheet" href="../style.css" />
+    <link rel="stylesheet" href="../responsive.css" />
     <link href="free-tools.css" rel="stylesheet" />
   </head>
   <body class="tool-page" data-page="monthly-cash-flow-model">
@@ -222,7 +223,9 @@
                       businesses, tailored to your stage, needs and growth
                       plans.
                     </div>
-                    <a class="promo-btn" href="../book-intro.html"> Book an Intro </a>
+                    <a class="promo-btn" href="../book-intro.html">
+                      Book an Intro
+                    </a>
                   </div>
                 </div>
               </div>
@@ -861,7 +864,9 @@
             </svg>
             Client Login
           </a>
-          <a class="btn-secondary nav-cta" href="../book-intro.html"> Book an Intro </a>
+          <a class="btn-secondary nav-cta" href="../book-intro.html">
+            Book an Intro
+          </a>
         </div>
         <button
           aria-label="Toggle menu"
@@ -1698,6 +1703,1274 @@
         }
       })();
     </script>
-    <script src="../script.js"></script>
+    <script>
+      document.addEventListener("DOMContentLoaded", () => {
+        // ===== Navbar scroll effect =====
+        const navbar = document.getElementById("navbar");
+        if (navbar) {
+          window.addEventListener("scroll", () => {
+            if (window.scrollY > 50) {
+              navbar.classList.add("scrolled");
+            } else {
+              navbar.classList.remove("scrolled");
+            }
+          });
+        }
+
+        // ===== Mobile menu toggle =====
+        const mobileMenuBtn = document.getElementById("mobileMenuBtn");
+        const navLinks = document.querySelector(".nav-links");
+        if (mobileMenuBtn && navLinks) {
+          mobileMenuBtn.addEventListener("click", () => {
+            mobileMenuBtn.classList.toggle("active");
+            navLinks.classList.toggle("active");
+            // Close all open dropdowns when menu closes
+            if (!navLinks.classList.contains("active")) {
+              document
+                .querySelectorAll(".nav-dropdown-wrap.open")
+                .forEach((w) => w.classList.remove("open"));
+            }
+          });
+        }
+
+        // ===== Mobile dropdown accordion =====
+        document
+          .querySelectorAll(".nav-dropdown-wrap > .nav-link")
+          .forEach((link) => {
+            link.addEventListener("click", (e) => {
+              // Only intercept on mobile (when hamburger is visible)
+              if (window.innerWidth > 768) return;
+              const wrap = link.closest(".nav-dropdown-wrap");
+              const dropdown = wrap.querySelector(".nav-dropdown");
+              if (!dropdown) return;
+              e.preventDefault();
+              // Close other open dropdowns (accordion behavior)
+              document
+                .querySelectorAll(".nav-dropdown-wrap.open")
+                .forEach((w) => {
+                  if (w !== wrap) w.classList.remove("open");
+                });
+              wrap.classList.toggle("open");
+            });
+          });
+
+        // ===== Close mobile menu when navigating to a section =====
+        if (navLinks && mobileMenuBtn) {
+          navLinks
+            .querySelectorAll("a:not(.nav-dropdown-wrap > .nav-link)")
+            .forEach((itemLink) => {
+              itemLink.addEventListener("click", () => {
+                if (window.innerWidth <= 768) {
+                  mobileMenuBtn.classList.remove("active");
+                  navLinks.classList.remove("active");
+                  document
+                    .querySelectorAll(".nav-dropdown-wrap.open")
+                    .forEach((w) => w.classList.remove("open"));
+                }
+              });
+            });
+        }
+
+        // ===== FAQ Accordion =====
+        const faqQuestions = document.querySelectorAll(".faq-question");
+        faqQuestions.forEach((btn) => {
+          btn.addEventListener("click", () => {
+            const item = btn.parentElement;
+            const isOpen = item.classList.contains("open");
+            document
+              .querySelectorAll(".faq-item")
+              .forEach((i) => i.classList.remove("open"));
+            if (!isOpen) item.classList.add("open");
+          });
+        });
+
+        // ===== Counter Animation =====
+        const counterObserver = new IntersectionObserver(
+          (entries) => {
+            entries.forEach((entry) => {
+              if (entry.isIntersecting) {
+                const counters = entry.target.querySelectorAll(".counter");
+                counters.forEach((counter) => {
+                  const target = parseFloat(counter.dataset.target);
+                  const duration = 2000;
+                  const step = target / (duration / 16);
+                  let current = 0;
+                  const timer = setInterval(() => {
+                    current += step;
+                    if (current >= target) {
+                      current = target;
+                      clearInterval(timer);
+                    }
+                    if (target % 1 !== 0) {
+                      counter.textContent = current.toFixed(1);
+                    } else {
+                      counter.textContent =
+                        Math.floor(current).toLocaleString();
+                    }
+                  }, 16);
+                });
+                counterObserver.unobserve(entry.target);
+              }
+            });
+          },
+          { threshold: 0.3 },
+        );
+
+        const metricsGrid = document.querySelector(".metrics-grid");
+        if (metricsGrid) counterObserver.observe(metricsGrid);
+
+        // ===== Scroll Reveal Animation =====
+        const revealObserver = new IntersectionObserver(
+          (entries) => {
+            entries.forEach((entry) => {
+              if (entry.isIntersecting) {
+                entry.target.classList.add("revealed");
+                revealObserver.unobserve(entry.target);
+              }
+            });
+          },
+          { threshold: 0.1 },
+        );
+
+        document
+          .querySelectorAll(
+            ".feature-row, .team-card, .metric-card, .testimonial-card, .section-heading, .hero-content",
+          )
+          .forEach((el) => {
+            el.classList.add("reveal");
+            revealObserver.observe(el);
+          });
+
+        // ===== Case Studies Modal & Slider =====
+        const csModal = document.getElementById("case-studies-modal");
+        const openCsModalBtn = document.getElementById("open-cs-modal");
+        const closeCsModalBtn = document.querySelector(".cs-modal-close");
+        const csSlider = document.getElementById("cs-slider");
+        const csPrevBtn = document.getElementById("cs-prev");
+        const csNextBtn = document.getElementById("cs-next");
+
+        let currentSlide = 0;
+        const totalSlides = 9;
+
+        function updateSliderPosition() {
+          if (csSlider) {
+            csSlider.style.transform = `translateX(-${currentSlide * 100}%)`;
+          }
+        }
+
+        if (openCsModalBtn && csModal) {
+          openCsModalBtn.addEventListener("click", (e) => {
+            e.preventDefault();
+            csModal.classList.add("show");
+            updateSliderPosition();
+          });
+        }
+
+        if (closeCsModalBtn && csModal) {
+          closeCsModalBtn.addEventListener("click", () => {
+            csModal.classList.remove("show");
+          });
+        }
+
+        if (csModal) {
+          window.addEventListener("click", (e) => {
+            if (e.target === csModal) {
+              csModal.classList.remove("show");
+            }
+          });
+        }
+
+        if (csNextBtn) {
+          csNextBtn.addEventListener("click", () => {
+            currentSlide = (currentSlide + 1) % totalSlides;
+            updateSliderPosition();
+          });
+        }
+
+        if (csPrevBtn) {
+          csPrevBtn.addEventListener("click", () => {
+            currentSlide = (currentSlide - 1 + totalSlides) % totalSlides;
+            updateSliderPosition();
+          });
+        }
+      });
+    </script>
+    <script>
+      /* CFO CRAFT – genuine XLSX export; works offline, no third-party libraries. */
+      (() => {
+        "use strict";
+        const esc = (s) =>
+          String(s ?? "")
+            .replace(/&/g, "&amp;")
+            .replace(/</g, "&lt;")
+            .replace(/>/g, "&gt;")
+            .replace(/"/g, "&quot;")
+            .replace(/'/g, "&apos;");
+        const col = (n) => {
+          let s = "";
+          while (n > 0) {
+            n--;
+            s = String.fromCharCode(65 + (n % 26)) + s;
+            n = Math.floor(n / 26);
+          }
+          return s;
+        };
+        const num = (x) => {
+          const n = Number(x);
+          return Number.isFinite(n) ? n : 0;
+        };
+        const val = (id) => {
+          const e = document.getElementById(id);
+          return e?.type === "checkbox" ? (e.checked ? 1 : 0) : num(e?.value);
+        };
+        const f = (expr, cached) => ({ f: expr, cache: cached });
+        const rich = (value, style) =>
+          typeof value === "object" &&
+          value !== null &&
+          ("v" in value || "f" in value)
+            ? { ...value, s: style ?? value.s }
+            : { v: value, s: style };
+        const sheet = (name, widths = []) => ({
+          name,
+          widths,
+          rows: [],
+          add(cells, style) {
+            this.rows.push(cells.map((c) => rich(c, style)));
+            return this.rows.length;
+          },
+          blank() {
+            this.rows.push([]);
+            return this.rows.length;
+          },
+        });
+        function makeDoc(title, identity) {
+          const tabs = [];
+          const summary = sheet("Summary", [41, 27, 18, 19, 18, 18]);
+          tabs.push(summary);
+          summary.add(["CFO CRAFT | FINANCIAL TOOL REPORT"], 1);
+          summary.add([title], 2);
+          summary.blank();
+          summary.add(["Prepared for", identity.name || ""]);
+          summary.add(["Company", identity.company || ""]);
+          summary.add(["Generated on", new Date().toLocaleString("en-IN")]);
+          summary.blank();
+          summary.add(["KEY FINDINGS", "Value", "Unit"], 3);
+          return { tabs, summary };
+        }
+        function appendResults(doc, metrics) {
+          const s = doc.summary;
+          metrics.forEach((m) => s.add([m[0], m[1], m[2] || ""], m[3] ? 4 : 0));
+          s.blank();
+          s.add(
+            [
+              "Note: This workbook reproduces the assumptions and calculator logic for indicative planning only.",
+            ],
+            5,
+          );
+          s.add(
+            [
+              "Input figures are user-supplied; verify against accounting records before any financial decision.",
+            ],
+            5,
+          );
+          s.add(["CFO CRAFT | Free Tools"], 5);
+        }
+        function makeInputs(doc, cfg) {
+          const s = sheet("Inputs", [43, 23, 23, 19]);
+          doc.tabs.push(s);
+          s.add(["INPUT PARAMETERS"], 1);
+          s.add(
+            [
+              "Change the blue numbers; other tabs recalculate when opened in Excel.",
+            ],
+            5,
+          );
+          s.blank();
+          s.add(["Input", "Value", "Unit"], 3);
+          const refs = {};
+          cfg.forEach(([id, label, unit]) => {
+            const row = s.add([label, { v: val(id), s: 4 }, unit || ""]);
+            refs[id] = "Inputs!B" + row;
+          });
+          return refs;
+        }
+        function makeAssumptions(doc, arr) {
+          const s = sheet("Assumptions", [43, 23, 30]);
+          doc.tabs.push(s);
+          s.add(["MODEL ASSUMPTIONS"], 1);
+          s.add(["Editable assumptions used by the formulas."], 5);
+          s.blank();
+          s.add(["Assumption", "Value", "Unit"], 3);
+          const refs = {};
+          arr.forEach(([key, label, n, unit]) => {
+            const row = s.add([label, { v: n, s: 4 }, unit || ""]);
+            refs[key] = "Assumptions!$B$" + row;
+          });
+          return refs;
+        }
+        function makeModel(doc) {
+          const s = sheet("Calculations", [46, 23, 28]);
+          doc.tabs.push(s);
+          s.add(["CALCULATIONS"], 1);
+          s.add(
+            [
+              "Excel formulas refer to the editable Inputs and Assumptions sheets.",
+            ],
+            5,
+          );
+          s.blank();
+          s.add(["Measure", "Formula result", "Unit"], 3);
+          return s;
+        }
+        function modelRow(s, label, expr, unit) {
+          const r = s.add([label, { f: expr, s: 6 }, unit || ""]);
+          return `'Calculations'!B${r}`;
+        }
+        function working(doc) {
+          const i = makeInputs(doc, [
+            ["rev", "Revenue from operations", "₹ lakh"],
+            ["cogs", "Cost of goods sold", "₹ lakh"],
+            ["inv", "Average inventory", "₹ lakh"],
+            ["rec", "Average trade receivables", "₹ lakh"],
+            ["pay", "Average trade payables", "₹ lakh"],
+            ["rate", "CC/OD interest rate", "% p.a."],
+            ["cut_dso", "Collect faster by", "days"],
+            ["cut_dio", "Hold less stock by", "days"],
+            ["ext_dpo", "Pay suppliers later by", "days"],
+          ]);
+          const a = makeAssumptions(doc, [
+            ["days", "Days per year", 365, "days"],
+            ["pct", "Percent denominator", 100, ""],
+          ]);
+          const s = makeModel(doc);
+          const dio = modelRow(
+            s,
+            "Inventory days (DIO)",
+            `IFERROR(${i.inv}/${i.cogs}*${a.days},0)`,
+            "days",
+          );
+          const dso = modelRow(
+            s,
+            "Receivable days (DSO)",
+            `IFERROR(${i.rec}/${i.rev}*${a.days},0)`,
+            "days",
+          );
+          const dpo = modelRow(
+            s,
+            "Payable days (DPO)",
+            `IFERROR(${i.pay}/${i.cogs}*${a.days},0)`,
+            "days",
+          );
+          const ccc = modelRow(
+            s,
+            "Cash conversion cycle",
+            `${dio}+${dso}-${dpo}`,
+            "days",
+          );
+          const nwc = modelRow(
+            s,
+            "Net working capital locked",
+            `${i.inv}+${i.rec}-${i.pay}`,
+            "₹ lakh",
+          );
+          const carry = modelRow(
+            s,
+            "Annual carrying cost",
+            `MAX(${nwc},0)*${i.rate}/${a.pct}`,
+            "₹ lakh",
+          );
+          const released = modelRow(
+            s,
+            "Cash released",
+            `IFERROR(MIN(${i.cut_dso},${dso})*${i.rev}/${a.days}+(MIN(${i.cut_dio},${dio})+${i.ext_dpo})*${i.cogs}/${a.days},0)`,
+            "₹ lakh",
+          );
+          const saved = modelRow(
+            s,
+            "Annual interest saved",
+            `${released}*${i.rate}/${a.pct}`,
+            "₹ lakh",
+          );
+          const after = modelRow(
+            s,
+            "Cycle after changes",
+            `${ccc}-MIN(${i.cut_dso},${dso})-MIN(${i.cut_dio},${dio})-${i.ext_dpo}`,
+            "days",
+          );
+          appendResults(doc, [
+            ["Cash conversion cycle", f(ccc), "days"],
+            ["Inventory days", f(dio), "days"],
+            ["Receivable days", f(dso), "days"],
+            ["Payable days", f(dpo), "days"],
+            ["Net working capital locked", f(nwc), "₹ lakh"],
+            ["Annual carrying cost", f(carry), "₹ lakh"],
+            ["Cash released by changes", f(released), "₹ lakh"],
+            ["Annual interest saved", f(saved), "₹ lakh"],
+            ["Cycle after the changes", f(after), "days"],
+          ]);
+        }
+        function overdraft(doc) {
+          const i = makeInputs(doc, [
+            ["lim", "Sanctioned CC/OD limit", "₹ lakh"],
+            ["rate", "Interest rate", "% p.a."],
+            ["util", "Average utilisation", "%"],
+            ["pf", "Processing or renewal fee", "%"],
+            ["unu", "Charge on unutilised limit", "%"],
+            ["oth", "Other annual charges", "₹ lakh"],
+            ["gst", "Add GST on fees and charges", "1 = yes, 0 = no"],
+            ["rev", "Annual revenue", "₹ lakh"],
+            ["days", "Collect faster by", "days"],
+          ]);
+          const a = makeAssumptions(doc, [
+            ["pct", "Percent denominator", 100],
+            ["months", "Months per year", 12],
+            ["days", "Days per year", 365],
+            ["gst", "GST rate on charges", 0.18],
+            ["lak", "Rupees per lakh", 100000],
+          ]);
+          const s = makeModel(doc);
+          const drawn = modelRow(
+            s,
+            "Average amount drawn",
+            `${i.lim}*MIN(${i.util},${a.pct})/${a.pct}`,
+            "₹ lakh",
+          );
+          const ear = modelRow(
+            s,
+            "Annual effective interest rate",
+            `(1+${i.rate}/${a.pct}/${a.months})^${a.months}-1`,
+            "decimal",
+          );
+          const interest = modelRow(
+            s,
+            "Interest, compounded monthly",
+            `${drawn}*${ear}`,
+            "₹ lakh",
+          );
+          const fee = modelRow(
+            s,
+            "Processing or renewal fee",
+            `${i.lim}*${i.pf}/${a.pct}`,
+            "₹ lakh",
+          );
+          const unused = modelRow(
+            s,
+            "Charge on unutilised limit",
+            `(${i.lim}-${drawn})*${i.unu}/${a.pct}`,
+            "₹ lakh",
+          );
+          const gst = modelRow(
+            s,
+            "GST on fees and charges",
+            `IF(${i.gst}=1,(${fee}+${unused}+${i.oth})*${a.gst},0)`,
+            "₹ lakh",
+          );
+          const cost = modelRow(
+            s,
+            "Total annual cost",
+            `${interest}+${fee}+${unused}+${i.oth}+${gst}`,
+            "₹ lakh",
+          );
+          const effective = modelRow(
+            s,
+            "Effective annual cost",
+            `IFERROR(${cost}/${drawn}*${a.pct},0)`,
+            "%",
+          );
+          const day = modelRow(
+            s,
+            "Cost of ₹1 lakh drawn for one day",
+            `IFERROR(${cost}/${drawn}/${a.days}*${a.lak},0)`,
+            "₹",
+          );
+          const freed = modelRow(
+            s,
+            "Cash freed by faster collection",
+            `MIN(${i.days}*${i.rev}/${a.days},${drawn})`,
+            "₹ lakh",
+          );
+          const saved = modelRow(
+            s,
+            "Interest saved a year",
+            `${freed}*${ear}`,
+            "₹ lakh",
+          );
+          appendResults(doc, [
+            ["Effective annual cost", f(effective), "%"],
+            ["Average amount drawn", f(drawn), "₹ lakh"],
+            ["Annual interest", f(interest), "₹ lakh"],
+            ["Renewal / processing fee", f(fee), "₹ lakh"],
+            ["Unused limit charge", f(unused), "₹ lakh"],
+            ["Other annual charges", f(i.oth), "₹ lakh"],
+            ["GST on charges", f(gst), "₹ lakh"],
+            ["Total annual cost", f(cost), "₹ lakh"],
+            ["Cost per day / ₹1 lakh", f(day), "₹"],
+            ["Cash released", f(freed), "₹ lakh"],
+            ["Annual interest saved", f(saved), "₹ lakh"],
+          ]);
+        }
+        function cma(doc) {
+          const i = makeInputs(doc, [
+            ["sales", "Net sales", "₹ lakh"],
+            ["cogs", "Cost of sales", "₹ lakh"],
+            ["pat", "Profit after tax", "₹ lakh"],
+            ["dep", "Depreciation", "₹ lakh"],
+            ["tli", "Interest on term loans", "₹ lakh"],
+            ["tlp", "Term-loan principal due", "₹ lakh"],
+            ["inv", "Inventory", "₹ lakh"],
+            ["rec", "Receivables", "₹ lakh"],
+            ["oca", "Other current assets", "₹ lakh"],
+            ["cash", "Cash and bank balances", "₹ lakh"],
+            ["cred", "Sundry creditors", "₹ lakh"],
+            ["ocl", "Other current liabilities", "₹ lakh"],
+            ["req", "Working capital limit requested", "₹ lakh"],
+            ["tl", "Term loans outstanding", "₹ lakh"],
+            ["oltl", "Other long-term liabilities", "₹ lakh"],
+            ["tnw", "Tangible net worth", "₹ lakh"],
+          ]);
+          const a = makeAssumptions(doc, [
+            ["m1", "Method I financing rate", 0.75],
+            ["m2", "Method II asset factor", 0.75],
+            ["tov", "Turnover method rate", 0.2],
+            ["capital", "Minimum own contribution", 0.25],
+            ["limit", "Turnover method reference limit", 500, "₹ lakh"],
+            ["months", "Months per year", 12],
+          ]);
+          const s = makeModel(doc);
+          const tca = modelRow(
+            s,
+            "Total current assets",
+            `${i.inv}+${i.rec}+${i.oca}+${i.cash}`,
+            "₹ lakh",
+          );
+          const cl = modelRow(
+            s,
+            "Current liabilities excluding bank borrowing",
+            `${i.cred}+${i.ocl}`,
+            "₹ lakh",
+          );
+          const gap = modelRow(
+            s,
+            "Working capital gap",
+            `${tca}-${cl}`,
+            "₹ lakh",
+          );
+          const m1 = modelRow(
+            s,
+            "MPBF, Method I",
+            `MAX(${gap}*${a.m1},0)`,
+            "₹ lakh",
+          );
+          const m2 = modelRow(
+            s,
+            "MPBF, Method II",
+            `MAX(${tca}*${a.m2}-${cl},0)`,
+            "₹ lakh",
+          );
+          const tov = modelRow(
+            s,
+            "MPBF, turnover method",
+            `IF(${i.req}>${a.limit},0,${i.sales}*${a.tov})`,
+            "₹ lakh (0 = n/a above 500 lakh)",
+          );
+          const cr = modelRow(
+            s,
+            "Current ratio at requested limit",
+            `IFERROR(${tca}/(${cl}+${i.req}),0)`,
+            "times",
+          );
+          const nwc = modelRow(
+            s,
+            "Net working capital (actual)",
+            `${tca}-${cl}-${i.req}`,
+            "₹ lakh",
+          );
+          const needed = modelRow(
+            s,
+            "Net working capital needed",
+            `${tca}*${a.capital}`,
+            "₹ lakh",
+          );
+          const tol = modelRow(
+            s,
+            "TOL / TNW",
+            `IFERROR((${cl}+${i.req}+${i.tl}+${i.oltl})/${i.tnw},0)`,
+            "times",
+          );
+          const dscr = modelRow(
+            s,
+            "Debt service coverage ratio",
+            `IFERROR((${i.pat}+${i.dep}+${i.tli})/(${i.tli}+${i.tlp}),0)`,
+            "times",
+          );
+          const st = modelRow(
+            s,
+            "Stock holding",
+            `IFERROR(${i.inv}/${i.cogs}*${a.months},0)`,
+            "months",
+          );
+          const db = modelRow(
+            s,
+            "Debtor holding",
+            `IFERROR(${i.rec}/${i.sales}*${a.months},0)`,
+            "months",
+          );
+          const cd = modelRow(
+            s,
+            "Creditor holding",
+            `IFERROR(${i.cred}/${i.cogs}*${a.months},0)`,
+            "months",
+          );
+          appendResults(doc, [
+            ["MPBF, Method II", f(m2), "₹ lakh"],
+            ["Total current assets", f(tca), "₹ lakh"],
+            ["Liabilities excl. bank", f(cl), "₹ lakh"],
+            ["Working capital gap", f(gap), "₹ lakh"],
+            ["MPBF, Method I", f(m1), "₹ lakh"],
+            ["MPBF, turnover method", f(tov), "₹ lakh (0 if not applicable)"],
+            ["Current ratio", f(cr), "times"],
+            ["Net working capital", f(nwc), "₹ lakh"],
+            ["Net working capital needed", f(needed), "₹ lakh"],
+            ["TOL / TNW", f(tol), "times"],
+            ["DSCR", f(dscr), "times"],
+            ["Stock holding", f(st), "months"],
+            ["Debtor holding", f(db), "months"],
+            ["Creditor holding", f(cd), "months"],
+          ]);
+        }
+        function gst(doc) {
+          const i = makeInputs(doc, [
+            ["books", "ITC as per purchase register", "₹"],
+            ["b2b", "ITC as per GSTR-2B", "₹"],
+            ["claimed", "Unsupported ITC already claimed", "₹"],
+            ["days", "Days since ITC was utilised", "days"],
+            ["r180", "ITC on unpaid invoices over 180 days", "₹"],
+          ]);
+          const a = makeAssumptions(doc, [
+            ["rate", "Indicative interest rate p.a.", 0.18],
+            ["days", "Days per year", 365],
+          ]);
+          const ck = sheet("GST Checklist", [25, 62, 77, 18]);
+          doc.tabs.push(ck);
+          ck.add(["GST RECONCILIATION CHECKLIST"], 1);
+          ck.add(
+            ["Edit status to Done or Pending to track checklist completion."],
+            5,
+          );
+          ck.blank();
+          ck.add(["Stage", "Check", "Explanation", "Status"], 3);
+          let count = 0;
+          document.querySelectorAll("#list .stage").forEach((stage) => {
+            const name =
+              stage.querySelector("h3")?.textContent.trim() || "Other";
+            stage.querySelectorAll("li").forEach((li) => {
+              const cb = li.querySelector("input[type=checkbox]");
+              const lab = li.querySelector("label span");
+              let description = "";
+              for (const n of lab?.childNodes || [])
+                if (n.nodeType === 3) description += n.textContent;
+              ck.add([
+                name,
+                description.trim(),
+                li.querySelector("small")?.textContent.trim() || "",
+                cb?.checked ? "Done" : "Pending",
+              ]);
+              count++;
+            });
+          });
+          const s = makeModel(doc);
+          const supported = modelRow(
+            s,
+            "ITC supported by GSTR-2B",
+            `${i.b2b}`,
+            "₹",
+          );
+          const gap = modelRow(
+            s,
+            "Gap: books over GSTR-2B",
+            `MAX(${i.books}-${i.b2b},0)`,
+            "₹",
+          );
+          const reversal = modelRow(
+            s,
+            "Reverse now: unsupported claim",
+            `MIN(${i.claimed},${gap})`,
+            "₹",
+          );
+          const hold = modelRow(
+            s,
+            "Hold until supplier reports",
+            `${gap}-${reversal}`,
+            "₹",
+          );
+          const rev2 = modelRow(
+            s,
+            "Reverse now: invoices unpaid over 180 days",
+            `${i.r180}`,
+            "₹",
+          );
+          const total = modelRow(
+            s,
+            "Total to reverse",
+            `${reversal}+${rev2}`,
+            "₹",
+          );
+          const interest = modelRow(
+            s,
+            "Indicative interest exposure",
+            `${reversal}*${a.rate}*${i.days}/${a.days}`,
+            "₹",
+          );
+          const last = 4 + count;
+          const pct = modelRow(
+            s,
+            "Checklist completion",
+            `IFERROR(COUNTIF('GST Checklist'!D5:D${last},"Done")/COUNTA('GST Checklist'!B5:B${last})*100,0)`,
+            "%",
+          );
+          appendResults(doc, [
+            ["Checklist completion", f(pct), "%"],
+            ["ITC supported", f(supported), "₹"],
+            ["ITC gap", f(gap), "₹"],
+            ["Hold pending supplier reporting", f(hold), "₹"],
+            ["Unsupported ITC reversal", f(reversal), "₹"],
+            ["Unpaid invoice reversal", f(rev2), "₹"],
+            ["Total to reverse", f(total), "₹"],
+            ["Indicative interest", f(interest), "₹"],
+          ]);
+          ck.add([], 0);
+          ck.add(
+            [
+              "Indicative checklist only. Confirm latest statutory rules with a qualified tax professional.",
+            ],
+            5,
+          );
+        }
+        function cashflow(doc) {
+          const inputs = makeInputs(doc, [
+            ["open", "Opening cash, 1 April", "₹ lakh"],
+            ["buf", "Minimum cash buffer", "₹ lakh"],
+          ]);
+          const months = [
+            "Apr",
+            "May",
+            "Jun",
+            "Jul",
+            "Aug",
+            "Sep",
+            "Oct",
+            "Nov",
+            "Dec",
+            "Jan",
+            "Feb",
+            "Mar",
+          ];
+          const categories = [
+            ["dom", "Domestic collections"],
+            ["exp", "Export collections"],
+            ["oth", "Other receipts"],
+            ["rin", "Total receipts"],
+            ["sup", "Supplier payments"],
+            ["sal", "Salaries and wages"],
+            ["ovh", "Rent, power and overheads"],
+            ["gst", "GST, net payment"],
+            ["tax", "Advance tax and TDS"],
+            ["emi", "Term-loan EMI"],
+            ["int", "CC/OD interest"],
+            ["cap", "Capital expenditure"],
+            ["drw", "Drawings or dividend"],
+            ["pout", "Total payments"],
+            ["net", "Net cash flow"],
+            ["op", "Opening cash"],
+            ["cl", "Closing cash"],
+            ["st", "Status"],
+          ];
+          const s = sheet("12-Month Cash Flow", [
+            34,
+            ...Array(12).fill(15),
+            20,
+          ]);
+          doc.tabs.push(s);
+          s.add(["12-MONTH CASH FLOW MODEL | ₹ lakh"], 1);
+          s.add(
+            [
+              "Blue numbers are editable assumptions, other rows contain Excel formulas.",
+            ],
+            5,
+          );
+          s.blank();
+          s.add(["Measure", ...months, "FY total"], 3);
+          const lookup = {};
+          categories.forEach(([key, label]) => {
+            const r = s.rows.length + 1;
+            lookup[key] = r;
+            const cells = [label];
+            for (let m = 0; m < 12; m++) {
+              const x = col(m + 2);
+              const source = document.querySelector(
+                `#cf input[data-k="${key}"][data-m="${m}"]`,
+              );
+              if (source) {
+                cells.push({ v: num(source.value), s: 4 });
+                continue;
+              }
+              let eq = "";
+              if (key === "rin")
+                eq = `SUM(${x}${lookup.dom}:${x}${lookup.oth})`;
+              if (key === "pout")
+                eq = `SUM(${x}${lookup.sup}:${x}${lookup.drw})`;
+              if (key === "net") eq = `${x}${lookup.rin}-${x}${lookup.pout}`;
+              if (key === "op")
+                eq = m === 0 ? `${inputs.open}` : `${col(m + 1)}${lookup.cl}`;
+              if (key === "cl") eq = `${x}${lookup.op}+${x}${lookup.net}`;
+              if (key === "st")
+                eq = `IF(${x}${lookup.cl}<0,"Shortfall",IF(${x}${lookup.cl}<${inputs.buf},"Tight","OK"))`;
+              cells.push(eq ? { f: eq, s: 6 } : "");
+            }
+            if (key === "st" || key === "op" || key === "cl") cells.push("");
+            else cells.push({ f: `SUM(B${r}:M${r})`, s: 6 });
+            s.add(cells);
+          });
+          const cl = lookup.cl,
+            rin = lookup.rin,
+            pout = lookup.pout,
+            net = lookup.net,
+            st = lookup.st;
+          const m = sheet("Cash Flow Metrics", [39, 24, 22]);
+          doc.tabs.push(m);
+          m.add(["ANNUAL CASH FLOW SUMMARY"], 1);
+          m.blank();
+          m.add(["Measure", "Calculated value", "Unit"], 3);
+          const mr = (label, eq, unit) => {
+            const row = m.add([label, { f: eq, s: 6 }, unit]);
+            return `'Cash Flow Metrics'!B${row}`;
+          };
+          const low = mr(
+            "Lowest month-end cash",
+            `MIN('12-Month Cash Flow'!B${cl}:M${cl})`,
+            "₹ lakh",
+          );
+          const rec = mr(
+            "Total receipts",
+            `'12-Month Cash Flow'!N${rin}`,
+            "₹ lakh",
+          );
+          const pay = mr(
+            "Total payments",
+            `'12-Month Cash Flow'!N${pout}`,
+            "₹ lakh",
+          );
+          const n = mr(
+            "Net cash flow for the year",
+            `'12-Month Cash Flow'!N${net}`,
+            "₹ lakh",
+          );
+          const end = mr(
+            "Closing cash, 31 March",
+            `'12-Month Cash Flow'!M${cl}`,
+            "₹ lakh",
+          );
+          const tight = mr(
+            "Months below buffer",
+            `COUNTIF('12-Month Cash Flow'!B${st}:M${st},"Tight")`,
+            "months",
+          );
+          const short = mr(
+            "Months in shortfall",
+            `COUNTIF('12-Month Cash Flow'!B${st}:M${st},"Shortfall")`,
+            "months",
+          );
+          appendResults(doc, [
+            ["Lowest month-end cash", f(low), "₹ lakh"],
+            ["Total receipts", f(rec), "₹ lakh"],
+            ["Total payments", f(pay), "₹ lakh"],
+            ["Annual net cash flow", f(n), "₹ lakh"],
+            ["Closing cash, 31 March", f(end), "₹ lakh"],
+            ["Months below cash buffer", f(tight), "months"],
+            ["Months in shortfall", f(short), "months"],
+          ]);
+        }
+        const tools = {
+          "working-capital-calculator": [
+            "Working Capital & Cash Conversion Cycle",
+            working,
+          ],
+          "monthly-cash-flow-model": ["Monthly Cash Flow Model", cashflow],
+          "overdraft-cost-calculator": ["CC/OD Cost Calculator", overdraft],
+          "gst-reconciliation-checklist": ["GST Reconciliation Checklist", gst],
+          "cma-data-template": ["CMA Data & MPBF Calculator", cma],
+        };
+        // OOXML ZIP implementation: store-only entries, valid CRC-32 and central directory.
+        const encoder = new TextEncoder();
+        const crcTable = Array.from({ length: 256 }, (_, k) => {
+          for (let i = 0; i < 8; i++)
+            k = k & 1 ? 0xedb88320 ^ (k >>> 1) : k >>> 1;
+          return k >>> 0;
+        });
+        const crc32 = (bytes) => {
+          let c = 0xffffffff;
+          for (const b of bytes) c = crcTable[(c ^ b) & 255] ^ (c >>> 8);
+          return (c ^ 0xffffffff) >>> 0;
+        };
+        function zip(files) {
+          const local = [],
+            central = [];
+          let offset = 0;
+          const u16 = (dv, p, v) => dv.setUint16(p, v, true),
+            u32 = (dv, p, v) => dv.setUint32(p, v >>> 0, true);
+          for (const [filename, text] of Object.entries(files)) {
+            const name = encoder.encode(filename),
+              data = encoder.encode(text),
+              crc = crc32(data);
+            const h = new Uint8Array(30 + name.length),
+              dv = new DataView(h.buffer);
+            u32(dv, 0, 0x04034b50);
+            u16(dv, 4, 20);
+            u16(dv, 6, 0x0800);
+            u16(dv, 8, 0);
+            u32(dv, 14, crc);
+            u32(dv, 18, data.length);
+            u32(dv, 22, data.length);
+            u16(dv, 26, name.length);
+            h.set(name, 30);
+            local.push(h, data);
+            const c = new Uint8Array(46 + name.length),
+              cv = new DataView(c.buffer);
+            u32(cv, 0, 0x02014b50);
+            u16(cv, 4, 20);
+            u16(cv, 6, 20);
+            u16(cv, 8, 0x0800);
+            u16(cv, 10, 0);
+            u32(cv, 16, crc);
+            u32(cv, 20, data.length);
+            u32(cv, 24, data.length);
+            u16(cv, 28, name.length);
+            u32(cv, 42, offset);
+            c.set(name, 46);
+            central.push(c);
+            offset += h.length + data.length;
+          }
+          const cdSize = central.reduce((a, b) => a + b.length, 0),
+            end = new Uint8Array(22),
+            ed = new DataView(end.buffer);
+          u32(ed, 0, 0x06054b50);
+          u16(ed, 8, central.length);
+          u16(ed, 10, central.length);
+          u32(ed, 12, cdSize);
+          u32(ed, 16, offset);
+          return new Blob([...local, ...central, end], {
+            type: "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+          });
+        }
+        function xmlCell(cell, r, c) {
+          if (!cell) return "";
+          const at = ` r="${col(c)}${r}" s="${Number.isFinite(cell.s) ? cell.s : 0}"`;
+          if (cell.f) {
+            return `<c${at}${typeof cell.cache === "string" ? ' t="str"' : ""}><f>${esc(cell.f.replace(/^=/, ""))}</f>${cell.cache !== undefined ? `<v>${esc(cell.cache)}</v>` : "<v/>"}</c>`;
+          }
+          if (cell.v === null || cell.v === undefined || cell.v === "")
+            return "";
+          if (typeof cell.v === "number" && Number.isFinite(cell.v))
+            return `<c${at}><v>${cell.v}</v></c>`;
+          const text = String(cell.v).replace(
+            /[\u0000-\u0008\u000b\u000c\u000e-\u001f]/g,
+            "",
+          );
+          return `<c${at} t="inlineStr"><is><t xml:space="preserve">${esc(text.slice(0, 32000))}</t></is></c>`;
+        }
+        function createXlsx(doc) {
+          const ns =
+            "http://schemas.openxmlformats.org/spreadsheetml/2006/main";
+          const files = {};
+          const overrides = [
+            '<Override PartName="/xl/workbook.xml" ContentType="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet.main+xml"/>',
+            '<Override PartName="/xl/styles.xml" ContentType="application/vnd.openxmlformats-officedocument.spreadsheetml.styles+xml"/>',
+          ];
+          doc.tabs.forEach((s, j) => {
+            const body = s.rows
+              .map(
+                (row, r) =>
+                  `<row r="${r + 1}"${r === 0 ? ' ht="27" customHeight="1"' : ""}>${row.map((x, c) => xmlCell(x, r + 1, c + 1)).join("")}</row>`,
+              )
+              .join("");
+            const widths = s.widths.length
+              ? `<cols>${s.widths.map((w, i) => `<col min="${i + 1}" max="${i + 1}" width="${w}" customWidth="1"/>`).join("")}</cols>`
+              : "";
+            files[`xl/worksheets/sheet${j + 1}.xml`] =
+              `<?xml version="1.0" encoding="UTF-8" standalone="yes"?><worksheet xmlns="${ns}"><sheetViews><sheetView workbookViewId="0" showGridLines="0"/></sheetViews><sheetFormatPr defaultRowHeight="19"/>${widths}<sheetData>${body}</sheetData></worksheet>`;
+            overrides.push(
+              `<Override PartName="/xl/worksheets/sheet${j + 1}.xml" ContentType="application/vnd.openxmlformats-officedocument.spreadsheetml.worksheet+xml"/>`,
+            );
+          });
+          files["[Content_Types].xml"] =
+            `<?xml version="1.0" encoding="UTF-8"?><Types xmlns="http://schemas.openxmlformats.org/package/2006/content-types"><Default Extension="rels" ContentType="application/vnd.openxmlformats-package.relationships+xml"/><Default Extension="xml" ContentType="application/xml"/>${overrides.join("")}</Types>`;
+          files["_rels/.rels"] =
+            '<?xml version="1.0" encoding="UTF-8"?><Relationships xmlns="http://schemas.openxmlformats.org/package/2006/relationships"><Relationship Id="rId1" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/officeDocument" Target="xl/workbook.xml"/></Relationships>';
+          files["xl/workbook.xml"] =
+            `<?xml version="1.0" encoding="UTF-8"?><workbook xmlns="${ns}" xmlns:r="http://schemas.openxmlformats.org/officeDocument/2006/relationships"><sheets>${doc.tabs.map((s, j) => `<sheet name="${esc(s.name.slice(0, 31))}" sheetId="${j + 1}" r:id="rId${j + 1}"/>`).join("")}</sheets><calcPr calcId="191029" calcMode="auto" fullCalcOnLoad="1" forceFullCalc="1"/></workbook>`;
+          files["xl/_rels/workbook.xml.rels"] =
+            `<?xml version="1.0" encoding="UTF-8"?><Relationships xmlns="http://schemas.openxmlformats.org/package/2006/relationships">${doc.tabs.map((s, j) => `<Relationship Id="rId${j + 1}" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/worksheet" Target="worksheets/sheet${j + 1}.xml"/>`).join("")}<Relationship Id="rId${doc.tabs.length + 1}" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/styles" Target="styles.xml"/></Relationships>`;
+          files["xl/styles.xml"] =
+            `<?xml version="1.0" encoding="UTF-8"?><styleSheet xmlns="${ns}"><fonts count="4"><font><sz val="11"/><name val="Aptos"/></font><font><sz val="13"/><b/><color rgb="FFFFFFFF"/><name val="Aptos"/></font><font><sz val="18"/><b/><color rgb="FF082951"/><name val="Aptos Display"/></font><font><sz val="11"/><b/><color rgb="FF082951"/><name val="Aptos"/></font></fonts><fills count="5"><fill><patternFill patternType="none"/></fill><fill><patternFill patternType="gray125"/></fill><fill><patternFill patternType="solid"><fgColor rgb="FF082951"/><bgColor indexed="64"/></patternFill></fill><fill><patternFill patternType="solid"><fgColor rgb="FFEAF2FC"/><bgColor indexed="64"/></patternFill></fill><fill><patternFill patternType="solid"><fgColor rgb="FFF5F8FC"/><bgColor indexed="64"/></patternFill></fill></fills><borders count="1"><border><left/><right/><top/><bottom/><diagonal/></border></borders><cellStyleXfs count="1"><xf numFmtId="0" fontId="0" fillId="0" borderId="0"/></cellStyleXfs><cellXfs count="7"><xf numFmtId="0" fontId="0" fillId="0" borderId="0" xfId="0"/><xf numFmtId="0" fontId="1" fillId="2" borderId="0" xfId="0" applyFill="1" applyFont="1"/><xf numFmtId="0" fontId="2" fillId="0" borderId="0" xfId="0" applyFont="1"/><xf numFmtId="0" fontId="3" fillId="3" borderId="0" xfId="0" applyFill="1" applyFont="1"/><xf numFmtId="4" fontId="3" fillId="4" borderId="0" xfId="0" applyFill="1" applyFont="1"/><xf numFmtId="0" fontId="0" fillId="0" borderId="0" xfId="0"/><xf numFmtId="4" fontId="3" fillId="3" borderId="0" xfId="0" applyFill="1" applyFont="1"/></cellXfs><cellStyles count="1"><cellStyle name="Normal" xfId="0" builtinId="0"/></cellStyles></styleSheet>`;
+          return zip(files);
+        }
+        window.CFOExcel = {
+          build(tool, identity) {
+            const conf = tools[tool];
+            if (!conf) throw new Error("Unknown tool.");
+            const doc = makeDoc(conf[0], identity);
+            conf[1](doc);
+            return createXlsx(doc);
+          },
+          download(blob, tool, company) {
+            const safe =
+              (company || "Report")
+                .replace(/[^a-z0-9 _-]/gi, "")
+                .trim()
+                .replace(/\s+/g, "_")
+                .slice(0, 36) || "Report";
+            const a = document.createElement("a");
+            const url = URL.createObjectURL(blob);
+            a.href = url;
+            a.download = `CFOCRAFT_${tool}_${safe}_${new Date().toISOString().slice(0, 10)}.xlsx`;
+            document.body.appendChild(a);
+            a.click();
+            a.remove();
+            setTimeout(() => URL.revokeObjectURL(url), 60000);
+          },
+        };
+      })();
+    </script>
+    <!-- Paste your own HTTPS contact form/API endpoint between the quotes to collect leads.
+         Without one, the popup and Excel work but user contact details are NOT saved. -->
+    <script>
+      window.CFO_LEADS_API = "";
+    </script>
+    <script>
+      /* Static-friendly lead form. Set window.CFO_LEADS_API to a configured HTTPS form/API endpoint
+   to save contact details. Without an endpoint, Excel downloads locally but NO lead is saved. */
+      (() => {
+        "use strict";
+        const tool = document.body.dataset.page;
+        const endpoint = String(window.CFO_LEADS_API || "").trim();
+        const valid = [
+          "working-capital-calculator",
+          "monthly-cash-flow-model",
+          "overdraft-cost-calculator",
+          "gst-reconciliation-checklist",
+          "cma-data-template",
+        ];
+        if (!valid.includes(tool)) return;
+        const names = {
+          "working-capital-calculator": "Working Capital Calculator",
+          "monthly-cash-flow-model": "Monthly Cash Flow Model",
+          "overdraft-cost-calculator": "Overdraft Cost Calculator",
+          "gst-reconciliation-checklist": "GST Reconciliation Checklist",
+          "cma-data-template": "CMA Data Template",
+        };
+        const interests = {
+          "working-capital-calculator": [
+            "Reduce cash tied up",
+            "Improve debtor collections",
+            "Inventory optimisation",
+            "Working capital funding",
+          ],
+          "monthly-cash-flow-model": [
+            "Cash flow forecasting",
+            "Prevent cash shortfalls",
+            "Improve cash visibility",
+            "Budgeting and reporting",
+          ],
+          "overdraft-cost-calculator": [
+            "Lower OD/CC interest",
+            "Review bank borrowing costs",
+            "Optimise limit utilisation",
+            "Working capital funding",
+          ],
+          "gst-reconciliation-checklist": [
+            "GST reconciliation",
+            "ITC mismatch support",
+            "Monthly GST compliance",
+            "Finance controls",
+          ],
+          "cma-data-template": [
+            "CMA preparation",
+            "Bank loan / credit proposal",
+            "MPBF assessment",
+            "Financial projections",
+          ],
+        };
+        function launch() {
+          const node = document.createElement("div");
+          node.className = "lead-panel";
+          node.innerHTML = `<div class="lead-row"><div><p class="lead-eyebrow">FREE EXCEL REPORT</p><h3>Download your Excel analysis</h3><p>Your current inputs, calculations and results will be included in the workbook.</p></div><button class="btn lead-download-trigger" type="button">↓ Download Excel</button></div>`;
+          const slip =
+            document.querySelector("#tool-start .slip") ||
+            document.querySelector(".cfsum .slip");
+          if (slip) {
+            const stack = document.createElement("div");
+            stack.className = "lead-result-stack";
+            slip.parentNode.insertBefore(stack, slip);
+            stack.appendChild(slip);
+            stack.appendChild(node);
+          } else document.querySelector("main")?.appendChild(node);
+          const oldTemplate = document.querySelectorAll(
+            'a[href="REPLACE_WITH_TEMPLATE_URL"],a[href="REPLACE_WITH_CMA_TEMPLATE_URL"]',
+          );
+          oldTemplate.forEach((a) => {
+            const p = a.closest(".slip-note") || a;
+            p.remove();
+          });
+          const backdrop = document.createElement("div");
+          backdrop.className = "lead-backdrop";
+          backdrop.hidden = true;
+          backdrop.innerHTML = `<div class="lead-modal" role="dialog" aria-modal="true" aria-labelledby="lead-title" tabindex="-1">
+      <button class="lead-close" type="button" aria-label="Close dialog">×</button>
+      <div class="lead-modal-head"><div class="lead-kicker">CFO CRAFT · FREE EXCEL</div><h2 id="lead-title">Get your personalised Excel report</h2><p>Complete your business details to receive the <strong>${names[tool]}</strong> workbook.</p></div>
+      <form id="lead-form" novalidate><div class="lead-fields">
+        <label>Full name <span>*</span><input name="name" autocomplete="name" maxlength="100" required placeholder="Your full name"></label>
+        <label>Company / business name <span>*</span><input name="company" autocomplete="organization" maxlength="120" required placeholder="Your organisation"></label>
+        <label>Work email <span>*</span><input name="email" type="email" autocomplete="email" maxlength="180" required placeholder="you@company.com"></label>
+        <label>Mobile number <span>*</span><input name="phone" type="tel" inputmode="tel" autocomplete="tel" maxlength="22" required placeholder="+91 98765 43210"></label>
+        <label>City <input name="city" autocomplete="address-level2" maxlength="90" placeholder="City (optional)"></label>
+        <label>Business type <select name="industry"><option value="">Select (optional)</option><option>Manufacturing</option><option>Trading & distribution</option><option>Services</option><option>Startup</option><option>Other</option></select></label>
+        <label class="lead-wide">What support would help most? <select name="interest"><option value="">Select (optional)</option>${interests[tool].map((x) => `<option>${x}</option>`).join("")}<option>Just exploring the tool</option><option>Other</option></select></label>
+      </div>
+      <label class="lead-check"><input type="checkbox" name="privacyConsent" required><span><strong>*</strong> I agree to use these details for preparing my Excel download. See the privacy notice below.</span></label>
+      ${endpoint ? `<label class="lead-check"><input type="checkbox" name="followupConsent"><span>CFO CRAFT may contact me about relevant financial advisory services. (Optional)</span></label>` : ""}
+      <p class="lead-privacy">${
+        endpoint
+          ? "Contact details and selected tool are sent to CFO CRAFT for this download. Financial calculator data remains only in your browser and workbook. Optional follow-up permission is requested separately."
+          : "<strong>Static preview:</strong> No lead is collected or sent to CFO CRAFT. Your form details are only used inside your Excel report. To collect contact details, the website owner must configure a form/CRM endpoint. Financial inputs stay in your browser."
+      }</p>
+      <p class="lead-form-error" role="alert" aria-live="polite" hidden></p>
+      <button class="lead-submit" type="submit">Submit &amp; Download Excel →</button>
+      <p class="lead-security">Excel is generated directly in your browser after successful submission.</p>
+      </form></div>`;
+          document.body.appendChild(backdrop);
+          const form = backdrop.querySelector("form"),
+            status = backdrop.querySelector(".lead-form-error"),
+            submit = backdrop.querySelector(".lead-submit");
+          const close = () => {
+            backdrop.hidden = true;
+            document.body.classList.remove("lead-modal-open");
+            node.querySelector("button").focus();
+          };
+          node.querySelector("button").addEventListener("click", () => {
+            backdrop.hidden = false;
+            document.body.classList.add("lead-modal-open");
+            status.hidden = true;
+            form.querySelector("[name=name]").focus();
+          });
+          backdrop
+            .querySelector(".lead-close")
+            .addEventListener("click", close);
+          backdrop.addEventListener("click", (e) => {
+            if (e.target === backdrop) close();
+          });
+          document.addEventListener("keydown", (e) => {
+            if (backdrop.hidden) return;
+            if (e.key === "Escape") {
+              e.preventDefault();
+              close();
+            }
+            if (e.key === "Tab") {
+              const f = [
+                ...backdrop.querySelectorAll("button,input,select"),
+              ].filter((x) => !x.disabled);
+              const first = f[0],
+                last = f[f.length - 1];
+              if (e.shiftKey && document.activeElement === first) {
+                e.preventDefault();
+                last.focus();
+              } else if (!e.shiftKey && document.activeElement === last) {
+                e.preventDefault();
+                first.focus();
+              }
+            }
+          });
+          form.addEventListener("submit", async (e) => {
+            e.preventDefault();
+            status.hidden = true;
+            if (!form.checkValidity()) {
+              status.textContent =
+                "Please complete the mandatory fields and consent checkbox.";
+              status.hidden = false;
+              const invalid = form.querySelector(":invalid");
+              invalid?.focus();
+              return;
+            }
+            const fd = new FormData(form);
+            const phone = String(fd.get("phone") || "").replace(/[^\d]/g, "");
+            if (phone.length < 10 || phone.length > 15) {
+              status.textContent =
+                "Please enter a valid mobile number with 10–15 digits.";
+              status.hidden = false;
+              form.elements.phone.focus();
+              return;
+            }
+            const calculatorError = document.querySelector(
+              "#tool-start #err.on",
+            );
+            if (calculatorError) {
+              status.textContent =
+                "Please correct the highlighted calculator inputs before downloading.";
+              status.hidden = false;
+              return;
+            }
+            const payload = {
+              name: String(fd.get("name") || "").trim(),
+              company: String(fd.get("company") || "").trim(),
+              email: String(fd.get("email") || "").trim(),
+              phone: String(fd.get("phone") || "").trim(),
+              city: String(fd.get("city") || "").trim(),
+              industry: String(fd.get("industry") || ""),
+              interest: String(fd.get("interest") || ""),
+              tool,
+              privacyConsent: fd.get("privacyConsent") === "on",
+              followupConsent: fd.get("followupConsent") === "on",
+              page: location.pathname,
+            };
+            submit.disabled = true;
+            submit.textContent = endpoint
+              ? "Submitting your details…"
+              : "Preparing your Excel…";
+            try {
+              // Build before the API call to avoid recording a lead that couldn't get a report.
+              const workbook = window.CFOExcel.build(tool, payload);
+              if (endpoint) {
+                const response = await fetch(endpoint, {
+                  method: "POST",
+                  headers: {
+                    "Content-Type": "application/json",
+                    Accept: "application/json",
+                  },
+                  body: JSON.stringify(payload),
+                });
+                if (!response.ok)
+                  throw new Error(
+                    response.status === 429
+                      ? "Too many attempts. Please try again shortly."
+                      : "Unable to save contact details. Please try again.",
+                  );
+              }
+              window.CFOExcel.download(workbook, tool, payload.company);
+              form.reset();
+              close();
+            } catch (error) {
+              status.textContent =
+                error.message || "Something went wrong. Please try again.";
+              status.hidden = false;
+            } finally {
+              submit.disabled = false;
+              submit.textContent = "Submit & Download Excel →";
+            }
+          });
+        }
+        if (document.readyState === "loading")
+          document.addEventListener("DOMContentLoaded", launch);
+        else launch();
+      })();
+    </script>
   </body>
 </html>

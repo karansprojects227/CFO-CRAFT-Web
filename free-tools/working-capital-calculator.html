@@ -1,756 +1,1241 @@
-<!DOCTYPE html>
+<!doctype html>
 
 <html lang="en-IN">
-<head>
-<meta charset="utf-8"/>
-<meta content="width=device-width, initial-scale=1" name="viewport"/>
-<title>Working capital calculator | CFO CRAFT</title>
-<meta content="Free working capital and cash conversion cycle calculator for Indian manufacturers and traders. See days locked in stock and debtors, and the cash and interest released by tightening the cycle." name="description"/>
-<link href="REPLACE_WITH_SITE_URL/free-tools/working-capital-calculator.html" rel="canonical"/>
-<meta content="Working capital calculator | CFO CRAFT" property="og:title"/>
-<meta content="Free working capital and cash conversion cycle calculator for Indian manufacturers and traders. See days locked in stock and debtors, and the cash and interest released by tightening the cycle." property="og:description"/>
-<link href="https://fonts.googleapis.com" rel="preconnect"/>
-<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
-<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700;800&amp;family=Roboto:wght@300;400;500;700&amp;display=swap" rel="stylesheet"/>
-<link href="../style.css" rel="stylesheet"/>
-<link href="../responsive.css" rel="stylesheet"/>
-<link href="free-tools.css" rel="stylesheet"/>
-</head>
-<body class="tool-page" data-page="working-capital-calculator">
-<a class="tool-skip" href="#main">Skip to content</a>
-<nav class="navbar" id="navbar">
-<div class="nav-container">
-<a class="nav-logo" href="/">
-<img alt="CFO Craft Logo" class="brand-logo" src="../images/logo.png"/>
-<span class="custom-tooltip">Go To Home Page</span>
-</a>
-<div class="nav-links">
-<!-- SERVICES DROPDOWN -->
-<div class="nav-dropdown-wrap">
-<span aria-haspopup="true" class="nav-link" role="button" tabindex="0">
+  <head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1" name="viewport" />
+    <title>Working capital calculator | CFO CRAFT</title>
+    <meta
+      content="Free working capital and cash conversion cycle calculator for Indian manufacturers and traders. See days locked in stock and debtors, and the cash and interest released by tightening the cycle."
+      name="description"
+    />
+    <link
+      href="REPLACE_WITH_SITE_URL/free-tools/working-capital-calculator.html"
+      rel="canonical"
+    />
+    <meta
+      content="Working capital calculator | CFO CRAFT"
+      property="og:title"
+    />
+    <meta
+      content="Free working capital and cash conversion cycle calculator for Indian manufacturers and traders. See days locked in stock and debtors, and the cash and interest released by tightening the cycle."
+      property="og:description"
+    />
+    <link href="https://fonts.googleapis.com" rel="preconnect" />
+    <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700;800&amp;family=Roboto:wght@300;400;500;700&amp;display=swap"
+      rel="stylesheet"
+    />
+
+    <link rel="stylesheet" href="../style.css" />
+    <link rel="stylesheet" href="../responsive.css" />
+    <link href="free-tools.css" rel="stylesheet" />
+  </head>
+  <body class="tool-page" data-page="working-capital-calculator">
+    <a class="tool-skip" href="#main">Skip to content</a>
+    <nav class="navbar" id="navbar">
+      <div class="nav-container">
+        <a class="nav-logo" href="/">
+          <img
+            alt="CFO Craft Logo"
+            class="brand-logo"
+            src="../images/logo.png"
+          />
+          <span class="custom-tooltip">Go To Home Page</span>
+        </a>
+        <div class="nav-links">
+          <!-- SERVICES DROPDOWN -->
+          <div class="nav-dropdown-wrap">
+            <span
+              aria-haspopup="true"
+              class="nav-link"
+              role="button"
+              tabindex="0"
+            >
               Services
-              <svg class="nav-chevron" fill="none" height="12" viewbox="0 0 12 12" width="12" xmlns="http://www.w3.org/2000/svg">
-<path d="M11.2498 2.99986L6.17049 8.74062C6.14908 8.76476 6.12279 8.78408 6.09336 8.79731C6.06393 8.81054 6.03202 8.81738 5.99976 8.81738C5.96749 8.81738 5.93559 8.81054 5.90615 8.79731C5.87672 8.78408 5.85043 8.76476 5.82902 8.74062L0.749756 2.99986" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.25"></path>
-</svg>
-</span>
-<div class="nav-dropdown dropdown-wide dropdown-left">
-<div class="dropdown-arrow"></div>
-<div class="dropdown-body">
-<div class="dropdown-grid two-col-with-promo">
-<div class="dropdown-items-grid">
-<!-- Finance Diagnostic -->
-<a class="dropdown-item" href="../services/finance-diagnostic.html">
-<div class="dd-icon">
-<svg fill="none" height="20" stroke="#082951" stroke-width="1.5" viewbox="0 0 24 24" width="20">
-<circle cx="11" cy="11" r="7"></circle>
-<path d="M20 20l-4-4"></path>
-<path d="M8 11l2 2 4-4"></path>
-</svg>
-</div>
-<div class="dd-text">
-<div class="dd-title">Finance Diagnostic</div>
-<div class="dd-desc">
+              <svg
+                class="nav-chevron"
+                fill="none"
+                height="12"
+                viewbox="0 0 12 12"
+                width="12"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  d="M11.2498 2.99986L6.17049 8.74062C6.14908 8.76476 6.12279 8.78408 6.09336 8.79731C6.06393 8.81054 6.03202 8.81738 5.99976 8.81738C5.96749 8.81738 5.93559 8.81054 5.90615 8.79731C5.87672 8.78408 5.85043 8.76476 5.82902 8.74062L0.749756 2.99986"
+                  stroke="currentColor"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="1.25"
+                ></path>
+              </svg>
+            </span>
+            <div class="nav-dropdown dropdown-wide dropdown-left">
+              <div class="dropdown-arrow"></div>
+              <div class="dropdown-body">
+                <div class="dropdown-grid two-col-with-promo">
+                  <div class="dropdown-items-grid">
+                    <!-- Finance Diagnostic -->
+                    <a
+                      class="dropdown-item"
+                      href="../services/finance-diagnostic.html"
+                    >
+                      <div class="dd-icon">
+                        <svg
+                          fill="none"
+                          height="20"
+                          stroke="#082951"
+                          stroke-width="1.5"
+                          viewbox="0 0 24 24"
+                          width="20"
+                        >
+                          <circle cx="11" cy="11" r="7"></circle>
+                          <path d="M20 20l-4-4"></path>
+                          <path d="M8 11l2 2 4-4"></path>
+                        </svg>
+                      </div>
+                      <div class="dd-text">
+                        <div class="dd-title">Finance Diagnostic</div>
+                        <div class="dd-desc">
                           Identify financial gaps, risks and opportunities
                         </div>
-</div>
-</a>
-<!-- Fractional CFO - Starter -->
-<a class="dropdown-item" href="../services/fractional-cfo-starter.html">
-<div class="dd-icon">
-<svg fill="none" height="20" stroke="#082951" stroke-width="1.5" viewbox="0 0 24 24" width="20">
-<path d="M4 19V5"></path>
-<path d="M4 19h16"></path>
-<path d="M7 15l4-4 3 2 5-6"></path>
-</svg>
-</div>
-<div class="dd-text">
-<div class="dd-title">Fractional CFO - Starter</div>
-<div class="dd-desc">
+                      </div>
+                    </a>
+                    <!-- Fractional CFO - Starter -->
+                    <a
+                      class="dropdown-item"
+                      href="../services/fractional-cfo-starter.html"
+                    >
+                      <div class="dd-icon">
+                        <svg
+                          fill="none"
+                          height="20"
+                          stroke="#082951"
+                          stroke-width="1.5"
+                          viewbox="0 0 24 24"
+                          width="20"
+                        >
+                          <path d="M4 19V5"></path>
+                          <path d="M4 19h16"></path>
+                          <path d="M7 15l4-4 3 2 5-6"></path>
+                        </svg>
+                      </div>
+                      <div class="dd-text">
+                        <div class="dd-title">Fractional CFO - Starter</div>
+                        <div class="dd-desc">
                           Essential finance support for growing businesses
                         </div>
-</div>
-</a>
-<!-- Fractional CFO - Core -->
-<a class="dropdown-item" href="../services/fractional-cfo-core.html">
-<div class="dd-icon">
-<svg fill="none" height="20" stroke="#082951" stroke-width="1.5" viewbox="0 0 24 24" width="20">
-<rect height="16" rx="2" width="18" x="3" y="4"></rect>
-<path d="M7 9h10"></path>
-<path d="M7 13h6"></path>
-<path d="M7 17h4"></path>
-</svg>
-</div>
-<div class="dd-text">
-<div class="dd-title">Fractional CFO - Core</div>
-<div class="dd-desc">
+                      </div>
+                    </a>
+                    <!-- Fractional CFO - Core -->
+                    <a
+                      class="dropdown-item"
+                      href="../services/fractional-cfo-core.html"
+                    >
+                      <div class="dd-icon">
+                        <svg
+                          fill="none"
+                          height="20"
+                          stroke="#082951"
+                          stroke-width="1.5"
+                          viewbox="0 0 24 24"
+                          width="20"
+                        >
+                          <rect
+                            height="16"
+                            rx="2"
+                            width="18"
+                            x="3"
+                            y="4"
+                          ></rect>
+                          <path d="M7 9h10"></path>
+                          <path d="M7 13h6"></path>
+                          <path d="M7 17h4"></path>
+                        </svg>
+                      </div>
+                      <div class="dd-text">
+                        <div class="dd-title">Fractional CFO - Core</div>
+                        <div class="dd-desc">
                           Ongoing CFO support to improve control and performance
                         </div>
-</div>
-</a>
-<!-- Fractional CFO - Growth -->
-<a class="dropdown-item" href="../services/fractional-cfo-growth.html">
-<div class="dd-icon">
-<svg fill="none" height="20" stroke="#082951" stroke-width="1.5" viewbox="0 0 24 24" width="20">
-<path d="M4 18l6-6 4 4 6-8"></path>
-<path d="M16 8h4v4"></path>
-</svg>
-</div>
-<div class="dd-text">
-<div class="dd-title">Fractional CFO - Growth</div>
-<div class="dd-desc">
+                      </div>
+                    </a>
+                    <!-- Fractional CFO - Growth -->
+                    <a
+                      class="dropdown-item"
+                      href="../services/fractional-cfo-growth.html"
+                    >
+                      <div class="dd-icon">
+                        <svg
+                          fill="none"
+                          height="20"
+                          stroke="#082951"
+                          stroke-width="1.5"
+                          viewbox="0 0 24 24"
+                          width="20"
+                        >
+                          <path d="M4 18l6-6 4 4 6-8"></path>
+                          <path d="M16 8h4v4"></path>
+                        </svg>
+                      </div>
+                      <div class="dd-text">
+                        <div class="dd-title">Fractional CFO - Growth</div>
+                        <div class="dd-desc">
                           Strategic finance leadership for ambitious growth
                         </div>
-</div>
-</a>
-<!-- Specialist & Project Work -->
-<a class="dropdown-item" href="../services/specialist-project-work.html">
-<div class="dd-icon">
-<svg fill="none" height="20" stroke="#082951" stroke-width="1.5" viewbox="0 0 24 24" width="20">
-<path d="M12 3v18"></path>
-<path d="M5 7h14"></path>
-<path d="M7 7l-4 7h8L7 7z"></path>
-<path d="M17 7l-4 7h8l-4-7z"></path>
-</svg>
-</div>
-<div class="dd-text">
-<div class="dd-title">
+                      </div>
+                    </a>
+                    <!-- Specialist & Project Work -->
+                    <a
+                      class="dropdown-item"
+                      href="../services/specialist-project-work.html"
+                    >
+                      <div class="dd-icon">
+                        <svg
+                          fill="none"
+                          height="20"
+                          stroke="#082951"
+                          stroke-width="1.5"
+                          viewbox="0 0 24 24"
+                          width="20"
+                        >
+                          <path d="M12 3v18"></path>
+                          <path d="M5 7h14"></path>
+                          <path d="M7 7l-4 7h8L7 7z"></path>
+                          <path d="M17 7l-4 7h8l-4-7z"></path>
+                        </svg>
+                      </div>
+                      <div class="dd-text">
+                        <div class="dd-title">
                           Specialist &amp; Project Work
                         </div>
-<div class="dd-desc">
+                        <div class="dd-desc">
                           Focused finance expertise for specific business needs
                         </div>
-</div>
-</a>
-</div>
-<!-- Promo -->
-<div class="dropdown-promo">
-<div class="promo-title">
+                      </div>
+                    </a>
+                  </div>
+                  <!-- Promo -->
+                  <div class="dropdown-promo">
+                    <div class="promo-title">
                       Finance Leadership, Built Around Your Business.
                     </div>
-<div class="promo-desc">
+                    <div class="promo-desc">
                       Practical CFO expertise for manufacturing and trading
                       businesses, tailored to your stage, needs and growth
                       plans.
                     </div>
-<a class="promo-btn" href="../book-intro.html">
+                    <a class="promo-btn" href="../book-intro.html">
                       Book an Intro
                     </a>
-</div>
-</div>
-</div>
-</div>
-</div>
-<!-- FREE TOOLS DROPDOWN -->
-<div class="nav-dropdown-wrap">
-<span aria-haspopup="true" class="nav-link" role="button" tabindex="0">
-<span class="nav-ai-icon"> ✦ </span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- FREE TOOLS DROPDOWN -->
+          <div class="nav-dropdown-wrap">
+            <span
+              aria-haspopup="true"
+              class="nav-link"
+              role="button"
+              tabindex="0"
+            >
+              <span class="nav-ai-icon"> ✦ </span>
               Free Tools
-              <svg class="nav-chevron" fill="none" height="12" viewbox="0 0 12 12" width="12" xmlns="http://www.w3.org/2000/svg">
-<path d="M11.2498 2.99986L6.17049 8.74062C6.14908 8.76476 6.12279 8.78408 6.09336 8.79731C6.06393 8.81054 6.03202 8.81738 5.99976 8.81738C5.96749 8.81738 5.93559 8.81054 5.90615 8.79731C5.87672 8.78408 5.85043 8.76476 5.82902 8.74062L0.749756 2.99986" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.25"></path>
-</svg>
-</span>
-<div class="nav-dropdown dropdown-compact">
-<div class="dropdown-arrow"></div>
-<div class="dropdown-body">
-<!-- Working Capital Calculator -->
-<a aria-current="page" class="dropdown-item" href="working-capital-calculator.html">
-<div class="dd-icon">
-<svg fill="none" height="20" stroke="#082951" stroke-width="1.5" viewbox="0 0 24 24" width="20">
-<rect height="20" rx="2" width="16" x="4" y="2"></rect>
-<line x1="8" x2="16" y1="6" y2="6"></line>
-<line x1="8" x2="10" y1="10" y2="10"></line>
-<line x1="14" x2="16" y1="10" y2="10"></line>
-<line x1="8" x2="10" y1="14" y2="14"></line>
-<line x1="14" x2="16" y1="14" y2="14"></line>
-<line x1="8" x2="16" y1="18" y2="18"></line>
-</svg>
-</div>
-<div class="dd-text">
-<div class="dd-title">Working Capital Calculator</div>
-<div class="dd-desc">
+              <svg
+                class="nav-chevron"
+                fill="none"
+                height="12"
+                viewbox="0 0 12 12"
+                width="12"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  d="M11.2498 2.99986L6.17049 8.74062C6.14908 8.76476 6.12279 8.78408 6.09336 8.79731C6.06393 8.81054 6.03202 8.81738 5.99976 8.81738C5.96749 8.81738 5.93559 8.81054 5.90615 8.79731C5.87672 8.78408 5.85043 8.76476 5.82902 8.74062L0.749756 2.99986"
+                  stroke="currentColor"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="1.25"
+                ></path>
+              </svg>
+            </span>
+            <div class="nav-dropdown dropdown-compact">
+              <div class="dropdown-arrow"></div>
+              <div class="dropdown-body">
+                <!-- Working Capital Calculator -->
+                <a
+                  aria-current="page"
+                  class="dropdown-item"
+                  href="working-capital-calculator.html"
+                >
+                  <div class="dd-icon">
+                    <svg
+                      fill="none"
+                      height="20"
+                      stroke="#082951"
+                      stroke-width="1.5"
+                      viewbox="0 0 24 24"
+                      width="20"
+                    >
+                      <rect height="20" rx="2" width="16" x="4" y="2"></rect>
+                      <line x1="8" x2="16" y1="6" y2="6"></line>
+                      <line x1="8" x2="10" y1="10" y2="10"></line>
+                      <line x1="14" x2="16" y1="10" y2="10"></line>
+                      <line x1="8" x2="10" y1="14" y2="14"></line>
+                      <line x1="14" x2="16" y1="14" y2="14"></line>
+                      <line x1="8" x2="16" y1="18" y2="18"></line>
+                    </svg>
+                  </div>
+                  <div class="dd-text">
+                    <div class="dd-title">Working Capital Calculator</div>
+                    <div class="dd-desc">
                       See how much cash is tied up in your business
                     </div>
-</div>
-</a>
-<!-- Monthly Cash Flow Model Template -->
-<a class="dropdown-item" href="monthly-cash-flow-model.html">
-<div class="dd-icon">
-<svg fill="none" height="20" stroke="#082951" stroke-width="1.5" viewbox="0 0 24 24" width="20">
-<path d="M3 3v18h18"></path>
-<path d="M6 16l4-5 3 3 5-7"></path>
-</svg>
-</div>
-<div class="dd-text">
-<div class="dd-title">Monthly Cash Flow Model Template</div>
-<div class="dd-desc">
+                  </div>
+                </a>
+                <!-- Monthly Cash Flow Model Template -->
+                <a class="dropdown-item" href="monthly-cash-flow-model.html">
+                  <div class="dd-icon">
+                    <svg
+                      fill="none"
+                      height="20"
+                      stroke="#082951"
+                      stroke-width="1.5"
+                      viewbox="0 0 24 24"
+                      width="20"
+                    >
+                      <path d="M3 3v18h18"></path>
+                      <path d="M6 16l4-5 3 3 5-7"></path>
+                    </svg>
+                  </div>
+                  <div class="dd-text">
+                    <div class="dd-title">Monthly Cash Flow Model Template</div>
+                    <div class="dd-desc">
                       Plan and track your monthly cash inflows and outflows
                     </div>
-</div>
-</a>
-<!-- Overdraft Cost Calculator -->
-<a class="dropdown-item" href="overdraft-cost-calculator.html">
-<div class="dd-icon">
-<svg fill="none" height="20" stroke="#082951" stroke-width="1.5" viewbox="0 0 24 24" width="20">
-<circle cx="12" cy="12" r="9"></circle>
-<path d="M12 7v10"></path>
-<path d="M15 9c-.6-1-1.7-1.5-3-1.5-1.7 0-3 1-3 2.3 0 1.4 1.2 2 3 2.5 1.8.5 3 1.1 3 2.5 0 1.4-1.3 2.4-3 2.4-1.3 0-2.5-.5-3.1-1.5"></path>
-</svg>
-</div>
-<div class="dd-text">
-<div class="dd-title">Overdraft Cost Calculator</div>
-<div class="dd-desc">
+                  </div>
+                </a>
+                <!-- Overdraft Cost Calculator -->
+                <a class="dropdown-item" href="overdraft-cost-calculator.html">
+                  <div class="dd-icon">
+                    <svg
+                      fill="none"
+                      height="20"
+                      stroke="#082951"
+                      stroke-width="1.5"
+                      viewbox="0 0 24 24"
+                      width="20"
+                    >
+                      <circle cx="12" cy="12" r="9"></circle>
+                      <path d="M12 7v10"></path>
+                      <path
+                        d="M15 9c-.6-1-1.7-1.5-3-1.5-1.7 0-3 1-3 2.3 0 1.4 1.2 2 3 2.5 1.8.5 3 1.1 3 2.5 0 1.4-1.3 2.4-3 2.4-1.3 0-2.5-.5-3.1-1.5"
+                      ></path>
+                    </svg>
+                  </div>
+                  <div class="dd-text">
+                    <div class="dd-title">Overdraft Cost Calculator</div>
+                    <div class="dd-desc">
                       Calculate the real cost of your overdraft facility
                     </div>
-</div>
-</a>
-<!-- GST Reconciliation Checklist -->
-<a class="dropdown-item" href="gst-reconciliation-checklist.html">
-<div class="dd-icon">
-<svg fill="none" height="20" stroke="#082951" stroke-width="1.5" viewbox="0 0 24 24" width="20">
-<rect height="18" rx="2" width="16" x="4" y="3"></rect>
-<path d="M8 8l1.5 1.5L12 7"></path>
-<line x1="14" x2="17" y1="9" y2="9"></line>
-<path d="M8 14l1.5 1.5L12 13"></path>
-<line x1="14" x2="17" y1="15" y2="15"></line>
-</svg>
-</div>
-<div class="dd-text">
-<div class="dd-title">GST Reconciliation Checklist</div>
-<div class="dd-desc">
+                  </div>
+                </a>
+                <!-- GST Reconciliation Checklist -->
+                <a
+                  class="dropdown-item"
+                  href="gst-reconciliation-checklist.html"
+                >
+                  <div class="dd-icon">
+                    <svg
+                      fill="none"
+                      height="20"
+                      stroke="#082951"
+                      stroke-width="1.5"
+                      viewbox="0 0 24 24"
+                      width="20"
+                    >
+                      <rect height="18" rx="2" width="16" x="4" y="3"></rect>
+                      <path d="M8 8l1.5 1.5L12 7"></path>
+                      <line x1="14" x2="17" y1="9" y2="9"></line>
+                      <path d="M8 14l1.5 1.5L12 13"></path>
+                      <line x1="14" x2="17" y1="15" y2="15"></line>
+                    </svg>
+                  </div>
+                  <div class="dd-text">
+                    <div class="dd-title">GST Reconciliation Checklist</div>
+                    <div class="dd-desc">
                       A practical checklist for accurate GST reconciliation
                     </div>
-</div>
-</a>
-<!-- CMA Data Template -->
-<a class="dropdown-item" href="cma-data-template.html">
-<div class="dd-icon">
-<svg fill="none" height="20" stroke="#082951" stroke-width="1.5" viewbox="0 0 24 24" width="20">
-<rect height="16" rx="2" width="18" x="3" y="4"></rect>
-<path d="M3 9h18"></path>
-<path d="M8 4v5"></path>
-<path d="M13 9v11"></path>
-<path d="M18 9v11"></path>
-</svg>
-</div>
-<div class="dd-text">
-<div class="dd-title">CMA Data Template</div>
-<div class="dd-desc">
+                  </div>
+                </a>
+                <!-- CMA Data Template -->
+                <a class="dropdown-item" href="cma-data-template.html">
+                  <div class="dd-icon">
+                    <svg
+                      fill="none"
+                      height="20"
+                      stroke="#082951"
+                      stroke-width="1.5"
+                      viewbox="0 0 24 24"
+                      width="20"
+                    >
+                      <rect height="16" rx="2" width="18" x="3" y="4"></rect>
+                      <path d="M3 9h18"></path>
+                      <path d="M8 4v5"></path>
+                      <path d="M13 9v11"></path>
+                      <path d="M18 9v11"></path>
+                    </svg>
+                  </div>
+                  <div class="dd-text">
+                    <div class="dd-title">CMA Data Template</div>
+                    <div class="dd-desc">
                       Organize financial data for bank and credit applications
                     </div>
-</div>
-</a>
-</div>
-</div>
-</div>
-<!-- INDUSTRIES DROPDOWN -->
-<div class="nav-dropdown-wrap">
-<span aria-haspopup="true" class="nav-link" role="button" tabindex="0">
+                  </div>
+                </a>
+              </div>
+            </div>
+          </div>
+          <!-- INDUSTRIES DROPDOWN -->
+          <div class="nav-dropdown-wrap">
+            <span
+              aria-haspopup="true"
+              class="nav-link"
+              role="button"
+              tabindex="0"
+            >
               Industries
-              <svg class="nav-chevron" fill="none" height="12" viewbox="0 0 12 12" width="12" xmlns="http://www.w3.org/2000/svg">
-<path d="M11.2498 2.99986L6.17049 8.74062C6.14908 8.76476 6.12279 8.78408 6.09336 8.79731C6.06393 8.81054 6.03202 8.81738 5.99976 8.81738C5.96749 8.81738 5.93559 8.81054 5.90615 8.79731C5.87672 8.78408 5.85043 8.76476 5.82902 8.74062L0.749756 2.99986" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.25"></path>
-</svg>
-</span>
-<div class="nav-dropdown dropdown-compact">
-<div class="dropdown-arrow"></div>
-<div class="dropdown-body">
-<!-- Manufacturing -->
-<a class="dropdown-item" href="../industries/manufacturing.html">
-<div class="dd-icon">
-<svg fill="none" height="20" stroke="#082951" stroke-width="1.5" viewbox="0 0 24 24" width="20">
-<path d="M3 21h18M3 7v1a3 3 0 0 0 6 0V7m0 1a3 3 0 0 0 6 0V7m0 1a3 3 0 0 0 6 0V7H3l2-4h14l2 4"></path>
-<path d="M5 21V11m14 0v10"></path>
-</svg>
-</div>
-<div class="dd-text">
-<div class="dd-title">Manufacturing</div>
-<div class="dd-desc">
+              <svg
+                class="nav-chevron"
+                fill="none"
+                height="12"
+                viewbox="0 0 12 12"
+                width="12"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  d="M11.2498 2.99986L6.17049 8.74062C6.14908 8.76476 6.12279 8.78408 6.09336 8.79731C6.06393 8.81054 6.03202 8.81738 5.99976 8.81738C5.96749 8.81738 5.93559 8.81054 5.90615 8.79731C5.87672 8.78408 5.85043 8.76476 5.82902 8.74062L0.749756 2.99986"
+                  stroke="currentColor"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="1.25"
+                ></path>
+              </svg>
+            </span>
+            <div class="nav-dropdown dropdown-compact">
+              <div class="dropdown-arrow"></div>
+              <div class="dropdown-body">
+                <!-- Manufacturing -->
+                <a
+                  class="dropdown-item"
+                  href="../industries/manufacturing.html"
+                >
+                  <div class="dd-icon">
+                    <svg
+                      fill="none"
+                      height="20"
+                      stroke="#082951"
+                      stroke-width="1.5"
+                      viewbox="0 0 24 24"
+                      width="20"
+                    >
+                      <path
+                        d="M3 21h18M3 7v1a3 3 0 0 0 6 0V7m0 1a3 3 0 0 0 6 0V7m0 1a3 3 0 0 0 6 0V7H3l2-4h14l2 4"
+                      ></path>
+                      <path d="M5 21V11m14 0v10"></path>
+                    </svg>
+                  </div>
+                  <div class="dd-text">
+                    <div class="dd-title">Manufacturing</div>
+                    <div class="dd-desc">
                       ₹20–200 Cr manufacturers across India
                     </div>
-</div>
-</a>
-<!-- Trading & Distribution -->
-<a class="dropdown-item" href="../industries/trading.html">
-<div class="dd-icon">
-<svg fill="none" height="20" stroke="#082951" stroke-width="1.5" viewbox="0 0 24 24" width="20">
-<rect height="14" rx="2" width="20" x="2" y="7"></rect>
-<path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"></path>
-</svg>
-</div>
-<div class="dd-text">
-<div class="dd-title">Trading &amp; Distribution</div>
-<div class="dd-desc">
+                  </div>
+                </a>
+                <!-- Trading & Distribution -->
+                <a class="dropdown-item" href="../industries/trading.html">
+                  <div class="dd-icon">
+                    <svg
+                      fill="none"
+                      height="20"
+                      stroke="#082951"
+                      stroke-width="1.5"
+                      viewbox="0 0 24 24"
+                      width="20"
+                    >
+                      <rect height="14" rx="2" width="20" x="2" y="7"></rect>
+                      <path
+                        d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"
+                      ></path>
+                    </svg>
+                  </div>
+                  <div class="dd-text">
+                    <div class="dd-title">Trading &amp; Distribution</div>
+                    <div class="dd-desc">
                       FMCG, steel, chemicals, and commodity traders
                     </div>
-</div>
-</a>
-<!-- Services -->
-<a class="dropdown-item" href="../industries/services.html">
-<div class="dd-icon">
-<svg fill="none" height="20" stroke="#082951" stroke-width="1.5" viewbox="0 0 24 24" width="20">
-<path d="M4 20V10"></path>
-<path d="M10 20V4"></path>
-<path d="M16 20v-7"></path>
-<path d="M22 20H2"></path>
-<path d="M7 10h3"></path>
-<path d="M13 4h3"></path>
-<path d="M19 13h3"></path>
-</svg>
-</div>
-<div class="dd-text">
-<div class="dd-title">Services</div>
-<div class="dd-desc">
+                  </div>
+                </a>
+                <!-- Services -->
+                <a class="dropdown-item" href="../industries/services.html">
+                  <div class="dd-icon">
+                    <svg
+                      fill="none"
+                      height="20"
+                      stroke="#082951"
+                      stroke-width="1.5"
+                      viewbox="0 0 24 24"
+                      width="20"
+                    >
+                      <path d="M4 20V10"></path>
+                      <path d="M10 20V4"></path>
+                      <path d="M16 20v-7"></path>
+                      <path d="M22 20H2"></path>
+                      <path d="M7 10h3"></path>
+                      <path d="M13 4h3"></path>
+                      <path d="M19 13h3"></path>
+                    </svg>
+                  </div>
+                  <div class="dd-text">
+                    <div class="dd-title">Services</div>
+                    <div class="dd-desc">
                       Project-based businesses focused on utilisation and
                       profitability
                     </div>
-</div>
-</a>
-<!-- High-Growth Startups -->
-<a class="dropdown-item" href="../industries/startups.html">
-<div class="dd-icon">
-<svg fill="none" height="20" stroke="#082951" stroke-width="1.5" viewbox="0 0 24 24" width="20">
-<path d="M4 18l6-6 4 4 6-8"></path>
-<path d="M16 8h4v4"></path>
-</svg>
-</div>
-<div class="dd-text">
-<div class="dd-title">High-Growth Startups</div>
-<div class="dd-desc">
+                  </div>
+                </a>
+                <!-- High-Growth Startups -->
+                <a class="dropdown-item" href="../industries/startups.html">
+                  <div class="dd-icon">
+                    <svg
+                      fill="none"
+                      height="20"
+                      stroke="#082951"
+                      stroke-width="1.5"
+                      viewbox="0 0 24 24"
+                      width="20"
+                    >
+                      <path d="M4 18l6-6 4 4 6-8"></path>
+                      <path d="M16 8h4v4"></path>
+                    </svg>
+                  </div>
+                  <div class="dd-text">
+                    <div class="dd-title">High-Growth Startups</div>
+                    <div class="dd-desc">
                       Investor-ready reporting, runway and burn visibility
                     </div>
-</div>
-</a>
-</div>
-</div>
-</div>
-<!-- ABOUT DROPDOWN -->
-<div class="nav-dropdown-wrap">
-<span aria-haspopup="true" class="nav-link" role="button" tabindex="0">
+                  </div>
+                </a>
+              </div>
+            </div>
+          </div>
+          <!-- ABOUT DROPDOWN -->
+          <div class="nav-dropdown-wrap">
+            <span
+              aria-haspopup="true"
+              class="nav-link"
+              role="button"
+              tabindex="0"
+            >
               About
-              <svg class="nav-chevron" fill="none" height="12" viewbox="0 0 12 12" width="12" xmlns="http://www.w3.org/2000/svg">
-<path d="M11.2498 2.99986L6.17049 8.74062C6.14908 8.76476 6.12279 8.78408 6.09336 8.79731C6.06393 8.81054 6.03202 8.81738 5.99976 8.81738C5.96749 8.81738 5.93559 8.81054 5.90615 8.79731C5.87672 8.78408 5.85043 8.76476 5.82902 8.74062L0.749756 2.99986" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.25"></path>
-</svg>
-</span>
-<div class="nav-dropdown dropdown-compact">
-<div class="dropdown-arrow"></div>
-<div class="dropdown-body">
-<a class="dropdown-item" href="../about/team.html">
-<div class="dd-icon">
-<svg fill="none" height="20" stroke="#082951" stroke-width="1.5" viewbox="0 0 24 24" width="20">
-<path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
-<circle cx="9" cy="7" r="4"></circle>
-<path d="M23 21v-2a4 4 0 0 0-3-3.87"></path>
-<path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
-</svg>
-</div>
-<div class="dd-text">
-<div class="dd-title">Our Team</div>
-<div class="dd-desc">Meet the CFO CRAFT advisory team</div>
-</div>
-</a>
-<a class="dropdown-item" href="../about/how-we-work.html">
-<div class="dd-icon">
-<svg fill="none" height="20" stroke="#082951" stroke-width="1.5" viewbox="0 0 24 24" width="20">
-<circle cx="12" cy="12" r="10"></circle>
-<line x1="2" x2="22" y1="12" y2="12"></line>
-<path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path>
-</svg>
-</div>
-<div class="dd-text">
-<div class="dd-title">How We Work</div>
-<div class="dd-desc">Our engagement model and process</div>
-</div>
-</a>
-<a class="dropdown-item" href="../about/careers.html">
-<div class="dd-icon">
-<svg fill="none" height="20" stroke="#082951" stroke-width="1.5" viewbox="0 0 24 24" width="20">
-<rect height="14" rx="2" ry="2" width="20" x="2" y="3"></rect>
-<line x1="8" x2="16" y1="21" y2="21"></line>
-<line x1="12" x2="12" y1="17" y2="21"></line>
-</svg>
-</div>
-<div class="dd-text">
-<div class="dd-title">Careers</div>
-<div class="dd-desc">Join the CFO CRAFT team</div>
-</div>
-</a>
-</div>
-</div>
-</div>
-<!-- RESOURCES DROPDOWN -->
-<div class="nav-dropdown-wrap">
-<span aria-haspopup="true" class="nav-link" role="button" tabindex="0">
+              <svg
+                class="nav-chevron"
+                fill="none"
+                height="12"
+                viewbox="0 0 12 12"
+                width="12"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  d="M11.2498 2.99986L6.17049 8.74062C6.14908 8.76476 6.12279 8.78408 6.09336 8.79731C6.06393 8.81054 6.03202 8.81738 5.99976 8.81738C5.96749 8.81738 5.93559 8.81054 5.90615 8.79731C5.87672 8.78408 5.85043 8.76476 5.82902 8.74062L0.749756 2.99986"
+                  stroke="currentColor"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="1.25"
+                ></path>
+              </svg>
+            </span>
+            <div class="nav-dropdown dropdown-compact">
+              <div class="dropdown-arrow"></div>
+              <div class="dropdown-body">
+                <a class="dropdown-item" href="../about/team.html">
+                  <div class="dd-icon">
+                    <svg
+                      fill="none"
+                      height="20"
+                      stroke="#082951"
+                      stroke-width="1.5"
+                      viewbox="0 0 24 24"
+                      width="20"
+                    >
+                      <path
+                        d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"
+                      ></path>
+                      <circle cx="9" cy="7" r="4"></circle>
+                      <path d="M23 21v-2a4 4 0 0 0-3-3.87"></path>
+                      <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
+                    </svg>
+                  </div>
+                  <div class="dd-text">
+                    <div class="dd-title">Our Team</div>
+                    <div class="dd-desc">Meet the CFO CRAFT advisory team</div>
+                  </div>
+                </a>
+                <a class="dropdown-item" href="../about/how-we-work.html">
+                  <div class="dd-icon">
+                    <svg
+                      fill="none"
+                      height="20"
+                      stroke="#082951"
+                      stroke-width="1.5"
+                      viewbox="0 0 24 24"
+                      width="20"
+                    >
+                      <circle cx="12" cy="12" r="10"></circle>
+                      <line x1="2" x2="22" y1="12" y2="12"></line>
+                      <path
+                        d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"
+                      ></path>
+                    </svg>
+                  </div>
+                  <div class="dd-text">
+                    <div class="dd-title">How We Work</div>
+                    <div class="dd-desc">Our engagement model and process</div>
+                  </div>
+                </a>
+                <a class="dropdown-item" href="../about/careers.html">
+                  <div class="dd-icon">
+                    <svg
+                      fill="none"
+                      height="20"
+                      stroke="#082951"
+                      stroke-width="1.5"
+                      viewbox="0 0 24 24"
+                      width="20"
+                    >
+                      <rect
+                        height="14"
+                        rx="2"
+                        ry="2"
+                        width="20"
+                        x="2"
+                        y="3"
+                      ></rect>
+                      <line x1="8" x2="16" y1="21" y2="21"></line>
+                      <line x1="12" x2="12" y1="17" y2="21"></line>
+                    </svg>
+                  </div>
+                  <div class="dd-text">
+                    <div class="dd-title">Careers</div>
+                    <div class="dd-desc">Join the CFO CRAFT team</div>
+                  </div>
+                </a>
+              </div>
+            </div>
+          </div>
+          <!-- RESOURCES DROPDOWN -->
+          <div class="nav-dropdown-wrap">
+            <span
+              aria-haspopup="true"
+              class="nav-link"
+              role="button"
+              tabindex="0"
+            >
               Resources
-              <svg class="nav-chevron" fill="none" height="12" viewbox="0 0 12 12" width="12" xmlns="http://www.w3.org/2000/svg">
-<path d="M11.2498 2.99986L6.17049 8.74062C6.14908 8.76476 6.12279 8.78408 6.09336 8.79731C6.06393 8.81054 6.03202 8.81738 5.99976 8.81738C5.96749 8.81738 5.93559 8.81054 5.90615 8.79731C5.87672 8.78408 5.85043 8.76476 5.82902 8.74062L0.749756 2.99986" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.25"></path>
-</svg>
-</span>
-<div class="nav-dropdown dropdown-wide">
-<div class="dropdown-arrow"></div>
-<div class="dropdown-body">
-<div class="dropdown-grid three-col">
-<div class="dropdown-col">
-<a class="dropdown-item" href="../resources/resources.html">
-<div class="dd-icon">
-<svg fill="none" height="20" stroke="#082951" stroke-width="1.5" viewbox="0 0 24 24" width="20">
-<circle cx="11" cy="11" r="8"></circle>
-<line x1="21" x2="16.65" y1="21" y2="16.65"></line>
-</svg>
-</div>
-<div class="dd-text">
-<div class="dd-title">Resources Hub</div>
-<div class="dd-desc">
+              <svg
+                class="nav-chevron"
+                fill="none"
+                height="12"
+                viewbox="0 0 12 12"
+                width="12"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  d="M11.2498 2.99986L6.17049 8.74062C6.14908 8.76476 6.12279 8.78408 6.09336 8.79731C6.06393 8.81054 6.03202 8.81738 5.99976 8.81738C5.96749 8.81738 5.93559 8.81054 5.90615 8.79731C5.87672 8.78408 5.85043 8.76476 5.82902 8.74062L0.749756 2.99986"
+                  stroke="currentColor"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="1.25"
+                ></path>
+              </svg>
+            </span>
+            <div class="nav-dropdown dropdown-wide">
+              <div class="dropdown-arrow"></div>
+              <div class="dropdown-body">
+                <div class="dropdown-grid three-col">
+                  <div class="dropdown-col">
+                    <a class="dropdown-item" href="../resources/resources.html">
+                      <div class="dd-icon">
+                        <svg
+                          fill="none"
+                          height="20"
+                          stroke="#082951"
+                          stroke-width="1.5"
+                          viewbox="0 0 24 24"
+                          width="20"
+                        >
+                          <circle cx="11" cy="11" r="8"></circle>
+                          <line x1="21" x2="16.65" y1="21" y2="16.65"></line>
+                        </svg>
+                      </div>
+                      <div class="dd-text">
+                        <div class="dd-title">Resources Hub</div>
+                        <div class="dd-desc">
                           Guides, templates &amp; insights for Indian businesses
                         </div>
-</div>
-</a>
-<a class="dropdown-item" href="../resources/case-studies.html">
-<div class="dd-icon">
-<svg fill="none" height="20" stroke="#082951" stroke-width="1.5" viewbox="0 0 24 24" width="20">
-<path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
-<polyline points="14 2 14 8 20 8"></polyline>
-</svg>
-</div>
-<div class="dd-text">
-<div class="dd-title">Case Studies</div>
-<div class="dd-desc">
+                      </div>
+                    </a>
+                    <a
+                      class="dropdown-item"
+                      href="../resources/case-studies.html"
+                    >
+                      <div class="dd-icon">
+                        <svg
+                          fill="none"
+                          height="20"
+                          stroke="#082951"
+                          stroke-width="1.5"
+                          viewbox="0 0 24 24"
+                          width="20"
+                        >
+                          <path
+                            d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"
+                          ></path>
+                          <polyline points="14 2 14 8 20 8"></polyline>
+                        </svg>
+                      </div>
+                      <div class="dd-text">
+                        <div class="dd-title">Case Studies</div>
+                        <div class="dd-desc">
                           See how businesses use CFO CRAFT
                         </div>
-</div>
-</a>
-<a class="dropdown-item" href="../resources/events.html">
-<div class="dd-icon">
-<svg fill="none" height="20" stroke="#082951" stroke-width="1.5" viewbox="0 0 24 24" width="20">
-<rect height="18" rx="2" ry="2" width="18" x="3" y="4"></rect>
-<line x1="16" x2="16" y1="2" y2="6"></line>
-<line x1="8" x2="8" y1="2" y2="6"></line>
-<line x1="3" x2="21" y1="10" y2="10"></line>
-</svg>
-</div>
-<div class="dd-text">
-<div class="dd-title">Events &amp; Webinars</div>
-<div class="dd-desc">Connect with us face-to-face</div>
-</div>
-</a>
-</div>
-<div class="dropdown-col">
-<div class="dd-col-title">Free Tools</div>
-<a class="dropdown-tool-link" href="working-capital-calculator.html">
-<svg fill="none" height="14" stroke="#082951" stroke-width="1.5" viewbox="0 0 24 24" width="14">
-<rect height="20" rx="2" width="16" x="4" y="2"></rect>
-<line x1="8" x2="16" y1="6" y2="6"></line>
-</svg>
+                      </div>
+                    </a>
+                    <a class="dropdown-item" href="../resources/events.html">
+                      <div class="dd-icon">
+                        <svg
+                          fill="none"
+                          height="20"
+                          stroke="#082951"
+                          stroke-width="1.5"
+                          viewbox="0 0 24 24"
+                          width="20"
+                        >
+                          <rect
+                            height="18"
+                            rx="2"
+                            ry="2"
+                            width="18"
+                            x="3"
+                            y="4"
+                          ></rect>
+                          <line x1="16" x2="16" y1="2" y2="6"></line>
+                          <line x1="8" x2="8" y1="2" y2="6"></line>
+                          <line x1="3" x2="21" y1="10" y2="10"></line>
+                        </svg>
+                      </div>
+                      <div class="dd-text">
+                        <div class="dd-title">Events &amp; Webinars</div>
+                        <div class="dd-desc">Connect with us face-to-face</div>
+                      </div>
+                    </a>
+                  </div>
+                  <div class="dropdown-col">
+                    <div class="dd-col-title">Free Tools</div>
+                    <a
+                      class="dropdown-tool-link"
+                      href="working-capital-calculator.html"
+                    >
+                      <svg
+                        fill="none"
+                        height="14"
+                        stroke="#082951"
+                        stroke-width="1.5"
+                        viewbox="0 0 24 24"
+                        width="14"
+                      >
+                        <rect height="20" rx="2" width="16" x="4" y="2"></rect>
+                        <line x1="8" x2="16" y1="6" y2="6"></line>
+                      </svg>
                       Working Capital Calculator
                     </a>
-<a class="dropdown-tool-link" href="monthly-cash-flow-model.html">
-<svg fill="none" height="14" stroke="#082951" stroke-width="1.5" viewbox="0 0 24 24" width="14">
-<path d="M22 12h-4l-3 9L9 3l-3 9H2"></path>
-</svg>
+                    <a
+                      class="dropdown-tool-link"
+                      href="monthly-cash-flow-model.html"
+                    >
+                      <svg
+                        fill="none"
+                        height="14"
+                        stroke="#082951"
+                        stroke-width="1.5"
+                        viewbox="0 0 24 24"
+                        width="14"
+                      >
+                        <path d="M22 12h-4l-3 9L9 3l-3 9H2"></path>
+                      </svg>
                       Monthly Cash Flow Model Template
                     </a>
-<a class="dropdown-tool-link" href="overdraft-cost-calculator.html">
-<svg fill="none" height="14" stroke="#082951" stroke-width="1.5" viewbox="0 0 24 24" width="14">
-<path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path>
-</svg>
+                    <a
+                      class="dropdown-tool-link"
+                      href="overdraft-cost-calculator.html"
+                    >
+                      <svg
+                        fill="none"
+                        height="14"
+                        stroke="#082951"
+                        stroke-width="1.5"
+                        viewbox="0 0 24 24"
+                        width="14"
+                      >
+                        <path
+                          d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"
+                        ></path>
+                      </svg>
                       Overdraft Cost Calculator
                     </a>
-<a class="dropdown-tool-link" href="gst-reconciliation-checklist.html">
-<svg fill="none" height="14" stroke="#082951" stroke-width="1.5" viewbox="0 0 24 24" width="14">
-<path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"></path>
-</svg>
+                    <a
+                      class="dropdown-tool-link"
+                      href="gst-reconciliation-checklist.html"
+                    >
+                      <svg
+                        fill="none"
+                        height="14"
+                        stroke="#082951"
+                        stroke-width="1.5"
+                        viewbox="0 0 24 24"
+                        width="14"
+                      >
+                        <path
+                          d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"
+                        ></path>
+                      </svg>
                       GST Reconciliation Checklist
                     </a>
-<a class="dropdown-tool-link" href="cma-data-template.html">
-<svg fill="none" height="14" stroke="#082951" stroke-width="1.5" viewbox="0 0 24 24" width="14">
-<rect height="18" rx="2" width="18" x="3" y="3"></rect>
-<path d="M3 9h18"></path>
-<path d="M9 21V9"></path>
-</svg>
+                    <a class="dropdown-tool-link" href="cma-data-template.html">
+                      <svg
+                        fill="none"
+                        height="14"
+                        stroke="#082951"
+                        stroke-width="1.5"
+                        viewbox="0 0 24 24"
+                        width="14"
+                      >
+                        <rect height="18" rx="2" width="18" x="3" y="3"></rect>
+                        <path d="M3 9h18"></path>
+                        <path d="M9 21V9"></path>
+                      </svg>
                       CMA Data Template
                     </a>
-</div>
-<div class="dropdown-col">
-<div class="dropdown-featured-card">
-<div class="featured-tag">CFO Insights</div>
-<div class="featured-title">
+                  </div>
+                  <div class="dropdown-col">
+                    <div class="dropdown-featured-card">
+                      <div class="featured-tag">CFO Insights</div>
+                      <div class="featured-title">
                         How to reduce your cash conversion cycle by 40%
                       </div>
-<a class="featured-link" href="../resources/resources.html">
+                      <a
+                        class="featured-link"
+                        href="../resources/resources.html"
+                      >
                         Read more
                       </a>
-</div>
-</div>
-</div>
-</div>
-</div>
-</div>
-<a class="nav-link" href="../pricing/pricing.html"> Pricing </a>
-</div>
-<div class="nav-right">
-<a class="nav-signin" href="../client-login.html">
-<svg fill="none" height="20" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" viewbox="0 0 24 24" width="20" xmlns="http://www.w3.org/2000/svg">
-<circle cx="12" cy="8" r="4"></circle>
-<path d="M20 21a8 8 0 1 0-16 0"></path>
-</svg>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <a class="nav-link" href="../pricing/pricing.html"> Pricing </a>
+        </div>
+        <div class="nav-right">
+          <a class="nav-signin" href="../client-login.html">
+            <svg
+              fill="none"
+              height="20"
+              stroke="currentColor"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="1.5"
+              viewbox="0 0 24 24"
+              width="20"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <circle cx="12" cy="8" r="4"></circle>
+              <path d="M20 21a8 8 0 1 0-16 0"></path>
+            </svg>
             Client Login
           </a>
-<a class="btn-secondary nav-cta" href="../book-intro.html">
+          <a class="btn-secondary nav-cta" href="../book-intro.html">
             Book an Intro
           </a>
-</div>
-<button aria-label="Toggle menu" class="mobile-menu-btn" id="mobileMenuBtn">
-<span> </span>
-<span> </span>
-<span> </span>
-</button>
-</div>
-</nav>
-<main id="main">
-<section class="tool-hero">
-<div class="wrap">
-<div class="tool-hero-grid">
-<div class="tool-hero-copy">
-<p class="crumb">
-<a href="/">Home</a> /
-            <a href="/#tools">Free tools</a> /
-            <span>Working capital calculator</span>
-</p>
-<h1>How many days is your cash stuck in operations?</h1>
-<p class="lede">
-            Enter five figures from your last balance sheet and P&amp;L, and
-            your borrowing rate. The calculator returns your cash conversion
-            cycle, the working capital it locks up, and what shortening it would
-            release against your CC/OD line.
-          </p>
-<p class="fine">
-            All figures in ₹ lakh. Calculations run in your browser; nothing you
-            enter is sent anywhere.
-          </p><div class="tool-hero-action"><a aria-label="Use the Calculator — jump to the tool" class="btn tool-hero-cta" href="#tool-start">Use the Calculator <span aria-hidden="true" class="tool-hero-cta-arrow">↓</span></a></div>
-</div>
-<aside aria-label="Working Capital Calculator video walkthrough" class="tool-demo-card">
-<div class="tool-demo-shell">
-<div class="tool-demo-media">
-<video aria-label="Working Capital Calculator demo walkthrough" class="tool-demo-video" controls="" playsinline="" poster="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxMjgwIiBoZWlnaHQ9IjcyMCIgdmlld0JveD0iMCAwIDEyODAgNzIwIj4KICAgICAgPGRlZnM+CiAgICAgICAgPGxpbmVhckdyYWRpZW50IGlkPSJiZyIgeDE9IjAiIHkxPSIwIiB4Mj0iMSIgeTI9IjEiPgogICAgICAgICAgPHN0b3Agb2Zmc2V0PSIwIiBzdG9wLWNvbG9yPSIjMDIwQzFCIi8+CiAgICAgICAgICA8c3RvcCBvZmZzZXQ9Ii41NiIgc3RvcC1jb2xvcj0iIzA3MUIzNSIvPgogICAgICAgICAgPHN0b3Agb2Zmc2V0PSIxIiBzdG9wLWNvbG9yPSIjMDgyOTUxIi8+CiAgICAgICAgPC9saW5lYXJHcmFkaWVudD4KICAgICAgICA8cmFkaWFsR3JhZGllbnQgaWQ9Imdsb3ciIGN4PSI4MiUiIGN5PSIxOCUiIHI9IjcwJSI+CiAgICAgICAgICA8c3RvcCBvZmZzZXQ9IjAiIHN0b3AtY29sb3I9IiMyQjZEQjIiIHN0b3Atb3BhY2l0eT0iLjQyIi8+CiAgICAgICAgICA8c3RvcCBvZmZzZXQ9IjEiIHN0b3AtY29sb3I9IiMyQjZEQjIiIHN0b3Atb3BhY2l0eT0iMCIvPgogICAgICAgIDwvcmFkaWFsR3JhZGllbnQ+CiAgICAgIDwvZGVmcz4KICAgICAgPHJlY3Qgd2lkdGg9IjEyODAiIGhlaWdodD0iNzIwIiByeD0iMjgiIGZpbGw9InVybCgjYmcpIi8+CiAgICAgIDxyZWN0IHdpZHRoPSIxMjgwIiBoZWlnaHQ9IjcyMCIgcng9IjI4IiBmaWxsPSJ1cmwoI2dsb3cpIi8+CiAgICAgIDxjaXJjbGUgY3g9IjExMTAiIGN5PSIxMDAiIHI9IjIyMCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjQTZDQkY3IiBzdHJva2Utb3BhY2l0eT0iLjA4IiBzdHJva2Utd2lkdGg9IjIiLz4KICAgICAgPGNpcmNsZSBjeD0iMTExMCIgY3k9IjEwMCIgcj0iMTY1IiBmaWxsPSJub25lIiBzdHJva2U9IiNBNkNCRjciIHN0cm9rZS1vcGFjaXR5PSIuMDU1IiBzdHJva2Utd2lkdGg9IjIiLz4KICAgICAgPHRleHQgeD0iNzIiIHk9IjkyIiBmaWxsPSIjQTZDQkY3IiBmb250LWZhbWlseT0iQXJpYWwsIHNhbnMtc2VyaWYiIGZvbnQtc2l6ZT0iMjQiIGZvbnQtd2VpZ2h0PSI3MDAiIGxldHRlci1zcGFjaW5nPSIzIj5DRk8gQ1JBRlQgwrcgRlJFRSBUT09MIFdBTEtUSFJPVUdIPC90ZXh0PgogICAgICA8ZyB0cmFuc2Zvcm09InRyYW5zbGF0ZSg2NDAgMzEwKSI+CiAgICAgICAgPGNpcmNsZSByPSI3NiIgZmlsbD0iI0VFQkE3RCIvPgogICAgICAgIDxjaXJjbGUgcj0iNzYiIGZpbGw9Im5vbmUiIHN0cm9rZT0iI2ZmZmZmZiIgc3Ryb2tlLW9wYWNpdHk9Ii4yMiIgc3Ryb2tlLXdpZHRoPSIyIi8+CiAgICAgICAgPHBhdGggZD0iTS0xOCAtMzEgTDM5IDAgTC0xOCAzMSBaIiBmaWxsPSIjMDgyOTUxIi8+CiAgICAgIDwvZz4KICAgICAgPHRleHQgeD0iNzIiIHk9IjUwMCIgZmlsbD0iI2ZmZmZmZiIgZm9udC1mYW1pbHk9IkFyaWFsLCBzYW5zLXNlcmlmIiBmb250LXNpemU9IjQ4IiBmb250LXdlaWdodD0iNjAwIj5Xb3JraW5nIENhcGl0YWwgQ2FsY3VsYXRvcjwvdGV4dD4KICAgICAgPHRleHQgeD0iNzIiIHk9IjU1NSIgZmlsbD0iI0E2Q0JGNyIgZm9udC1mYW1pbHk9IkFyaWFsLCBzYW5zLXNlcmlmIiBmb250LXNpemU9IjI0Ij5DYXNoIGNvbnZlcnNpb24gY3ljbGUgd2Fsa3Rocm91Z2g8L3RleHQ+CiAgICAgIDxyZWN0IHg9IjcyIiB5PSI2MTgiIHdpZHRoPSIxMTM2IiBoZWlnaHQ9IjIiIHJ4PSIxIiBmaWxsPSIjQTZDQkY3IiBmaWxsLW9wYWNpdHk9Ii4xNSIvPgogICAgICA8dGV4dCB4PSI3MiIgeT0iNjYzIiBmaWxsPSIjZmZmZmZmIiBmaWxsLW9wYWNpdHk9Ii43MCIgZm9udC1mYW1pbHk9IkFyaWFsLCBzYW5zLXNlcmlmIiBmb250LXNpemU9IjIwIj5QcmVzcyBwbGF5IGZvciBhIHF1aWNrIHdhbGt0aHJvdWdoPC90ZXh0PgogICAgPC9zdmc+" preload="metadata">
-<source src="../videos/working-capital-calculator-demo.mp4" type="video/mp4"/>
-                  Your browser does not support HTML5 video.
-                </video>
-</div>
-<div class="tool-demo-meta">
-<div class="tool-demo-copy">
-<p class="tool-demo-kicker">Prefer watching over reading?</p>
-<h2>See how to use the Working Capital Calculator</h2>
-<p>A quick walkthrough of the inputs, DIO / DSO / DPO, cash conversion cycle and the cash you could release by tightening working capital.</p>
-</div>
-</div>
-</div>
-</aside>
-</div>
-</div>
-</section>
-<div class="tools-strip">
-<nav aria-label="Free tools" class="wrap">
-<a aria-current="page" href="working-capital-calculator.html">Working capital calculator</a><a href="monthly-cash-flow-model.html">Monthly cash flow model</a><a href="overdraft-cost-calculator.html">Overdraft cost calculator</a><a href="gst-reconciliation-checklist.html">GST reconciliation checklist</a><a href="cma-data-template.html">CMA data template</a>
-</nav>
-</div>
-<section aria-label="Calculator" class="tool wrap" id="tool-start">
-<div class="panel">
-<p class="err" id="err" role="alert"></p>
-<fieldset>
-<legend>From your last full year</legend>
-<div class="grid2">
-<div class="field">
-<label for="rev">Revenue from operations</label>
-<div class="inbox">
-<input aria-describedby="rev-h" id="rev" inputmode="decimal" min="0" step="any" type="number" value="4800"/><span>₹ lakh</span>
-</div>
-<p class="hint" id="rev-h">Net of GST.</p>
-</div>
-<div class="field">
-<label for="cogs">Cost of goods sold</label>
-<div class="inbox">
-<input aria-describedby="cogs-h" id="cogs" inputmode="decimal" min="0" step="any" type="number" value="3600"/><span>₹ lakh</span>
-</div>
-<p class="hint" id="cogs-h">
+        </div>
+        <button
+          aria-label="Toggle menu"
+          class="mobile-menu-btn"
+          id="mobileMenuBtn"
+        >
+          <span> </span>
+          <span> </span>
+          <span> </span>
+        </button>
+      </div>
+    </nav>
+    <main id="main">
+      <section class="tool-hero">
+        <div class="wrap">
+          <div class="tool-hero-grid">
+            <div class="tool-hero-copy">
+              <p class="crumb">
+                <a href="/">Home</a> / <a href="/#tools">Free tools</a> /
+                <span>Working capital calculator</span>
+              </p>
+              <h1>How many days is your cash stuck in operations?</h1>
+              <p class="lede">
+                Enter five figures from your last balance sheet and P&amp;L, and
+                your borrowing rate. The calculator returns your cash conversion
+                cycle, the working capital it locks up, and what shortening it
+                would release against your CC/OD line.
+              </p>
+              <p class="fine">
+                All figures in ₹ lakh. Calculations run in your browser; nothing
+                you enter is sent anywhere.
+              </p>
+              <div class="tool-hero-action">
+                <a
+                  aria-label="Use the Calculator — jump to the tool"
+                  class="btn tool-hero-cta"
+                  href="#tool-start"
+                  >Use the Calculator
+                  <span aria-hidden="true" class="tool-hero-cta-arrow"
+                    >↓</span
+                  ></a
+                >
+              </div>
+            </div>
+            <aside
+              aria-label="Working Capital Calculator video walkthrough"
+              class="tool-demo-card"
+            >
+              <div class="tool-demo-shell">
+                <div class="tool-demo-media">
+                  <video
+                    aria-label="Working Capital Calculator demo walkthrough"
+                    class="tool-demo-video"
+                    controls=""
+                    playsinline=""
+                    poster="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxMjgwIiBoZWlnaHQ9IjcyMCIgdmlld0JveD0iMCAwIDEyODAgNzIwIj4KICAgICAgPGRlZnM+CiAgICAgICAgPGxpbmVhckdyYWRpZW50IGlkPSJiZyIgeDE9IjAiIHkxPSIwIiB4Mj0iMSIgeTI9IjEiPgogICAgICAgICAgPHN0b3Agb2Zmc2V0PSIwIiBzdG9wLWNvbG9yPSIjMDIwQzFCIi8+CiAgICAgICAgICA8c3RvcCBvZmZzZXQ9Ii41NiIgc3RvcC1jb2xvcj0iIzA3MUIzNSIvPgogICAgICAgICAgPHN0b3Agb2Zmc2V0PSIxIiBzdG9wLWNvbG9yPSIjMDgyOTUxIi8+CiAgICAgICAgPC9saW5lYXJHcmFkaWVudD4KICAgICAgICA8cmFkaWFsR3JhZGllbnQgaWQ9Imdsb3ciIGN4PSI4MiUiIGN5PSIxOCUiIHI9IjcwJSI+CiAgICAgICAgICA8c3RvcCBvZmZzZXQ9IjAiIHN0b3AtY29sb3I9IiMyQjZEQjIiIHN0b3Atb3BhY2l0eT0iLjQyIi8+CiAgICAgICAgICA8c3RvcCBvZmZzZXQ9IjEiIHN0b3AtY29sb3I9IiMyQjZEQjIiIHN0b3Atb3BhY2l0eT0iMCIvPgogICAgICAgIDwvcmFkaWFsR3JhZGllbnQ+CiAgICAgIDwvZGVmcz4KICAgICAgPHJlY3Qgd2lkdGg9IjEyODAiIGhlaWdodD0iNzIwIiByeD0iMjgiIGZpbGw9InVybCgjYmcpIi8+CiAgICAgIDxyZWN0IHdpZHRoPSIxMjgwIiBoZWlnaHQ9IjcyMCIgcng9IjI4IiBmaWxsPSJ1cmwoI2dsb3cpIi8+CiAgICAgIDxjaXJjbGUgY3g9IjExMTAiIGN5PSIxMDAiIHI9IjIyMCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjQTZDQkY3IiBzdHJva2Utb3BhY2l0eT0iLjA4IiBzdHJva2Utd2lkdGg9IjIiLz4KICAgICAgPGNpcmNsZSBjeD0iMTExMCIgY3k9IjEwMCIgcj0iMTY1IiBmaWxsPSJub25lIiBzdHJva2U9IiNBNkNCRjciIHN0cm9rZS1vcGFjaXR5PSIuMDU1IiBzdHJva2Utd2lkdGg9IjIiLz4KICAgICAgPHRleHQgeD0iNzIiIHk9IjkyIiBmaWxsPSIjQTZDQkY3IiBmb250LWZhbWlseT0iQXJpYWwsIHNhbnMtc2VyaWYiIGZvbnQtc2l6ZT0iMjQiIGZvbnQtd2VpZ2h0PSI3MDAiIGxldHRlci1zcGFjaW5nPSIzIj5DRk8gQ1JBRlQgwrcgRlJFRSBUT09MIFdBTEtUSFJPVUdIPC90ZXh0PgogICAgICA8ZyB0cmFuc2Zvcm09InRyYW5zbGF0ZSg2NDAgMzEwKSI+CiAgICAgICAgPGNpcmNsZSByPSI3NiIgZmlsbD0iI0VFQkE3RCIvPgogICAgICAgIDxjaXJjbGUgcj0iNzYiIGZpbGw9Im5vbmUiIHN0cm9rZT0iI2ZmZmZmZiIgc3Ryb2tlLW9wYWNpdHk9Ii4yMiIgc3Ryb2tlLXdpZHRoPSIyIi8+CiAgICAgICAgPHBhdGggZD0iTS0xOCAtMzEgTDM5IDAgTC0xOCAzMSBaIiBmaWxsPSIjMDgyOTUxIi8+CiAgICAgIDwvZz4KICAgICAgPHRleHQgeD0iNzIiIHk9IjUwMCIgZmlsbD0iI2ZmZmZmZiIgZm9udC1mYW1pbHk9IkFyaWFsLCBzYW5zLXNlcmlmIiBmb250LXNpemU9IjQ4IiBmb250LXdlaWdodD0iNjAwIj5Xb3JraW5nIENhcGl0YWwgQ2FsY3VsYXRvcjwvdGV4dD4KICAgICAgPHRleHQgeD0iNzIiIHk9IjU1NSIgZmlsbD0iI0E2Q0JGNyIgZm9udC1mYW1pbHk9IkFyaWFsLCBzYW5zLXNlcmlmIiBmb250LXNpemU9IjI0Ij5DYXNoIGNvbnZlcnNpb24gY3ljbGUgd2Fsa3Rocm91Z2g8L3RleHQ+CiAgICAgIDxyZWN0IHg9IjcyIiB5PSI2MTgiIHdpZHRoPSIxMTM2IiBoZWlnaHQ9IjIiIHJ4PSIxIiBmaWxsPSIjQTZDQkY3IiBmaWxsLW9wYWNpdHk9Ii4xNSIvPgogICAgICA8dGV4dCB4PSI3MiIgeT0iNjYzIiBmaWxsPSIjZmZmZmZmIiBmaWxsLW9wYWNpdHk9Ii43MCIgZm9udC1mYW1pbHk9IkFyaWFsLCBzYW5zLXNlcmlmIiBmb250LXNpemU9IjIwIj5QcmVzcyBwbGF5IGZvciBhIHF1aWNrIHdhbGt0aHJvdWdoPC90ZXh0PgogICAgPC9zdmc+"
+                    preload="metadata"
+                  >
+                    <source
+                      src="../videos/working-capital-calculator-demo.mp4"
+                      type="video/mp4"
+                    />
+                    Your browser does not support HTML5 video.
+                  </video>
+                </div>
+                <div class="tool-demo-meta">
+                  <div class="tool-demo-copy">
+                    <p class="tool-demo-kicker">
+                      Prefer watching over reading?
+                    </p>
+                    <h2>See how to use the Working Capital Calculator</h2>
+                    <p>
+                      A quick walkthrough of the inputs, DIO / DSO / DPO, cash
+                      conversion cycle and the cash you could release by
+                      tightening working capital.
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </aside>
+          </div>
+        </div>
+      </section>
+      <div class="tools-strip">
+        <nav aria-label="Free tools" class="wrap">
+          <a aria-current="page" href="working-capital-calculator.html"
+            >Working capital calculator</a
+          ><a href="monthly-cash-flow-model.html">Monthly cash flow model</a
+          ><a href="overdraft-cost-calculator.html">Overdraft cost calculator</a
+          ><a href="gst-reconciliation-checklist.html"
+            >GST reconciliation checklist</a
+          ><a href="cma-data-template.html">CMA data template</a>
+        </nav>
+      </div>
+      <section aria-label="Calculator" class="tool wrap" id="tool-start">
+        <div class="panel">
+          <p class="err" id="err" role="alert"></p>
+          <fieldset>
+            <legend>From your last full year</legend>
+            <div class="grid2">
+              <div class="field">
+                <label for="rev">Revenue from operations</label>
+                <div class="inbox">
+                  <input
+                    aria-describedby="rev-h"
+                    id="rev"
+                    inputmode="decimal"
+                    min="0"
+                    step="any"
+                    type="number"
+                    value="4800"
+                  /><span>₹ lakh</span>
+                </div>
+                <p class="hint" id="rev-h">Net of GST.</p>
+              </div>
+              <div class="field">
+                <label for="cogs">Cost of goods sold</label>
+                <div class="inbox">
+                  <input
+                    aria-describedby="cogs-h"
+                    id="cogs"
+                    inputmode="decimal"
+                    min="0"
+                    step="any"
+                    type="number"
+                    value="3600"
+                  /><span>₹ lakh</span>
+                </div>
+                <p class="hint" id="cogs-h">
                   Materials, conversion cost and purchases of traded goods.
                 </p>
-</div>
-<div class="field">
-<label for="inv">Average inventory</label>
-<div class="inbox">
-<input aria-describedby="inv-h" id="inv" inputmode="decimal" min="0" step="any" type="number" value="720"/><span>₹ lakh</span>
-</div>
-<p class="hint" id="inv-h">
+              </div>
+              <div class="field">
+                <label for="inv">Average inventory</label>
+                <div class="inbox">
+                  <input
+                    aria-describedby="inv-h"
+                    id="inv"
+                    inputmode="decimal"
+                    min="0"
+                    step="any"
+                    type="number"
+                    value="720"
+                  /><span>₹ lakh</span>
+                </div>
+                <p class="hint" id="inv-h">
                   Raw material, WIP and finished goods. Average of opening and
                   closing.
                 </p>
-</div>
-<div class="field">
-<label for="rec">Average trade receivables</label>
-<div class="inbox">
-<input aria-describedby="rec-h" id="rec" inputmode="decimal" min="0" step="any" type="number" value="1050"/><span>₹ lakh</span>
-</div>
-<p class="hint" id="rec-h">
+              </div>
+              <div class="field">
+                <label for="rec">Average trade receivables</label>
+                <div class="inbox">
+                  <input
+                    aria-describedby="rec-h"
+                    id="rec"
+                    inputmode="decimal"
+                    min="0"
+                    step="any"
+                    type="number"
+                    value="1050"
+                  /><span>₹ lakh</span>
+                </div>
+                <p class="hint" id="rec-h">
                   Average of opening and closing debtors.
                 </p>
-</div>
-<div class="field">
-<label for="pay">Average trade payables</label>
-<div class="inbox">
-<input aria-describedby="pay-h" id="pay" inputmode="decimal" min="0" step="any" type="number" value="540"/><span>₹ lakh</span>
-</div>
-<p class="hint" id="pay-h">
+              </div>
+              <div class="field">
+                <label for="pay">Average trade payables</label>
+                <div class="inbox">
+                  <input
+                    aria-describedby="pay-h"
+                    id="pay"
+                    inputmode="decimal"
+                    min="0"
+                    step="any"
+                    type="number"
+                    value="540"
+                  /><span>₹ lakh</span>
+                </div>
+                <p class="hint" id="pay-h">
                   Average of opening and closing creditors for goods.
                 </p>
-</div>
-<div class="field">
-<label for="rate">CC/OD interest rate</label>
-<div class="inbox">
-<input aria-describedby="rate-h" id="rate" inputmode="decimal" min="0" step="any" type="number" value="10.5"/><span>% p.a.</span>
-</div>
-<p class="hint" id="rate-h">
+              </div>
+              <div class="field">
+                <label for="rate">CC/OD interest rate</label>
+                <div class="inbox">
+                  <input
+                    aria-describedby="rate-h"
+                    id="rate"
+                    inputmode="decimal"
+                    min="0"
+                    step="any"
+                    type="number"
+                    value="10.5"
+                  /><span>% p.a.</span>
+                </div>
+                <p class="hint" id="rate-h">
                   Your working capital borrowing rate.
                 </p>
-</div>
-</div>
-</fieldset>
-<fieldset>
-<legend>What if you tightened the cycle?</legend>
-<div class="grid2">
-<div class="field">
-<label for="cut_dso">Collect faster by</label>
-<div class="inbox">
-<input id="cut_dso" inputmode="decimal" min="0" step="any" type="number" value="15"/><span>days</span>
-</div>
-</div>
-<div class="field">
-<label for="cut_dio">Hold less stock by</label>
-<div class="inbox">
-<input id="cut_dio" inputmode="decimal" min="0" step="any" type="number" value="10"/><span>days</span>
-</div>
-</div>
-<div class="field">
-<label for="ext_dpo">Pay suppliers later by</label>
-<div class="inbox">
-<input aria-describedby="ext_dpo-h" id="ext_dpo" inputmode="decimal" min="0" step="any" type="number" value="0"/><span>days</span>
-</div>
-<p class="hint" id="ext_dpo-h">
+              </div>
+            </div>
+          </fieldset>
+          <fieldset>
+            <legend>What if you tightened the cycle?</legend>
+            <div class="grid2">
+              <div class="field">
+                <label for="cut_dso">Collect faster by</label>
+                <div class="inbox">
+                  <input
+                    id="cut_dso"
+                    inputmode="decimal"
+                    min="0"
+                    step="any"
+                    type="number"
+                    value="15"
+                  /><span>days</span>
+                </div>
+              </div>
+              <div class="field">
+                <label for="cut_dio">Hold less stock by</label>
+                <div class="inbox">
+                  <input
+                    id="cut_dio"
+                    inputmode="decimal"
+                    min="0"
+                    step="any"
+                    type="number"
+                    value="10"
+                  /><span>days</span>
+                </div>
+              </div>
+              <div class="field">
+                <label for="ext_dpo">Pay suppliers later by</label>
+                <div class="inbox">
+                  <input
+                    aria-describedby="ext_dpo-h"
+                    id="ext_dpo"
+                    inputmode="decimal"
+                    min="0"
+                    step="any"
+                    type="number"
+                    value="0"
+                  /><span>days</span>
+                </div>
+                <p class="hint" id="ext_dpo-h">
                   Read the note on MSE suppliers before using this lever.
                 </p>
-</div>
-</div>
-</fieldset>
-</div>
-<aside aria-label="Results" aria-live="polite" class="slip">
-<div class="slip-head">
-<span class="k">Cash conversion cycle</span><span class="big" id="o_ccc">—</span><span class="u">days</span><span class="sub" id="o_ccc_sub"></span>
-</div>
-<dl class="rows">
-<div>
-<dt>Inventory days (DIO)</dt>
-<dd id="o_dio">—</dd>
-</div>
-<div>
-<dt>Receivable days (DSO)</dt>
-<dd id="o_dso">—</dd>
-</div>
-<div>
-<dt>Less: payable days (DPO)</dt>
-<dd id="o_dpo">—</dd>
-</div>
-<div class="total">
-<dt>Cash conversion cycle</dt>
-<dd id="o_ccc2">—</dd>
-</div>
-<div>
-<dt>Net working capital locked (₹ lakh)</dt>
-<dd id="o_nwc">—</dd>
-</div>
-<div>
-<dt>Annual carrying cost at your rate (₹ lakh)</dt>
-<dd id="o_carry">—</dd>
-</div>
-<div class="total">
-<dt>Cash released by the changes (₹ lakh)</dt>
-<dd id="o_rel">—</dd>
-</div>
-<div>
-<dt>Annual interest saved (₹ lakh)</dt>
-<dd id="o_save">—</dd>
-</div>
-<div>
-<dt>Cycle after the changes</dt>
-<dd id="o_new">—</dd>
-</div>
-</dl>
-<p class="slip-note" id="o_note"></p>
-</aside>
-</section>
-<section class="read">
-<div class="wrap">
-<h2>How it is worked out</h2>
-<div class="prose">
-<div class="formula">
-<table>
-<thead>
-<tr>
-<th>Measure</th>
-<th>Formula</th>
-<th>What it tells you</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>Inventory days (DIO)</td>
-<td>Average inventory ÷ COGS × 365</td>
-<td>
+              </div>
+            </div>
+          </fieldset>
+        </div>
+        <aside aria-label="Results" aria-live="polite" class="slip">
+          <div class="slip-head">
+            <span class="k">Cash conversion cycle</span
+            ><span class="big" id="o_ccc">—</span><span class="u">days</span
+            ><span class="sub" id="o_ccc_sub"></span>
+          </div>
+          <dl class="rows">
+            <div>
+              <dt>Inventory days (DIO)</dt>
+              <dd id="o_dio">—</dd>
+            </div>
+            <div>
+              <dt>Receivable days (DSO)</dt>
+              <dd id="o_dso">—</dd>
+            </div>
+            <div>
+              <dt>Less: payable days (DPO)</dt>
+              <dd id="o_dpo">—</dd>
+            </div>
+            <div class="total">
+              <dt>Cash conversion cycle</dt>
+              <dd id="o_ccc2">—</dd>
+            </div>
+            <div>
+              <dt>Net working capital locked (₹ lakh)</dt>
+              <dd id="o_nwc">—</dd>
+            </div>
+            <div>
+              <dt>Annual carrying cost at your rate (₹ lakh)</dt>
+              <dd id="o_carry">—</dd>
+            </div>
+            <div class="total">
+              <dt>Cash released by the changes (₹ lakh)</dt>
+              <dd id="o_rel">—</dd>
+            </div>
+            <div>
+              <dt>Annual interest saved (₹ lakh)</dt>
+              <dd id="o_save">—</dd>
+            </div>
+            <div>
+              <dt>Cycle after the changes</dt>
+              <dd id="o_new">—</dd>
+            </div>
+          </dl>
+          <p class="slip-note" id="o_note"></p>
+        </aside>
+      </section>
+      <section class="read">
+        <div class="wrap">
+          <h2>How it is worked out</h2>
+          <div class="prose">
+            <div class="formula">
+              <table>
+                <thead>
+                  <tr>
+                    <th>Measure</th>
+                    <th>Formula</th>
+                    <th>What it tells you</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>Inventory days (DIO)</td>
+                    <td>Average inventory ÷ COGS × 365</td>
+                    <td>
                       How long material and goods sit before they are sold.
                     </td>
-</tr>
-<tr>
-<td>Receivable days (DSO)</td>
-<td>Average receivables ÷ revenue × 365</td>
-<td>How long customers take to pay after invoicing.</td>
-</tr>
-<tr>
-<td>Payable days (DPO)</td>
-<td>Average payables ÷ COGS × 365</td>
-<td>How long you take to pay suppliers.</td>
-</tr>
-<tr>
-<td>Cash conversion cycle</td>
-<td>DIO + DSO − DPO</td>
-<td>
+                  </tr>
+                  <tr>
+                    <td>Receivable days (DSO)</td>
+                    <td>Average receivables ÷ revenue × 365</td>
+                    <td>How long customers take to pay after invoicing.</td>
+                  </tr>
+                  <tr>
+                    <td>Payable days (DPO)</td>
+                    <td>Average payables ÷ COGS × 365</td>
+                    <td>How long you take to pay suppliers.</td>
+                  </tr>
+                  <tr>
+                    <td>Cash conversion cycle</td>
+                    <td>DIO + DSO − DPO</td>
+                    <td>
                       Days between paying for inputs and collecting from
                       customers.
                     </td>
-</tr>
-<tr>
-<td>Cash released</td>
-<td>ΔDSO × revenue ÷ 365 + (ΔDIO + ΔDPO) × COGS ÷ 365</td>
-<td>One-time cash freed by shortening the cycle.</td>
-</tr>
-<tr>
-<td>Interest saved</td>
-<td>Cash released × CC/OD rate</td>
-<td>
+                  </tr>
+                  <tr>
+                    <td>Cash released</td>
+                    <td>ΔDSO × revenue ÷ 365 + (ΔDIO + ΔDPO) × COGS ÷ 365</td>
+                    <td>One-time cash freed by shortening the cycle.</td>
+                  </tr>
+                  <tr>
+                    <td>Interest saved</td>
+                    <td>Cash released × CC/OD rate</td>
+                    <td>
                       Annual saving if the freed cash reduces your CC/OD
                       balance.
                     </td>
-</tr>
-</tbody>
-</table>
-</div>
-<p>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <p>
               A 365-day year is used. Averages are more reliable than year-end
               balances because year-end stock and debtors are often managed for
               the balance sheet. If your business is seasonal, run the
               calculator on monthly averages instead.
             </p>
-</div>
-</div>
-<div class="wrap">
-<h2>Reading the result</h2>
-<div class="prose">
-<p>
+          </div>
+        </div>
+        <div class="wrap">
+          <h2>Reading the result</h2>
+          <div class="prose">
+            <p>
               The cycle is a count of days your own money, or the bank's, is
               funding operations. A longer cycle is not wrong in itself. A
               business that builds inventory ahead of a season, or sells to
@@ -758,15 +1243,15 @@
               design. What matters is whether the cycle is moving, and whether
               it is funded by a CC/OD line that is priced and sized for it.
             </p>
-<p>
+            <p>
               Look at the three components separately. A rising DSO usually
               points to collection discipline or customer concentration. A
               rising DIO usually points to slow-moving finished goods or buying
               raw material ahead of need. Each has a different fix and a
               different owner in the business.
             </p>
-<h3>A caution on stretching supplier payments</h3>
-<p>
+            <h3>A caution on stretching supplier payments</h3>
+            <p>
               Paying later is the easiest lever on paper and the riskiest in
               practice. For suppliers registered as micro or small enterprises,
               Section 15 of the MSMED Act, 2006 requires payment within the
@@ -780,160 +1265,247 @@
               Medium enterprises are outside this provision. Check each
               supplier's Udyam classification before relying on this lever.
             </p>
-</div>
-</div>
-<div class="wrap">
-<h2>Sources and references</h2>
-<div class="prose">
-<ul class="src">
-<li>
+          </div>
+        </div>
+        <div class="wrap">
+          <h2>Sources and references</h2>
+          <div class="prose">
+            <ul class="src">
+              <li>
                 Micro, Small and Medium Enterprises Development Act, 2006,
                 Sections 15 and 16 (payment period and interest on delayed
                 payment).
               </li>
-<li>
+              <li>
                 Income-tax Act, 1961, Section 43B(h), inserted by the Finance
                 Act, 2023 with effect from 1 April 2024; corresponding provision
                 Section 37(2)(g), Income-tax Act, 2025. Verify against the bare
                 Act.
               </li>
-<li>
+              <li>
                 DIO, DSO, DPO and cash conversion cycle are standard working
                 capital measures; the formulas above use COGS as the base for
                 inventory and payables and revenue for receivables.
               </li>
-</ul>
-</div>
-</div>
-</section>
-<section aria-labelledby="more-h" class="more wrap">
-<h2 id="more-h">Other free tools</h2>
-<ul>
-<li>
-<a href="monthly-cash-flow-model.html">Monthly cash flow model<small>A 12-month, April–March view of cash in and out</small></a>
-</li>
-<li>
-<a href="overdraft-cost-calculator.html">Overdraft cost calculator<small>The all-in cost of your CC/OD line, not just the rate</small></a>
-</li>
-<li>
-<a href="gst-reconciliation-checklist.html">GST reconciliation checklist<small>Monthly GSTR-2B and IMS close, with an ITC-at-risk
-                estimate</small></a>
-</li>
-<li>
-<a href="cma-data-template.html">CMA data template<small>The ratios and MPBF your bank will compute from your CMA</small></a>
-</li>
-</ul>
-</section>
-<section class="cta">
-<div class="wrap">
-<div>
-<h2>Want these numbers read against your own books?</h2>
-<p>
+            </ul>
+          </div>
+        </div>
+      </section>
+      <section aria-labelledby="more-h" class="more wrap">
+        <h2 id="more-h">Other free tools</h2>
+        <ul>
+          <li>
+            <a href="monthly-cash-flow-model.html"
+              >Monthly cash flow model<small
+                >A 12-month, April–March view of cash in and out</small
+              ></a
+            >
+          </li>
+          <li>
+            <a href="overdraft-cost-calculator.html"
+              >Overdraft cost calculator<small
+                >The all-in cost of your CC/OD line, not just the rate</small
+              ></a
+            >
+          </li>
+          <li>
+            <a href="gst-reconciliation-checklist.html"
+              >GST reconciliation checklist<small
+                >Monthly GSTR-2B and IMS close, with an ITC-at-risk
+                estimate</small
+              ></a
+            >
+          </li>
+          <li>
+            <a href="cma-data-template.html"
+              >CMA data template<small
+                >The ratios and MPBF your bank will compute from your CMA</small
+              ></a
+            >
+          </li>
+        </ul>
+      </section>
+      <section class="cta">
+        <div class="wrap">
+          <div>
+            <h2>Want these numbers read against your own books?</h2>
+            <p>
               We work with manufacturing and trading businesses on working
               capital, cash flow and bank-ready reporting. Start with a
               discovery call.
             </p>
-</div>
-<a class="btn" href="/#book">Book a Discovery Call</a>
-</div>
-</section>
-</main>
-<footer class="footer">
-<div class="container">
-<div class="footer-top">
-<div class="footer-brand">
-<a class="footer-logo" href="/">
-<img alt="CFO Craft Logo" class="brand-logo" src="../images/logo.png"/>
-<span class="custom-tooltip">Go To Home Page</span>
-</a>
-<div class="footer-address">
+          </div>
+          <a class="btn" href="/#book">Book a Discovery Call</a>
+        </div>
+      </section>
+    </main>
+    <footer class="footer">
+      <div class="container">
+        <div class="footer-top">
+          <div class="footer-brand">
+            <a class="footer-logo" href="/">
+              <img
+                alt="CFO Craft Logo"
+                class="brand-logo"
+                src="../images/logo.png"
+              />
+              <span class="custom-tooltip">Go To Home Page</span>
+            </a>
+            <div class="footer-address">
               CFO CRAFT Advisory Services pvt Ltd
-              <br/>
+              <br />
               Aditya Heritage, 502, Near Rustomjee Elanza Avenue, Mindspace,
               Malad West, Mumbai 4000664
             </div>
-<div class="footer-contact">
-<a href="tel:+919892560660"> +91 9892560660 </a>
-<a href="mailto:info@cfocraft.com"> info@cfocraft.com </a>
-</div>
-<div class="footer-ratings">
-<svg class="g2-icon" height="22" viewbox="0 0 24 24" width="22">
-<circle cx="12" cy="12" fill="#2B6DB2" r="11"></circle>
-<text fill="white" font-size="11" font-weight="700" text-anchor="middle" x="12" y="16">
+            <div class="footer-contact">
+              <a href="tel:+919892560660"> +91 9892560660 </a>
+              <a href="mailto:info@cfocraft.com"> info@cfocraft.com </a>
+            </div>
+            <div class="footer-ratings">
+              <svg class="g2-icon" height="22" viewbox="0 0 24 24" width="22">
+                <circle cx="12" cy="12" fill="#2B6DB2" r="11"></circle>
+                <text
+                  fill="white"
+                  font-size="11"
+                  font-weight="700"
+                  text-anchor="middle"
+                  x="12"
+                  y="16"
+                >
                   CC
                 </text>
-</svg>
-<span> Trusted by 50+ businesses </span>
-</div>
-</div>
-<div class="footer-col">
-<h4>Services</h4>
-<a href="../services/finance-diagnostic.html">
+              </svg>
+              <span> Trusted by 50+ businesses </span>
+            </div>
+          </div>
+          <div class="footer-col">
+            <h4>Services</h4>
+            <a href="../services/finance-diagnostic.html">
               Finance Diagnostic
             </a>
-<a href="../services/fractional-cfo-starter.html">
+            <a href="../services/fractional-cfo-starter.html">
               Fractional CFO - Starter
             </a>
-<a href="../services/fractional-cfo-core.html">
+            <a href="../services/fractional-cfo-core.html">
               Fractional CFO - Core
             </a>
-<a href="../services/fractional-cfo-growth.html">
+            <a href="../services/fractional-cfo-growth.html">
               Fractional CFO - Growth
             </a>
-<a href="../services/specialist-project-work.html">
+            <a href="../services/specialist-project-work.html">
               Specialist &amp; Project Work
             </a>
-</div>
-<div class="footer-col">
-<h4>Company</h4>
-<a href="../pricing/pricing.html"> Pricing </a>
-<a href="../about/team.html"> About CFO CRAFT </a>
-<a href="../about/careers.html"> Careers </a>
-<a href="working-capital-calculator.html"> Free Calculator </a>
-<a href="../resources/resources.html"> Resources Hub </a>
-</div>
-</div>
-<div class="footer-bottom">
-<span> © CFO CRAFT Advisory Services Pvt. Ltd. </span>
-<div class="footer-socials">
-<a aria-label="LinkedIn" href="https://www.linkedin.com/company/cfo-craft-advisory-services-private-limited/posts/?feedView=all" rel="noopener noreferrer" target="_blank">
-<svg fill="currentColor" height="20" viewbox="0 0 24 24" width="20">
-<path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path>
-<rect height="12" width="4" x="2" y="9"></rect>
-<circle cx="4" cy="4" r="2"></circle>
-</svg>
-</a>
-<a aria-label="Facebook" href="https://www.facebook.com/people/CFO-CRAFT/100093439479258/" rel="noopener noreferrer" target="_blank">
-<svg fill="currentColor" height="20" viewbox="0 0 24 24" width="20">
-<path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"></path>
-</svg>
-</a>
-<a aria-label="YouTube" href="https://www.youtube.com/@CFOCRAFT" rel="noopener noreferrer" target="_blank">
-<svg fill="currentColor" height="20" viewbox="0 0 24 24" width="20">
-<path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"></path>
-</svg>
-</a>
-<a aria-label="Instagram" href="https://www.instagram.com/cfo.craft" rel="noopener noreferrer" target="_blank">
-<svg fill="currentColor" height="20" viewbox="0 0 24 24" width="20">
-<path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"></path>
-</svg>
-</a>
-<a aria-label="WhatsApp" href="https://wa.me/919892560660" rel="noopener noreferrer" target="_blank">
-<svg fill="currentColor" height="20" viewbox="0 0 24 24" width="20">
-<path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413z"></path>
-</svg>
-</a>
-</div>
-</div>
-<div class="footer-disclosures">
-<p>
+          </div>
+          <div class="footer-col">
+            <h4>Company</h4>
+            <a href="../pricing/pricing.html"> Pricing </a>
+            <a href="../about/team.html"> About CFO CRAFT </a>
+            <a href="../about/careers.html"> Careers </a>
+            <a href="working-capital-calculator.html"> Free Calculator </a>
+            <a href="../resources/resources.html"> Resources Hub </a>
+          </div>
+        </div>
+        <div class="footer-bottom">
+          <span> © CFO CRAFT Advisory Services Pvt. Ltd. </span>
+          <div class="footer-socials">
+            <a
+              aria-label="LinkedIn"
+              href="https://www.linkedin.com/company/cfo-craft-advisory-services-private-limited/posts/?feedView=all"
+              rel="noopener noreferrer"
+              target="_blank"
+            >
+              <svg
+                fill="currentColor"
+                height="20"
+                viewbox="0 0 24 24"
+                width="20"
+              >
+                <path
+                  d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"
+                ></path>
+                <rect height="12" width="4" x="2" y="9"></rect>
+                <circle cx="4" cy="4" r="2"></circle>
+              </svg>
+            </a>
+            <a
+              aria-label="Facebook"
+              href="https://www.facebook.com/people/CFO-CRAFT/100093439479258/"
+              rel="noopener noreferrer"
+              target="_blank"
+            >
+              <svg
+                fill="currentColor"
+                height="20"
+                viewbox="0 0 24 24"
+                width="20"
+              >
+                <path
+                  d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"
+                ></path>
+              </svg>
+            </a>
+            <a
+              aria-label="YouTube"
+              href="https://www.youtube.com/@CFOCRAFT"
+              rel="noopener noreferrer"
+              target="_blank"
+            >
+              <svg
+                fill="currentColor"
+                height="20"
+                viewbox="0 0 24 24"
+                width="20"
+              >
+                <path
+                  d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"
+                ></path>
+              </svg>
+            </a>
+            <a
+              aria-label="Instagram"
+              href="https://www.instagram.com/cfo.craft"
+              rel="noopener noreferrer"
+              target="_blank"
+            >
+              <svg
+                fill="currentColor"
+                height="20"
+                viewbox="0 0 24 24"
+                width="20"
+              >
+                <path
+                  d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"
+                ></path>
+              </svg>
+            </a>
+            <a
+              aria-label="WhatsApp"
+              href="https://wa.me/919892560660"
+              rel="noopener noreferrer"
+              target="_blank"
+            >
+              <svg
+                fill="currentColor"
+                height="20"
+                viewbox="0 0 24 24"
+                width="20"
+              >
+                <path
+                  d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413z"
+                ></path>
+              </svg>
+            </a>
+          </div>
+        </div>
+        <div class="footer-disclosures">
+          <p>
             This tool gives indicative figures based only on what you enter. It
             is not tax, legal, audit or credit advice. Statutory positions are
             summarised as understood at the time of publishing and can change;
             verify against the current Act, rules, notifications and your bank's
             sanction terms before acting.
           </p>
-<p>
+          <p>
             Disclaimer: Site content, descriptions, and claims are provided by
             CFO CRAFT Advisory Services Private Limited are for informational
             purposes only and do not constitute tax, legal, or accounting
@@ -943,10 +1515,10 @@
             Limited unless expressly stated otherwise. Engagement-specific
             advice requires a formally signed agreement.
           </p>
-</div>
-</div>
-</footer>
-<script>
+        </div>
+      </div>
+    </footer>
+    <script>
       const $ = (id) => document.getElementById(id);
       const num = (id) => {
         const v = parseFloat($(id).value);
@@ -1044,6 +1616,1274 @@
         }
       })();
     </script>
-<script src="../script.js"></script>
-</body>
+    <script>
+      document.addEventListener("DOMContentLoaded", () => {
+        // ===== Navbar scroll effect =====
+        const navbar = document.getElementById("navbar");
+        if (navbar) {
+          window.addEventListener("scroll", () => {
+            if (window.scrollY > 50) {
+              navbar.classList.add("scrolled");
+            } else {
+              navbar.classList.remove("scrolled");
+            }
+          });
+        }
+
+        // ===== Mobile menu toggle =====
+        const mobileMenuBtn = document.getElementById("mobileMenuBtn");
+        const navLinks = document.querySelector(".nav-links");
+        if (mobileMenuBtn && navLinks) {
+          mobileMenuBtn.addEventListener("click", () => {
+            mobileMenuBtn.classList.toggle("active");
+            navLinks.classList.toggle("active");
+            // Close all open dropdowns when menu closes
+            if (!navLinks.classList.contains("active")) {
+              document
+                .querySelectorAll(".nav-dropdown-wrap.open")
+                .forEach((w) => w.classList.remove("open"));
+            }
+          });
+        }
+
+        // ===== Mobile dropdown accordion =====
+        document
+          .querySelectorAll(".nav-dropdown-wrap > .nav-link")
+          .forEach((link) => {
+            link.addEventListener("click", (e) => {
+              // Only intercept on mobile (when hamburger is visible)
+              if (window.innerWidth > 768) return;
+              const wrap = link.closest(".nav-dropdown-wrap");
+              const dropdown = wrap.querySelector(".nav-dropdown");
+              if (!dropdown) return;
+              e.preventDefault();
+              // Close other open dropdowns (accordion behavior)
+              document
+                .querySelectorAll(".nav-dropdown-wrap.open")
+                .forEach((w) => {
+                  if (w !== wrap) w.classList.remove("open");
+                });
+              wrap.classList.toggle("open");
+            });
+          });
+
+        // ===== Close mobile menu when navigating to a section =====
+        if (navLinks && mobileMenuBtn) {
+          navLinks
+            .querySelectorAll("a:not(.nav-dropdown-wrap > .nav-link)")
+            .forEach((itemLink) => {
+              itemLink.addEventListener("click", () => {
+                if (window.innerWidth <= 768) {
+                  mobileMenuBtn.classList.remove("active");
+                  navLinks.classList.remove("active");
+                  document
+                    .querySelectorAll(".nav-dropdown-wrap.open")
+                    .forEach((w) => w.classList.remove("open"));
+                }
+              });
+            });
+        }
+
+        // ===== FAQ Accordion =====
+        const faqQuestions = document.querySelectorAll(".faq-question");
+        faqQuestions.forEach((btn) => {
+          btn.addEventListener("click", () => {
+            const item = btn.parentElement;
+            const isOpen = item.classList.contains("open");
+            document
+              .querySelectorAll(".faq-item")
+              .forEach((i) => i.classList.remove("open"));
+            if (!isOpen) item.classList.add("open");
+          });
+        });
+
+        // ===== Counter Animation =====
+        const counterObserver = new IntersectionObserver(
+          (entries) => {
+            entries.forEach((entry) => {
+              if (entry.isIntersecting) {
+                const counters = entry.target.querySelectorAll(".counter");
+                counters.forEach((counter) => {
+                  const target = parseFloat(counter.dataset.target);
+                  const duration = 2000;
+                  const step = target / (duration / 16);
+                  let current = 0;
+                  const timer = setInterval(() => {
+                    current += step;
+                    if (current >= target) {
+                      current = target;
+                      clearInterval(timer);
+                    }
+                    if (target % 1 !== 0) {
+                      counter.textContent = current.toFixed(1);
+                    } else {
+                      counter.textContent =
+                        Math.floor(current).toLocaleString();
+                    }
+                  }, 16);
+                });
+                counterObserver.unobserve(entry.target);
+              }
+            });
+          },
+          { threshold: 0.3 },
+        );
+
+        const metricsGrid = document.querySelector(".metrics-grid");
+        if (metricsGrid) counterObserver.observe(metricsGrid);
+
+        // ===== Scroll Reveal Animation =====
+        const revealObserver = new IntersectionObserver(
+          (entries) => {
+            entries.forEach((entry) => {
+              if (entry.isIntersecting) {
+                entry.target.classList.add("revealed");
+                revealObserver.unobserve(entry.target);
+              }
+            });
+          },
+          { threshold: 0.1 },
+        );
+
+        document
+          .querySelectorAll(
+            ".feature-row, .team-card, .metric-card, .testimonial-card, .section-heading, .hero-content",
+          )
+          .forEach((el) => {
+            el.classList.add("reveal");
+            revealObserver.observe(el);
+          });
+
+        // ===== Case Studies Modal & Slider =====
+        const csModal = document.getElementById("case-studies-modal");
+        const openCsModalBtn = document.getElementById("open-cs-modal");
+        const closeCsModalBtn = document.querySelector(".cs-modal-close");
+        const csSlider = document.getElementById("cs-slider");
+        const csPrevBtn = document.getElementById("cs-prev");
+        const csNextBtn = document.getElementById("cs-next");
+
+        let currentSlide = 0;
+        const totalSlides = 9;
+
+        function updateSliderPosition() {
+          if (csSlider) {
+            csSlider.style.transform = `translateX(-${currentSlide * 100}%)`;
+          }
+        }
+
+        if (openCsModalBtn && csModal) {
+          openCsModalBtn.addEventListener("click", (e) => {
+            e.preventDefault();
+            csModal.classList.add("show");
+            updateSliderPosition();
+          });
+        }
+
+        if (closeCsModalBtn && csModal) {
+          closeCsModalBtn.addEventListener("click", () => {
+            csModal.classList.remove("show");
+          });
+        }
+
+        if (csModal) {
+          window.addEventListener("click", (e) => {
+            if (e.target === csModal) {
+              csModal.classList.remove("show");
+            }
+          });
+        }
+
+        if (csNextBtn) {
+          csNextBtn.addEventListener("click", () => {
+            currentSlide = (currentSlide + 1) % totalSlides;
+            updateSliderPosition();
+          });
+        }
+
+        if (csPrevBtn) {
+          csPrevBtn.addEventListener("click", () => {
+            currentSlide = (currentSlide - 1 + totalSlides) % totalSlides;
+            updateSliderPosition();
+          });
+        }
+      });
+    </script>
+    <script>
+      /* CFO CRAFT – genuine XLSX export; works offline, no third-party libraries. */
+      (() => {
+        "use strict";
+        const esc = (s) =>
+          String(s ?? "")
+            .replace(/&/g, "&amp;")
+            .replace(/</g, "&lt;")
+            .replace(/>/g, "&gt;")
+            .replace(/"/g, "&quot;")
+            .replace(/'/g, "&apos;");
+        const col = (n) => {
+          let s = "";
+          while (n > 0) {
+            n--;
+            s = String.fromCharCode(65 + (n % 26)) + s;
+            n = Math.floor(n / 26);
+          }
+          return s;
+        };
+        const num = (x) => {
+          const n = Number(x);
+          return Number.isFinite(n) ? n : 0;
+        };
+        const val = (id) => {
+          const e = document.getElementById(id);
+          return e?.type === "checkbox" ? (e.checked ? 1 : 0) : num(e?.value);
+        };
+        const f = (expr, cached) => ({ f: expr, cache: cached });
+        const rich = (value, style) =>
+          typeof value === "object" &&
+          value !== null &&
+          ("v" in value || "f" in value)
+            ? { ...value, s: style ?? value.s }
+            : { v: value, s: style };
+        const sheet = (name, widths = []) => ({
+          name,
+          widths,
+          rows: [],
+          add(cells, style) {
+            this.rows.push(cells.map((c) => rich(c, style)));
+            return this.rows.length;
+          },
+          blank() {
+            this.rows.push([]);
+            return this.rows.length;
+          },
+        });
+        function makeDoc(title, identity) {
+          const tabs = [];
+          const summary = sheet("Summary", [41, 27, 18, 19, 18, 18]);
+          tabs.push(summary);
+          summary.add(["CFO CRAFT | FINANCIAL TOOL REPORT"], 1);
+          summary.add([title], 2);
+          summary.blank();
+          summary.add(["Prepared for", identity.name || ""]);
+          summary.add(["Company", identity.company || ""]);
+          summary.add(["Generated on", new Date().toLocaleString("en-IN")]);
+          summary.blank();
+          summary.add(["KEY FINDINGS", "Value", "Unit"], 3);
+          return { tabs, summary };
+        }
+        function appendResults(doc, metrics) {
+          const s = doc.summary;
+          metrics.forEach((m) => s.add([m[0], m[1], m[2] || ""], m[3] ? 4 : 0));
+          s.blank();
+          s.add(
+            [
+              "Note: This workbook reproduces the assumptions and calculator logic for indicative planning only.",
+            ],
+            5,
+          );
+          s.add(
+            [
+              "Input figures are user-supplied; verify against accounting records before any financial decision.",
+            ],
+            5,
+          );
+          s.add(["CFO CRAFT | Free Tools"], 5);
+        }
+        function makeInputs(doc, cfg) {
+          const s = sheet("Inputs", [43, 23, 23, 19]);
+          doc.tabs.push(s);
+          s.add(["INPUT PARAMETERS"], 1);
+          s.add(
+            [
+              "Change the blue numbers; other tabs recalculate when opened in Excel.",
+            ],
+            5,
+          );
+          s.blank();
+          s.add(["Input", "Value", "Unit"], 3);
+          const refs = {};
+          cfg.forEach(([id, label, unit]) => {
+            const row = s.add([label, { v: val(id), s: 4 }, unit || ""]);
+            refs[id] = "Inputs!B" + row;
+          });
+          return refs;
+        }
+        function makeAssumptions(doc, arr) {
+          const s = sheet("Assumptions", [43, 23, 30]);
+          doc.tabs.push(s);
+          s.add(["MODEL ASSUMPTIONS"], 1);
+          s.add(["Editable assumptions used by the formulas."], 5);
+          s.blank();
+          s.add(["Assumption", "Value", "Unit"], 3);
+          const refs = {};
+          arr.forEach(([key, label, n, unit]) => {
+            const row = s.add([label, { v: n, s: 4 }, unit || ""]);
+            refs[key] = "Assumptions!$B$" + row;
+          });
+          return refs;
+        }
+        function makeModel(doc) {
+          const s = sheet("Calculations", [46, 23, 28]);
+          doc.tabs.push(s);
+          s.add(["CALCULATIONS"], 1);
+          s.add(
+            [
+              "Excel formulas refer to the editable Inputs and Assumptions sheets.",
+            ],
+            5,
+          );
+          s.blank();
+          s.add(["Measure", "Formula result", "Unit"], 3);
+          return s;
+        }
+        function modelRow(s, label, expr, unit) {
+          const r = s.add([label, { f: expr, s: 6 }, unit || ""]);
+          return `'Calculations'!B${r}`;
+        }
+        function working(doc) {
+          const i = makeInputs(doc, [
+            ["rev", "Revenue from operations", "₹ lakh"],
+            ["cogs", "Cost of goods sold", "₹ lakh"],
+            ["inv", "Average inventory", "₹ lakh"],
+            ["rec", "Average trade receivables", "₹ lakh"],
+            ["pay", "Average trade payables", "₹ lakh"],
+            ["rate", "CC/OD interest rate", "% p.a."],
+            ["cut_dso", "Collect faster by", "days"],
+            ["cut_dio", "Hold less stock by", "days"],
+            ["ext_dpo", "Pay suppliers later by", "days"],
+          ]);
+          const a = makeAssumptions(doc, [
+            ["days", "Days per year", 365, "days"],
+            ["pct", "Percent denominator", 100, ""],
+          ]);
+          const s = makeModel(doc);
+          const dio = modelRow(
+            s,
+            "Inventory days (DIO)",
+            `IFERROR(${i.inv}/${i.cogs}*${a.days},0)`,
+            "days",
+          );
+          const dso = modelRow(
+            s,
+            "Receivable days (DSO)",
+            `IFERROR(${i.rec}/${i.rev}*${a.days},0)`,
+            "days",
+          );
+          const dpo = modelRow(
+            s,
+            "Payable days (DPO)",
+            `IFERROR(${i.pay}/${i.cogs}*${a.days},0)`,
+            "days",
+          );
+          const ccc = modelRow(
+            s,
+            "Cash conversion cycle",
+            `${dio}+${dso}-${dpo}`,
+            "days",
+          );
+          const nwc = modelRow(
+            s,
+            "Net working capital locked",
+            `${i.inv}+${i.rec}-${i.pay}`,
+            "₹ lakh",
+          );
+          const carry = modelRow(
+            s,
+            "Annual carrying cost",
+            `MAX(${nwc},0)*${i.rate}/${a.pct}`,
+            "₹ lakh",
+          );
+          const released = modelRow(
+            s,
+            "Cash released",
+            `IFERROR(MIN(${i.cut_dso},${dso})*${i.rev}/${a.days}+(MIN(${i.cut_dio},${dio})+${i.ext_dpo})*${i.cogs}/${a.days},0)`,
+            "₹ lakh",
+          );
+          const saved = modelRow(
+            s,
+            "Annual interest saved",
+            `${released}*${i.rate}/${a.pct}`,
+            "₹ lakh",
+          );
+          const after = modelRow(
+            s,
+            "Cycle after changes",
+            `${ccc}-MIN(${i.cut_dso},${dso})-MIN(${i.cut_dio},${dio})-${i.ext_dpo}`,
+            "days",
+          );
+          appendResults(doc, [
+            ["Cash conversion cycle", f(ccc), "days"],
+            ["Inventory days", f(dio), "days"],
+            ["Receivable days", f(dso), "days"],
+            ["Payable days", f(dpo), "days"],
+            ["Net working capital locked", f(nwc), "₹ lakh"],
+            ["Annual carrying cost", f(carry), "₹ lakh"],
+            ["Cash released by changes", f(released), "₹ lakh"],
+            ["Annual interest saved", f(saved), "₹ lakh"],
+            ["Cycle after the changes", f(after), "days"],
+          ]);
+        }
+        function overdraft(doc) {
+          const i = makeInputs(doc, [
+            ["lim", "Sanctioned CC/OD limit", "₹ lakh"],
+            ["rate", "Interest rate", "% p.a."],
+            ["util", "Average utilisation", "%"],
+            ["pf", "Processing or renewal fee", "%"],
+            ["unu", "Charge on unutilised limit", "%"],
+            ["oth", "Other annual charges", "₹ lakh"],
+            ["gst", "Add GST on fees and charges", "1 = yes, 0 = no"],
+            ["rev", "Annual revenue", "₹ lakh"],
+            ["days", "Collect faster by", "days"],
+          ]);
+          const a = makeAssumptions(doc, [
+            ["pct", "Percent denominator", 100],
+            ["months", "Months per year", 12],
+            ["days", "Days per year", 365],
+            ["gst", "GST rate on charges", 0.18],
+            ["lak", "Rupees per lakh", 100000],
+          ]);
+          const s = makeModel(doc);
+          const drawn = modelRow(
+            s,
+            "Average amount drawn",
+            `${i.lim}*MIN(${i.util},${a.pct})/${a.pct}`,
+            "₹ lakh",
+          );
+          const ear = modelRow(
+            s,
+            "Annual effective interest rate",
+            `(1+${i.rate}/${a.pct}/${a.months})^${a.months}-1`,
+            "decimal",
+          );
+          const interest = modelRow(
+            s,
+            "Interest, compounded monthly",
+            `${drawn}*${ear}`,
+            "₹ lakh",
+          );
+          const fee = modelRow(
+            s,
+            "Processing or renewal fee",
+            `${i.lim}*${i.pf}/${a.pct}`,
+            "₹ lakh",
+          );
+          const unused = modelRow(
+            s,
+            "Charge on unutilised limit",
+            `(${i.lim}-${drawn})*${i.unu}/${a.pct}`,
+            "₹ lakh",
+          );
+          const gst = modelRow(
+            s,
+            "GST on fees and charges",
+            `IF(${i.gst}=1,(${fee}+${unused}+${i.oth})*${a.gst},0)`,
+            "₹ lakh",
+          );
+          const cost = modelRow(
+            s,
+            "Total annual cost",
+            `${interest}+${fee}+${unused}+${i.oth}+${gst}`,
+            "₹ lakh",
+          );
+          const effective = modelRow(
+            s,
+            "Effective annual cost",
+            `IFERROR(${cost}/${drawn}*${a.pct},0)`,
+            "%",
+          );
+          const day = modelRow(
+            s,
+            "Cost of ₹1 lakh drawn for one day",
+            `IFERROR(${cost}/${drawn}/${a.days}*${a.lak},0)`,
+            "₹",
+          );
+          const freed = modelRow(
+            s,
+            "Cash freed by faster collection",
+            `MIN(${i.days}*${i.rev}/${a.days},${drawn})`,
+            "₹ lakh",
+          );
+          const saved = modelRow(
+            s,
+            "Interest saved a year",
+            `${freed}*${ear}`,
+            "₹ lakh",
+          );
+          appendResults(doc, [
+            ["Effective annual cost", f(effective), "%"],
+            ["Average amount drawn", f(drawn), "₹ lakh"],
+            ["Annual interest", f(interest), "₹ lakh"],
+            ["Renewal / processing fee", f(fee), "₹ lakh"],
+            ["Unused limit charge", f(unused), "₹ lakh"],
+            ["Other annual charges", f(i.oth), "₹ lakh"],
+            ["GST on charges", f(gst), "₹ lakh"],
+            ["Total annual cost", f(cost), "₹ lakh"],
+            ["Cost per day / ₹1 lakh", f(day), "₹"],
+            ["Cash released", f(freed), "₹ lakh"],
+            ["Annual interest saved", f(saved), "₹ lakh"],
+          ]);
+        }
+        function cma(doc) {
+          const i = makeInputs(doc, [
+            ["sales", "Net sales", "₹ lakh"],
+            ["cogs", "Cost of sales", "₹ lakh"],
+            ["pat", "Profit after tax", "₹ lakh"],
+            ["dep", "Depreciation", "₹ lakh"],
+            ["tli", "Interest on term loans", "₹ lakh"],
+            ["tlp", "Term-loan principal due", "₹ lakh"],
+            ["inv", "Inventory", "₹ lakh"],
+            ["rec", "Receivables", "₹ lakh"],
+            ["oca", "Other current assets", "₹ lakh"],
+            ["cash", "Cash and bank balances", "₹ lakh"],
+            ["cred", "Sundry creditors", "₹ lakh"],
+            ["ocl", "Other current liabilities", "₹ lakh"],
+            ["req", "Working capital limit requested", "₹ lakh"],
+            ["tl", "Term loans outstanding", "₹ lakh"],
+            ["oltl", "Other long-term liabilities", "₹ lakh"],
+            ["tnw", "Tangible net worth", "₹ lakh"],
+          ]);
+          const a = makeAssumptions(doc, [
+            ["m1", "Method I financing rate", 0.75],
+            ["m2", "Method II asset factor", 0.75],
+            ["tov", "Turnover method rate", 0.2],
+            ["capital", "Minimum own contribution", 0.25],
+            ["limit", "Turnover method reference limit", 500, "₹ lakh"],
+            ["months", "Months per year", 12],
+          ]);
+          const s = makeModel(doc);
+          const tca = modelRow(
+            s,
+            "Total current assets",
+            `${i.inv}+${i.rec}+${i.oca}+${i.cash}`,
+            "₹ lakh",
+          );
+          const cl = modelRow(
+            s,
+            "Current liabilities excluding bank borrowing",
+            `${i.cred}+${i.ocl}`,
+            "₹ lakh",
+          );
+          const gap = modelRow(
+            s,
+            "Working capital gap",
+            `${tca}-${cl}`,
+            "₹ lakh",
+          );
+          const m1 = modelRow(
+            s,
+            "MPBF, Method I",
+            `MAX(${gap}*${a.m1},0)`,
+            "₹ lakh",
+          );
+          const m2 = modelRow(
+            s,
+            "MPBF, Method II",
+            `MAX(${tca}*${a.m2}-${cl},0)`,
+            "₹ lakh",
+          );
+          const tov = modelRow(
+            s,
+            "MPBF, turnover method",
+            `IF(${i.req}>${a.limit},0,${i.sales}*${a.tov})`,
+            "₹ lakh (0 = n/a above 500 lakh)",
+          );
+          const cr = modelRow(
+            s,
+            "Current ratio at requested limit",
+            `IFERROR(${tca}/(${cl}+${i.req}),0)`,
+            "times",
+          );
+          const nwc = modelRow(
+            s,
+            "Net working capital (actual)",
+            `${tca}-${cl}-${i.req}`,
+            "₹ lakh",
+          );
+          const needed = modelRow(
+            s,
+            "Net working capital needed",
+            `${tca}*${a.capital}`,
+            "₹ lakh",
+          );
+          const tol = modelRow(
+            s,
+            "TOL / TNW",
+            `IFERROR((${cl}+${i.req}+${i.tl}+${i.oltl})/${i.tnw},0)`,
+            "times",
+          );
+          const dscr = modelRow(
+            s,
+            "Debt service coverage ratio",
+            `IFERROR((${i.pat}+${i.dep}+${i.tli})/(${i.tli}+${i.tlp}),0)`,
+            "times",
+          );
+          const st = modelRow(
+            s,
+            "Stock holding",
+            `IFERROR(${i.inv}/${i.cogs}*${a.months},0)`,
+            "months",
+          );
+          const db = modelRow(
+            s,
+            "Debtor holding",
+            `IFERROR(${i.rec}/${i.sales}*${a.months},0)`,
+            "months",
+          );
+          const cd = modelRow(
+            s,
+            "Creditor holding",
+            `IFERROR(${i.cred}/${i.cogs}*${a.months},0)`,
+            "months",
+          );
+          appendResults(doc, [
+            ["MPBF, Method II", f(m2), "₹ lakh"],
+            ["Total current assets", f(tca), "₹ lakh"],
+            ["Liabilities excl. bank", f(cl), "₹ lakh"],
+            ["Working capital gap", f(gap), "₹ lakh"],
+            ["MPBF, Method I", f(m1), "₹ lakh"],
+            ["MPBF, turnover method", f(tov), "₹ lakh (0 if not applicable)"],
+            ["Current ratio", f(cr), "times"],
+            ["Net working capital", f(nwc), "₹ lakh"],
+            ["Net working capital needed", f(needed), "₹ lakh"],
+            ["TOL / TNW", f(tol), "times"],
+            ["DSCR", f(dscr), "times"],
+            ["Stock holding", f(st), "months"],
+            ["Debtor holding", f(db), "months"],
+            ["Creditor holding", f(cd), "months"],
+          ]);
+        }
+        function gst(doc) {
+          const i = makeInputs(doc, [
+            ["books", "ITC as per purchase register", "₹"],
+            ["b2b", "ITC as per GSTR-2B", "₹"],
+            ["claimed", "Unsupported ITC already claimed", "₹"],
+            ["days", "Days since ITC was utilised", "days"],
+            ["r180", "ITC on unpaid invoices over 180 days", "₹"],
+          ]);
+          const a = makeAssumptions(doc, [
+            ["rate", "Indicative interest rate p.a.", 0.18],
+            ["days", "Days per year", 365],
+          ]);
+          const ck = sheet("GST Checklist", [25, 62, 77, 18]);
+          doc.tabs.push(ck);
+          ck.add(["GST RECONCILIATION CHECKLIST"], 1);
+          ck.add(
+            ["Edit status to Done or Pending to track checklist completion."],
+            5,
+          );
+          ck.blank();
+          ck.add(["Stage", "Check", "Explanation", "Status"], 3);
+          let count = 0;
+          document.querySelectorAll("#list .stage").forEach((stage) => {
+            const name =
+              stage.querySelector("h3")?.textContent.trim() || "Other";
+            stage.querySelectorAll("li").forEach((li) => {
+              const cb = li.querySelector("input[type=checkbox]");
+              const lab = li.querySelector("label span");
+              let description = "";
+              for (const n of lab?.childNodes || [])
+                if (n.nodeType === 3) description += n.textContent;
+              ck.add([
+                name,
+                description.trim(),
+                li.querySelector("small")?.textContent.trim() || "",
+                cb?.checked ? "Done" : "Pending",
+              ]);
+              count++;
+            });
+          });
+          const s = makeModel(doc);
+          const supported = modelRow(
+            s,
+            "ITC supported by GSTR-2B",
+            `${i.b2b}`,
+            "₹",
+          );
+          const gap = modelRow(
+            s,
+            "Gap: books over GSTR-2B",
+            `MAX(${i.books}-${i.b2b},0)`,
+            "₹",
+          );
+          const reversal = modelRow(
+            s,
+            "Reverse now: unsupported claim",
+            `MIN(${i.claimed},${gap})`,
+            "₹",
+          );
+          const hold = modelRow(
+            s,
+            "Hold until supplier reports",
+            `${gap}-${reversal}`,
+            "₹",
+          );
+          const rev2 = modelRow(
+            s,
+            "Reverse now: invoices unpaid over 180 days",
+            `${i.r180}`,
+            "₹",
+          );
+          const total = modelRow(
+            s,
+            "Total to reverse",
+            `${reversal}+${rev2}`,
+            "₹",
+          );
+          const interest = modelRow(
+            s,
+            "Indicative interest exposure",
+            `${reversal}*${a.rate}*${i.days}/${a.days}`,
+            "₹",
+          );
+          const last = 4 + count;
+          const pct = modelRow(
+            s,
+            "Checklist completion",
+            `IFERROR(COUNTIF('GST Checklist'!D5:D${last},"Done")/COUNTA('GST Checklist'!B5:B${last})*100,0)`,
+            "%",
+          );
+          appendResults(doc, [
+            ["Checklist completion", f(pct), "%"],
+            ["ITC supported", f(supported), "₹"],
+            ["ITC gap", f(gap), "₹"],
+            ["Hold pending supplier reporting", f(hold), "₹"],
+            ["Unsupported ITC reversal", f(reversal), "₹"],
+            ["Unpaid invoice reversal", f(rev2), "₹"],
+            ["Total to reverse", f(total), "₹"],
+            ["Indicative interest", f(interest), "₹"],
+          ]);
+          ck.add([], 0);
+          ck.add(
+            [
+              "Indicative checklist only. Confirm latest statutory rules with a qualified tax professional.",
+            ],
+            5,
+          );
+        }
+        function cashflow(doc) {
+          const inputs = makeInputs(doc, [
+            ["open", "Opening cash, 1 April", "₹ lakh"],
+            ["buf", "Minimum cash buffer", "₹ lakh"],
+          ]);
+          const months = [
+            "Apr",
+            "May",
+            "Jun",
+            "Jul",
+            "Aug",
+            "Sep",
+            "Oct",
+            "Nov",
+            "Dec",
+            "Jan",
+            "Feb",
+            "Mar",
+          ];
+          const categories = [
+            ["dom", "Domestic collections"],
+            ["exp", "Export collections"],
+            ["oth", "Other receipts"],
+            ["rin", "Total receipts"],
+            ["sup", "Supplier payments"],
+            ["sal", "Salaries and wages"],
+            ["ovh", "Rent, power and overheads"],
+            ["gst", "GST, net payment"],
+            ["tax", "Advance tax and TDS"],
+            ["emi", "Term-loan EMI"],
+            ["int", "CC/OD interest"],
+            ["cap", "Capital expenditure"],
+            ["drw", "Drawings or dividend"],
+            ["pout", "Total payments"],
+            ["net", "Net cash flow"],
+            ["op", "Opening cash"],
+            ["cl", "Closing cash"],
+            ["st", "Status"],
+          ];
+          const s = sheet("12-Month Cash Flow", [
+            34,
+            ...Array(12).fill(15),
+            20,
+          ]);
+          doc.tabs.push(s);
+          s.add(["12-MONTH CASH FLOW MODEL | ₹ lakh"], 1);
+          s.add(
+            [
+              "Blue numbers are editable assumptions, other rows contain Excel formulas.",
+            ],
+            5,
+          );
+          s.blank();
+          s.add(["Measure", ...months, "FY total"], 3);
+          const lookup = {};
+          categories.forEach(([key, label]) => {
+            const r = s.rows.length + 1;
+            lookup[key] = r;
+            const cells = [label];
+            for (let m = 0; m < 12; m++) {
+              const x = col(m + 2);
+              const source = document.querySelector(
+                `#cf input[data-k="${key}"][data-m="${m}"]`,
+              );
+              if (source) {
+                cells.push({ v: num(source.value), s: 4 });
+                continue;
+              }
+              let eq = "";
+              if (key === "rin")
+                eq = `SUM(${x}${lookup.dom}:${x}${lookup.oth})`;
+              if (key === "pout")
+                eq = `SUM(${x}${lookup.sup}:${x}${lookup.drw})`;
+              if (key === "net") eq = `${x}${lookup.rin}-${x}${lookup.pout}`;
+              if (key === "op")
+                eq = m === 0 ? `${inputs.open}` : `${col(m + 1)}${lookup.cl}`;
+              if (key === "cl") eq = `${x}${lookup.op}+${x}${lookup.net}`;
+              if (key === "st")
+                eq = `IF(${x}${lookup.cl}<0,"Shortfall",IF(${x}${lookup.cl}<${inputs.buf},"Tight","OK"))`;
+              cells.push(eq ? { f: eq, s: 6 } : "");
+            }
+            if (key === "st" || key === "op" || key === "cl") cells.push("");
+            else cells.push({ f: `SUM(B${r}:M${r})`, s: 6 });
+            s.add(cells);
+          });
+          const cl = lookup.cl,
+            rin = lookup.rin,
+            pout = lookup.pout,
+            net = lookup.net,
+            st = lookup.st;
+          const m = sheet("Cash Flow Metrics", [39, 24, 22]);
+          doc.tabs.push(m);
+          m.add(["ANNUAL CASH FLOW SUMMARY"], 1);
+          m.blank();
+          m.add(["Measure", "Calculated value", "Unit"], 3);
+          const mr = (label, eq, unit) => {
+            const row = m.add([label, { f: eq, s: 6 }, unit]);
+            return `'Cash Flow Metrics'!B${row}`;
+          };
+          const low = mr(
+            "Lowest month-end cash",
+            `MIN('12-Month Cash Flow'!B${cl}:M${cl})`,
+            "₹ lakh",
+          );
+          const rec = mr(
+            "Total receipts",
+            `'12-Month Cash Flow'!N${rin}`,
+            "₹ lakh",
+          );
+          const pay = mr(
+            "Total payments",
+            `'12-Month Cash Flow'!N${pout}`,
+            "₹ lakh",
+          );
+          const n = mr(
+            "Net cash flow for the year",
+            `'12-Month Cash Flow'!N${net}`,
+            "₹ lakh",
+          );
+          const end = mr(
+            "Closing cash, 31 March",
+            `'12-Month Cash Flow'!M${cl}`,
+            "₹ lakh",
+          );
+          const tight = mr(
+            "Months below buffer",
+            `COUNTIF('12-Month Cash Flow'!B${st}:M${st},"Tight")`,
+            "months",
+          );
+          const short = mr(
+            "Months in shortfall",
+            `COUNTIF('12-Month Cash Flow'!B${st}:M${st},"Shortfall")`,
+            "months",
+          );
+          appendResults(doc, [
+            ["Lowest month-end cash", f(low), "₹ lakh"],
+            ["Total receipts", f(rec), "₹ lakh"],
+            ["Total payments", f(pay), "₹ lakh"],
+            ["Annual net cash flow", f(n), "₹ lakh"],
+            ["Closing cash, 31 March", f(end), "₹ lakh"],
+            ["Months below cash buffer", f(tight), "months"],
+            ["Months in shortfall", f(short), "months"],
+          ]);
+        }
+        const tools = {
+          "working-capital-calculator": [
+            "Working Capital & Cash Conversion Cycle",
+            working,
+          ],
+          "monthly-cash-flow-model": ["Monthly Cash Flow Model", cashflow],
+          "overdraft-cost-calculator": ["CC/OD Cost Calculator", overdraft],
+          "gst-reconciliation-checklist": ["GST Reconciliation Checklist", gst],
+          "cma-data-template": ["CMA Data & MPBF Calculator", cma],
+        };
+        // OOXML ZIP implementation: store-only entries, valid CRC-32 and central directory.
+        const encoder = new TextEncoder();
+        const crcTable = Array.from({ length: 256 }, (_, k) => {
+          for (let i = 0; i < 8; i++)
+            k = k & 1 ? 0xedb88320 ^ (k >>> 1) : k >>> 1;
+          return k >>> 0;
+        });
+        const crc32 = (bytes) => {
+          let c = 0xffffffff;
+          for (const b of bytes) c = crcTable[(c ^ b) & 255] ^ (c >>> 8);
+          return (c ^ 0xffffffff) >>> 0;
+        };
+        function zip(files) {
+          const local = [],
+            central = [];
+          let offset = 0;
+          const u16 = (dv, p, v) => dv.setUint16(p, v, true),
+            u32 = (dv, p, v) => dv.setUint32(p, v >>> 0, true);
+          for (const [filename, text] of Object.entries(files)) {
+            const name = encoder.encode(filename),
+              data = encoder.encode(text),
+              crc = crc32(data);
+            const h = new Uint8Array(30 + name.length),
+              dv = new DataView(h.buffer);
+            u32(dv, 0, 0x04034b50);
+            u16(dv, 4, 20);
+            u16(dv, 6, 0x0800);
+            u16(dv, 8, 0);
+            u32(dv, 14, crc);
+            u32(dv, 18, data.length);
+            u32(dv, 22, data.length);
+            u16(dv, 26, name.length);
+            h.set(name, 30);
+            local.push(h, data);
+            const c = new Uint8Array(46 + name.length),
+              cv = new DataView(c.buffer);
+            u32(cv, 0, 0x02014b50);
+            u16(cv, 4, 20);
+            u16(cv, 6, 20);
+            u16(cv, 8, 0x0800);
+            u16(cv, 10, 0);
+            u32(cv, 16, crc);
+            u32(cv, 20, data.length);
+            u32(cv, 24, data.length);
+            u16(cv, 28, name.length);
+            u32(cv, 42, offset);
+            c.set(name, 46);
+            central.push(c);
+            offset += h.length + data.length;
+          }
+          const cdSize = central.reduce((a, b) => a + b.length, 0),
+            end = new Uint8Array(22),
+            ed = new DataView(end.buffer);
+          u32(ed, 0, 0x06054b50);
+          u16(ed, 8, central.length);
+          u16(ed, 10, central.length);
+          u32(ed, 12, cdSize);
+          u32(ed, 16, offset);
+          return new Blob([...local, ...central, end], {
+            type: "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+          });
+        }
+        function xmlCell(cell, r, c) {
+          if (!cell) return "";
+          const at = ` r="${col(c)}${r}" s="${Number.isFinite(cell.s) ? cell.s : 0}"`;
+          if (cell.f) {
+            return `<c${at}${typeof cell.cache === "string" ? ' t="str"' : ""}><f>${esc(cell.f.replace(/^=/, ""))}</f>${cell.cache !== undefined ? `<v>${esc(cell.cache)}</v>` : "<v/>"}</c>`;
+          }
+          if (cell.v === null || cell.v === undefined || cell.v === "")
+            return "";
+          if (typeof cell.v === "number" && Number.isFinite(cell.v))
+            return `<c${at}><v>${cell.v}</v></c>`;
+          const text = String(cell.v).replace(
+            /[\u0000-\u0008\u000b\u000c\u000e-\u001f]/g,
+            "",
+          );
+          return `<c${at} t="inlineStr"><is><t xml:space="preserve">${esc(text.slice(0, 32000))}</t></is></c>`;
+        }
+        function createXlsx(doc) {
+          const ns =
+            "http://schemas.openxmlformats.org/spreadsheetml/2006/main";
+          const files = {};
+          const overrides = [
+            '<Override PartName="/xl/workbook.xml" ContentType="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet.main+xml"/>',
+            '<Override PartName="/xl/styles.xml" ContentType="application/vnd.openxmlformats-officedocument.spreadsheetml.styles+xml"/>',
+          ];
+          doc.tabs.forEach((s, j) => {
+            const body = s.rows
+              .map(
+                (row, r) =>
+                  `<row r="${r + 1}"${r === 0 ? ' ht="27" customHeight="1"' : ""}>${row.map((x, c) => xmlCell(x, r + 1, c + 1)).join("")}</row>`,
+              )
+              .join("");
+            const widths = s.widths.length
+              ? `<cols>${s.widths.map((w, i) => `<col min="${i + 1}" max="${i + 1}" width="${w}" customWidth="1"/>`).join("")}</cols>`
+              : "";
+            files[`xl/worksheets/sheet${j + 1}.xml`] =
+              `<?xml version="1.0" encoding="UTF-8" standalone="yes"?><worksheet xmlns="${ns}"><sheetViews><sheetView workbookViewId="0" showGridLines="0"/></sheetViews><sheetFormatPr defaultRowHeight="19"/>${widths}<sheetData>${body}</sheetData></worksheet>`;
+            overrides.push(
+              `<Override PartName="/xl/worksheets/sheet${j + 1}.xml" ContentType="application/vnd.openxmlformats-officedocument.spreadsheetml.worksheet+xml"/>`,
+            );
+          });
+          files["[Content_Types].xml"] =
+            `<?xml version="1.0" encoding="UTF-8"?><Types xmlns="http://schemas.openxmlformats.org/package/2006/content-types"><Default Extension="rels" ContentType="application/vnd.openxmlformats-package.relationships+xml"/><Default Extension="xml" ContentType="application/xml"/>${overrides.join("")}</Types>`;
+          files["_rels/.rels"] =
+            '<?xml version="1.0" encoding="UTF-8"?><Relationships xmlns="http://schemas.openxmlformats.org/package/2006/relationships"><Relationship Id="rId1" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/officeDocument" Target="xl/workbook.xml"/></Relationships>';
+          files["xl/workbook.xml"] =
+            `<?xml version="1.0" encoding="UTF-8"?><workbook xmlns="${ns}" xmlns:r="http://schemas.openxmlformats.org/officeDocument/2006/relationships"><sheets>${doc.tabs.map((s, j) => `<sheet name="${esc(s.name.slice(0, 31))}" sheetId="${j + 1}" r:id="rId${j + 1}"/>`).join("")}</sheets><calcPr calcId="191029" calcMode="auto" fullCalcOnLoad="1" forceFullCalc="1"/></workbook>`;
+          files["xl/_rels/workbook.xml.rels"] =
+            `<?xml version="1.0" encoding="UTF-8"?><Relationships xmlns="http://schemas.openxmlformats.org/package/2006/relationships">${doc.tabs.map((s, j) => `<Relationship Id="rId${j + 1}" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/worksheet" Target="worksheets/sheet${j + 1}.xml"/>`).join("")}<Relationship Id="rId${doc.tabs.length + 1}" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/styles" Target="styles.xml"/></Relationships>`;
+          files["xl/styles.xml"] =
+            `<?xml version="1.0" encoding="UTF-8"?><styleSheet xmlns="${ns}"><fonts count="4"><font><sz val="11"/><name val="Aptos"/></font><font><sz val="13"/><b/><color rgb="FFFFFFFF"/><name val="Aptos"/></font><font><sz val="18"/><b/><color rgb="FF082951"/><name val="Aptos Display"/></font><font><sz val="11"/><b/><color rgb="FF082951"/><name val="Aptos"/></font></fonts><fills count="5"><fill><patternFill patternType="none"/></fill><fill><patternFill patternType="gray125"/></fill><fill><patternFill patternType="solid"><fgColor rgb="FF082951"/><bgColor indexed="64"/></patternFill></fill><fill><patternFill patternType="solid"><fgColor rgb="FFEAF2FC"/><bgColor indexed="64"/></patternFill></fill><fill><patternFill patternType="solid"><fgColor rgb="FFF5F8FC"/><bgColor indexed="64"/></patternFill></fill></fills><borders count="1"><border><left/><right/><top/><bottom/><diagonal/></border></borders><cellStyleXfs count="1"><xf numFmtId="0" fontId="0" fillId="0" borderId="0"/></cellStyleXfs><cellXfs count="7"><xf numFmtId="0" fontId="0" fillId="0" borderId="0" xfId="0"/><xf numFmtId="0" fontId="1" fillId="2" borderId="0" xfId="0" applyFill="1" applyFont="1"/><xf numFmtId="0" fontId="2" fillId="0" borderId="0" xfId="0" applyFont="1"/><xf numFmtId="0" fontId="3" fillId="3" borderId="0" xfId="0" applyFill="1" applyFont="1"/><xf numFmtId="4" fontId="3" fillId="4" borderId="0" xfId="0" applyFill="1" applyFont="1"/><xf numFmtId="0" fontId="0" fillId="0" borderId="0" xfId="0"/><xf numFmtId="4" fontId="3" fillId="3" borderId="0" xfId="0" applyFill="1" applyFont="1"/></cellXfs><cellStyles count="1"><cellStyle name="Normal" xfId="0" builtinId="0"/></cellStyles></styleSheet>`;
+          return zip(files);
+        }
+        window.CFOExcel = {
+          build(tool, identity) {
+            const conf = tools[tool];
+            if (!conf) throw new Error("Unknown tool.");
+            const doc = makeDoc(conf[0], identity);
+            conf[1](doc);
+            return createXlsx(doc);
+          },
+          download(blob, tool, company) {
+            const safe =
+              (company || "Report")
+                .replace(/[^a-z0-9 _-]/gi, "")
+                .trim()
+                .replace(/\s+/g, "_")
+                .slice(0, 36) || "Report";
+            const a = document.createElement("a");
+            const url = URL.createObjectURL(blob);
+            a.href = url;
+            a.download = `CFOCRAFT_${tool}_${safe}_${new Date().toISOString().slice(0, 10)}.xlsx`;
+            document.body.appendChild(a);
+            a.click();
+            a.remove();
+            setTimeout(() => URL.revokeObjectURL(url), 60000);
+          },
+        };
+      })();
+    </script>
+    <!-- Paste your own HTTPS contact form/API endpoint between the quotes to collect leads.
+         Without one, the popup and Excel work but user contact details are NOT saved. -->
+    <script>
+      window.CFO_LEADS_API = "";
+    </script>
+    <script>
+      /* Static-friendly lead form. Set window.CFO_LEADS_API to a configured HTTPS form/API endpoint
+   to save contact details. Without an endpoint, Excel downloads locally but NO lead is saved. */
+      (() => {
+        "use strict";
+        const tool = document.body.dataset.page;
+        const endpoint = String(window.CFO_LEADS_API || "").trim();
+        const valid = [
+          "working-capital-calculator",
+          "monthly-cash-flow-model",
+          "overdraft-cost-calculator",
+          "gst-reconciliation-checklist",
+          "cma-data-template",
+        ];
+        if (!valid.includes(tool)) return;
+        const names = {
+          "working-capital-calculator": "Working Capital Calculator",
+          "monthly-cash-flow-model": "Monthly Cash Flow Model",
+          "overdraft-cost-calculator": "Overdraft Cost Calculator",
+          "gst-reconciliation-checklist": "GST Reconciliation Checklist",
+          "cma-data-template": "CMA Data Template",
+        };
+        const interests = {
+          "working-capital-calculator": [
+            "Reduce cash tied up",
+            "Improve debtor collections",
+            "Inventory optimisation",
+            "Working capital funding",
+          ],
+          "monthly-cash-flow-model": [
+            "Cash flow forecasting",
+            "Prevent cash shortfalls",
+            "Improve cash visibility",
+            "Budgeting and reporting",
+          ],
+          "overdraft-cost-calculator": [
+            "Lower OD/CC interest",
+            "Review bank borrowing costs",
+            "Optimise limit utilisation",
+            "Working capital funding",
+          ],
+          "gst-reconciliation-checklist": [
+            "GST reconciliation",
+            "ITC mismatch support",
+            "Monthly GST compliance",
+            "Finance controls",
+          ],
+          "cma-data-template": [
+            "CMA preparation",
+            "Bank loan / credit proposal",
+            "MPBF assessment",
+            "Financial projections",
+          ],
+        };
+        function launch() {
+          const node = document.createElement("div");
+          node.className = "lead-panel";
+          node.innerHTML = `<div class="lead-row"><div><p class="lead-eyebrow">FREE EXCEL REPORT</p><h3>Download your Excel analysis</h3><p>Your current inputs, calculations and results will be included in the workbook.</p></div><button class="btn lead-download-trigger" type="button">↓ Download Excel</button></div>`;
+          const slip =
+            document.querySelector("#tool-start .slip") ||
+            document.querySelector(".cfsum .slip");
+          if (slip) {
+            const stack = document.createElement("div");
+            stack.className = "lead-result-stack";
+            slip.parentNode.insertBefore(stack, slip);
+            stack.appendChild(slip);
+            stack.appendChild(node);
+          } else document.querySelector("main")?.appendChild(node);
+          const oldTemplate = document.querySelectorAll(
+            'a[href="REPLACE_WITH_TEMPLATE_URL"],a[href="REPLACE_WITH_CMA_TEMPLATE_URL"]',
+          );
+          oldTemplate.forEach((a) => {
+            const p = a.closest(".slip-note") || a;
+            p.remove();
+          });
+          const backdrop = document.createElement("div");
+          backdrop.className = "lead-backdrop";
+          backdrop.hidden = true;
+          backdrop.innerHTML = `<div class="lead-modal" role="dialog" aria-modal="true" aria-labelledby="lead-title" tabindex="-1">
+      <button class="lead-close" type="button" aria-label="Close dialog">×</button>
+      <div class="lead-modal-head"><div class="lead-kicker">CFO CRAFT · FREE EXCEL</div><h2 id="lead-title">Get your personalised Excel report</h2><p>Complete your business details to receive the <strong>${names[tool]}</strong> workbook.</p></div>
+      <form id="lead-form" novalidate><div class="lead-fields">
+        <label>Full name <span>*</span><input name="name" autocomplete="name" maxlength="100" required placeholder="Your full name"></label>
+        <label>Company / business name <span>*</span><input name="company" autocomplete="organization" maxlength="120" required placeholder="Your organisation"></label>
+        <label>Work email <span>*</span><input name="email" type="email" autocomplete="email" maxlength="180" required placeholder="you@company.com"></label>
+        <label>Mobile number <span>*</span><input name="phone" type="tel" inputmode="tel" autocomplete="tel" maxlength="22" required placeholder="+91 98765 43210"></label>
+        <label>City <input name="city" autocomplete="address-level2" maxlength="90" placeholder="City (optional)"></label>
+        <label>Business type <select name="industry"><option value="">Select (optional)</option><option>Manufacturing</option><option>Trading & distribution</option><option>Services</option><option>Startup</option><option>Other</option></select></label>
+        <label class="lead-wide">What support would help most? <select name="interest"><option value="">Select (optional)</option>${interests[tool].map((x) => `<option>${x}</option>`).join("")}<option>Just exploring the tool</option><option>Other</option></select></label>
+      </div>
+      <label class="lead-check"><input type="checkbox" name="privacyConsent" required><span><strong>*</strong> I agree to use these details for preparing my Excel download. See the privacy notice below.</span></label>
+      ${endpoint ? `<label class="lead-check"><input type="checkbox" name="followupConsent"><span>CFO CRAFT may contact me about relevant financial advisory services. (Optional)</span></label>` : ""}
+      <p class="lead-privacy">${
+        endpoint
+          ? "Contact details and selected tool are sent to CFO CRAFT for this download. Financial calculator data remains only in your browser and workbook. Optional follow-up permission is requested separately."
+          : "<strong>Static preview:</strong> No lead is collected or sent to CFO CRAFT. Your form details are only used inside your Excel report. To collect contact details, the website owner must configure a form/CRM endpoint. Financial inputs stay in your browser."
+      }</p>
+      <p class="lead-form-error" role="alert" aria-live="polite" hidden></p>
+      <button class="lead-submit" type="submit">Submit &amp; Download Excel →</button>
+      <p class="lead-security">Excel is generated directly in your browser after successful submission.</p>
+      </form></div>`;
+          document.body.appendChild(backdrop);
+          const form = backdrop.querySelector("form"),
+            status = backdrop.querySelector(".lead-form-error"),
+            submit = backdrop.querySelector(".lead-submit");
+          const close = () => {
+            backdrop.hidden = true;
+            document.body.classList.remove("lead-modal-open");
+            node.querySelector("button").focus();
+          };
+          node.querySelector("button").addEventListener("click", () => {
+            backdrop.hidden = false;
+            document.body.classList.add("lead-modal-open");
+            status.hidden = true;
+            form.querySelector("[name=name]").focus();
+          });
+          backdrop
+            .querySelector(".lead-close")
+            .addEventListener("click", close);
+          backdrop.addEventListener("click", (e) => {
+            if (e.target === backdrop) close();
+          });
+          document.addEventListener("keydown", (e) => {
+            if (backdrop.hidden) return;
+            if (e.key === "Escape") {
+              e.preventDefault();
+              close();
+            }
+            if (e.key === "Tab") {
+              const f = [
+                ...backdrop.querySelectorAll("button,input,select"),
+              ].filter((x) => !x.disabled);
+              const first = f[0],
+                last = f[f.length - 1];
+              if (e.shiftKey && document.activeElement === first) {
+                e.preventDefault();
+                last.focus();
+              } else if (!e.shiftKey && document.activeElement === last) {
+                e.preventDefault();
+                first.focus();
+              }
+            }
+          });
+          form.addEventListener("submit", async (e) => {
+            e.preventDefault();
+            status.hidden = true;
+            if (!form.checkValidity()) {
+              status.textContent =
+                "Please complete the mandatory fields and consent checkbox.";
+              status.hidden = false;
+              const invalid = form.querySelector(":invalid");
+              invalid?.focus();
+              return;
+            }
+            const fd = new FormData(form);
+            const phone = String(fd.get("phone") || "").replace(/[^\d]/g, "");
+            if (phone.length < 10 || phone.length > 15) {
+              status.textContent =
+                "Please enter a valid mobile number with 10–15 digits.";
+              status.hidden = false;
+              form.elements.phone.focus();
+              return;
+            }
+            const calculatorError = document.querySelector(
+              "#tool-start #err.on",
+            );
+            if (calculatorError) {
+              status.textContent =
+                "Please correct the highlighted calculator inputs before downloading.";
+              status.hidden = false;
+              return;
+            }
+            const payload = {
+              name: String(fd.get("name") || "").trim(),
+              company: String(fd.get("company") || "").trim(),
+              email: String(fd.get("email") || "").trim(),
+              phone: String(fd.get("phone") || "").trim(),
+              city: String(fd.get("city") || "").trim(),
+              industry: String(fd.get("industry") || ""),
+              interest: String(fd.get("interest") || ""),
+              tool,
+              privacyConsent: fd.get("privacyConsent") === "on",
+              followupConsent: fd.get("followupConsent") === "on",
+              page: location.pathname,
+            };
+            submit.disabled = true;
+            submit.textContent = endpoint
+              ? "Submitting your details…"
+              : "Preparing your Excel…";
+            try {
+              // Build before the API call to avoid recording a lead that couldn't get a report.
+              const workbook = window.CFOExcel.build(tool, payload);
+              if (endpoint) {
+                const response = await fetch(endpoint, {
+                  method: "POST",
+                  headers: {
+                    "Content-Type": "application/json",
+                    Accept: "application/json",
+                  },
+                  body: JSON.stringify(payload),
+                });
+                if (!response.ok)
+                  throw new Error(
+                    response.status === 429
+                      ? "Too many attempts. Please try again shortly."
+                      : "Unable to save contact details. Please try again.",
+                  );
+              }
+              window.CFOExcel.download(workbook, tool, payload.company);
+              form.reset();
+              close();
+            } catch (error) {
+              status.textContent =
+                error.message || "Something went wrong. Please try again.";
+              status.hidden = false;
+            } finally {
+              submit.disabled = false;
+              submit.textContent = "Submit & Download Excel →";
+            }
+          });
+        }
+        if (document.readyState === "loading")
+          document.addEventListener("DOMContentLoaded", launch);
+        else launch();
+      })();
+    </script>
+  </body>
 </html>

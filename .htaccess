@@ -1,11 +1,15 @@
 
 RewriteEngine On
 
-# Existing files and directories ko as-is serve karo
+# 1. Direct .html URLs ko clean URLs par redirect karo
+RewriteCond %{THE_REQUEST} \s/+(.+)\.html(?:[\s?]) [NC]
+RewriteRule ^(.+)\.html$ /$1 [R=301,L,NE]
+
+# 2. Existing files aur directories ko as-is serve karo
 RewriteCond %{REQUEST_FILENAME} -f [OR]
 RewriteCond %{REQUEST_FILENAME} -d
 RewriteRule ^ - [L]
 
-# Extensionless URLs ko corresponding HTML file par map karo
-RewriteCond %{DOCUMENT_ROOT}/$1.html -f
+# 3. Clean URLs ko corresponding HTML files se serve karo
+RewriteCond %{REQUEST_FILENAME}.html -f
 RewriteRule ^(.+?)/?$ $1.html [L]

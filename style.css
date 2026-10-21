@@ -5095,3 +5095,288 @@ h6,
     transition: none !important;
   }
 }
+
+
+/* ======================================================================
+   CFO CRAFT · SIGNATURE CONTACT / WHITE × BLUE × LIGHT BLUE
+   Scoped to #contact so no other section, form, or global design is changed.
+   Brand palette + Manrope/Roboto inherited from :root.
+   ====================================================================== */
+.home-page #contact.section-contact {
+  position: relative;
+  isolation: isolate;
+  background:
+    radial-gradient(ellipse at 97% 12%, rgba(166,203,247,.70) 0%, transparent 36%),
+    radial-gradient(ellipse at 12% 96%, rgba(166,203,247,.30) 0%, transparent 43%),
+    linear-gradient(118deg, #ffffff 4%, #f3f9ff 42%, #e5f1ff 72%, #cfe5fc 100%);
+  color: var(--dark-blue);
+  overflow: hidden;
+}
+.home-page #contact.section-contact::before,
+.home-page #contact.section-contact::after {
+  border: 0;
+  pointer-events: none;
+  z-index: 0;
+}
+.home-page #contact.section-contact::before {
+  width: 440px;
+  height: 440px;
+  top: -290px;
+  right: -150px;
+  border: 1px solid rgba(43,109,178,.10);
+}
+.home-page #contact.section-contact::after {
+  width: 280px;
+  height: 280px;
+  bottom: -185px;
+  left: -130px;
+  border: 1px solid rgba(43,109,178,.09);
+}
+.home-page #contact > .container {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  max-width: 1510px;
+}
+.home-page #contact .cc-contact-shell {
+  display: grid;
+  grid-template-columns: minmax(0,.94fr) minmax(0,1.06fr);
+  gap: clamp(2rem,5vw,6rem);
+  align-items: center;
+  width: 100%;
+  min-width: 0;
+  max-width: 1380px;
+  margin: 0 auto;
+}
+.home-page #contact .cc-contact-left {
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.home-page #contact .contact-head {
+  max-width: 630px;
+  margin: 0 0 clamp(1.15rem,2.3vh,1.6rem) !important;
+}
+.home-page #contact .pre-title {
+  color: var(--primary-blue) !important;
+  font-family: var(--font-primary);
+  margin: 0 0 .65rem !important;
+  font-size: .84rem;
+  letter-spacing: .12em;
+}
+.home-page #contact .pre-title::before { background:var(--primary-blue) !important; width: 24px; }
+.home-page #contact .section-heading {
+  color: var(--dark-blue) !important;
+  max-width: none !important;
+  margin: 0 0 .85rem !important;
+  font-family: var(--font-heading);
+  font-weight: 500;
+  font-size: clamp(2.15rem,3.15vw,3.25rem);
+  line-height: 1.13;
+  letter-spacing: -.045em;
+  text-align: left;
+}
+.home-page #contact .section-heading span { color:var(--primary-blue); }
+.home-page #contact .contact-intro {
+  max-width: 580px;
+  margin: 0 !important;
+  color: #58728a !important;
+  font-size: clamp(.88rem,1.05vw,1rem);
+  font-weight: 400;
+  line-height: 1.65;
+}
+.home-page #contact .contact-info-area {
+  display: flex;
+  flex-direction: column;
+  gap: 0 !important;
+  width: 100%;
+  min-width: 0;
+  height: auto;
+  padding: 0 !important;
+  background: none;
+}
+.home-page #contact .cc-contact-item {
+  display: flex;
+  gap: .95rem;
+  align-items: flex-start;
+  padding: .75rem 0;
+  background: transparent;
+  color: var(--dark-blue);
+  border: 0;
+  border-bottom: 1px solid rgba(43,109,178,.14);
+  box-shadow: none;
+  border-radius: 0;
+  text-decoration: none;
+  min-height: 0;
+}
+.home-page #contact a.cc-contact-item:hover .cc-contact-arrow { transform:translate(2px,-2px); }
+.home-page #contact .cc-contact-icon {
+  display: grid;
+  place-items: center;
+  flex: 0 0 40px;
+  width: 40px;
+  height: 40px;
+  margin: 0;
+  background: rgba(220,237,254,.87);
+  border: 1px solid rgba(43,109,178,.14);
+  border-radius: 11px;
+  color: var(--primary-blue);
+}
+.home-page #contact .cc-contact-icon svg { width:19px; height:19px; }
+.home-page #contact .cc-contact-detail { display:flex; flex:1; flex-direction:column; gap:.13rem; min-width:0; }
+.home-page #contact .cc-contact-label {
+  display: block;
+  color: #6485a5;
+  font-weight: 700;
+  font-size: .66rem;
+  line-height:1.35;
+  letter-spacing: .115em;
+  text-transform: uppercase;
+}
+.home-page #contact .cc-contact-detail strong {
+  color:var(--dark-blue);
+  font-size:clamp(.89rem,1vw,1rem);
+  font-weight:600;
+  line-height:1.42;
+  overflow-wrap:anywhere;
+}
+.home-page #contact .cc-contact-address,
+.home-page #contact .cc-contact-hours {
+  display:block;
+  color: #56728c;
+  font-size: .81rem;
+  line-height: 1.43;
+}
+.home-page #contact .cc-contact-hours { margin-top: .3rem; color: var(--primary-blue); font-weight:600; }
+.home-page #contact .cc-contact-arrow { color:var(--primary-blue); margin-left:auto; font-size:1.1rem; transition:transform .2s; }
+.home-page #contact .cc-contact-promise {
+  display:flex;
+  align-items:center;
+  flex-wrap:wrap;
+  gap:.35rem;
+  margin: .95rem 0 0;
+  color:#58728a;
+  font-size:.78rem;
+  font-weight:500;
+  line-height:1.4;
+}
+.home-page #contact .cc-contact-promise svg { flex:0 0 16px; width:16px; height:16px; margin-right:.25rem; color:var(--primary-blue); }
+.home-page #contact .contact-form-area { min-width:0; }
+.home-page #contact .contact-form {
+  display:flex;
+  flex-direction:column;
+  gap:.75rem;
+  width:100%;
+  height:auto;
+  min-height:0;
+  max-width:690px;
+  margin:0 auto;
+  padding:clamp(1.35rem,2.35vw,2.25rem);
+  border:1px solid rgba(43,109,178,.13);
+  border-radius:22px;
+  background: rgba(255,255,255,.97);
+  box-shadow:0 22px 65px rgba(43,109,178,.105), 0 2px 9px rgba(8,41,81,.035);
+}
+.home-page #contact .cc-form-heading { margin:0 0 .2rem; }
+.home-page #contact .cc-form-heading h3 {
+  color:var(--dark-blue);
+  font-family:var(--font-heading);
+  font-weight:700;
+  letter-spacing:-.035em;
+  font-size:clamp(1.35rem,1.8vw,1.7rem);
+  line-height:1.25;
+}
+.home-page #contact .cc-form-heading p { margin:.25rem 0 0; color:#72889d; font-size:.82rem; }
+.home-page #contact .contact-form .form-row {
+  display:grid;
+  grid-template-columns:repeat(2,minmax(0,1fr));
+  gap:.85rem;
+  width:100%;
+}
+.home-page #contact .contact-form .form-group { gap:.3rem; min-width:0; }
+.home-page #contact .contact-form .form-group label {
+  color:var(--dark-blue) !important;
+  font-size:.75rem;
+  font-weight:600;
+  letter-spacing:.015em;
+}
+.home-page #contact .contact-form .form-group input,
+.home-page #contact .contact-form .form-group select,
+.home-page #contact .contact-form .form-group textarea {
+  display:block;
+  width:100%;
+  min-width:0;
+  min-height:0;
+  max-width:100%;
+  border:1px solid #dbe6f2;
+  border-radius:9px;
+  background-color:#f9fcff;
+  color:var(--dark-blue);
+  padding:.67rem .8rem;
+  font-family:var(--font-primary);
+  font-size:.88rem;
+  line-height:1.4;
+  box-shadow:none;
+}
+.home-page #contact .contact-form .form-group input,
+.home-page #contact .contact-form .form-group select { height:43px; }
+.home-page #contact .contact-form .form-group textarea { height:76px; min-height:76px; max-height:180px; resize:vertical; }
+.home-page #contact .contact-form .form-group textarea::placeholder { color:#9baebe; }
+.home-page #contact .contact-form .form-group input:focus-visible,
+.home-page #contact .contact-form .form-group select:focus-visible,
+.home-page #contact .contact-form .form-group textarea:focus-visible {
+  outline:2px solid rgba(43,109,178,.23);
+  outline-offset:1px;
+  border-color:var(--primary-blue);
+  background:#fff;
+}
+.home-page #contact .contact-form .form-group select {
+  color:var(--dark-blue);
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 16 16'%3E%3Cpath d='m4 6 4 4 4-4' fill='none' stroke='%232B6DB2' stroke-width='1.6' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+  background-position: right .85rem center;
+  background-size:16px;
+}
+.home-page #contact .contact-form .form-group select option { color:var(--dark-blue); background:#fff; }
+.home-page #contact .contact-form > .btn-secondary {
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  gap:.55rem;
+  width:100%;
+  min-height:44px;
+  margin:.1rem 0 0;
+  padding:.65rem 1rem;
+  background:var(--creamish);
+  color:var(--dark-blue);
+  border:0;
+  border-radius:50px;
+  font-family:var(--font-primary);
+  font-size:.9rem;
+  font-weight:700;
+  box-shadow:none;
+  cursor:pointer;
+}
+.home-page #contact .contact-form > .btn-secondary:hover { background:#e8b16e; transform:translateY(-1px); box-shadow:0 7px 16px rgba(43,109,178,.10); }
+.home-page #contact .form-footer { display:flex; flex-direction:column; gap:.32rem; margin:0; text-align:center; }
+.home-page #contact .form-footer p { margin:0; font-size:.73rem; line-height:1.45; color:#71899f; }
+.home-page #contact .form-footer .pick-time { font-size:.78rem; }
+.home-page #contact .form-footer .pick-time a { color:var(--primary-blue); font-weight:700; text-decoration:underline; text-decoration-color:rgba(43,109,178,.32); text-underline-offset:3px; }
+.home-page #contact .form-footer .pick-time a:hover { text-decoration-color:var(--primary-blue); }
+
+
+/* ===============================================================
+   GET IN TOUCH | annual revenue single-chevron correction
+   Hover shorthand used elsewhere would reset background-repeat.
+   Keep the intended single SVG arrow in every interaction state.
+   =============================================================== */
+.home-page #contact .contact-form .form-group select {
+  background-repeat: no-repeat !important;
+  background-color: #f9fcff;
+}
+.home-page #contact .contact-form .form-group select:hover,
+.home-page #contact .contact-form .form-group select:focus,
+.home-page #contact .contact-form .form-group select:focus-visible {
+  background-color: #ffffff !important;
+  background-repeat: no-repeat !important;
+}

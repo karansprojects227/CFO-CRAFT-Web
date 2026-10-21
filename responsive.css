@@ -1004,7 +1004,7 @@
     min-height: 0 !important;
     max-height: none !important;
     margin: 0 !important;
-    padding: 5.25rem 0 5.5rem !important;
+    padding: 1.25rem 0 2rem !important;
     overflow: visible !important;
     align-items: initial !important;
     background: var(--gray-100) !important;
@@ -1035,7 +1035,7 @@
   .home-page #pricing > .container > .home-pricing-lead {
     margin-bottom: 0.9rem;
     max-width: 980px !important;
-    margin: 0 0 2rem !important;
+    margin: 0 0 .8rem !important;
     font-size: 1rem !important;
     line-height: 1.6 !important;
   }
@@ -1076,7 +1076,7 @@
   }
 
   .home-page #pricing .home-plan-price {
-    margin-top: 1.15rem !important;
+    margin-top: .25rem !important;
     font-size: 1.42rem !important;
   }
 
@@ -1092,7 +1092,7 @@
   }
 
   .home-page #pricing .home-plan-feats {
-    margin: 1rem 0 1rem !important;
+    margin: .5rem 0 .5rem !important;
     padding-top: 1rem !important;
   }
 
@@ -4768,5 +4768,194 @@
   }
   .home-page .section-platform .platform-split {
     zoom: calc((100vw - 2.5rem) / 1200px) !important;
+  }
+}
+
+
+/* ======================================================================
+   CFO CRAFT — SIGNATURE CONTACT: viewport-specific final overrides
+   All overrides are scoped to #contact; other sections remain untouched.
+   ====================================================================== */
+@media (min-width: 1025px) {
+  .home-page #contact.section-contact {
+    box-sizing:border-box !important;
+    display:flex !important;
+    align-items:center !important;
+    justify-content:center !important;
+    width:100% !important;
+    height:100svh !important;
+    min-height:100svh !important;
+    max-height:100svh !important;
+    margin:0 !important;
+    padding:calc(var(--home-nav-offset,76px) + 6px) 0 12px !important;
+    overflow:hidden !important;
+  }
+  .home-page #contact > .container {
+    width:100% !important;
+    max-width:1510px !important;
+    height:auto !important;
+    max-height:calc(100svh - var(--home-nav-offset,76px) - 18px) !important;
+    display:flex !important;
+    align-items:center !important;
+    margin:0 auto !important;
+    padding:0 clamp(2rem,5vw,5.5rem) !important;
+  }
+  .home-page #contact .cc-contact-shell { gap:clamp(2rem,5vw,5rem) !important; }
+  .home-page #contact .contact-head { margin:0 0 1.1rem !important; }
+  .home-page #contact .section-heading { font-size:clamp(2rem,3.05vw,3.1rem) !important; line-height:1.1 !important; margin:0 0 .7rem !important; }
+  .home-page #contact .contact-intro { font-size:clamp(.85rem,1vw,.97rem) !important; line-height:1.56 !important; }
+  .home-page #contact .contact-info-area { display:flex !important; flex-direction:column !important; gap:0 !important; height:auto !important; padding:0 !important; }
+  .home-page #contact .cc-contact-item { min-height:0 !important; padding:.65rem 0 !important; }
+  .home-page #contact .contact-form { height:auto !important; min-height:0 !important; padding:clamp(1.15rem,2.25vw,1.9rem) !important; gap:.65rem !important; }
+  .home-page #contact .contact-form .form-row { grid-template-columns:repeat(2,minmax(0,1fr)) !important; gap:.85rem !important; }
+  .home-page #contact .contact-form .form-group { gap:.25rem !important; }
+  .home-page #contact .contact-form .form-group label { font-size:.75rem !important; }
+  .home-page #contact .contact-form .form-group input,
+  .home-page #contact .contact-form .form-group select { height:42px !important; min-height:0 !important; padding:.6rem .8rem !important; }
+  .home-page #contact .contact-form .form-group textarea { height:72px !important; min-height:72px !important; padding:.55rem .8rem !important; }
+  .home-page #contact .contact-form > .btn-secondary { min-height:43px !important; padding:.62rem .95rem !important; }
+  .home-page #contact .form-footer { margin:0 !important; gap:.22rem !important; }
+  .home-page #contact .form-footer p { font-size:.71rem !important; }
+  .home-page #contact .form-footer .pick-time { font-size:.76rem !important; }
+}
+@media (min-width:1025px) and (max-height:720px) {
+  .home-page #contact .cc-contact-shell { gap:2.4rem !important; }
+  .home-page #contact .section-heading { font-size:clamp(1.9rem,2.8vw,2.65rem) !important; }
+  .home-page #contact .cc-contact-item { padding:.5rem 0 !important; }
+  .home-page #contact .contact-form { padding:1.05rem 1.35rem !important; gap:.46rem !important; }
+  .home-page #contact .cc-form-heading { margin:0 !important; }
+  .home-page #contact .cc-form-heading h3 { font-size:1.35rem !important; }
+  .home-page #contact .contact-form .form-group input,
+  .home-page #contact .contact-form .form-group select { height:38px !important; }
+  .home-page #contact .contact-form .form-group textarea { height:58px !important; min-height:58px !important; }
+  .home-page #contact .contact-form > .btn-secondary { min-height:39px !important; }
+}
+@media (max-width:1024px) {
+  .home-page #contact.section-contact {
+    display:block !important;
+    height:auto !important;
+    min-height:0 !important;
+    max-height:none !important;
+    overflow:visible !important;
+    padding:clamp(2rem,5vw,3.6rem) 0 !important;
+    margin:0 !important;
+  }
+  .home-page #contact > .container {
+    width:100% !important;
+    height:auto !important;
+    max-height:none !important;
+    padding:0 clamp(1rem,4vw,2rem) !important;
+  }
+  .home-page #contact .cc-contact-shell {
+    display:grid !important;
+    grid-template-columns:minmax(0,1fr) !important;
+    gap:1.55rem !important;
+    max-width:720px;
+  }
+  .home-page #contact .cc-contact-left { display:contents !important; }
+  .home-page #contact .contact-head { grid-row:1; margin:0 !important; max-width:none !important; }
+  .home-page #contact .section-heading { font-size:clamp(2rem,4.4vw,2.8rem) !important; }
+  .home-page #contact .contact-form-area { grid-row:2; width:100%; }
+  .home-page #contact .contact-form { max-width:none; height:auto !important; min-height:0 !important; padding:1.55rem !important; gap:.85rem !important; }
+  .home-page #contact .contact-form .form-row { grid-template-columns:repeat(2,minmax(0,1fr)) !important; gap:.85rem !important; }
+  .home-page #contact .contact-info-area { grid-row:3; display:flex !important; flex-direction:column !important; gap:0 !important; height:auto !important; padding:0 !important; }
+  .home-page #contact .cc-contact-item { min-height:0 !important; padding:.85rem 0 !important; }
+  .home-page #contact .contact-form .form-group input,
+  .home-page #contact .contact-form .form-group select { height:44px !important; min-height:0 !important; }
+  .home-page #contact .contact-form .form-group textarea { height:85px !important; min-height:85px !important; }
+  .home-page #contact .contact-form > .btn-secondary { min-height:45px !important; }
+  .home-page #contact .form-footer { margin:0 !important; }
+}
+@media (max-width:600px) {
+  .home-page #contact.section-contact { padding:2rem 0 2.5rem !important; }
+  .home-page #contact > .container { padding:0 1.1rem !important; }
+  .home-page #contact .cc-contact-shell { gap:1.3rem !important; }
+  .home-page #contact .pre-title { font-size:.75rem !important; margin:0 0 .5rem !important; }
+  .home-page #contact .section-heading { font-size:clamp(1.8rem,7.5vw,2.3rem) !important; line-height:1.16 !important; margin:0 0 .65rem !important; }
+  .home-page #contact .contact-intro { font-size:.9rem !important; line-height:1.58 !important; }
+  .home-page #contact .contact-form { padding:1.15rem !important; gap:.75rem !important; border-radius:17px !important; }
+  .home-page #contact .cc-form-heading h3 { font-size:1.4rem !important; }
+  .home-page #contact .contact-form .form-row { grid-template-columns:minmax(0,1fr) !important; gap:.75rem !important; }
+  .home-page #contact .contact-form .form-group { gap:.25rem !important; }
+  .home-page #contact .contact-form .form-group label { font-size:.78rem !important; }
+  .home-page #contact .contact-form .form-group input,
+  .home-page #contact .contact-form .form-group select { height:43px !important; padding:.6rem .7rem !important; }
+  .home-page #contact .contact-form .form-group textarea { height:80px !important; min-height:80px !important; padding:.65rem .7rem !important; }
+  .home-page #contact .contact-form > .btn-secondary { min-height:45px !important; }
+  .home-page #contact .form-footer p { font-size:.73rem !important; }
+  .home-page #contact .cc-contact-detail strong { font-size:.92rem; }
+  .home-page #contact .cc-contact-address { font-size:.8rem; }
+  .home-page #contact .cc-contact-icon { flex-basis:38px; width:38px; height:38px; }
+}
+
+
+/* ===============================================================
+   GET IN TOUCH | clean mobile layout fixes (<=600px only)
+   1. Keep the discovery-call link and arrow together.
+   2. Let the full company name use the entire mobile content width.
+   3. Preserve legible spacing on 320px+ screens.
+   Desktop and all other website sections are untouched.
+   =============================================================== */
+@media (max-width: 600px) {
+  /* A full, centred clickable link; arrow must not orphan. */
+  .home-page #contact .contact-form .form-footer .pick-time {
+    text-align: center !important;
+    line-height: 1.55 !important;
+  }
+  .home-page #contact .contact-form .form-footer .pick-time a {
+    display: block !important;
+    width: max-content;
+    max-width: 100%;
+    margin: .3rem auto 0 !important;
+    white-space: nowrap !important;
+    overflow-wrap: normal !important;
+    line-height: 1.55 !important;
+    text-decoration: underline;
+    text-underline-offset: 3px;
+  }
+
+  /* Office: icon + label on first row, information across full width. */
+  .home-page #contact .cc-contact-item.cc-contact-office {
+    display: grid !important;
+    grid-template-columns: 38px minmax(0, 1fr) !important;
+    column-gap: .85rem !important;
+    row-gap: .32rem !important;
+    align-items: center !important;
+  }
+  .home-page #contact .cc-contact-office > .cc-contact-icon {
+    grid-column: 1 !important;
+    grid-row: 1 !important;
+    align-self: center !important;
+  }
+  .home-page #contact .cc-contact-office > .cc-contact-detail {
+    display: contents !important;
+  }
+  .home-page #contact .cc-contact-office .cc-contact-label {
+    grid-column: 2 !important;
+    grid-row: 1 !important;
+    align-self: center !important;
+  }
+  .home-page #contact .cc-contact-office .cc-contact-detail strong,
+  .home-page #contact .cc-contact-office .cc-contact-address,
+  .home-page #contact .cc-contact-office .cc-contact-hours {
+    grid-column: 1 / -1 !important;
+    min-width: 0;
+    overflow-wrap: normal;
+    word-break: normal;
+  }
+  .home-page #contact .cc-contact-office .cc-contact-detail strong {
+    grid-row: 2 !important;
+    margin-top: .15rem !important;
+    font-size: clamp(.88rem, 3.7vw, 1rem) !important;
+    font-weight: 700;
+    line-height: 1.4 !important;
+  }
+  .home-page #contact .cc-contact-office .cc-contact-address {
+    grid-row: 3 !important;
+    line-height: 1.5 !important;
+  }
+  .home-page #contact .cc-contact-office .cc-contact-hours {
+    grid-row: 4 !important;
+    margin-top: .24rem !important;
   }
 }

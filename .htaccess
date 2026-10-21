@@ -1,0 +1,11 @@
+
+RewriteEngine On
+
+# Existing files and directories ko as-is serve karo
+RewriteCond %{REQUEST_FILENAME} -f [OR]
+RewriteCond %{REQUEST_FILENAME} -d
+RewriteRule ^ - [L]
+
+# Extensionless URLs ko corresponding HTML file par map karo
+RewriteCond %{DOCUMENT_ROOT}/$1.html -f
+RewriteRule ^(.+?)/?$ $1.html [L]

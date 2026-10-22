@@ -33,16 +33,6 @@
   margin: 0 auto;
 }
 
-.pricing-page .ph {
-  display: inline;
-  background: rgba(238, 186, 125, 0.22);
-  color: var(--dark-blue);
-  border: 1px dashed rgba(43, 109, 178, 0.38);
-  padding: 0.05em 0.35em;
-  border-radius: 5px;
-  font-weight: 600;
-}
-
 /* Hero */
 .pricing-page .p-hero {
   background: linear-gradient(135deg, var(--dark-blue-gradient));

@@ -1069,9 +1069,9 @@
   }
 
   .home-page #pricing .home-plan-desc {
-    min-height: 4.15rem !important;
+    min-height: 2.2rem !important;
     margin: 0 !important;
-    font-size: 0.9rem !important;
+    font-size: 0.8rem !important;
     line-height: 1.55 !important;
   }
 
@@ -4787,7 +4787,6 @@
     min-height:100svh !important;
     max-height:100svh !important;
     margin:0 !important;
-    padding:calc(var(--home-nav-offset,76px) + 6px) 0 12px !important;
     overflow:hidden !important;
   }
   .home-page #contact > .container {

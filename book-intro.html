@@ -20,16 +20,17 @@
     <link href="responsive.css" rel="stylesheet" />
     <link href="book-intro.css" rel="stylesheet" />
     <script>
-      // LIVE INTEGRATION: Insert your deployed, server-side endpoints here, after setup.
-      // Example: availabilityEndpoint: '/api/intro/availability', bookingEndpoint: '/api/intro/book'
-      // Both are required. Never put calendar credentials or API secrets in this page.
+      // Live public endpoints: Render runs the Google Calendar integration.
+      // Turnstile site key is PUBLIC. Never add the secret or BOOKING_TEST_KEY here.
       window.CFO_BOOKING_CONFIG = {
-        availabilityEndpoint: "",
-        bookingEndpoint: "",
+        availabilityEndpoint: "https://cfo-craft-backend.onrender.com/api/intro/availability",
+        bookingEndpoint: "https://cfo-craft-backend.onrender.com/api/intro/book-public",
+        turnstileSiteKey: "0x4AAAAAAFgfmtXeuTjGZyV2",
         durationMinutes: 30,
         businessEmail: "info@cfocraft.com",
       };
     </script>
+    <script defer src="https://challenges.cloudflare.com/turnstile/v0/api.js?render=explicit"></script>
     <script defer="" src="book-intro.js"></script>
   </head>
   <body class="booking-page">
@@ -853,7 +854,7 @@
               </div>
             </div>
           </div>
-          <a class="nav-link" href="../pricing.html"> Pricing </a>
+          <a class="nav-link" href="./pricing/pricing.html"> Pricing </a>
         </div>
         <div class="nav-right">
           <a class="nav-signin" href="./client-login.html">
@@ -1211,6 +1212,8 @@
                       introductory call.</span
                     ></label
                   >
+                  <!-- Security check runs only on booking; the rest of the form is unchanged. -->
+                  <div id="cfo-turnstile"></div>
                   <p
                     class="form-error"
                     hidden=""
@@ -1307,7 +1310,7 @@
           </div>
           <div class="footer-col">
             <h4>Company</h4>
-            <a href="../pricing.html"> Pricing </a>
+            <a href="./pricing/pricing.html"> Pricing </a>
             <a href="./about/team.html"> About CFO CRAFT </a>
             <a href="./about/careers.html"> Careers </a>
             <a href="./free-tools/working-capital-calculator.html">

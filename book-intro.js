@@ -166,6 +166,49 @@
     $('email-request').hidden=confirmed;
     gotoStep(3);
   }
+  // Public booking security check: Turnstile token never goes in local storage.
+  // Render verifies it server-side; BOOKING_TEST_KEY is never sent by visitors.
+  let challengeWidgetId=null;
+  let challengeWaiter=null;
+  function completeChallenge(error,token){
+    if(!challengeWaiter)return;
+    const pending=challengeWaiter;challengeWaiter=null;
+    clearTimeout(pending.timer);
+    if(error)pending.reject(error);else pending.resolve(token);
+  }
+  function challengeToken(){
+    const key=CFG.turnstileSiteKey;
+    if(!key || key.startsWith('REPLACE_WITH_')){
+      return Promise.reject(new Error('Online booking is being configured. Please try again later.'));
+    }
+    if(!window.turnstile){
+      return Promise.reject(new Error('Security verification could not load. Please retry or contact us.'));
+    }
+    if(challengeWaiter)return Promise.reject(new Error('Verification is already running.'));
+    return new Promise((resolve,reject)=>{
+      try{
+        if(challengeWidgetId===null){
+          challengeWidgetId=window.turnstile.render('#cfo-turnstile',{
+            sitekey:key,
+            execution:'execute',
+            appearance:'interaction-only',
+            action:'intro_booking',
+            callback:token=>completeChallenge(null,token),
+            'error-callback':()=>completeChallenge(new Error('Security verification failed. Please retry.')),
+            'expired-callback':()=>completeChallenge(new Error('Security verification expired. Please retry.')),
+            'timeout-callback':()=>completeChallenge(new Error('Security verification timed out. Please retry.'))
+          });
+        }
+        if(challengeWidgetId===undefined){throw new Error('Security verification could not start.');}
+        const timer=setTimeout(()=>completeChallenge(new Error('Security verification timed out. Please retry.')),120000);
+        challengeWaiter={resolve,reject,timer};
+        window.turnstile.execute(challengeWidgetId);
+      }catch(error){
+        if(challengeWaiter)completeChallenge(error);
+        else reject(new Error('Security verification could not start.'));
+      }
+    });
+  }
   async function sendRequest(event){
     event.preventDefault();$('form-error').hidden=true;
     const f=$('booking-form');if(!f.checkValidity()){f.reportValidity();return;}
@@ -175,13 +218,20 @@
     if(!LIVE){const link=buildMailto(details);$('email-request').href=link;showFinish(details,false);window.location.href=link;return;}
     const btn=$('confirm-button');btn.disabled=true;btn.textContent='Confirming with calendar…';
     try{
+      details.consent=$('guest-consent').checked;
+      details.turnstileToken=await challengeToken();
       const csrf=document.querySelector('meta[name="csrf-token"]')?.content;
       const r=await fetch(new URL(CFG.bookingEndpoint,location.origin).toString(),{method:'POST',headers:{'Content-Type':'application/json',Accept:'application/json',...(csrf?{'X-CSRF-Token':csrf}:{})},credentials:'same-origin',cache:'no-store',body:JSON.stringify(details)});
       const j=await r.json().catch(()=>({}));
       if(!r.ok||j.status!=='confirmed')throw new Error(j.message||'Could not reserve the time. Please choose another slot.');
       showFinish(details,true);
     }catch(err){$('form-error').textContent=err.message||'Booking could not be confirmed. Please try again.';$('form-error').hidden=false;}
-    finally{btn.disabled=false;btn.textContent='Confirm this time →';}
+    finally{
+      if(challengeWidgetId!==null && window.turnstile){
+        try{window.turnstile.reset(challengeWidgetId);}catch(_){/* ignore reset failures */}
+      }
+      btn.disabled=false;btn.textContent='Confirm this time →';
+    }
   }
   function setup(){
     const q=new URLSearchParams(location.search);const passed=q.get('email');if(passed&&passed.length<255)$('guest-email').value=passed;

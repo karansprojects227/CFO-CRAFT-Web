@@ -981,7 +981,7 @@
                     step="any"
                     type="number"
                     value="4800"
-                  /><span>₹ lakh</span>
+                  / required><span>₹ lakh</span>
                 </div>
                 <p class="hint" id="rev-h">Net of GST.</p>
               </div>
@@ -996,7 +996,7 @@
                     step="any"
                     type="number"
                     value="3600"
-                  /><span>₹ lakh</span>
+                  / required><span>₹ lakh</span>
                 </div>
                 <p class="hint" id="cogs-h">
                   Materials, conversion cost and purchases of traded goods.
@@ -1013,7 +1013,7 @@
                     step="any"
                     type="number"
                     value="720"
-                  /><span>₹ lakh</span>
+                  / required><span>₹ lakh</span>
                 </div>
                 <p class="hint" id="inv-h">
                   Raw material, WIP and finished goods. Average of opening and
@@ -1031,7 +1031,7 @@
                     step="any"
                     type="number"
                     value="1050"
-                  /><span>₹ lakh</span>
+                  / required><span>₹ lakh</span>
                 </div>
                 <p class="hint" id="rec-h">
                   Average of opening and closing debtors.
@@ -1048,7 +1048,7 @@
                     step="any"
                     type="number"
                     value="540"
-                  /><span>₹ lakh</span>
+                  / required><span>₹ lakh</span>
                 </div>
                 <p class="hint" id="pay-h">
                   Average of opening and closing creditors for goods.
@@ -1065,7 +1065,7 @@
                     step="any"
                     type="number"
                     value="10.5"
-                  /><span>% p.a.</span>
+                  / required><span>% p.a.</span>
                 </div>
                 <p class="hint" id="rate-h">
                   Your working capital borrowing rate.
@@ -1086,7 +1086,7 @@
                     step="any"
                     type="number"
                     value="15"
-                  /><span>days</span>
+                  / required><span>days</span>
                 </div>
               </div>
               <div class="field">
@@ -1099,7 +1099,7 @@
                     step="any"
                     type="number"
                     value="10"
-                  /><span>days</span>
+                  / required><span>days</span>
                 </div>
               </div>
               <div class="field">
@@ -1113,7 +1113,7 @@
                     step="any"
                     type="number"
                     value="0"
-                  /><span>days</span>
+                  / required><span>days</span>
                 </div>
                 <p class="hint" id="ext_dpo-h">
                   Read the note on MSE suppliers before using this lever.
@@ -1502,458 +1502,7 @@
         </div>
       </div>
     </footer>
-    <script>
-      const $ = (id) => document.getElementById(id);
-      const num = (id) => {
-        const v = parseFloat($(id).value);
-        return Number.isFinite(v) ? v : 0;
-      };
-      const fmt = (v, d = 2) =>
-        Number.isFinite(v)
-          ? v.toLocaleString("en-IN", {
-              minimumFractionDigits: d,
-              maximumFractionDigits: d,
-            })
-          : "—";
-
-      function calc() {
-        const rev = num("rev"),
-          cogs = num("cogs"),
-          inv = num("inv"),
-          rec = num("rec"),
-          pay = num("pay"),
-          rate = num("rate") / 100;
-        const err = $("err"),
-          ids = [
-            "o_ccc",
-            "o_dio",
-            "o_dso",
-            "o_dpo",
-            "o_ccc2",
-            "o_nwc",
-            "o_carry",
-            "o_rel",
-            "o_save",
-            "o_new",
-          ];
-        if (rev <= 0 || cogs <= 0) {
-          err.textContent =
-            "Enter revenue and cost of goods sold greater than zero to calculate the cycle.";
-          err.classList.add("on");
-          ids.forEach((i) => ($(i).textContent = "—"));
-          $("o_ccc_sub").textContent = "";
-          $("o_note").textContent = "";
-          return;
-        }
-        err.classList.remove("on");
-        const dio = (inv / cogs) * 365,
-          dso = (rec / rev) * 365,
-          dpo = (pay / cogs) * 365,
-          ccc = dio + dso - dpo;
-        const nwc = inv + rec - pay,
-          carry = Math.max(nwc, 0) * rate;
-        const cDso = Math.min(num("cut_dso"), dso),
-          cDio = Math.min(num("cut_dio"), dio),
-          eDpo = num("ext_dpo");
-        const rel = (cDso * rev) / 365 + ((cDio + eDpo) * cogs) / 365,
-          save = rel * rate,
-          nccc = ccc - cDso - cDio - eDpo;
-        $("o_ccc").textContent = fmt(ccc, 1);
-        $("o_ccc2").textContent = fmt(ccc, 1) + " days";
-        $("o_dio").textContent = fmt(dio, 1) + " days";
-        $("o_dso").textContent = fmt(dso, 1) + " days";
-        $("o_dpo").textContent = "(" + fmt(dpo, 1) + " days)";
-        $("o_nwc").textContent = fmt(nwc);
-        $("o_carry").textContent = fmt(carry);
-        $("o_rel").textContent = fmt(rel);
-        $("o_save").textContent = fmt(save);
-        $("o_new").textContent = fmt(nccc, 1) + " days";
-        $("o_ccc_sub").textContent =
-          "Each day of the cycle ties up about ₹" +
-          fmt(cogs / 365, 2) +
-          " lakh of cost.";
-        const notes = [];
-        if (dpo + eDpo > 45)
-          notes.push(
-            "Payable days are above 45. If any of these creditors are micro or small enterprises, check the MSMED Act payment limit and the tax disallowance explained below.",
-          );
-        if (num("cut_dso") > dso || num("cut_dio") > dio)
-          notes.push(
-            "A reduction was larger than the current days, so it has been capped at the current figure.",
-          );
-        if (nwc < 0)
-          notes.push(
-            "Payables exceed inventory plus receivables, so suppliers are funding operations. Carrying cost is shown as zero.",
-          );
-        $("o_note").textContent = notes.join(" ");
-      }
-      document
-        .querySelectorAll("input")
-        .forEach((i) => i.addEventListener("input", calc));
-      calc();
-
-      (function () {
-        const a = document.querySelector(".tools-strip [aria-current]");
-        if (a) {
-          const c = a.parentElement;
-          c.scrollLeft = a.offsetLeft - (c.clientWidth - a.offsetWidth) / 2;
-        }
-      })();
-    </script>
-    <script>
-      document.addEventListener("DOMContentLoaded", () => {
-        // ===== Navbar scroll effect =====
-        const navbar = document.getElementById("navbar");
-        if (navbar) {
-          window.addEventListener("scroll", () => {
-            if (window.scrollY > 50) {
-              navbar.classList.add("scrolled");
-            } else {
-              navbar.classList.remove("scrolled");
-            }
-          });
-        }
-
-        // ===== Mobile menu toggle =====
-        const mobileMenuBtn = document.getElementById("mobileMenuBtn");
-        const navLinks = document.querySelector(".nav-links");
-        if (mobileMenuBtn && navLinks) {
-          mobileMenuBtn.addEventListener("click", () => {
-            mobileMenuBtn.classList.toggle("active");
-            navLinks.classList.toggle("active");
-            // Close all open dropdowns when menu closes
-            if (!navLinks.classList.contains("active")) {
-              document
-                .querySelectorAll(".nav-dropdown-wrap.open")
-                .forEach((w) => w.classList.remove("open"));
-            }
-          });
-        }
-
-        // ===== Mobile dropdown accordion =====
-        document
-          .querySelectorAll(".nav-dropdown-wrap > .nav-link")
-          .forEach((link) => {
-            link.addEventListener("click", (e) => {
-              // Only intercept on mobile (when hamburger is visible)
-              if (window.innerWidth > 768) return;
-              const wrap = link.closest(".nav-dropdown-wrap");
-              const dropdown = wrap.querySelector(".nav-dropdown");
-              if (!dropdown) return;
-              e.preventDefault();
-              // Close other open dropdowns (accordion behavior)
-              document
-                .querySelectorAll(".nav-dropdown-wrap.open")
-                .forEach((w) => {
-                  if (w !== wrap) w.classList.remove("open");
-                });
-              wrap.classList.toggle("open");
-            });
-          });
-
-        // ===== Close mobile menu when navigating to a section =====
-        if (navLinks && mobileMenuBtn) {
-          navLinks
-            .querySelectorAll("a:not(.nav-dropdown-wrap > .nav-link)")
-            .forEach((itemLink) => {
-              itemLink.addEventListener("click", () => {
-                if (window.innerWidth <= 768) {
-                  mobileMenuBtn.classList.remove("active");
-                  navLinks.classList.remove("active");
-                  document
-                    .querySelectorAll(".nav-dropdown-wrap.open")
-                    .forEach((w) => w.classList.remove("open"));
-                }
-              });
-            });
-        }
-
-        // ===== FAQ Accordion =====
-        const faqQuestions = document.querySelectorAll(".faq-question");
-        faqQuestions.forEach((btn) => {
-          btn.addEventListener("click", () => {
-            const item = btn.parentElement;
-            const isOpen = item.classList.contains("open");
-            document
-              .querySelectorAll(".faq-item")
-              .forEach((i) => i.classList.remove("open"));
-            if (!isOpen) item.classList.add("open");
-          });
-        });
-
-        // ===== Counter Animation =====
-        const counterObserver = new IntersectionObserver(
-          (entries) => {
-            entries.forEach((entry) => {
-              if (entry.isIntersecting) {
-                const counters = entry.target.querySelectorAll(".counter");
-                counters.forEach((counter) => {
-                  const target = parseFloat(counter.dataset.target);
-                  const duration = 2000;
-                  const step = target / (duration / 16);
-                  let current = 0;
-                  const timer = setInterval(() => {
-                    current += step;
-                    if (current >= target) {
-                      current = target;
-                      clearInterval(timer);
-                    }
-                    if (target % 1 !== 0) {
-                      counter.textContent = current.toFixed(1);
-                    } else {
-                      counter.textContent =
-                        Math.floor(current).toLocaleString();
-                    }
-                  }, 16);
-                });
-                counterObserver.unobserve(entry.target);
-              }
-            });
-          },
-          { threshold: 0.3 },
-        );
-
-        const metricsGrid = document.querySelector(".metrics-grid");
-        if (metricsGrid) counterObserver.observe(metricsGrid);
-
-        // ===== Scroll Reveal Animation =====
-        const revealObserver = new IntersectionObserver(
-          (entries) => {
-            entries.forEach((entry) => {
-              if (entry.isIntersecting) {
-                entry.target.classList.add("revealed");
-                revealObserver.unobserve(entry.target);
-              }
-            });
-          },
-          { threshold: 0.1 },
-        );
-
-        document
-          .querySelectorAll(
-            ".feature-row, .team-card, .metric-card, .testimonial-card, .section-heading, .hero-content",
-          )
-          .forEach((el) => {
-            el.classList.add("reveal");
-            revealObserver.observe(el);
-          });
-
-        // ===== Case Studies Modal & Slider =====
-        const csModal = document.getElementById("case-studies-modal");
-        const openCsModalBtn = document.getElementById("open-cs-modal");
-        const closeCsModalBtn = document.querySelector(".cs-modal-close");
-        const csSlider = document.getElementById("cs-slider");
-        const csPrevBtn = document.getElementById("cs-prev");
-        const csNextBtn = document.getElementById("cs-next");
-
-        let currentSlide = 0;
-        const totalSlides = 9;
-
-        function updateSliderPosition() {
-          if (csSlider) {
-            csSlider.style.transform = `translateX(-${currentSlide * 100}%)`;
-          }
-        }
-
-        if (openCsModalBtn && csModal) {
-          openCsModalBtn.addEventListener("click", (e) => {
-            e.preventDefault();
-            csModal.classList.add("show");
-            updateSliderPosition();
-          });
-        }
-
-        if (closeCsModalBtn && csModal) {
-          closeCsModalBtn.addEventListener("click", () => {
-            csModal.classList.remove("show");
-          });
-        }
-
-        if (csModal) {
-          window.addEventListener("click", (e) => {
-            if (e.target === csModal) {
-              csModal.classList.remove("show");
-            }
-          });
-        }
-
-        if (csNextBtn) {
-          csNextBtn.addEventListener("click", () => {
-            currentSlide = (currentSlide + 1) % totalSlides;
-            updateSliderPosition();
-          });
-        }
-
-        if (csPrevBtn) {
-          csPrevBtn.addEventListener("click", () => {
-            currentSlide = (currentSlide - 1 + totalSlides) % totalSlides;
-            updateSliderPosition();
-          });
-        }
-      });
-    </script>
     <!-- CFO CRAFT secure PDF download; OTP and PDF generation run on Render. -->
-    <script>
-      window.CFO_FREE_REPORT_API = "https://cfo-craft-backend.onrender.com/api/free-report";
-    </script>
-    <script>
-/* CFO CRAFT Free Report: email OTP -> verified PDF. Production PDF is issued ONLY by backend. */
-(() => {
-  'use strict';
-  const TOOL_NAMES = {
-    'working-capital-calculator':'Working Capital Calculator',
-    'monthly-cash-flow-model':'Monthly Cash Flow Model',
-    'overdraft-cost-calculator':'Overdraft Cost Calculator',
-    'gst-reconciliation-checklist':'GST Reconciliation Checklist',
-    'cma-data-template':'CMA Data Template'
-  };
-  const FIELDS = {
-    'working-capital-calculator': {rev:'Revenue from operations (Rs lakh)',cogs:'Cost of goods sold (Rs lakh)',inv:'Average inventory (Rs lakh)',rec:'Average trade receivables (Rs lakh)',pay:'Average trade payables (Rs lakh)',rate:'CC / OD rate (% p.a.)',cut_dso:'Collect faster by (days)',cut_dio:'Hold less stock by (days)',ext_dpo:'Pay suppliers later by (days)'},
-    'overdraft-cost-calculator': {lim:'Sanctioned CC / OD limit (Rs lakh)',rate:'Interest rate (% p.a.)',util:'Average utilisation (%)',pf:'Processing / renewal fee (%)',unu:'Unutilised limit charge (%)',oth:'Other annual charges (Rs lakh)',gst:'Add GST on fees',rev:'Annual revenue (Rs lakh)',days:'Collect faster by (days)'},
-    'cma-data-template': {sales:'Net sales (Rs lakh)',cogs:'Cost of sales (Rs lakh)',pat:'Profit after tax (Rs lakh)',dep:'Depreciation (Rs lakh)',tli:'Term loan interest (Rs lakh)',tlp:'Term loan principal due (Rs lakh)',inv:'Inventory (Rs lakh)',rec:'Receivables (Rs lakh)',oca:'Other current assets (Rs lakh)',cash:'Cash and bank balances (Rs lakh)',cred:'Sundry creditors (Rs lakh)',ocl:'Other current liabilities (Rs lakh)',req:'Working capital limit requested (Rs lakh)',tl:'Term loans outstanding (Rs lakh)',oltl:'Other long term liabilities (Rs lakh)',tnw:'Tangible net worth (Rs lakh)'},
-    'gst-reconciliation-checklist': {books:'ITC as per purchase register (Rs)',b2b:'ITC as per GSTR-2B (Rs)',claimed:'Unsupported ITC already claimed (Rs)',days:'Days since utilisation',r180:'Invoices unpaid over 180 days: ITC (Rs)'},
-    'monthly-cash-flow-model': {open:'Opening cash (Rs lakh)',buf:'Minimum cash buffer (Rs lakh)'}
-  };
-  const RESULTS = {
-    'working-capital-calculator': [['o_ccc','Cash conversion cycle (days)'],['o_dio','Inventory days / DIO'],['o_dso','Receivable days / DSO'],['o_dpo','Payable days / DPO'],['o_ccc2','Cash conversion cycle - detailed'],['o_nwc','Net working capital locked (Rs lakh)'],['o_carry','Annual carrying cost (Rs lakh)'],['o_rel','Cash released by changes (Rs lakh)'],['o_save','Annual interest saved (Rs lakh)'],['o_new','Cycle after changes (days)']],
-    'overdraft-cost-calculator': [['o_eff','Effective annual cost (%)'],['o_drawn','Average amount drawn (Rs lakh)'],['o_int','Compounded annual interest (Rs lakh)'],['o_fee','Renewal / processing fee (Rs lakh)'],['o_unu','Charge on unutilised limit (Rs lakh)'],['o_oth','Other charges (Rs lakh)'],['o_gst','GST on fees and charges (Rs lakh)'],['o_tot','Total annual cost (Rs lakh)'],['o_day','Cost of Rs 1 lakh for one day (Rs)'],['o_freed','Cash freed by faster collections (Rs lakh)'],['o_save','Annual interest saved (Rs lakh)']],
-    'cma-data-template': [['o_m2','MPBF Method II (Rs lakh)'],['o_tca','Total current assets (Rs lakh)'],['o_ocl','Current liabilities excluding bank borrowing (Rs lakh)'],['o_wcg','Working capital gap (Rs lakh)'],['o_m1','MPBF Method I (Rs lakh)'],['o_tov','MPBF turnover method (Rs lakh)'],['o_cr','Current ratio at requested limit'],['o_nwc','Net working capital - actual / needed (Rs lakh)'],['o_tol','TOL / TNW'],['o_dscr','Debt service coverage ratio'],['o_hold','Stock / debtor / creditor holding days']],
-    'gst-reconciliation-checklist': [['o_pct','Checklist completion (%)'],['o_cnt','Checklist steps ticked'],['o_sup','ITC supported by GSTR-2B (Rs)'],['o_gap','Gap: books over GSTR-2B (Rs)'],['o_hold','Hold until supplier reports (Rs)'],['o_rev1','Reverse unsupported ITC (Rs)'],['o_rev2','Reverse unpaid over 180 days (Rs)'],['o_rev','Total ITC to reverse (Rs)'],['o_int','Indicative interest exposure (Rs)']],
-    'monthly-cash-flow-model': [['o_low','Lowest month-end cash (Rs lakh)'],['o_lowm','Lowest month'],['o_rin','Annual receipts (Rs lakh)'],['o_pout','Annual payments (Rs lakh)'],['o_net','Annual net cash flow (Rs lakh)'],['o_close','Closing cash on 31 March (Rs lakh)'],['o_tight','Months below buffer'],['o_short','Months in shortfall']]
-  };
-  const tool = document.body.dataset.page;
-  if (!TOOL_NAMES[tool]) return;
-  const api = String(window.CFO_FREE_REPORT_API || 'https://cfo-craft-backend.onrender.com/api/free-report').replace(/\/+$/,'');
-  const txt = el => (el?.textContent || '').replace(/\s+/g,' ').trim();
-  const safe = s => String(s ?? '').slice(0,200);
-  function snapshot(){
-    if (document.querySelector('main #err.on')) throw new Error('Please correct the highlighted calculator inputs first.');
-    const inputs = Object.entries(FIELDS[tool]).map(([id,label]) => {
-      const el=document.getElementById(id);
-      return {label,value:el?.type==='checkbox' ? (el.checked?'Yes':'No') : safe(el?.value || '0')};
-    });
-    const results = RESULTS[tool].map(([id,label])=>({label,value:safe(txt(document.getElementById(id)))}));
-    if(results.some(r=>!r.value || r.value==='—' || r.value==='-')) throw new Error('Please enter valid calculator inputs so the report has complete results.');
-    const tables=[];
-    const cash = document.getElementById('cf');
-    if(tool==='monthly-cash-flow-model' && cash){
-      const rows=[...cash.querySelectorAll('tr')].map(tr=>[...tr.children].map(cell=>{
-        const input=cell.querySelector('input');return safe(input?input.value:txt(cell));
-      }));
-      tables.push({title:'12-month cash flow model (Rs lakh)',rows});
-    }
-    const checklist=[];
-    if(tool==='gst-reconciliation-checklist'){
-      document.querySelectorAll('#list .stage').forEach(stage=>{
-        const group=txt(stage.querySelector('h3'));
-        stage.querySelectorAll('li label').forEach(label=>{
-          checklist.push({group,task:safe(txt(label.querySelector('span')?.childNodes[0])),done:!!label.querySelector('input')?.checked});
-        });
-      });
-    }
-    const notes=txt(document.getElementById('o_note')).slice(0,1800);
-    const methodology=[...document.querySelectorAll('main .read')].slice(0,2).map(sec=>({title:txt(sec.querySelector('h2'))||'How it is worked out',text:txt(sec).slice(0,4800)}));
-    return {tool,title:TOOL_NAMES[tool],generatedAt:new Date().toISOString(),inputs,results,tables,checklist,notes,methodology};
-  }
-  const interest = {
-    'working-capital-calculator':['Reduce cash tied up','Improve collections','Inventory optimisation','Working capital funding'],
-    'monthly-cash-flow-model':['Cash flow forecasting','Prevent cash shortfalls','Budgeting and reporting'],
-    'overdraft-cost-calculator':['Reduce borrowing cost','Review bank charges','Manage OD utilisation'],
-    'gst-reconciliation-checklist':['GST reconciliation','Input tax credit reviews','Finance controls'],
-    'cma-data-template':['CMA preparation','Bank loan proposals','MPBF assessment']
-  };
-  function launch(){
-    const card=document.createElement('section'); card.className='report-panel';card.setAttribute('aria-label','Free PDF report');
-    card.innerHTML=`<div class="report-panel-copy"><p class="report-eyebrow">FREE REPORT</p><h3>Download your analysis</h3><p>Your current inputs, calculations and results, prepared as a personalised PDF report.</p></div><button type="button" class="report-open">↓ Download PDF</button>`;
-    const slip=document.querySelector('#tool-start .slip')||document.querySelector('.cfsum .slip');
-    if(slip){const stack=document.createElement('div');stack.className='report-result-stack';slip.before(stack);stack.append(slip,card);} else document.querySelector('main')?.append(card);
-    document.querySelectorAll('a[href="REPLACE_WITH_TEMPLATE_URL"],a[href="REPLACE_WITH_CMA_TEMPLATE_URL"]').forEach(a=>(a.closest('.slip-note')||a).remove());
-    const backdrop=document.createElement('div');backdrop.className='report-backdrop';backdrop.hidden=true;
-    backdrop.innerHTML=`<div class="report-modal" role="dialog" aria-modal="true" aria-labelledby="report-modal-title" tabindex="-1">
-      <button type="button" class="report-close" aria-label="Close">×</button>
-      <div class="report-head"><p class="report-eyebrow">CFO CRAFT · FREE REPORT</p><h2 id="report-modal-title">Get your personalised PDF report</h2><p>Share your details, then verify the one-time code sent to your work email.</p></div>
-      <form id="report-form" novalidate>
-      <div class="report-fields">
-        <label><span class="report-field-title">Full name <b>*</b></span><input name="name" required maxlength="100" autocomplete="name" placeholder="Your full name"></label>
-        <label><span class="report-field-title">Company / business <b>*</b></span><input name="company" required maxlength="120" autocomplete="organization" placeholder="Company name"></label>
-        <label><span class="report-field-title">Work email <b>*</b></span><input name="email" required type="email" maxlength="180" autocomplete="email" placeholder="name@company.com"></label>
-        <label><span class="report-field-title">Mobile <b>*</b></span><input name="phone" required type="tel" maxlength="22" autocomplete="tel" placeholder="+91 98765 43210"></label>
-        <label>City <input name="city" maxlength="90" autocomplete="address-level2" placeholder="Optional"></label>
-        <label>Business type <select name="industry"><option value="">Select (optional)</option><option>Manufacturing</option><option>Trading & distribution</option><option>Services</option><option>Startup</option><option>Other</option></select></label>
-        <label class="report-wide">What support would help? <select name="interest"><option value="">Select (optional)</option>${interest[tool].map(x=>`<option>${x}</option>`).join('')}<option>Just exploring</option><option>Other</option></select></label>
-      </div>
-      <label class="report-check"><input name="privacyConsent" type="checkbox" required> <span>I agree to use my email for OTP verification and to process my details to issue this PDF. <strong>*</strong></span></label>
-      <label class="report-check"><input name="followupConsent" type="checkbox"> <span>CFO CRAFT may contact me about advisory services. (Optional)</span></label>
-      <p class="report-privacy">Your contact details and selected tool are used for verification and report access. Only if you opt in to follow-up will your verified contact details be retained for up to 90 days. Financial inputs are used to generate the PDF after verification and are not stored as lead data.</p>
-      <p class="report-error" role="alert" aria-live="polite" hidden></p>
-      <button class="report-primary" type="submit">Send email verification code →</button>
-      </form>
-      <form id="report-otp-form" hidden novalidate>
-      <div class="report-otp-info">A 6-digit verification code has been sent to <strong class="report-email-display"></strong>. It expires in 5 minutes.</div>
-      <label class="report-otp-label">Email verification code <input id="report-otp" type="text" inputmode="numeric" autocomplete="one-time-code" pattern="[0-9]{6}" maxlength="6" placeholder="000000" required></label>
-      <p class="report-error report-otp-error" role="alert" aria-live="polite" hidden></p>
-      <button class="report-primary" type="submit">Verify &amp; Download PDF →</button>
-      <div class="report-otp-actions"><button type="button" class="report-resend">Resend code</button><button type="button" class="report-edit">Edit email / details</button></div>
-      </form></div>`;
-    document.body.append(backdrop);
-    const contactForm=backdrop.querySelector('#report-form'), otpForm=backdrop.querySelector('#report-otp-form');
-    const generalErr=backdrop.querySelector('#report-form .report-error'),otpErr=backdrop.querySelector('.report-otp-error');
-    const openButton=card.querySelector('.report-open');
-    let lead=null, challengeId=null, downloadToken=null, pending=false;
-    function error(node,message){node.textContent=message;node.hidden=!message;}
-    function toggleBusy(el,busy,label){el.disabled=busy;el.textContent=label;}
-    function close(){if(pending)return;backdrop.hidden=true;document.body.classList.remove('report-modal-open');openButton.focus();}
-    function open(){backdrop.hidden=false;document.body.classList.add('report-modal-open');error(generalErr,'');error(otpErr,'');contactForm.querySelector('[name=name]').focus();}
-    openButton.addEventListener('click',open);
-    backdrop.querySelector('.report-close').addEventListener('click',close);
-    backdrop.addEventListener('click',e=>{if(e.target===backdrop)close();});
-    document.addEventListener('keydown',e=>{if(backdrop.hidden)return;if(e.key==='Escape')close(); if(e.key==='Tab'){const focusable=[...backdrop.querySelectorAll('button,input,select')].filter(el=>!el.disabled && el.offsetParent!==null);if(focusable.length){const first=focusable[0],last=focusable.at(-1);if(e.shiftKey&&document.activeElement===first){e.preventDefault();last.focus();}else if(!e.shiftKey&&document.activeElement===last){e.preventDefault();first.focus();}}}});
-    async function jsonRequest(path,payload){
-      const r=await fetch(api+path,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(payload),mode:'cors',cache:'no-store'});
-      let obj={};try{obj=await r.json();}catch(_){}
-      if(!r.ok)throw new Error(obj.error || (r.status===429?'Too many attempts; please try later.':'Verification service unavailable. Please try again.'));
-      return obj;
-    }
-    async function sendCode(){
-      const reply=await jsonRequest('/start',{...lead,tool,page:location.pathname});
-      challengeId=reply.challengeId;downloadToken=null;
-      if(!challengeId)throw new Error('The server did not issue a verification request.');
-      contactForm.hidden=true;otpForm.hidden=false;
-      backdrop.querySelector('.report-email-display').textContent=lead.email;
-      backdrop.querySelector('#report-otp').value='';backdrop.querySelector('#report-otp').focus();
-    }
-    contactForm.addEventListener('submit',async e=>{
-      e.preventDefault();error(generalErr,'');
-      if(!contactForm.checkValidity()){contactForm.querySelector(':invalid')?.focus();error(generalErr,'Please complete the required fields and consent checkbox.');return;}
-      const fd=new FormData(contactForm);const phone=String(fd.get('phone')||'').replace(/\D/g,'');
-      if(phone.length<10 || phone.length>15){error(generalErr,'Please enter a valid phone number (10–15 digits).');return;}
-      try{snapshot();}catch(err){error(generalErr,err.message);return;}
-      lead={name:String(fd.get('name')).trim(),company:String(fd.get('company')).trim(),email:String(fd.get('email')).trim().toLowerCase(),phone:String(fd.get('phone')).trim(),city:String(fd.get('city')||'').trim(),industry:String(fd.get('industry')||''),interest:String(fd.get('interest')||''),privacyConsent:fd.get('privacyConsent')==='on',followupConsent:fd.get('followupConsent')==='on'};
-      const btn=contactForm.querySelector('[type=submit]');pending=true;toggleBusy(btn,true,'Sending code…');
-      try{await sendCode();}catch(err){error(generalErr,err.message || 'Unable to send code.');}
-      finally{pending=false;toggleBusy(btn,false,'Send email verification code →');}
-    });
-    backdrop.querySelector('.report-edit').addEventListener('click',()=>{otpForm.hidden=true;contactForm.hidden=false;challengeId=null;downloadToken=null;error(otpErr,'');});
-    backdrop.querySelector('.report-resend').addEventListener('click',async e=>{if(!lead||pending)return;pending=true;toggleBusy(e.currentTarget,true,'Sending…');error(otpErr,'');try{await sendCode();}catch(err){error(otpErr,err.message);}finally{pending=false;toggleBusy(e.currentTarget,false,'Resend code');}});
-    otpForm.addEventListener('submit',async e=>{
-      e.preventDefault();error(otpErr,'');const code=backdrop.querySelector('#report-otp').value.trim();
-      if(!/^\d{6}$/.test(code)){error(otpErr,'Enter the 6-digit code from your email.');return;}
-      const btn=otpForm.querySelector('[type=submit]');pending=true;toggleBusy(btn,true,'Verifying & preparing PDF…');
-      try{
-        if(!downloadToken){const verified=await jsonRequest('/verify',{challengeId,code});downloadToken=verified.downloadToken; if(!downloadToken)throw new Error('Verification succeeded but report token was missing.');}
-        const data=snapshot(); // always capture latest calculated values
-        const response=await fetch(api+'/download',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({downloadToken,report:data}),mode:'cors',cache:'no-store'});
-        if(!response.ok){let payload={};try{payload=await response.json();}catch(_){ }throw new Error(payload.error||'Could not generate your PDF. Please retry.');}
-        const blob=await response.blob();if(!blob.type.includes('pdf'))throw new Error('The server did not return a PDF.');
-        const url=URL.createObjectURL(blob),a=document.createElement('a');a.href=url;a.download=`CFOCRAFT_${tool}_${new Date().toISOString().slice(0,10)}.pdf`;document.body.append(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(url),45000);
-        downloadToken=null;challengeId=null;lead=null;contactForm.reset();otpForm.reset();otpForm.hidden=true;contactForm.hidden=false;
-        pending=false;close();
-      }catch(err){error(otpErr,err.message||'Unable to download.');}finally{pending=false;toggleBusy(btn,false,'Verify & Download PDF →');}
-    });
-  }
-  if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',launch);else launch();
-})();
-
-    </script>
+    <script src="free-tools.js" defer></script>
   </body>
 </html>

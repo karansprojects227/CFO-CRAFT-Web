@@ -5780,3 +5780,14 @@ body.lead-modal-open{overflow:hidden;}
 @media(max-width:760px){.tool-page .report-panel{padding:22px 20px;flex-direction:column;align-items:stretch;gap:18px}.tool-page .report-open{width:100%;min-height:48px}.report-modal{padding:26px 19px;border-radius:16px}.report-fields{grid-template-columns:1fr;gap:11px}.report-wide{grid-column:auto}.report-backdrop{padding:10px}}
 
 .report-fields .report-field-title{display:block;font-weight:650;font-size:.87rem;color:#082951}.report-fields .report-field-title b{color:#b33030;font-weight:700}
+
+/* ===== Five free tools: frontend field validation ===== */
+.tool-page .free-tool-field-error {display:block;margin-top:5px;color:#a92626;font-size:.76rem;font-weight:600;line-height:1.4}
+.tool-page .free-tool-field-error[hidden],.report-field-error[hidden]{display:none!important}
+.tool-page .field.free-tool-invalid .inbox{border-color:#c33434;box-shadow:0 0 0 2px rgba(195,52,52,.1)}
+.tool-page #cf td.free-tool-invalid input{outline:2px solid #c33434;outline-offset:-2px;border-radius:3px}
+.tool-page #cf td .free-tool-field-error{max-width:145px;font-size:.68rem;white-space:normal}
+.report-field-error{color:#a92626;font-size:.75rem;font-weight:600;line-height:1.35;display:block}
+.report-fields label.report-invalid input,.report-fields label.report-invalid select,.report-otp-label input[aria-invalid="true"]{border-color:#c33434!important;box-shadow:0 0 0 2px rgba(195,52,52,.08)}
+.report-check.report-invalid{color:#a92626}
+.report-fields label.report-invalid .report-field-title{color:#082951}

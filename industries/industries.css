@@ -1610,15 +1610,6 @@ body[data-page="industry-startups"] .industry-pack li:nth-child(5)::after {
   text-transform: uppercase;
 }
 
-.industry-page .industry-demo-kicker::before {
-  content: "";
-  width: 20px;
-  height: 2px;
-  flex: 0 0 20px;
-  border-radius: 999px;
-  background: var(--creamish);
-}
-
 .industry-page .industry-demo-copy h2 {
   margin: 0;
   color: var(--white);

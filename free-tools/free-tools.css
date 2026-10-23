@@ -5352,15 +5352,6 @@ body.tool-page {
   text-transform: uppercase;
 }
 
-.tool-page .tool-demo-kicker::before {
-  content: "";
-  width: 20px;
-  height: 2px;
-  flex: 0 0 20px;
-  border-radius: 999px;
-  background: var(--creamish);
-}
-
 .tool-page .tool-demo-copy h2 {
   margin: 0;
   color: var(--white);

@@ -1623,15 +1623,6 @@ body.service-page {
   text-transform: uppercase;
 }
 
-.service-page .service-demo-kicker::before {
-  content: "";
-  width: 20px;
-  height: 2px;
-  flex: 0 0 20px;
-  border-radius: 999px;
-  background: var(--creamish);
-}
-
 .service-page .service-demo-copy h2 {
   margin: 0;
   color: var(--white);

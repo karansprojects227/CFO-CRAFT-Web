@@ -5435,3 +5435,25 @@ h6,
   transform: none;
   box-shadow: none;
 }
+
+
+/* GET IN TOUCH — clear compulsory fields and inline validation. */
+.home-page #contact .cc-form-heading .cc-form-requirements {
+  margin-top: .35rem;
+  font-size: .73rem;
+  line-height: 1.35;
+  color: #58738d;
+}
+.home-page #contact .cc-form-requirements span,
+.home-page #contact .cc-field-required { color: #c23929; font-weight: 800; }
+.home-page #contact .cc-field-optional { color: #748a9c; font-size: .72rem; font-weight: 400; }
+.home-page #contact .contact-form .form-group .cc-field-error:not([hidden]) {
+  display: block;
+  margin: .22rem 0 0;
+  font-size: .73rem;
+  color: #a52b1c;
+  line-height: 1.3;
+}
+.home-page #contact .contact-form .form-group .cc-field-error[hidden] { display: none !important; }
+.home-page #contact .cc-contact-disclosure { cursor: default; }
+.home-page #contact .contact-form .form-group select:has(option[value=""]:checked) { color: #6d859b; }

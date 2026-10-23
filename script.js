@@ -4892,9 +4892,9 @@ if (document.readyState === "loading") {
 
 
 /* ========================================================================
-   GET IN TOUCH — Existing Node/Express backend integration.
+   GET IN TOUCH — Fast, field-level validation & safe backend integration.
    POST /api/contact/submit -> validation -> controller -> Neon -> Resend.
-   Does not change Book an Intro, PDF OTP, or any other section.
+   Name/email/phone required. Other inputs optional, no silent revenue default.
    ======================================================================== */
 (function initGetInTouchForm() {
   const mount = () => {
@@ -4904,35 +4904,50 @@ if (document.readyState === "loading") {
 
     const statusBox = form.querySelector("#contactFormStatus");
     const submit = form.querySelector('button[type="submit"]');
-    const originalButtonContent = submit?.innerHTML || "Request a Callback";
     if (!statusBox || !submit) return;
-
-    const controls = {
+    const originalButtonContent = submit.innerHTML;
+    const fields = {
       name: form.elements.namedItem("name"),
       email: form.elements.namedItem("email"),
       phone: form.elements.namedItem("mobile"),
       company: form.elements.namedItem("company"),
       revenue: form.elements.namedItem("revenue"),
-      message: form.elements.namedItem("message"),
-      consent: form.elements.namedItem("consent")
+      message: form.elements.namedItem("message")
     };
-    const revenueChoices = ["Under ₹20 Cr", "₹20 - ₹50 Cr", "₹50 - ₹100 Cr", "₹100 - ₹200 Cr", "₹200 Cr+"];
+    const revenueChoices = new Set(["Under ₹20 Cr", "₹20 - ₹50 Cr", "₹50 - ₹100 Cr", "₹100 - ₹200 Cr", "₹200 Cr+"]);
+    const errors = {};
     let sending = false;
 
-    function notify(text, type) {
+    // Create an accessible error directly below each input; no layout changes elsewhere.
+    for (const [key, input] of Object.entries(fields)) {
+      if (!input) continue;
+      const error = document.createElement("span");
+      error.className = "cc-field-error";
+      error.id = `cc-${key}-error`;
+      error.setAttribute("aria-live", "polite");
+      error.hidden = true;
+      input.closest(".form-group")?.append(error);
+      input.setAttribute("aria-describedby", error.id);
+      errors[key] = error;
+    }
+
+    function notify(text, type = "") {
       statusBox.textContent = text;
       statusBox.dataset.state = type;
       statusBox.hidden = !text;
     }
-    function invalidate(field, message) {
-      const input = controls[field];
-      if (input) {
-        input.setAttribute("aria-invalid", "true");
-        input.focus({ preventScroll: true });
-      }
-      notify(message, "error");
+
+    function showError(key, message = "") {
+      const input = fields[key];
+      const error = errors[key];
+      if (!input || !error) return;
+      error.textContent = message;
+      error.hidden = !message;
+      if (message) input.setAttribute("aria-invalid", "true");
+      else input.removeAttribute("aria-invalid");
     }
-    function buildPayload() {
+
+    function payloadFromForm() {
       const data = new FormData(form);
       return {
         name: String(data.get("name") || "").trim().replace(/\s+/g, " "),
@@ -4941,65 +4956,96 @@ if (document.readyState === "loading") {
         company: String(data.get("company") || "").trim().replace(/\s+/g, " "),
         revenue: String(data.get("revenue") || "").trim(),
         message: String(data.get("message") || "").trim(),
-        consent: controls.consent?.checked === true
+        // Clicking submit with the visible disclosure is the user's affirmative request.
+        consent: true
       };
-    }
-    function validate(payload) {
-      if (payload.name.length < 2 || payload.name.length > 100 ||
-          !/^[\p{L}\p{M}][\p{L}\p{M} .\-'\u2019]*$/u.test(payload.name) ||
-          (payload.name.match(/\p{L}/gu) || []).length < 2) {
-        return ["name", "Please enter your full name (at least 2 letters)."];
-      }
-      // The backend performs definitive email validation.
-      if (payload.email.length > 254 || !/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(payload.email)) {
-        return ["email", "Please enter a valid business email address."];
-      }
-      if (payload.company.length < 2 || payload.company.length > 160 ||
-          !/[\p{L}\p{N}]/u.test(payload.company) || /[<>]/.test(payload.company)) {
-        return ["company", "Please enter a valid company name."];
-      }
-      if (payload.phone) {
-        const digits = payload.phone.replace(/\D/g, "");
-        const simpleIndian = /^(?:0|91)?[6-9]\d{9}$/.test(digits);
-        const explicitGlobal = payload.phone.startsWith("+") && /^\+[1-9]\d{7,14}$/.test("+" + digits);
-        if (payload.phone.length > 40 || !/^[+\d() .-]+$/.test(payload.phone) ||
-            (payload.phone.match(/\+/g) || []).length > 1 ||
-            (!simpleIndian && !explicitGlobal)) {
-          return ["phone", "Enter a valid mobile number, such as 9820646563 or +91 9820646563."];
-        }
-      }
-      if (!revenueChoices.includes(payload.revenue)) {
-        return ["revenue", "Please select an annual revenue range."];
-      }
-      if (payload.message.length > 1200 || /[<>]/.test(payload.message)) {
-        return ["message", "Please use plain text (maximum 1,200 characters)."];
-      }
-      if (!payload.consent) {
-        return ["consent", "Please agree to be contacted about your enquiry."];
-      }
-      return null;
     }
 
-    Object.values(controls).forEach((control) => {
-      if (!control) return;
-      const onEdit = () => {
-        control.removeAttribute("aria-invalid");
-        if (statusBox.dataset.state === "error") notify("", "");
+    const checks = {
+      name(p) {
+        if (!p.name) return "Full name is required.";
+        if (p.name.length < 2 || p.name.length > 100 ||
+            !/^[\p{L}\p{M}][\p{L}\p{M} .\-'\u2019]*$/u.test(p.name) ||
+            (p.name.match(/\p{L}/gu) || []).length < 2)
+          return "Enter a valid full name (at least two letters).";
+        return "";
+      },
+      email(p) {
+        if (!p.email) return "Business email is required.";
+        const [local, domain, extra] = p.email.split("@");
+        if (extra !== undefined || !local || local.length > 64 || p.email.length > 254 ||
+            !/^[a-z0-9!#$%&'*+/=?^_`{|}~.-]+$/.test(local) ||
+            local.startsWith(".") || local.endsWith(".") || local.includes("..") ||
+            !/^(?:[a-z0-9](?:[a-z0-9-]{0,61}[a-z0-9])?\.)+[a-z]{2,63}$/.test(domain || ""))
+          return "Enter a valid email address, such as name@company.com.";
+        return "";
+      },
+      phone(p) {
+        if (!p.phone) return "Mobile number is required.";
+        if (p.phone.length > 40 || !/^[+\d() .-]+$/.test(p.phone) ||
+            (p.phone.match(/\+/g) || []).length > 1 || (p.phone.includes("+") && !p.phone.startsWith("+")))
+          return "Enter a valid mobile number.";
+        const digits = p.phone.replace(/\D/g, "");
+        const indian = /^(?:0|91)?[6-9]\d{9}$/.test(digits);
+        const international = p.phone.startsWith("+") && /^\+[1-9]\d{7,14}$/.test(`+${digits}`);
+        if (!indian && !international) return "Enter a 10-digit Indian mobile or a number with +country code.";
+        const local = digits.length === 10 ? digits : (digits.length === 11 ? digits.slice(1) : digits.slice(2));
+        const e164 = international ? `+${digits}` : `+91${local}`;
+        if ((e164.startsWith("+91") && !/^\+91[6-9]\d{9}$/.test(e164)) ||
+            (e164.startsWith("+61") && !/^\+61[23478]\d{8}$/.test(e164)) ||
+            (e164.startsWith("+1") && !/^\+1[2-9]\d{2}[2-9]\d{6}$/.test(e164)) ||
+            /^\+(\d)\1{7,14}$/.test(e164))
+          return "Enter a valid mobile number and country code.";
+        return "";
+      },
+      company(p) {
+        if (!p.company) return "";
+        if (p.company.length < 2 || p.company.length > 160 ||
+            !/[\p{L}\p{N}]/u.test(p.company) || /[<>]/.test(p.company))
+          return "Enter a valid company name, or leave it blank.";
+        return "";
+      },
+      revenue(p) {
+        if (!p.revenue) return "";
+        return revenueChoices.has(p.revenue) ? "" : "Select a valid revenue range.";
+      },
+      message(p) {
+        return p.message.length > 1200 || /[<>]/.test(p.message)
+          ? "Use plain text with a maximum of 1,200 characters." : "";
+      }
+    };
+
+    // Validate once the user leaves a field, then on edits only when it has an error.
+    for (const [key, input] of Object.entries(fields)) {
+      if (!input) continue;
+      input.addEventListener("blur", () => {
+        if (sending) return;
+        // Do not show an error for untouched optional fields.
+        showError(key, checks[key](payloadFromForm()));
+      });
+      const onChange = () => {
+        if (errors[key] && !errors[key].hidden) showError(key, checks[key](payloadFromForm()));
+        if (statusBox.dataset.state === "error") notify("");
       };
-      control.addEventListener("input", onEdit);
-      control.addEventListener("change", onEdit);
-    });
+      input.addEventListener("input", onChange);
+      input.addEventListener("change", onChange);
+    }
 
     form.addEventListener("submit", async (event) => {
       event.preventDefault();
       if (sending) return;
-      notify("", "");
-      Object.values(controls).forEach((item) => item?.removeAttribute("aria-invalid"));
-
-      const payload = buildPayload();
-      const problem = validate(payload);
-      if (problem) {
-        invalidate(problem[0], problem[1]);
+      notify("");
+      const payload = payloadFromForm();
+      let firstInvalid = null;
+      for (const [key, check] of Object.entries(checks)) {
+        const message = check(payload);
+        showError(key, message);
+        if (message && !firstInvalid) firstInvalid = key;
+      }
+      if (firstInvalid) {
+        notify("Please correct the highlighted fields.", "error");
+        fields[firstInvalid].focus({ preventScroll: true });
+        fields[firstInvalid].scrollIntoView({ behavior: "smooth", block: "center" });
         return;
       }
 
@@ -5007,7 +5053,6 @@ if (document.readyState === "loading") {
       submit.disabled = true;
       submit.textContent = "Submitting…";
       form.setAttribute("aria-busy", "true");
-
       try {
         const response = await fetch(form.dataset.contactApi, {
           method: "POST",
@@ -5017,10 +5062,14 @@ if (document.readyState === "loading") {
         });
         const result = await response.json().catch(() => ({}));
         if (!response.ok) {
-          const backendField = result.field === "mobile" ? "phone" : result.field;
-          invalidate(backendField, result.message || (response.status === 429
+          const key = result.field === "mobile" ? "phone" : result.field;
+          if (key && fields[key]) {
+            showError(key, result.message || "Please check this field.");
+            fields[key].focus({ preventScroll: true });
+          }
+          notify(result.message || (response.status === 429
             ? "Too many requests. Please try again later."
-            : "We could not submit your enquiry. Please try again."));
+            : "We could not submit your enquiry. Please try again."), "error");
           return;
         }
         if (response.status !== 201 || result.status !== "received") {
@@ -5028,9 +5077,10 @@ if (document.readyState === "loading") {
           return;
         }
         form.reset();
+        for (const key of Object.keys(fields)) showError(key);
         notify("Thank you! Your enquiry has been received. We will respond within one working day.", "success");
       } catch (error) {
-        // A network error does not prove whether the backend saved an enquiry.
+        // Timeout or network error does not prove that no enquiry was saved.
         notify("We couldn't confirm your submission. Please contact info@cfocraft.com if the problem continues.", "error");
       } finally {
         sending = false;
@@ -5040,9 +5090,6 @@ if (document.readyState === "loading") {
       }
     });
   };
-  if (document.readyState === "loading") {
-    document.addEventListener("DOMContentLoaded", mount, { once: true });
-  } else {
-    mount();
-  }
+  if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", mount, { once: true });
+  else mount();
 })();

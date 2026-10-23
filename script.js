@@ -318,7 +318,7 @@ document.addEventListener("DOMContentLoaded", () => {
     "(prefers-reduced-motion: reduce)",
   ).matches;
 
-  const cr3t24NpUrJMNunMMASmhAM953bFGeLXzN7 = ({
+  const cr3nP5oFahNL86vESFrkKjmuupsQa1mPzN7 = ({
     root,
     numberSelector,
     verticalBarSelector,
@@ -458,14 +458,14 @@ document.addEventListener("DOMContentLoaded", () => {
     return { play, pause };
   };
 
-  cr3t24NpUrJMNunMMASmhAM953bFGeLXzN7({
+  cr3nP5oFahNL86vESFrkKjmuupsQa1mPzN7({
     root: document.querySelector(".hero-decision-desk"),
     numberSelector: ".decision-kpi-card strong, .cash-driver-row > strong",
     verticalBarSelector: ".decision-chart .decision-bar",
     horizontalBarSelector: ".cash-driver-track > i",
   });
 
-  cr3t24NpUrJMNunMMASmhAM953bFGeLXzN7({
+  cr3nP5oFahNL86vESFrkKjmuupsQa1mPzN7({
     root: document.querySelector(".mock-dashboard-enhanced"),
     numberSelector: ".md-kpi-value, .md-kpi-trend",
     verticalBarSelector: ".md-bars .md-bar",
@@ -4888,4 +4888,161 @@ if (document.readyState === "loading") {
   }
   if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', initCfoScrollShowcases, {once:true});
   else initCfoScrollShowcases();
+})();
+
+
+/* ========================================================================
+   GET IN TOUCH — Existing Node/Express backend integration.
+   POST /api/contact/submit -> validation -> controller -> Neon -> Resend.
+   Does not change Book an Intro, PDF OTP, or any other section.
+   ======================================================================== */
+(function initGetInTouchForm() {
+  const mount = () => {
+    const form = document.getElementById("getInTouchForm");
+    if (!form || form.dataset.contactBound === "true") return;
+    form.dataset.contactBound = "true";
+
+    const statusBox = form.querySelector("#contactFormStatus");
+    const submit = form.querySelector('button[type="submit"]');
+    const originalButtonContent = submit?.innerHTML || "Request a Callback";
+    if (!statusBox || !submit) return;
+
+    const controls = {
+      name: form.elements.namedItem("name"),
+      email: form.elements.namedItem("email"),
+      phone: form.elements.namedItem("mobile"),
+      company: form.elements.namedItem("company"),
+      revenue: form.elements.namedItem("revenue"),
+      message: form.elements.namedItem("message"),
+      consent: form.elements.namedItem("consent")
+    };
+    const revenueChoices = ["Under ₹20 Cr", "₹20 - ₹50 Cr", "₹50 - ₹100 Cr", "₹100 - ₹200 Cr", "₹200 Cr+"];
+    let sending = false;
+
+    function notify(text, type) {
+      statusBox.textContent = text;
+      statusBox.dataset.state = type;
+      statusBox.hidden = !text;
+    }
+    function invalidate(field, message) {
+      const input = controls[field];
+      if (input) {
+        input.setAttribute("aria-invalid", "true");
+        input.focus({ preventScroll: true });
+      }
+      notify(message, "error");
+    }
+    function buildPayload() {
+      const data = new FormData(form);
+      return {
+        name: String(data.get("name") || "").trim().replace(/\s+/g, " "),
+        email: String(data.get("email") || "").trim().toLowerCase(),
+        phone: String(data.get("mobile") || "").trim(),
+        company: String(data.get("company") || "").trim().replace(/\s+/g, " "),
+        revenue: String(data.get("revenue") || "").trim(),
+        message: String(data.get("message") || "").trim(),
+        consent: controls.consent?.checked === true
+      };
+    }
+    function validate(payload) {
+      if (payload.name.length < 2 || payload.name.length > 100 ||
+          !/^[\p{L}\p{M}][\p{L}\p{M} .\-'\u2019]*$/u.test(payload.name) ||
+          (payload.name.match(/\p{L}/gu) || []).length < 2) {
+        return ["name", "Please enter your full name (at least 2 letters)."];
+      }
+      // The backend performs definitive email validation.
+      if (payload.email.length > 254 || !/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(payload.email)) {
+        return ["email", "Please enter a valid business email address."];
+      }
+      if (payload.company.length < 2 || payload.company.length > 160 ||
+          !/[\p{L}\p{N}]/u.test(payload.company) || /[<>]/.test(payload.company)) {
+        return ["company", "Please enter a valid company name."];
+      }
+      if (payload.phone) {
+        const digits = payload.phone.replace(/\D/g, "");
+        const simpleIndian = /^(?:0|91)?[6-9]\d{9}$/.test(digits);
+        const explicitGlobal = payload.phone.startsWith("+") && /^\+[1-9]\d{7,14}$/.test("+" + digits);
+        if (payload.phone.length > 40 || !/^[+\d() .-]+$/.test(payload.phone) ||
+            (payload.phone.match(/\+/g) || []).length > 1 ||
+            (!simpleIndian && !explicitGlobal)) {
+          return ["phone", "Enter a valid mobile number, such as 9820646563 or +91 9820646563."];
+        }
+      }
+      if (!revenueChoices.includes(payload.revenue)) {
+        return ["revenue", "Please select an annual revenue range."];
+      }
+      if (payload.message.length > 1200 || /[<>]/.test(payload.message)) {
+        return ["message", "Please use plain text (maximum 1,200 characters)."];
+      }
+      if (!payload.consent) {
+        return ["consent", "Please agree to be contacted about your enquiry."];
+      }
+      return null;
+    }
+
+    Object.values(controls).forEach((control) => {
+      if (!control) return;
+      const onEdit = () => {
+        control.removeAttribute("aria-invalid");
+        if (statusBox.dataset.state === "error") notify("", "");
+      };
+      control.addEventListener("input", onEdit);
+      control.addEventListener("change", onEdit);
+    });
+
+    form.addEventListener("submit", async (event) => {
+      event.preventDefault();
+      if (sending) return;
+      notify("", "");
+      Object.values(controls).forEach((item) => item?.removeAttribute("aria-invalid"));
+
+      const payload = buildPayload();
+      const problem = validate(payload);
+      if (problem) {
+        invalidate(problem[0], problem[1]);
+        return;
+      }
+
+      sending = true;
+      submit.disabled = true;
+      submit.textContent = "Submitting…";
+      form.setAttribute("aria-busy", "true");
+
+      try {
+        const response = await fetch(form.dataset.contactApi, {
+          method: "POST",
+          headers: { "Content-Type": "application/json", "Accept": "application/json" },
+          body: JSON.stringify(payload),
+          cache: "no-store"
+        });
+        const result = await response.json().catch(() => ({}));
+        if (!response.ok) {
+          const backendField = result.field === "mobile" ? "phone" : result.field;
+          invalidate(backendField, result.message || (response.status === 429
+            ? "Too many requests. Please try again later."
+            : "We could not submit your enquiry. Please try again."));
+          return;
+        }
+        if (response.status !== 201 || result.status !== "received") {
+          notify("The server returned an unexpected response. Please contact us directly.", "error");
+          return;
+        }
+        form.reset();
+        notify("Thank you! Your enquiry has been received. We will respond within one working day.", "success");
+      } catch (error) {
+        // A network error does not prove whether the backend saved an enquiry.
+        notify("We couldn't confirm your submission. Please contact info@cfocraft.com if the problem continues.", "error");
+      } finally {
+        sending = false;
+        submit.disabled = false;
+        submit.innerHTML = originalButtonContent;
+        form.removeAttribute("aria-busy");
+      }
+    });
+  };
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", mount, { once: true });
+  } else {
+    mount();
+  }
 })();

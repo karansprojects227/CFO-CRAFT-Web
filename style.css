@@ -5380,3 +5380,58 @@ h6,
   background-color: #ffffff !important;
   background-repeat: no-repeat !important;
 }
+
+
+/* GET IN TOUCH — Inline consent, validation, submission feedback.
+   Scoped to this form; site-wide design and layout remain unchanged. */
+.home-page #contact .cc-contact-consent {
+  display: flex;
+  align-items: flex-start;
+  gap: .55rem;
+  color: #56728c;
+  font-family: var(--font-primary);
+  font-size: .76rem;
+  line-height: 1.4;
+  cursor: pointer;
+}
+.home-page #contact .cc-contact-consent input {
+  flex: 0 0 auto;
+  width: 16px;
+  height: 16px;
+  margin-top: .02rem;
+  accent-color: var(--primary-blue);
+  cursor: pointer;
+}
+.home-page #contact .cc-contact-consent [aria-invalid="true"] {
+  outline: 2px solid #c33e2e;
+  outline-offset: 2px;
+}
+.home-page #contact .cc-contact-status:not([hidden]) {
+  display: block;
+  padding: .6rem .75rem;
+  border-radius: 9px;
+  font-size: .78rem;
+  font-weight: 500;
+  line-height: 1.4;
+}
+.home-page #contact .cc-contact-status[hidden] { display: none !important; }
+.home-page #contact .cc-contact-status[data-state="error"] {
+  background: #fff1ee;
+  color: #a52b1c;
+  border: 1px solid #f3c1b9;
+}
+.home-page #contact .cc-contact-status[data-state="success"] {
+  background: #ebf7f1;
+  color: #12623b;
+  border: 1px solid #b9e2cd;
+}
+.home-page #contact .contact-form .form-group [aria-invalid="true"] {
+  border-color: #c33e2e !important;
+  background-color: #fff9f8;
+}
+.home-page #contact .contact-form > .btn-secondary:disabled {
+  cursor: wait;
+  opacity: .75;
+  transform: none;
+  box-shadow: none;
+}

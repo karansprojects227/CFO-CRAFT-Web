@@ -1121,3 +1121,16 @@ a:focus-visible {
   transform: none;
 }
 
+
+/* Client sign-in: accessible error indication and small-screen spacing. */
+.phone-entry:has(input[aria-invalid="true"]) {
+  border-color: #ff9f9a;
+}
+.auth-status:not(:empty) {
+  padding: 0.3rem 0.6rem;
+  line-height: 1.5;
+}
+@media (max-width: 420px) {
+  .otp-entry .phone-submit { min-width: 86px; padding-inline: 0.65rem; }
+  .otp-entry input { letter-spacing: 0.22em; }
+}

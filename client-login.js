@@ -382,6 +382,7 @@
         const result = await post('/logout', {});
         if (result.success !== true) throw new Error('Logout could not be confirmed.');
         setStatus(signedInStatus);
+        clearAuthQuery();
         setStatus(providerStatus, 'You have signed out.', 'success');
         show('provider');
       } catch (error) {
@@ -450,7 +451,10 @@
     });
 
     googleBtn.addEventListener('click', () => startProvider('google', googleBtn));
-    // Microsoft login is intentionally paused; its button is hidden.
+    // Keep the original Microsoft option visible while Microsoft OAuth setup is paused.
+    microsoftBtn.addEventListener('click', () => {
+      setStatus(providerStatus, 'Microsoft sign-in is temporarily unavailable. Please use Google or phone.', 'error');
+    });
 
     phoneInput.addEventListener('input', () => {
       sanitizeNationalNumber();
@@ -535,14 +539,12 @@
 
         if (result.success !== true) throw new Error('Verification failed. Please try again.');
 
-        const redirect =
-          typeof result.redirectUrl === 'string' &&
-          result.redirectUrl.startsWith('/') &&
-          !result.redirectUrl.startsWith('//')
-            ? result.redirectUrl
-            : '/client/dashboard';
-
-        window.location.assign(redirect);
+        // After OTP, show the same first-time/returning-account state as Google.
+        // Do not send users to a dashboard route that may not exist yet.
+        const client = await getSession();
+        if (!client) throw new Error('Code verified, but your session could not be confirmed. Please sign in again.');
+        state.challengeId = '';
+        displayClient(client);
       } catch (error) {
         setStatus(otpStatus, friendlyError(error), 'error');
       } finally {

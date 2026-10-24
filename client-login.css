@@ -1135,8 +1135,7 @@ a:focus-visible {
   .otp-entry input { letter-spacing: 0.22em; }
 }
 
-/* Google-only + secure one-time first-login / returning-login view. */
-.provider-row.google-only { grid-template-columns: minmax(0, 1fr); max-width: 420px; }
+/* Original dual-provider login layout; account cards appear only after authentication. */
 .provider-row .provider-btn[hidden],
 .showcase-section[hidden] { display: none !important; }
 .client-state-card {

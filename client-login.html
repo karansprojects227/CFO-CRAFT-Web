@@ -18,7 +18,7 @@
   <!-- Set this to your actual Render HTTPS backend origin before going live.
        Example format: https://YOUR-SERVICE.onrender.com (not a real URL). -->
   <meta name="cfocraft-auth-api-origin" content="https://api.cfocraft.com" />
-  <link rel="stylesheet" href="client-login.css?v=google-flow-v2" />
+  <link rel="stylesheet" href="client-login.css?v=original-ui-v3" />
 </head>
 
 <body class="client-login-page">
@@ -29,7 +29,7 @@
     </div>
 
     <nav class="login-utility-links" aria-label="Login page links">
-      <a href="./index.html">← Back to website</a>
+      <a href="https://cfocraft.com/">← Back to website</a>
     </nav>
 
     <main class="login-main">
@@ -44,7 +44,7 @@
           <p class="auth-status">Checking secure sign-in…</p>
         </div>
 
-        <!-- New users: one-time CFO CRAFT registration confirmation. -->
+        <!-- First-time user only: one-time CFO CRAFT setup after Google verification. -->
         <div class="auth-view" id="continue-view" hidden>
           <div class="client-state-card">
             <p class="client-state-kicker">FIRST-TIME SIGN IN</p>
@@ -72,7 +72,7 @@
 
         <!-- GOOGLE / MICROSOFT VIEW -->
         <div class="auth-view" id="provider-view" hidden>
-          <div class="provider-row google-only">
+          <div class="provider-row">
             <button class="provider-btn" id="google-btn" type="button">
               <svg viewBox="0 0 48 48" aria-hidden="true">
                 <path fill="#EA4335" d="M24 9.5c3.54 0 6.71 1.22 9.21 3.6l6.85-6.85C35.9 2.38 30.47 0 24 0 14.62 0 6.51 5.38 2.56 13.22l7.98 6.19C12.43 13.72 17.74 9.5 24 9.5z"/>
@@ -83,7 +83,7 @@
               <span>Sign in with Google</span>
             </button>
 
-            <button class="provider-btn" id="microsoft-btn" type="button" hidden aria-hidden="true">
+            <button class="provider-btn" id="microsoft-btn" type="button">
               <svg viewBox="0 0 24 24" aria-hidden="true">
                 <path fill="#F25022" d="M2 2h9v9H2z"/>
                 <path fill="#7FBA00" d="M13 2h9v9h-9z"/>
@@ -199,7 +199,7 @@
           <div class="login-divider"><span>OR</span></div>
 
           <button class="switch-auth-link" id="show-provider-btn" type="button">
-            Sign in using Google
+            Sign in using Google or Microsoft
           </button>
         </div>
 
@@ -286,6 +286,6 @@
 
   </div>
 
-  <script src="client-login.js?v=google-flow-v2" defer></script>
+  <script src="client-login.js?v=original-ui-v3" defer></script>
 </body>
 </html>

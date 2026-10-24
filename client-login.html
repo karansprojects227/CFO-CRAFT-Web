@@ -1,366 +1,291 @@
 <!doctype html>
 <html lang="en-IN">
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="theme-color" content="#020C1B" />
-    <meta name="robots" content="noindex, nofollow, noarchive" />
-    <meta name="referrer" content="strict-origin-when-cross-origin" />
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#020C1B" />
+  <meta name="robots" content="noindex, nofollow, noarchive" />
+  <meta name="referrer" content="strict-origin-when-cross-origin" />
 
-    <title>Client Login | CFO CRAFT</title>
+  <title>Client Login | CFO CRAFT</title>
 
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700;800&family=Roboto:wght@300;400;500;700&display=swap"
-      rel="stylesheet"
-    />
-    <!-- Set this to your actual Render HTTPS backend origin before going live.
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700;800&family=Roboto:wght@300;400;500;700&display=swap"
+    rel="stylesheet"
+  />
+  <!-- Set this to your actual Render HTTPS backend origin before going live.
        Example format: https://YOUR-SERVICE.onrender.com (not a real URL). -->
-    <meta
-      name="cfocraft-auth-api-origin"
-      content="https://api.cfocraft.com"
-    />
-    <link rel="stylesheet" href="client-login.css?v=auth-v1" />
-  </head>
+  <meta name="cfocraft-auth-api-origin" content="https://api.cfocraft.com" />
+  <link rel="stylesheet" href="client-login.css?v=google-flow-v2" />
+</head>
 
-  <body class="client-login-page">
-    <div class="login-page-shell">
-      <div class="login-logo" aria-label="CFO CRAFT">
-        <img src="images/logo.png" alt="CFO CRAFT" />
-        <span class="logo-fallback">CFO CRAFT</span>
-      </div>
+<body class="client-login-page">
+  <div class="login-page-shell">
+    <div class="login-logo" aria-label="CFO CRAFT">
+      <img src="images/logo.png" alt="CFO CRAFT" />
+      <span class="logo-fallback">CFO CRAFT</span>
+    </div>
 
-      <nav class="login-utility-links" aria-label="Login page links">
-        <a href="./">← Back to website</a>
-      </nav>
+    <nav class="login-utility-links" aria-label="Login page links">
+      <a href="./index.html">← Back to website</a>
+    </nav>
 
-      <main class="login-main">
-        <section class="login-auth" aria-labelledby="login-title">
-          <h1 id="login-title">Welcome to CFO CRAFT</h1>
-          <p class="login-subtitle">
-            Your financial dashboard is just one step away. Get started.
-          </p>
+    <main class="login-main">
+      <section class="login-auth" aria-labelledby="login-title">
+        <h1 id="login-title">Welcome to CFO CRAFT</h1>
+        <p class="login-subtitle" id="login-subtitle">
+          Your financial dashboard is just one step away. Get started.
+        </p>
 
-          <!-- GOOGLE / MICROSOFT VIEW -->
-          <div class="auth-view" id="provider-view">
-            <div class="provider-row">
-              <button class="provider-btn" id="google-btn" type="button">
-                <svg viewBox="0 0 48 48" aria-hidden="true">
-                  <path
-                    fill="#EA4335"
-                    d="M24 9.5c3.54 0 6.71 1.22 9.21 3.6l6.85-6.85C35.9 2.38 30.47 0 24 0 14.62 0 6.51 5.38 2.56 13.22l7.98 6.19C12.43 13.72 17.74 9.5 24 9.5z"
-                  />
-                  <path
-                    fill="#4285F4"
-                    d="M46.98 24.55c0-1.57-.15-3.09-.38-4.55H24v9.02h12.94c-.58 2.96-2.25 5.48-4.76 7.18l7.73 6.01c4.51-4.17 7.07-10.32 7.07-17.66z"
-                  />
-                  <path
-                    fill="#FBBC05"
-                    d="M10.53 28.59A14.41 14.41 0 0 1 9.75 24c0-1.59.27-3.13.76-4.59l-7.98-6.2A23.91 23.91 0 0 0 0 24c0 3.87.93 7.51 2.56 10.78z"
-                  />
-                  <path
-                    fill="#34A853"
-                    d="M24 48c6.48 0 11.92-2.13 15.9-5.79l-7.73-6.01c-2.14 1.44-4.89 2.3-8.17 2.3-6.26 0-11.57-4.22-13.47-9.91l-7.98 6.19C6.51 42.62 14.62 48 24 48z"
-                  />
-                </svg>
-                <span>Sign in with Google</span>
-              </button>
+        <!-- Checking HTTP-only cookie with the backend; never trust query params as authentication. -->
+        <div class="auth-view" id="checking-view" role="status" aria-live="polite">
+          <p class="auth-status">Checking secure sign-in…</p>
+        </div>
 
-              <button class="provider-btn" id="microsoft-btn" type="button">
-                <svg viewBox="0 0 24 24" aria-hidden="true">
-                  <path fill="#F25022" d="M2 2h9v9H2z" />
-                  <path fill="#7FBA00" d="M13 2h9v9h-9z" />
-                  <path fill="#00A4EF" d="M2 13h9v9H2z" />
-                  <path fill="#FFB900" d="M13 13h9v9h-9z" />
-                </svg>
-                <span>Sign in with Microsoft</span>
+        <!-- New users: one-time CFO CRAFT registration confirmation. -->
+        <div class="auth-view" id="continue-view" hidden>
+          <div class="client-state-card">
+            <p class="client-state-kicker">FIRST-TIME SIGN IN</p>
+            <h2>Welcome to CFO CRAFT</h2>
+            <p>Your Google account is verified. Continue to finish your account setup.</p>
+            <p class="client-identity" id="continue-email"></p>
+            <button class="client-primary-action" id="continue-btn" type="button">Continue</button>
+            <button class="client-secondary-action" id="continue-logout-btn" type="button">Use a different account</button>
+            <p class="auth-status" id="continue-status" role="status" aria-live="polite"></p>
+          </div>
+        </div>
+
+        <!-- Existing users, or new users after one-time Continue. -->
+        <div class="auth-view" id="signed-in-view" hidden>
+          <div class="client-state-card">
+            <p class="client-state-kicker">SIGNED IN SECURELY</p>
+            <h2>You're signed in</h2>
+            <p>Your CFO CRAFT account is ready.</p>
+            <p class="client-identity" id="signed-in-email"></p>
+            <p class="client-notice">Your financial dashboard will appear here when available.</p>
+            <button class="client-primary-action" id="logout-btn" type="button">Log out</button>
+            <p class="auth-status" id="signed-in-status" role="status" aria-live="polite"></p>
+          </div>
+        </div>
+
+        <!-- GOOGLE / MICROSOFT VIEW -->
+        <div class="auth-view" id="provider-view" hidden>
+          <div class="provider-row google-only">
+            <button class="provider-btn" id="google-btn" type="button">
+              <svg viewBox="0 0 48 48" aria-hidden="true">
+                <path fill="#EA4335" d="M24 9.5c3.54 0 6.71 1.22 9.21 3.6l6.85-6.85C35.9 2.38 30.47 0 24 0 14.62 0 6.51 5.38 2.56 13.22l7.98 6.19C12.43 13.72 17.74 9.5 24 9.5z"/>
+                <path fill="#4285F4" d="M46.98 24.55c0-1.57-.15-3.09-.38-4.55H24v9.02h12.94c-.58 2.96-2.25 5.48-4.76 7.18l7.73 6.01c4.51-4.17 7.07-10.32 7.07-17.66z"/>
+                <path fill="#FBBC05" d="M10.53 28.59A14.41 14.41 0 0 1 9.75 24c0-1.59.27-3.13.76-4.59l-7.98-6.2A23.91 23.91 0 0 0 0 24c0 3.87.93 7.51 2.56 10.78z"/>
+                <path fill="#34A853" d="M24 48c6.48 0 11.92-2.13 15.9-5.79l-7.73-6.01c-2.14 1.44-4.89 2.3-8.17 2.3-6.26 0-11.57-4.22-13.47-9.91l-7.98 6.19C6.51 42.62 14.62 48 24 48z"/>
+              </svg>
+              <span>Sign in with Google</span>
+            </button>
+
+            <button class="provider-btn" id="microsoft-btn" type="button" hidden aria-hidden="true">
+              <svg viewBox="0 0 24 24" aria-hidden="true">
+                <path fill="#F25022" d="M2 2h9v9H2z"/>
+                <path fill="#7FBA00" d="M13 2h9v9h-9z"/>
+                <path fill="#00A4EF" d="M2 13h9v9H2z"/>
+                <path fill="#FFB900" d="M13 13h9v9h-9z"/>
+              </svg>
+              <span>Sign in with Microsoft</span>
+            </button>
+          </div>
+
+          <div class="login-divider"><span>OR</span></div>
+
+          <button class="switch-auth-link" id="show-phone-btn" type="button">
+            Sign in using phone
+          </button>
+          <p class="auth-status" id="provider-status" role="status" aria-live="polite"></p>
+        </div>
+
+        <!-- PHONE VIEW -->
+        <div class="auth-view" id="phone-view" hidden>
+          <form id="phone-form" novalidate>
+            <div class="phone-entry">
+              <div class="country-select-wrap" id="country-select-wrap">
+                <button
+                  class="country-select-trigger"
+                  id="country-select-trigger"
+                  type="button"
+                  aria-haspopup="listbox"
+                  aria-expanded="false"
+                  aria-controls="country-menu"
+                >
+                  <span class="country-code-badge" id="selected-country-iso">IN</span>
+                  <span class="country-dial" id="selected-country-dial">+91</span>
+                  <svg class="country-chevron" viewBox="0 0 12 8" aria-hidden="true">
+                    <path d="m1 1 5 5 5-5"></path>
+                  </svg>
+                </button>
+
+                <div class="country-menu" id="country-menu" hidden>
+                  <div class="country-search">
+                    <svg viewBox="0 0 24 24" aria-hidden="true">
+                      <circle cx="11" cy="11" r="6.5"></circle>
+                      <path d="m16 16 4.2 4.2"></path>
+                    </svg>
+                    <input
+                      id="country-search-input"
+                      type="search"
+                      autocomplete="off"
+                      placeholder="Search country or code"
+                      aria-label="Search country or calling code"
+                    />
+                  </div>
+                  <div
+                    class="country-list"
+                    id="country-list"
+                    role="listbox"
+                    aria-label="Country calling codes"
+                  ></div>
+                </div>
+              </div>
+
+              <input
+                id="phone"
+                type="tel"
+                inputmode="tel"
+                autocomplete="tel-national"
+                maxlength="13"
+                placeholder="Phone number"
+                aria-label="Phone number"
+                aria-describedby="phone-status"
+                aria-invalid="false"
+                required
+              />
+
+              <button class="phone-submit" id="send-otp-btn" type="submit">
+                Send OTP
               </button>
             </div>
 
-            <div class="login-divider"><span>OR</span></div>
+            <div class="channel-selector" aria-label="Receive OTP through">
+              <button
+                class="channel-option is-active"
+                id="sms-btn"
+                type="button"
+                aria-pressed="true"
+              >
+                <svg class="channel-brand-icon" viewBox="0 0 32 32" aria-hidden="true">
+  <circle cx="16" cy="16" r="15" fill="#4285F4"></circle>
+  <path d="M9.2 10.4h13.6a2 2 0 0 1 2 2v7.5a2 2 0 0 1-2 2h-7.7l-4.8 3v-3H9.2a2 2 0 0 1-2-2v-7.5a2 2 0 0 1 2-2Z" fill="#fff"></path>
+  <path d="M11.2 14.2h9.6M11.2 17.8h6.8" stroke="#4285F4" stroke-width="1.5" stroke-linecap="round"></path>
+</svg>
+                <span>SMS</span>
+              </button>
 
-            <button class="switch-auth-link" id="show-phone-btn" type="button">
-              Sign in using phone
-            </button>
-            <p
-              class="auth-status"
-              id="provider-status"
-              role="status"
-              aria-live="polite"
-            ></p>
-          </div>
+              <button
+                class="channel-option"
+                id="whatsapp-btn"
+                type="button"
+                aria-pressed="false"
+              >
+                <svg class="channel-brand-icon" viewBox="0 0 32 32" aria-hidden="true">
+  <circle cx="16" cy="16" r="15" fill="#25D366"></circle>
+  <path d="M23.4 8.6A10.1 10.1 0 0 0 7.5 20.7L6.1 26l5.4-1.4A10.1 10.1 0 0 0 26 15.5c0-2.6-.9-5-2.6-6.9Z" fill="none" stroke="#fff" stroke-width="1.7" stroke-linejoin="round"></path>
+  <path d="M12.1 10.8c.3-.5.6-.5 1-.5h.6c.2 0 .5.1.6.5l1 2.3c.1.3.1.6-.1.8l-.8 1c-.2.2-.2.4-.1.7.8 1.5 1.9 2.7 3.5 3.5.3.1.5.1.7-.1l1-1.2c.2-.3.5-.3.8-.2l2.4 1.1c.3.1.5.3.5.6 0 .4-.2 1.8-1 2.5-.8.8-2 1.1-3.3.8-1.4-.3-3.3-1-5.3-2.8-2.4-2.1-3.9-4.8-4.1-6.2-.2-1.2.2-2.2.7-2.8Z" fill="#fff"></path>
+</svg>
+                <span>WhatsApp</span>
+              </button>
+            </div>
 
-          <!-- PHONE VIEW -->
-          <div class="auth-view" id="phone-view" hidden>
-            <form id="phone-form" novalidate>
-              <div class="phone-entry">
-                <div class="country-select-wrap" id="country-select-wrap">
-                  <button
-                    class="country-select-trigger"
-                    id="country-select-trigger"
-                    type="button"
-                    aria-haspopup="listbox"
-                    aria-expanded="false"
-                    aria-controls="country-menu"
-                  >
-                    <span class="country-code-badge" id="selected-country-iso"
-                      >IN</span
-                    >
-                    <span class="country-dial" id="selected-country-dial"
-                      >+91</span
-                    >
-                    <svg
-                      class="country-chevron"
-                      viewBox="0 0 12 8"
-                      aria-hidden="true"
-                    >
-                      <path d="m1 1 5 5 5-5"></path>
-                    </svg>
-                  </button>
+            <p class="auth-status" id="phone-status" role="status" aria-live="polite"></p>
+          </form>
 
-                  <div class="country-menu" id="country-menu" hidden>
-                    <div class="country-search">
-                      <svg viewBox="0 0 24 24" aria-hidden="true">
-                        <circle cx="11" cy="11" r="6.5"></circle>
-                        <path d="m16 16 4.2 4.2"></path>
-                      </svg>
-                      <input
-                        id="country-search-input"
-                        type="search"
-                        autocomplete="off"
-                        placeholder="Search country or code"
-                        aria-label="Search country or calling code"
-                      />
-                    </div>
-                    <div
-                      class="country-list"
-                      id="country-list"
-                      role="listbox"
-                      aria-label="Country calling codes"
-                    ></div>
-                  </div>
-                </div>
+          <div class="login-divider"><span>OR</span></div>
 
-                <input
-                  id="phone"
-                  type="tel"
-                  inputmode="tel"
-                  autocomplete="tel-national"
-                  maxlength="13"
-                  placeholder="Phone number"
-                  aria-label="Phone number"
-                  aria-describedby="phone-status"
-                  aria-invalid="false"
-                  required
-                />
-
-                <button class="phone-submit" id="send-otp-btn" type="submit">
-                  Send OTP
-                </button>
-              </div>
-
-              <div class="channel-selector" aria-label="Receive OTP through">
-                <button
-                  class="channel-option is-active"
-                  id="sms-btn"
-                  type="button"
-                  aria-pressed="true"
-                >
-                  <svg
-                    class="channel-brand-icon"
-                    viewBox="0 0 32 32"
-                    aria-hidden="true"
-                  >
-                    <circle cx="16" cy="16" r="15" fill="#4285F4"></circle>
-                    <path
-                      d="M9.2 10.4h13.6a2 2 0 0 1 2 2v7.5a2 2 0 0 1-2 2h-7.7l-4.8 3v-3H9.2a2 2 0 0 1-2-2v-7.5a2 2 0 0 1 2-2Z"
-                      fill="#fff"
-                    ></path>
-                    <path
-                      d="M11.2 14.2h9.6M11.2 17.8h6.8"
-                      stroke="#4285F4"
-                      stroke-width="1.5"
-                      stroke-linecap="round"
-                    ></path>
-                  </svg>
-                  <span>SMS</span>
-                </button>
-
-                <button
-                  class="channel-option"
-                  id="whatsapp-btn"
-                  type="button"
-                  aria-pressed="false"
-                >
-                  <svg
-                    class="channel-brand-icon"
-                    viewBox="0 0 32 32"
-                    aria-hidden="true"
-                  >
-                    <circle cx="16" cy="16" r="15" fill="#25D366"></circle>
-                    <path
-                      d="M23.4 8.6A10.1 10.1 0 0 0 7.5 20.7L6.1 26l5.4-1.4A10.1 10.1 0 0 0 26 15.5c0-2.6-.9-5-2.6-6.9Z"
-                      fill="none"
-                      stroke="#fff"
-                      stroke-width="1.7"
-                      stroke-linejoin="round"
-                    ></path>
-                    <path
-                      d="M12.1 10.8c.3-.5.6-.5 1-.5h.6c.2 0 .5.1.6.5l1 2.3c.1.3.1.6-.1.8l-.8 1c-.2.2-.2.4-.1.7.8 1.5 1.9 2.7 3.5 3.5.3.1.5.1.7-.1l1-1.2c.2-.3.5-.3.8-.2l2.4 1.1c.3.1.5.3.5.6 0 .4-.2 1.8-1 2.5-.8.8-2 1.1-3.3.8-1.4-.3-3.3-1-5.3-2.8-2.4-2.1-3.9-4.8-4.1-6.2-.2-1.2.2-2.2.7-2.8Z"
-                      fill="#fff"
-                    ></path>
-                  </svg>
-                  <span>WhatsApp</span>
-                </button>
-              </div>
-
-              <p
-                class="auth-status"
-                id="phone-status"
-                role="status"
-                aria-live="polite"
-              ></p>
-            </form>
-
-            <div class="login-divider"><span>OR</span></div>
-
-            <button
-              class="switch-auth-link"
-              id="show-provider-btn"
-              type="button"
-            >
-              Sign in using Google or Microsoft
-            </button>
-          </div>
-
-          <!-- OTP VIEW -->
-          <div class="auth-view" id="otp-view" hidden>
-            <p class="otp-label">Enter the 6-digit verification code</p>
-            <p class="otp-destination" id="otp-destination"></p>
-
-            <form id="otp-form" novalidate>
-              <div class="otp-entry">
-                <input
-                  id="otp-code"
-                  type="text"
-                  inputmode="numeric"
-                  autocomplete="one-time-code"
-                  maxlength="6"
-                  placeholder="000000"
-                  aria-label="6-digit OTP"
-                  aria-describedby="otp-status"
-                  aria-invalid="false"
-                  pattern="[0-9]{6}"
-                  required
-                />
-                <button class="phone-submit" id="verify-otp-btn" type="submit">
-                  Verify
-                </button>
-              </div>
-
-              <div class="otp-actions">
-                <button class="minor-link" id="change-number-btn" type="button">
-                  Change number
-                </button>
-                <span id="resend-countdown">Resend in 30s</span>
-                <button
-                  class="minor-link"
-                  id="resend-btn"
-                  type="button"
-                  disabled
-                >
-                  Resend OTP
-                </button>
-              </div>
-
-              <p
-                class="auth-status"
-                id="otp-status"
-                role="status"
-                aria-live="polite"
-              ></p>
-            </form>
-          </div>
-        </section>
-
-        <section class="showcase-section" aria-label="CFO CRAFT services">
-          <button
-            class="carousel-arrow carousel-prev"
-            id="carousel-prev"
-            type="button"
-            aria-label="Previous service"
-          >
-            &#8249;
+          <button class="switch-auth-link" id="show-provider-btn" type="button">
+            Sign in using Google
           </button>
+        </div>
 
-          <div class="showcase-track" id="showcase-track">
-            <article class="showcase-card">
-              <p class="showcase-kicker">FINANCE DIAGNOSTIC</p>
-              <h2>Know exactly where your finance function stands</h2>
-              <p>
-                Books, cash, margins and controls — reviewed in one fixed-fee
-                diagnostic.
-              </p>
-              <div class="showcase-image">
-                <img
-                  src="images/showcase-finance-diagnostic.png"
-                  alt="Finance Diagnostic dashboard preview"
-                  width="1600"
-                  height="900"
-                  decoding="async"
-                />
-              </div>
-            </article>
+        <!-- OTP VIEW -->
+        <div class="auth-view" id="otp-view" hidden>
+          <p class="otp-label">Enter the 6-digit verification code</p>
+          <p class="otp-destination" id="otp-destination"></p>
 
-            <article class="showcase-card">
-              <p class="showcase-kicker">FRACTIONAL CFO — CORE</p>
-              <h2>A CFO who owns your monthly finance rhythm</h2>
-              <p>
-                Monthly MIS, cash oversight, margins, controls and promoter
-                review.
-              </p>
-              <div class="showcase-image">
-                <img
-                  src="images/showcase-fractional-cfo-core.png"
-                  alt="Fractional CFO Core dashboard preview"
-                  width="1672"
-                  height="941"
-                  decoding="async"
-                />
-              </div>
-            </article>
+          <form id="otp-form" novalidate>
+            <div class="otp-entry">
+              <input
+                id="otp-code"
+                type="text"
+                inputmode="numeric"
+                autocomplete="one-time-code"
+                maxlength="6"
+                placeholder="000000"
+                aria-label="6-digit OTP"
+                aria-describedby="otp-status"
+                aria-invalid="false"
+                pattern="[0-9]{6}"
+                required
+              />
+              <button class="phone-submit" id="verify-otp-btn" type="submit">
+                Verify
+              </button>
+            </div>
 
-            <article class="showcase-card">
-              <p class="showcase-kicker">FRACTIONAL CFO — GROWTH</p>
-              <h2>Strategic finance for the next stage of growth</h2>
-              <p>
-                Budgeting, forecasting, variance analysis and banking support.
-              </p>
-              <div class="showcase-image">
-                <img
-                  src="images/showcase-fractional-cfo-growth.png"
-                  alt="Fractional CFO Growth dashboard preview"
-                  width="1672"
-                  height="941"
-                  decoding="async"
-                />
-              </div>
-            </article>
-          </div>
+            <div class="otp-actions">
+              <button class="minor-link" id="change-number-btn" type="button">
+                Change number
+              </button>
+              <span id="resend-countdown">Resend in 30s</span>
+              <button class="minor-link" id="resend-btn" type="button" disabled>
+                Resend OTP
+              </button>
+            </div>
 
-          <button
-            class="carousel-arrow carousel-next"
-            id="carousel-next"
-            type="button"
-            aria-label="Next service"
-          >
-            &#8250;
-          </button>
-        </section>
-      </main>
-    </div>
+            <p class="auth-status" id="otp-status" role="status" aria-live="polite"></p>
+          </form>
+        </div>
+      </section>
 
-    <script src="client-login.js?v=auth-v1" defer></script>
-  </body>
+      <section class="showcase-section" id="showcase-section" aria-label="CFO CRAFT services">
+        <button class="carousel-arrow carousel-prev" id="carousel-prev" type="button" aria-label="Previous service">
+          &#8249;
+        </button>
+
+        <div class="showcase-track" id="showcase-track">
+          <article class="showcase-card">
+            <p class="showcase-kicker">FINANCE DIAGNOSTIC</p>
+            <h2>Know exactly where your finance function stands</h2>
+            <p>Books, cash, margins and controls — reviewed in one fixed-fee diagnostic.</p>
+            <div class="showcase-image">
+              <img src="images/showcase-finance-diagnostic.png" alt="Finance Diagnostic dashboard preview" width="1600" height="900" decoding="async" />
+            </div>
+          </article>
+
+          <article class="showcase-card">
+            <p class="showcase-kicker">FRACTIONAL CFO — CORE</p>
+            <h2>A CFO who owns your monthly finance rhythm</h2>
+            <p>Monthly MIS, cash oversight, margins, controls and promoter review.</p>
+            <div class="showcase-image">
+              <img src="images/showcase-fractional-cfo-core.png" alt="Fractional CFO Core dashboard preview" width="1672" height="941" decoding="async" />
+            </div>
+          </article>
+
+          <article class="showcase-card">
+            <p class="showcase-kicker">FRACTIONAL CFO — GROWTH</p>
+            <h2>Strategic finance for the next stage of growth</h2>
+            <p>Budgeting, forecasting, variance analysis and banking support.</p>
+            <div class="showcase-image">
+              <img src="images/showcase-fractional-cfo-growth.png" alt="Fractional CFO Growth dashboard preview" width="1672" height="941" decoding="async" />
+            </div>
+          </article>
+        </div>
+
+        <button class="carousel-arrow carousel-next" id="carousel-next" type="button" aria-label="Next service">
+          &#8250;
+        </button>
+      </section>
+    </main>
+
+
+  </div>
+
+  <script src="client-login.js?v=google-flow-v2" defer></script>
+</body>
 </html>

@@ -959,7 +959,7 @@
               events.
             </p>
           </div>
-          <form action="FORM_ACTION" id="form" method="post" novalidate="">
+          <form action="#" id="form" method="post" novalidate="">
             <div class="grid2">
               <label
                 >Full name<input autocomplete="name" name="name" required=""
@@ -1013,6 +1013,7 @@
                 in the <a href="../privacy.html">privacy policy</a>.</span
               ></label
             >
+            <input name="website" type="text" autocomplete="off" tabindex="-1" aria-hidden="true" style="position:absolute;left:-9999px" />
             <p class="err" hidden="" id="err" role="alert"></p>
             <button class="resource-btn resource-btn-navy" type="submit">
               Register interest
@@ -1234,28 +1235,56 @@
 <div><p class="f">${esc(e.fmt)}</p><h3>${esc(e.title)}</h3><p class="info">${esc(e.mon)} ${esc(e.day)} · ${esc(e.time)} · ${esc(e.where)}${e.seats ? " · " + esc(e.seats) : ""}</p></div>
 <a class="resource-btn resource-btn-sky" href="${esc(e.url)}">Register</a></li>`,
       ).join("");
-      el("form").addEventListener("submit", (ev) => {
-        const f = ev.target;
-        const miss = [...f.querySelectorAll("[required]")].filter((i) =>
-          i.type === "checkbox"
-            ? !i.checked
-            : !i.value.trim() || (i.type === "email" && !i.checkValidity()),
+      // Set this to your existing Render backend URL without a trailing slash.
+      const EVENTS_API_BASE = "https://YOUR-RENDER-BACKEND.onrender.com";
+      el("form").addEventListener("submit", async (ev) => {
+        ev.preventDefault();
+        const form = ev.currentTarget;
+        const button = form.querySelector('button[type="submit"]');
+        const error = el("err"), success = el("ok");
+        error.hidden = true;
+        success.hidden = true;
+        const missing = [...form.querySelectorAll("[required]")].filter(input =>
+          input.type === "checkbox" ? !input.checked :
+          !input.value.trim() || (input.type === "email" && !input.checkValidity())
         );
-        if (miss.length) {
-          ev.preventDefault();
-          el("err").textContent =
-            miss.some((i) => i.name === "consent") && miss.length === 1
-              ? "Tick the consent box to register."
-              : "Complete the highlighted fields: name, company, role, a valid work email and consent.";
-          el("err").hidden = false;
-          miss[0].focus();
+        const interests = [...form.querySelectorAll('input[name="interest"]:checked')].map(i => i.value);
+        if (missing.length || !interests.length) {
+          error.textContent = !interests.length && !missing.length
+            ? "Select at least one event interest."
+            : "Complete your name, company, role, valid work email and consent.";
+          error.hidden = false;
+          (missing[0] || form.querySelector('input[name="interest"]')).focus();
           return;
         }
-        el("err").hidden = true;
-        if (f.getAttribute("action") === "FORM_ACTION") {
-          ev.preventDefault();
-          el("ok").hidden = false;
-          f.querySelector("button").disabled = true;
+        button.disabled = true;
+        const oldText = button.textContent;
+        button.textContent = "Submitting...";
+        try {
+          const response = await fetch(`${EVENTS_API_BASE}/api/events/interest`, {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({
+              name: form.elements.name.value.trim(),
+              company: form.elements.company.value.trim(),
+              role: form.elements.role.value,
+              email: form.elements.email.value.trim(),
+              interests,
+              consent: form.elements.consent.checked,
+              website: form.elements.website.value
+            }),
+          });
+          const data = await response.json().catch(() => ({}));
+          if (!response.ok) throw new Error(data.message || "Registration failed. Try again.");
+          form.reset();
+          success.textContent = "Registered. We will email you when the next session is confirmed.";
+          success.hidden = false;
+        } catch (e) {
+          error.textContent = e.message || "Unable to register. Please try again.";
+          error.hidden = false;
+        } finally {
+          button.disabled = false;
+          button.textContent = oldText;
         }
       });
     </script>

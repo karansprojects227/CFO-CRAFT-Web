@@ -1013,7 +1013,6 @@
                 in the <a href="../privacy.html">privacy policy</a>.</span
               ></label
             >
-            <input name="website" type="text" autocomplete="off" tabindex="-1" aria-hidden="true" style="position:absolute;left:-9999px" />
             <p class="err" hidden="" id="err" role="alert"></p>
             <button class="resource-btn resource-btn-navy" type="submit">
               Register interest
@@ -1052,7 +1051,7 @@
               CFO CRAFT Advisory Services pvt Ltd
               <br />
               Aditya Heritage, 502, Near Rustomjee Elanza Avenue, Mindspace,
-              Malad West, Mumbai 400064
+              Malad West, Mumbai 4000664
             </div>
             <div class="footer-contact">
               <a href="tel:+919892560660"> +91 9892560660 </a>
@@ -1235,57 +1234,43 @@
 <div><p class="f">${esc(e.fmt)}</p><h3>${esc(e.title)}</h3><p class="info">${esc(e.mon)} ${esc(e.day)} · ${esc(e.time)} · ${esc(e.where)}${e.seats ? " · " + esc(e.seats) : ""}</p></div>
 <a class="resource-btn resource-btn-sky" href="${esc(e.url)}">Register</a></li>`,
       ).join("");
-      // Set this to your existing Render backend URL without a trailing slash.
-      const EVENTS_API_BASE = "https://YOUR-RENDER-BACKEND.onrender.com";
+      // Match the existing site API base URL (used by Get in Touch).
+      // Replace the hostname below if your existing backend is different.
+      const EVENTS_API_BASE = "https://api.cfocraft.com";
       el("form").addEventListener("submit", async (ev) => {
         ev.preventDefault();
-        const form = ev.currentTarget;
-        const button = form.querySelector('button[type="submit"]');
-        const error = el("err"), success = el("ok");
-        error.hidden = true;
-        success.hidden = true;
-        const missing = [...form.querySelectorAll("[required]")].filter(input =>
-          input.type === "checkbox" ? !input.checked :
-          !input.value.trim() || (input.type === "email" && !input.checkValidity())
+        const f = ev.currentTarget;
+        const err = el("err"), ok = el("ok");
+        const button = f.querySelector('button[type="submit"]');
+        err.hidden = true; ok.hidden = true;
+        const missing = [...f.querySelectorAll("[required]")].filter(i =>
+          i.type === "checkbox" ? !i.checked : !i.value.trim() || (i.type === "email" && !i.checkValidity())
         );
-        const interests = [...form.querySelectorAll('input[name="interest"]:checked')].map(i => i.value);
+        const interests = [...f.querySelectorAll('input[name="interest"]:checked')].map(i => i.value);
         if (missing.length || !interests.length) {
-          error.textContent = !interests.length && !missing.length
-            ? "Select at least one event interest."
-            : "Complete your name, company, role, valid work email and consent.";
-          error.hidden = false;
-          (missing[0] || form.querySelector('input[name="interest"]')).focus();
+          err.textContent = !interests.length && !missing.length ? "Select at least one event type." :
+            "Enter your name, company, role, valid email and tick the consent box.";
+          err.hidden = false;
+          (missing[0] || f.querySelector('input[name="interest"]')).focus();
           return;
         }
         button.disabled = true;
-        const oldText = button.textContent;
-        button.textContent = "Submitting...";
+        const original = button.textContent;
+        button.textContent = "Registering...";
         try {
-          const response = await fetch(`${EVENTS_API_BASE}/api/events/interest`, {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
+          const response = await fetch(EVENTS_API_BASE + "/api/events/interest", {
+            method: "POST", headers: {"Content-Type": "application/json"},
             body: JSON.stringify({
-              name: form.elements.name.value.trim(),
-              company: form.elements.company.value.trim(),
-              role: form.elements.role.value,
-              email: form.elements.email.value.trim(),
-              interests,
-              consent: form.elements.consent.checked,
-              website: form.elements.website.value
-            }),
+              name: f.elements.name.value.trim(), company: f.elements.company.value.trim(),
+              role: f.elements.role.value, email: f.elements.email.value.trim(), interests,
+              consent: f.elements.consent.checked
+            })
           });
           const data = await response.json().catch(() => ({}));
           if (!response.ok) throw new Error(data.message || "Registration failed. Try again.");
-          form.reset();
-          success.textContent = "Registered. We will email you when the next session is confirmed.";
-          success.hidden = false;
-        } catch (e) {
-          error.textContent = e.message || "Unable to register. Please try again.";
-          error.hidden = false;
-        } finally {
-          button.disabled = false;
-          button.textContent = oldText;
-        }
+          f.reset(); ok.textContent = data.message || "Registered successfully."; ok.hidden = false;
+        } catch (e) {err.textContent = e.message || "Unable to submit. Please try again."; err.hidden = false;}
+        finally {button.disabled = false; button.textContent = original;}
       });
     </script>
     <script src="../script.js"></script>

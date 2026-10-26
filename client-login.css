@@ -1300,3 +1300,51 @@ a:focus-visible {
   .login-methods { width: 100%; max-width: 370px; }
   .login-method-btn { min-height: 53px; }
 }
+
+/* Email OTP matches the dark, rounded phone/OTP field styling. */
+.email-description { margin: .35rem 0 .85rem; }
+.email-entry {
+  width: min(520px, 100%);
+  min-height: 56px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: minmax(0,1fr) auto;
+  align-items: stretch;
+  border: 1px solid rgba(166,203,247,.30);
+  border-radius: 9px;
+  background: rgba(255,255,255,.06);
+  transition: border-color var(--transition), box-shadow var(--transition);
+}
+.email-entry:focus-within {
+  border-color: var(--light-blue);
+  box-shadow: 0 0 0 4px rgba(166,203,247,.08);
+}
+.email-entry:has(input[aria-invalid="true"]) {border-color: #ff9f9a;}
+.email-entry input {
+  display: block;
+  width: 100%;min-width:0;
+  padding: 0 .95rem;
+  border:0;border-radius:8px 0 0 8px;
+  outline:none;
+  background: transparent !important;
+  color:var(--white) !important;
+  font-size:.92rem;
+  caret-color: var(--white);
+}
+.email-entry input::placeholder {color:rgba(255,255,255,.35);}
+.email-entry input:-webkit-autofill,
+.email-entry input:-webkit-autofill:hover,
+.email-entry input:-webkit-autofill:focus {
+  -webkit-text-fill-color: #ffffff !important;
+  -webkit-box-shadow: 0 0 0 1000px #17283b inset !important;
+  box-shadow: 0 0 0 1000px #17283b inset !important;
+  caret-color:#fff;
+  transition:background-color 9999s ease-in-out 0s;
+}
+#email-view .login-back-link {display:inline-block;margin-top:1.4rem;}
+#email-otp-view .otp-actions {margin-top:.75rem;}
+@media(max-width:420px){
+  .email-entry {grid-template-columns:minmax(0,1fr) auto;}
+  .email-entry .phone-submit {min-width:84px;padding:0 .6rem;margin:.4rem;font-size:.8rem;}
+  .email-entry input {padding:0 .65rem;font-size:.85rem;}
+}

@@ -18,7 +18,7 @@
   <!-- Set this to your actual Render HTTPS backend origin before going live.
        Example format: https://YOUR-SERVICE.onrender.com (not a real URL). -->
   <meta name="cfocraft-auth-api-origin" content="https://api.cfocraft.com" />
-  <link rel="stylesheet" href="client-login.css?v=login-choices-v5" />
+  <link rel="stylesheet" href="client-login.css?v=email-otp-v6" />
 </head>
 
 <body class="client-login-page">
@@ -70,7 +70,7 @@
           </div>
         </div>
 
-        <!-- Passwordless sign-in choices. Email OTP will be activated after its backend exists. -->
+        <!-- Passwordless sign-in choices. Email OTP available after backend deployment and email setup. -->
         <div class="auth-view" id="provider-view" hidden>
           <div class="login-methods" aria-label="Sign-in methods">
             <button class="provider-btn login-method-btn" id="google-btn" type="button">
@@ -83,13 +83,12 @@
               <span>Continue with Google</span>
             </button>
 
-            <button class="provider-btn login-method-btn login-method-btn--upcoming" id="email-btn" type="button" aria-label="Continue with Email, coming soon">
+            <button class="provider-btn login-method-btn" id="email-btn" type="button">
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
                 <rect x="2.5" y="4.8" width="19" height="14.4" rx="2.8"/>
                 <path d="m3.5 6.5 8.5 6.5 8.5-6.5"/>
               </svg>
               <span>Continue with Email</span>
-              <span class="login-method-soon" aria-hidden="true">Soon</span>
             </button>
 
             <div class="login-divider login-method-divider" aria-hidden="true"><span>OR</span></div>
@@ -110,6 +109,42 @@
               Secure, passwordless sign-in
             </p>
           </div>
+        </div>
+
+        <!-- EMAIL ADDRESS ENTRY -->
+        <div class="auth-view" id="email-view" hidden>
+          <form id="email-form" novalidate>
+            <label class="otp-label" for="email-address">Enter your email address</label>
+            <p class="otp-destination email-description">We'll send a 6-digit sign-in code to your inbox.</p>
+            <div class="email-entry">
+              <input id="email-address" type="email" inputmode="email" autocomplete="email"
+                     maxlength="254" placeholder="you@company.com" aria-label="Email address"
+                     aria-describedby="email-status" aria-invalid="false" required />
+              <button class="phone-submit" id="send-email-otp-btn" type="submit">Send OTP</button>
+            </div>
+            <p class="auth-status" id="email-status" role="status" aria-live="polite"></p>
+          </form>
+          <button class="switch-auth-link login-back-link" id="email-back-btn" type="button">← Back to sign-in options</button>
+        </div>
+
+        <!-- EMAIL OTP VERIFICATION -->
+        <div class="auth-view" id="email-otp-view" hidden>
+          <p class="otp-label">Enter the 6-digit email verification code</p>
+          <p class="otp-destination" id="email-otp-destination"></p>
+          <form id="email-otp-form" novalidate>
+            <div class="otp-entry">
+              <input id="email-otp-code" type="text" inputmode="numeric" autocomplete="one-time-code"
+                     maxlength="6" placeholder="000000" aria-label="6-digit email OTP"
+                     aria-describedby="email-otp-status" aria-invalid="false" required />
+              <button class="phone-submit" id="verify-email-otp-btn" type="submit">Verify</button>
+            </div>
+            <div class="otp-actions">
+              <button class="minor-link" id="change-email-btn" type="button">Change email</button>
+              <span id="email-resend-countdown" aria-live="polite"></span>
+              <button class="minor-link" id="resend-email-otp-btn" type="button" disabled>Resend OTP</button>
+            </div>
+            <p class="auth-status" id="email-otp-status" role="status" aria-live="polite"></p>
+          </form>
         </div>
 
         <!-- PHONE VIEW -->
@@ -296,6 +331,6 @@
 
   </div>
 
-  <script src="client-login.js?v=login-choices-v5" defer></script>
+  <script src="client-login.js?v=email-otp-v6" defer></script>
 </body>
 </html>

@@ -79,6 +79,22 @@
     const showProviderBtn = document.getElementById('show-provider-btn');
     const googleBtn = document.getElementById('google-btn');
     const emailBtn = document.getElementById('email-btn');
+    const emailView = document.getElementById('email-view');
+    const emailOtpView = document.getElementById('email-otp-view');
+    const emailForm = document.getElementById('email-form');
+    const emailAddress = document.getElementById('email-address');
+    const emailStatus = document.getElementById('email-status');
+    const sendEmailOtpBtn = document.getElementById('send-email-otp-btn');
+    const emailBackBtn = document.getElementById('email-back-btn');
+    const emailOtpForm = document.getElementById('email-otp-form');
+    const emailOtpCode = document.getElementById('email-otp-code');
+    const emailOtpDestination = document.getElementById('email-otp-destination');
+    const emailOtpStatus = document.getElementById('email-otp-status');
+    const verifyEmailOtpBtn = document.getElementById('verify-email-otp-btn');
+    const changeEmailBtn = document.getElementById('change-email-btn');
+    const resendEmailOtpBtn = document.getElementById('resend-email-otp-btn');
+    const emailResendCountdown = document.getElementById('email-resend-countdown');
+    const emailState = {email:'',challengeId:'',until:0,timer:null};
     const providerStatus = document.getElementById('provider-status');
 
     const phoneForm = document.getElementById('phone-form');
@@ -121,6 +137,8 @@
     function show(view) {
       checkingView.hidden = view !== 'checking';
       providerView.hidden = view !== 'provider';
+      emailView.hidden = view !== 'email';
+      emailOtpView.hidden = view !== 'email-otp';
       phoneView.hidden = view !== 'phone';
       otpView.hidden = view !== 'otp';
       continueView.hidden = view !== 'continue';
@@ -453,7 +471,101 @@
 
     googleBtn.addEventListener('click', () => startProvider('google', googleBtn));
     emailBtn.addEventListener('click', () => {
-      setStatus(providerStatus, 'Email OTP login is coming soon. Please use Google or Phone SMS for now.');
+      setStatus(providerStatus);
+      setStatus(emailStatus);
+      show('email');
+      emailAddress.focus();
+    });
+    emailBackBtn.addEventListener('click', () => {show('provider');setStatus(emailStatus);});
+    changeEmailBtn.addEventListener('click', () => {
+      clearInterval(emailState.timer);
+      emailState.challengeId = '';
+      emailOtpCode.value = '';
+      setStatus(emailOtpStatus);
+      show('email');
+      emailAddress.focus();
+    });
+    emailAddress.addEventListener('input', () => {
+      emailAddress.setAttribute('aria-invalid', 'false');
+      setStatus(emailStatus);
+    });
+    emailOtpCode.addEventListener('input', () => {
+      emailOtpCode.value = emailOtpCode.value.replace(/\D/g, '').slice(0, 6);
+      emailOtpCode.setAttribute('aria-invalid', 'false');
+      setStatus(emailOtpStatus);
+    });
+    function emailCooldown(seconds = 30) {
+      clearInterval(emailState.timer);
+      emailState.until = Date.now() + seconds * 1000;
+      const tick = () => {
+        const remaining = Math.max(0, Math.ceil((emailState.until - Date.now()) / 1000));
+        emailResendCountdown.textContent = remaining ? `Resend in ${remaining}s` : '';
+        resendEmailOtpBtn.disabled = remaining > 0;
+      };
+      tick();
+      emailState.timer = setInterval(tick, 1000);
+    }
+    async function requestEmailOtp(email) {
+      const data = await post('/email/start', {email});
+      if (!data.challengeId) throw new Error('Invalid email verification response.');
+      emailState.email = email;
+      emailState.challengeId = data.challengeId;
+      emailOtpDestination.textContent = `Code sent to ${email}`;
+      emailOtpCode.value = '';
+      emailOtpCode.setAttribute('aria-invalid', 'false');
+      setStatus(emailOtpStatus);
+      emailCooldown(Number(data.resendAfterSeconds) || 30);
+      show('email-otp');
+      emailOtpCode.focus();
+    }
+    emailForm.addEventListener('submit', async event => {
+      event.preventDefault();
+      if (sendEmailOtpBtn.disabled) return;
+      const email = emailAddress.value.trim().toLowerCase();
+      if (email.length > 254 || !/^[^\s@<>]+@[^\s@<>]+\.[a-z]{2,}$/i.test(email)) {
+        emailAddress.setAttribute('aria-invalid','true');
+        setStatus(emailStatus,'Enter a valid email address.','error');
+        emailAddress.focus();return;
+      }
+      sendEmailOtpBtn.disabled = true;
+      sendEmailOtpBtn.textContent = 'Sending…';
+      setStatus(emailStatus);
+      try { await requestEmailOtp(email); }
+      catch (error) {setStatus(emailStatus,friendlyError(error),'error');}
+      finally {sendEmailOtpBtn.disabled=false;sendEmailOtpBtn.textContent='Send OTP';}
+    });
+    emailOtpForm.addEventListener('submit', async event => {
+      event.preventDefault();
+      if (verifyEmailOtpBtn.disabled) return;
+      const code = emailOtpCode.value.replace(/\D/g,'');
+      if (!/^\d{6}$/.test(code) || !emailState.challengeId) {
+        emailOtpCode.setAttribute('aria-invalid','true');
+        setStatus(emailOtpStatus,'Enter the complete 6-digit code.','error');
+        return;
+      }
+      verifyEmailOtpBtn.disabled = true;
+      verifyEmailOtpBtn.textContent = 'Verifying…';
+      setStatus(emailOtpStatus);
+      try {
+        const result = await post('/email/verify',{challengeId:emailState.challengeId,code});
+        if (result.success !== true) throw new Error('Unable to verify email code.');
+        const client = await getSession();
+        if (!client) throw new Error('Code accepted but session could not be confirmed. Please sign in again.');
+        emailState.challengeId = '';
+        clearInterval(emailState.timer);
+        displayClient(client);
+      } catch (error) {setStatus(emailOtpStatus,friendlyError(error),'error');}
+      finally {verifyEmailOtpBtn.disabled=false;verifyEmailOtpBtn.textContent='Verify';}
+    });
+    resendEmailOtpBtn.addEventListener('click',async () => {
+      if (!emailState.email || resendEmailOtpBtn.disabled) return;
+      resendEmailOtpBtn.disabled = true;
+      setStatus(emailOtpStatus,'Sending a new code…');
+      try {await requestEmailOtp(emailState.email);}
+      catch (error) {
+        setStatus(emailOtpStatus,friendlyError(error),'error');
+        resendEmailOtpBtn.disabled = emailState.until > Date.now();
+      }
     });
 
     phoneInput.addEventListener('input', () => {

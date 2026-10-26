@@ -4,7 +4,6 @@
     /*
       Existing backend contract:
         GET  /api/auth/google/start
-        GET  /api/auth/microsoft/start
 
         POST /api/auth/otp/start
         {
@@ -79,7 +78,6 @@
     const showPhoneBtn = document.getElementById('show-phone-btn');
     const showProviderBtn = document.getElementById('show-provider-btn');
     const googleBtn = document.getElementById('google-btn');
-    const microsoftBtn = document.getElementById('microsoft-btn');
     const providerStatus = document.getElementById('provider-status');
 
     const phoneForm = document.getElementById('phone-form');
@@ -451,10 +449,6 @@
     });
 
     googleBtn.addEventListener('click', () => startProvider('google', googleBtn));
-    // Keep the original Microsoft option visible while Microsoft OAuth setup is paused.
-    microsoftBtn.addEventListener('click', () => {
-      setStatus(providerStatus, 'Microsoft sign-in is temporarily unavailable. Please use Google or phone.', 'error');
-    });
 
     phoneInput.addEventListener('input', () => {
       sanitizeNationalNumber();

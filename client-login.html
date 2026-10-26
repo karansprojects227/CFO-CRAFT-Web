@@ -18,7 +18,7 @@
   <!-- Set this to your actual Render HTTPS backend origin before going live.
        Example format: https://YOUR-SERVICE.onrender.com (not a real URL). -->
   <meta name="cfocraft-auth-api-origin" content="https://api.cfocraft.com" />
-  <link rel="stylesheet" href="client-login.css?v=original-ui-v3" />
+  <link rel="stylesheet" href="client-login.css?v=google-sms-v4" />
 </head>
 
 <body class="client-login-page">
@@ -70,9 +70,9 @@
           </div>
         </div>
 
-        <!-- GOOGLE / MICROSOFT VIEW -->
+        <!-- GOOGLE VIEW (LinkedIn may be added later once integrated) -->
         <div class="auth-view" id="provider-view" hidden>
-          <div class="provider-row">
+          <div class="provider-row provider-row--single">
             <button class="provider-btn" id="google-btn" type="button">
               <svg viewBox="0 0 48 48" aria-hidden="true">
                 <path fill="#EA4335" d="M24 9.5c3.54 0 6.71 1.22 9.21 3.6l6.85-6.85C35.9 2.38 30.47 0 24 0 14.62 0 6.51 5.38 2.56 13.22l7.98 6.19C12.43 13.72 17.74 9.5 24 9.5z"/>
@@ -81,16 +81,6 @@
                 <path fill="#34A853" d="M24 48c6.48 0 11.92-2.13 15.9-5.79l-7.73-6.01c-2.14 1.44-4.89 2.3-8.17 2.3-6.26 0-11.57-4.22-13.47-9.91l-7.98 6.19C6.51 42.62 14.62 48 24 48z"/>
               </svg>
               <span>Sign in with Google</span>
-            </button>
-
-            <button class="provider-btn" id="microsoft-btn" type="button">
-              <svg viewBox="0 0 24 24" aria-hidden="true">
-                <path fill="#F25022" d="M2 2h9v9H2z"/>
-                <path fill="#7FBA00" d="M13 2h9v9h-9z"/>
-                <path fill="#00A4EF" d="M2 13h9v9H2z"/>
-                <path fill="#FFB900" d="M13 13h9v9h-9z"/>
-              </svg>
-              <span>Sign in with Microsoft</span>
             </button>
           </div>
 
@@ -199,7 +189,7 @@
           <div class="login-divider"><span>OR</span></div>
 
           <button class="switch-auth-link" id="show-provider-btn" type="button">
-            Sign in using Google or Microsoft
+            Sign in using Google
           </button>
         </div>
 
@@ -286,6 +276,6 @@
 
   </div>
 
-  <script src="client-login.js?v=original-ui-v3" defer></script>
+  <script src="client-login.js?v=google-sms-v4" defer></script>
 </body>
 </html>

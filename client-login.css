@@ -1135,7 +1135,7 @@ a:focus-visible {
   .otp-entry input { letter-spacing: 0.22em; }
 }
 
-/* Original dual-provider login layout; account cards appear only after authentication. */
+/* Login provider layout; account cards appear only after authentication. */
 .provider-row .provider-btn[hidden],
 .showcase-section[hidden] { display: none !important; }
 .client-state-card {
@@ -1164,3 +1164,42 @@ a:focus-visible {
   text-decoration: underline; text-underline-offset: 4px;
 }
 .client-state-card .auth-status { margin-top: .4rem; }
+
+
+/* Single active OAuth provider today. Restore two columns if LinkedIn is added later. */
+.provider-row.provider-row--single {
+  grid-template-columns: minmax(0, 1fr);
+  width: min(420px, 100%);
+}
+
+/* Keep the original dark input in Chrome/Edge, even after number autofill/focus.
+   Browser autofill paints its own pale background; an inset fill overrides it. */
+#phone,
+#otp-code {
+  color-scheme: dark;
+  caret-color: var(--white);
+  background-color: transparent;
+}
+
+#phone:focus,
+#phone:active,
+#otp-code:focus,
+#otp-code:active {
+  background-color: transparent;
+  color: var(--white);
+}
+
+#phone:-webkit-autofill,
+#phone:-webkit-autofill:hover,
+#phone:-webkit-autofill:focus,
+#phone:-webkit-autofill:active,
+#otp-code:-webkit-autofill,
+#otp-code:-webkit-autofill:hover,
+#otp-code:-webkit-autofill:focus,
+#otp-code:-webkit-autofill:active {
+  -webkit-text-fill-color: var(--white) !important;
+  -webkit-box-shadow: 0 0 0 1000px #1b2737 inset !important;
+  box-shadow: 0 0 0 1000px #1b2737 inset !important;
+  caret-color: var(--white);
+  transition: background-color 99999s ease-out 0s;
+}

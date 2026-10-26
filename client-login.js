@@ -78,6 +78,7 @@
     const showPhoneBtn = document.getElementById('show-phone-btn');
     const showProviderBtn = document.getElementById('show-provider-btn');
     const googleBtn = document.getElementById('google-btn');
+    const emailBtn = document.getElementById('email-btn');
     const providerStatus = document.getElementById('provider-status');
 
     const phoneForm = document.getElementById('phone-form');
@@ -129,7 +130,7 @@
       loginTitle.textContent = authenticatedScreen ? 'Your CFO CRAFT account' : 'Welcome to CFO CRAFT';
       loginSubtitle.textContent = authenticatedScreen
         ? 'Access your account securely.'
-        : 'Your financial dashboard is just one step away. Get started.';
+        : 'Secure access to your financial workspace';
       closeCountryMenu();
     }
 
@@ -439,16 +440,21 @@
     });
 
     showPhoneBtn.addEventListener('click', () => {
+      setStatus(providerStatus);
       show('phone');
       phoneInput.focus();
     });
 
     showProviderBtn.addEventListener('click', () => {
+      setStatus(providerStatus);
       show('provider');
       setStatus(phoneStatus);
     });
 
     googleBtn.addEventListener('click', () => startProvider('google', googleBtn));
+    emailBtn.addEventListener('click', () => {
+      setStatus(providerStatus, 'Email OTP login is coming soon. Please use Google or Phone SMS for now.');
+    });
 
     phoneInput.addEventListener('input', () => {
       sanitizeNationalNumber();

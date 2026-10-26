@@ -18,7 +18,7 @@
   <!-- Set this to your actual Render HTTPS backend origin before going live.
        Example format: https://YOUR-SERVICE.onrender.com (not a real URL). -->
   <meta name="cfocraft-auth-api-origin" content="https://api.cfocraft.com" />
-  <link rel="stylesheet" href="client-login.css?v=google-sms-v4" />
+  <link rel="stylesheet" href="client-login.css?v=login-choices-v5" />
 </head>
 
 <body class="client-login-page">
@@ -36,7 +36,7 @@
       <section class="login-auth" aria-labelledby="login-title">
         <h1 id="login-title">Welcome to CFO CRAFT</h1>
         <p class="login-subtitle" id="login-subtitle">
-          Your financial dashboard is just one step away. Get started.
+          Secure access to your financial workspace
         </p>
 
         <!-- Checking HTTP-only cookie with the backend; never trust query params as authentication. -->
@@ -70,26 +70,46 @@
           </div>
         </div>
 
-        <!-- GOOGLE VIEW (LinkedIn may be added later once integrated) -->
+        <!-- Passwordless sign-in choices. Email OTP will be activated after its backend exists. -->
         <div class="auth-view" id="provider-view" hidden>
-          <div class="provider-row provider-row--single">
-            <button class="provider-btn" id="google-btn" type="button">
+          <div class="login-methods" aria-label="Sign-in methods">
+            <button class="provider-btn login-method-btn" id="google-btn" type="button">
               <svg viewBox="0 0 48 48" aria-hidden="true">
                 <path fill="#EA4335" d="M24 9.5c3.54 0 6.71 1.22 9.21 3.6l6.85-6.85C35.9 2.38 30.47 0 24 0 14.62 0 6.51 5.38 2.56 13.22l7.98 6.19C12.43 13.72 17.74 9.5 24 9.5z"/>
                 <path fill="#4285F4" d="M46.98 24.55c0-1.57-.15-3.09-.38-4.55H24v9.02h12.94c-.58 2.96-2.25 5.48-4.76 7.18l7.73 6.01c4.51-4.17 7.07-10.32 7.07-17.66z"/>
                 <path fill="#FBBC05" d="M10.53 28.59A14.41 14.41 0 0 1 9.75 24c0-1.59.27-3.13.76-4.59l-7.98-6.2A23.91 23.91 0 0 0 0 24c0 3.87.93 7.51 2.56 10.78z"/>
                 <path fill="#34A853" d="M24 48c6.48 0 11.92-2.13 15.9-5.79l-7.73-6.01c-2.14 1.44-4.89 2.3-8.17 2.3-6.26 0-11.57-4.22-13.47-9.91l-7.98 6.19C6.51 42.62 14.62 48 24 48z"/>
               </svg>
-              <span>Sign in with Google</span>
+              <span>Continue with Google</span>
             </button>
+
+            <button class="provider-btn login-method-btn login-method-btn--upcoming" id="email-btn" type="button" aria-label="Continue with Email, coming soon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <rect x="2.5" y="4.8" width="19" height="14.4" rx="2.8"/>
+                <path d="m3.5 6.5 8.5 6.5 8.5-6.5"/>
+              </svg>
+              <span>Continue with Email</span>
+              <span class="login-method-soon" aria-hidden="true">Soon</span>
+            </button>
+
+            <div class="login-divider login-method-divider" aria-hidden="true"><span>OR</span></div>
+
+            <button class="provider-btn login-method-btn" id="show-phone-btn" type="button">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <rect x="6.5" y="2.1" width="11" height="19.8" rx="2.5"/>
+                <path d="M10 18.3h4"/>
+              </svg>
+              <span>Continue with Phone</span>
+            </button>
+
+            <p class="auth-status login-method-status" id="provider-status" role="status" aria-live="polite"></p>
+            <p class="login-security-note">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <rect x="5" y="10.5" width="14" height="10.5" rx="2"/><path d="M8 10.5V7a4 4 0 0 1 8 0v3.5"/>
+              </svg>
+              Secure, passwordless sign-in
+            </p>
           </div>
-
-          <div class="login-divider"><span>OR</span></div>
-
-          <button class="switch-auth-link" id="show-phone-btn" type="button">
-            Sign in using phone
-          </button>
-          <p class="auth-status" id="provider-status" role="status" aria-live="polite"></p>
         </div>
 
         <!-- PHONE VIEW -->
@@ -153,7 +173,7 @@
               </button>
             </div>
 
-            <div class="channel-selector" aria-label="Receive OTP through">
+            <div class="channel-selector channel-selector--sms-only" aria-label="Receive OTP through">
               <button
                 class="channel-option is-active"
                 id="sms-btn"
@@ -173,6 +193,8 @@
                 id="whatsapp-btn"
                 type="button"
                 aria-pressed="false"
+                hidden
+                aria-hidden="true"
               >
                 <svg class="channel-brand-icon" viewBox="0 0 32 32" aria-hidden="true">
   <circle cx="16" cy="16" r="15" fill="#25D366"></circle>
@@ -186,10 +208,8 @@
             <p class="auth-status" id="phone-status" role="status" aria-live="polite"></p>
           </form>
 
-          <div class="login-divider"><span>OR</span></div>
-
-          <button class="switch-auth-link" id="show-provider-btn" type="button">
-            Sign in using Google
+          <button class="switch-auth-link login-back-link" id="show-provider-btn" type="button">
+            ← Back to sign-in options
           </button>
         </div>
 
@@ -276,6 +296,6 @@
 
   </div>
 
-  <script src="client-login.js?v=google-sms-v4" defer></script>
+  <script src="client-login.js?v=login-choices-v5" defer></script>
 </body>
 </html>

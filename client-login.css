@@ -1203,3 +1203,100 @@ a:focus-visible {
   caret-color: var(--white);
   transition: background-color 99999s ease-out 0s;
 }
+
+
+/* ===========================================================================
+   LOGIN CHOICES — Google, future Email OTP and Phone SMS
+   The legacy OTP and account views above intentionally remain unchanged.
+   =========================================================================== */
+.login-methods {
+  display: flex;
+  flex-direction: column;
+  gap: 0.7rem;
+  width: min(400px, 100%);
+  margin: 0 auto;
+}
+
+.login-method-btn {
+  position: relative;
+  width: 100%;
+  min-height: 56px;
+  gap: 0.85rem;
+  padding: 0.82rem 1.1rem;
+  background: rgba(23, 44, 69, 0.86);
+  border-color: rgba(166, 203, 247, 0.33);
+  color: #f5f8fc;
+  border-radius: 10px;
+  font-size: 0.94rem;
+  letter-spacing: 0.005em;
+}
+
+.login-method-btn svg {
+  flex: 0 0 21px;
+  width: 21px;
+  height: 21px;
+  color: var(--light-blue);
+}
+
+.login-method-btn--upcoming {
+  padding-right: 4.1rem;
+}
+
+.login-method-soon {
+  position: absolute;
+  right: 0.9rem;
+  font-size: 0.65rem;
+  letter-spacing: 0.035em;
+  font-weight: 600;
+  color: #a5b5c7;
+  background: rgba(166, 203, 247, 0.09);
+  padding: 0.12rem 0.45rem;
+  border-radius: 999px;
+}
+
+.login-method-divider {
+  width: 100%;
+  margin: 0.03rem auto;
+}
+
+.login-method-status {
+  margin: 0;
+  min-height: 0;
+  text-align: center;
+}
+
+.login-method-status:empty { display: none; }
+
+.login-security-note {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.45rem;
+  margin: 0.2rem 0 0;
+  color: #aebdd0;
+  font-size: 0.73rem;
+  line-height: 1.5;
+}
+
+.login-security-note svg {
+  width: 14px;
+  height: 14px;
+  flex: 0 0 14px;
+  color: var(--mint);
+}
+
+.login-back-link {
+  margin: 1.05rem auto 0;
+}
+
+/* WhatsApp is not enabled until its sender setup is completed. */
+.channel-option[hidden] { display: none !important; }
+.channel-selector--sms-only {
+  grid-template-columns: minmax(0, 1fr);
+  width: min(164px, 100%);
+}
+
+@media (max-width: 420px) {
+  .login-methods { width: 100%; max-width: 370px; }
+  .login-method-btn { min-height: 53px; }
+}

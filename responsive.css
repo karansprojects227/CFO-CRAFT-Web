@@ -4488,7 +4488,7 @@
   .home-page .cfo-story.story-enhanced .cfo-story-heading .section-heading {font-size:clamp(1.3rem,2.3vw,1.8rem) !important;}
   .home-page .cfo-story.story-enhanced .cfo-story-heading .section-subheading {font-size:.76rem !important;}
   .home-page .cfo-story.story-enhanced .feature-title {font-size:1.5rem;}
-  .home-page .cfo-story.story-enhanced .feature-desc {line-height:1.35;}
+  .home-page .cfo-story.story-enhanced .feature-desc {font-size:1rem;line-height:1.35;}
   .home-page .cfo-story.story-enhanced .feature-list li {line-height:1.25;margin-bottom:.18rem;}
 }
 
@@ -4957,4 +4957,132 @@
     grid-row: 4 !important;
     margin-top: .24rem !important;
   }
+}
+
+/* =====================================================================
+   CASE STUDIES — responsive showcase refinements (27 Oct 2026)
+   Desktop >768px retains original sticky scroll-controlled slide changes.
+   Only phones get manual navigation buttons and native swipe.
+   ===================================================================== */
+.home-page #case-studies .cs-slider-container {
+  border-radius: 20px;
+  border: 1px solid rgba(8, 41, 81, .16);
+  background: #061a36;
+  box-shadow: 0 22px 55px rgba(8,41,81,.19), 0 2px 10px rgba(8,41,81,.09);
+}
+.home-page #case-studies .cs-slide { background: #061a36 !important; }
+.home-page #case-studies .cs-slide img { background: #061a36 !important; }
+.home-page #case-studies .cs-mobile-controls { display: none; }
+.home-page #case-studies .cs-showcase-footer .feature-link {
+  font-weight: 700;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 5px;
+}
+@media (min-width: 1025px) {
+  /* Occupy more available width, but leave a safe margin around the showcase. */
+  .home-page #case-studies .cs-showcase {
+    width: min(1360px, calc(100vw - 64px), calc(var(--case-slide-height) * 2.08)) !important;
+  }
+  .home-page #case-studies .cs-slider-container,
+  .home-page #case-studies .cs-slider-wrapper,
+  .home-page #case-studies .cs-slide {
+    height: var(--case-slide-height) !important;
+  }
+  .home-page #case-studies .cs-slide img { object-fit: contain !important; }
+}
+@media (min-width: 769px) and (max-width: 1024px) {
+  .home-page #case-studies .cs-showcase {
+    width: min(100%, calc(100vw - 48px)) !important;
+    max-width: 1100px !important;
+  }
+  .home-page #case-studies .cs-slide { height: auto !important; }
+  .home-page #case-studies .cs-slide img {
+    display: block;
+    width: 100% !important;
+    height: auto !important;
+    max-height: min(54svh, 560px) !important;
+    object-fit: contain !important;
+  }
+}
+@media (max-width: 768px) {
+  .home-page #case-studies.case-scroll-story { margin: 0 !important; padding: 0 !important; height: auto !important; }
+  .home-page #case-studies .cs-sticky-frame {
+    position: relative !important;
+    height: auto !important;
+    min-height: 0 !important;
+    padding: clamp(2.2rem, 6vw, 3.5rem) 0 !important;
+    overflow: visible !important;
+  }
+  .home-page #case-studies .cs-sticky-content { height: auto !important; min-height: 0 !important; }
+  .home-page #case-studies .case-study-header { margin-bottom: 1.25rem !important; }
+  .home-page #case-studies .section-heading { font-size: clamp(1.65rem, 5.3vw, 2.3rem) !important; line-height: 1.2 !important; }
+  .home-page #case-studies .section-subheading { font-size: .91rem !important; }
+  .home-page #case-studies .cs-showcase { width: 100% !important; max-width: 680px !important; margin: 0 auto !important; }
+  .home-page #case-studies .cs-slider-container {
+    overflow-x: auto !important;
+    overflow-y: hidden !important;
+    scroll-snap-type: x mandatory;
+    overscroll-behavior-x: contain;
+    scrollbar-width: none;
+    border-radius: 14px !important;
+    touch-action: pan-x pan-y;
+  }
+  .home-page #case-studies .cs-slider-container::-webkit-scrollbar { display: none; }
+  .home-page #case-studies .cs-slider-wrapper { transform: none !important; height: auto !important; }
+  .home-page #case-studies .cs-slide {
+    aspect-ratio: auto !important;
+    height: auto !important;
+    min-height: 0 !important;
+    flex: 0 0 100% !important;
+    scroll-snap-align: center;
+  }
+  .home-page #case-studies .cs-slide img {
+    width: 100% !important;
+    height: auto !important;
+    max-height: none !important;
+    min-height: 0 !important;
+    object-fit: contain !important;
+  }
+  .home-page #case-studies .cs-mobile-controls {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+    margin-top: 1rem;
+  }
+  .home-page #case-studies .cs-mobile-position {
+    font-size: .68rem;
+    font-weight: 700;
+    letter-spacing: .09em;
+    color: var(--gray-600);
+  }
+  .home-page #case-studies .cs-mobile-arrow {
+    width: 46px;
+    height: 46px;
+    flex: 0 0 46px;
+    border-radius: 50%;
+    border: 1px solid rgba(8,41,81,.16);
+    background: var(--dark-blue);
+    color: #fff;
+    font-size: 1.3rem;
+    display: grid;
+    place-items: center;
+    cursor: pointer;
+    transition: background .18s ease, opacity .18s ease;
+  }
+  .home-page #case-studies .cs-mobile-arrow:focus-visible { outline: 3px solid var(--primary-blue); outline-offset: 3px; }
+  .home-page #case-studies .cs-mobile-arrow:disabled { opacity: .32; cursor: not-allowed; }
+  .home-page #case-studies .cs-showcase-footer { flex-direction: row !important; flex-wrap: wrap; align-items: center !important; gap: .75rem !important; margin-top: .9rem !important; }
+  .home-page #case-studies .cs-scroll-hint { display: flex; align-items: center; gap: .4rem; }
+}
+@media (max-width: 480px) {
+  .home-page #case-studies .cs-sticky-content { padding-left: 12px !important; padding-right: 12px !important; }
+  .home-page #case-studies .cs-mobile-controls { gap: .75rem; }
+  .home-page #case-studies .cs-showcase-footer { font-size: .75rem !important; }
+  .home-page #case-studies .cs-scroll-hint { font-size: .75rem; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .home-page #case-studies .cs-slider-wrapper,
+  .home-page #case-studies .cs-mobile-arrow { transition: none !important; }
+  .home-page #case-studies .cs-slider-container { scroll-behavior: auto !important; }
 }

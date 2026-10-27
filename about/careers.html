@@ -26,6 +26,7 @@
     <link href="../style.css" rel="stylesheet" />
     <link href="../responsive.css" rel="stylesheet" />
     <link href="about.css" rel="stylesheet" />
+    <link href="../careers/careers-cards.css" rel="stylesheet" />
   </head>
   <body class="about-page" data-page="careers">
     <a class="about-skip" href="#main"> Skip to content </a>
@@ -955,11 +956,11 @@
             <p aria-live="polite" class="about-count" id="count"></p>
           </div>
           <ol class="about-roles" id="roles-list"></ol>
+          <noscript><p class="about-sub">Enable JavaScript to view current vacancies, or <a href="../careers/apply.html?role=general">send a general application</a>.</p></noscript>
           <div class="about-empty" hidden="" id="empty">
             <p>
               <strong> There are no open roles right now. </strong>
-              We still read every application. Send your CV and we will contact
-              you when a matching role opens.
+              You can still share your CV for future relevant opportunities.
             </p>
           </div>
         </div>
@@ -974,7 +975,7 @@
             <li>
               <span aria-hidden="true" class="about-hire-number"> 1 </span>
               <h3>Apply</h3>
-              <p>Email your CV and a short note on why this role.</p>
+              <p>Submit your CV and a short note explaining why this role interests you.</p>
             </li>
             <li>
               <span aria-hidden="true" class="about-hire-number"> 2 </span>
@@ -1013,7 +1014,7 @@
           <div class="about-apply-actions">
             <a
               class="btn-secondary"
-              href="mailto:CAREERS_EMAIL?subject=Speculative%20application"
+              href="../careers/apply.html?role=general"
             >
               Send your CV
             </a>
@@ -1187,46 +1188,7 @@
       </div>
     </footer>
     <script src="../script.js"></script>
-    <script>
-      const ROLES = [
-        {
-          t: "Finance Delivery Associate",
-          type: "Part-time, moving to full-time",
-          loc: "Malad West, Mumbai [confirm on-site or hybrid]",
-          exp: "Qualified CA, 0\u20133 years post-qualification",
-          d: "Prepare monthly MIS packs, reconciliations and cash forecasts from client data, and support the engagement CFO in client reviews.",
-          status: "open",
-        },
-        {
-          t: "Business Development & Operations Support",
-          type: "Full-time",
-          loc: "Malad West, Mumbai",
-          exp: "1\u20132 years in business development, client servicing or operations",
-          d: "Coordinate intro calls, maintain the CRM, prepare proposals and keep engagement administration running on schedule.",
-          status: "open",
-        },
-      ];
-      const el = (id) => document.getElementById(id);
-      function esc(s) {
-        return String(s).replace(
-          /[&<>"]/g,
-          (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" })[c],
-        );
-      }
-      const open = ROLES.filter((r) => r.status === "open");
-      el("empty").hidden = open.length > 0;
-      el("count").textContent = open.length
-        ? open.length + (open.length === 1 ? " open role" : " open roles")
-        : "";
-      el("roles-list").innerHTML = open
-        .map(
-          (
-            r,
-          ) => `<li class="about-job-role"><div><h3>${esc(r.t)}</h3><p>${esc(r.d)}</p></div>
-<dl><dt>Type</dt><dd>${esc(r.type)}</dd><dt>Location</dt><dd>${esc(r.loc)}</dd><dt>Experience</dt><dd>${esc(r.exp)}</dd></dl>
-<a class="btn-secondary" href="mailto:CAREERS_EMAIL?subject=${encodeURIComponent("Application: " + r.t)}">Apply</a></li>`,
-        )
-        .join("");
-    </script>
+    <script src="../careers/roles.js"></script>
+    <script src="../careers/careers-listing.js"></script>
   </body>
 </html>

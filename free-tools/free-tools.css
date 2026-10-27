@@ -5782,3 +5782,32 @@ body.lead-modal-open{overflow:hidden;}
 .report-fields label.report-invalid input,.report-fields label.report-invalid select,.report-otp-label input[aria-invalid="true"]{border-color:#c33434!important;box-shadow:0 0 0 2px rgba(195,52,52,.08)}
 .report-check.report-invalid{color:#a92626}
 .report-fields label.report-invalid .report-field-title{color:#082951}
+
+
+/* ===============================================================
+   FREE TOOLS — FINAL CTA ALIGNMENT
+   Match the centred content width / equal side gutters used by
+   industries.css (.industry-wrap). No HTML or tool logic changes.
+   =============================================================== */
+.tool-page .cta > .wrap {
+  width: 100%;
+  max-width: 1200px;
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 2rem;
+  padding-right: 2rem;
+}
+
+@media (max-width: 768px) {
+  .tool-page .cta > .wrap {
+    padding-left: 1.25rem;
+    padding-right: 1.25rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .tool-page .cta > .wrap {
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
+}

@@ -50,7 +50,7 @@ body.resource-page {
 .resource-page .resource-sub { max-width:760px; color:var(--resource-muted); }
 .resource-page .resource-ph { display:inline; padding:1px 5px; border:1px dashed #c8954f; border-radius:4px; background:#fff6e9; color:#76501f; font-weight:600; }
 
-.resource-page .resource-btn { display:inline-flex; align-items:center; justify-content:center; min-height:44px; padding:12px 18px; border:1px solid transparent; border-radius:8px; font:600 .92rem/1 var(--font-primary); text-decoration:none; cursor:pointer; transition:var(--transition); }
+.resource-page .resource-btn { display:inline-flex; align-items:center; justify-content:center; min-height:44px; padding:12px 18px; border:1px solid transparent; border-radius:999px; font:600 .92rem/1 var(--font-primary); text-decoration:none; cursor:pointer; transition:var(--transition); }
 .resource-page .resource-btn-navy { background:var(--dark-blue); color:var(--white); }
 .resource-page .resource-btn-navy:hover { background:var(--primary-blue); }
 .resource-page .resource-btn-sky { background:var(--light-blue); color:var(--dark-blue); }
@@ -796,4 +796,50 @@ body.resource-page.case-studies-page .case-status {
     font-size: clamp(1.9rem, 9vw, 2.2rem);
     line-height: 1.12;
   }
+}
+
+
+/* Corporate profile PDF: downloadable brochure card */
+.resource-page .fmt[data-f="Brochure"] {
+  background: #e6f3f1;
+  border-color: rgba(27, 125, 113, .15);
+  color: #176d65;
+}
+.resource-page .row:has(.fmt[data-f="Brochure"]) {
+  border-color: rgba(43, 109, 178, .22);
+  background: linear-gradient(110deg, #ffffff 65%, #f0f7ff);
+}
+.resource-page .row:has(.fmt[data-f="Brochure"])::before {
+  background-color: #e0edf9;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='%23082951' stroke-width='1.7' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M6 2h8l5 5v15H6a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2z'/%3E%3Cpath d='M14 2v6h6M8 13h8M8 17h6'/%3E%3C/svg%3E");
+}
+.resource-page .act a.download-link {
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  gap: 9px;
+  padding: 11px 16px;
+  border-radius: 10px;
+  background: var(--dark-blue);
+  border: 1px solid var(--dark-blue);
+  color: #fff;
+  text-decoration: none;
+  white-space: nowrap;
+  font-size: .82rem;
+  font-weight: 700;
+  box-shadow: 0 5px 14px rgba(8, 41, 81, .13);
+  transition: background .2s ease, transform .2s ease, box-shadow .2s ease;
+}
+.resource-page .act a.download-link::before { content: "↓"; font-size: 1.08rem; line-height: .7; }
+.resource-page .act a.download-link::after { content: none; }
+.resource-page .act a.download-link:hover {
+  background: var(--primary-blue);
+  border-color: var(--primary-blue);
+  color: #fff;
+  transform: translateY(-2px);
+  box-shadow: 0 9px 18px rgba(8, 41, 81, .2);
+}
+.resource-page .act a.download-link:focus-visible { outline: 3px solid var(--light-blue); outline-offset: 3px; }
+@media (max-width: 560px) {
+  .resource-page .act a.download-link { width: 100%; }
 }

@@ -4882,7 +4882,7 @@ h6,
   font-weight: 500;
   line-height: 1.25;
 }
-.home-page .cfo-story-segment.is-active .cfo-story-segment-label {color: #082951;font-weight: 700;}
+.home-page .cfo-story-segment.is-active .cfo-story-segment-label {font-size: clamp(.77rem, 1.1vw, .94rem);color: #082951;font-weight: 700;}
 .home-page .cfo-story-segment:focus-visible {outline: 2px solid #2b6db2;outline-offset: 6px;border-radius: 4px;}
 .home-page .cfo-story-current {
   display: flex;

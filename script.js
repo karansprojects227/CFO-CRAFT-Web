@@ -220,6 +220,8 @@ document.addEventListener("DOMContentLoaded", () => {
     const caseCount = document.getElementById("case-study-count");
     const caseProgressText = document.getElementById("case-study-progress-text");
     const caseScroller = caseSection.querySelector(".cs-slider-container");
+    const casePrev = caseSection.querySelector("[data-case-prev]");
+    const caseNext = caseSection.querySelector("[data-case-next]");
 
     let activeCase = -1;
     let caseRaf = 0;
@@ -228,6 +230,8 @@ document.addEventListener("DOMContentLoaded", () => {
       const safe = Math.max(0, Math.min(caseSlides.length - 1, index));
       if (safe === activeCase) return;
       activeCase = safe;
+      if (casePrev) casePrev.disabled = safe === 0;
+      if (caseNext) caseNext.disabled = safe === caseSlides.length - 1;
 
       if (window.innerWidth > 768) {
         caseTrack.style.transform = `translate3d(-${safe * 100}%, 0, 0)`;
@@ -304,6 +308,16 @@ document.addEventListener("DOMContentLoaded", () => {
         });
       }, { passive: true });
     }
+
+    // Phone only: click arrows without changing the desktop scroll-story.
+    const navigateMobileCase = (delta) => {
+      if (window.innerWidth > 768 || !caseScroller) return;
+      const next = Math.max(0, Math.min(caseSlides.length - 1, activeCase + delta));
+      caseScroller.scrollTo({ left: next * caseScroller.clientWidth, behavior: "smooth" });
+      setCase(next);
+    };
+    casePrev?.addEventListener("click", () => navigateMobileCase(-1));
+    caseNext?.addEventListener("click", () => navigateMobileCase(1));
 
     setCase(0);
     updateCaseStory();

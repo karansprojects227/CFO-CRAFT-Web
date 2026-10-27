@@ -1741,10 +1741,6 @@ body[data-page="industry-startups"] .industry-pack li:nth-child(5)::after {
     grid-template-columns: 1fr;
     gap: .6rem;
   }
-
-  .industry-page .industry-demo-badge {
-    width: fit-content;
-  }
 }
 
 @media (max-width: 480px) {

@@ -1,0 +1,98 @@
+/* CFO CRAFT Careers only — refined horizontal role cards, no styles leaked to other About pages. */
+.about-page[data-page="careers"] #roles { scroll-margin-top:100px; }
+.about-page[data-page="careers"] .about-roles { display:grid; gap:1.2rem; margin-top:2rem; }
+.about-page[data-page="careers"] .about-roles .cfo-career-card {
+  display:block; position:relative; padding:0; overflow:hidden;
+  border:1px solid #dae4ee; border-radius:20px;
+  background:linear-gradient(155deg,#fff 65%,#f8fbff); box-shadow:0 9px 30px rgba(8,41,81,.055);
+  transition:transform .24s ease,border-color .24s ease,box-shadow .24s ease;
+}
+.about-page[data-page="careers"] .about-roles .cfo-career-card:last-child { border-bottom:1px solid #dae4ee; }
+.about-page[data-page="careers"] .about-roles .cfo-career-card::after { opacity:.45; }
+.about-page[data-page="careers"] .about-roles .cfo-career-card:hover {
+  transform:translateY(-4px); border-color:rgba(43,109,178,.32); box-shadow:0 18px 44px rgba(8,41,81,.1);
+}
+.about-page[data-page="careers"] .cfo-career-top {
+  position:relative; z-index:1; display:flex; justify-content:space-between; align-items:center;
+  gap:clamp(1rem,3vw,3rem); padding:clamp(1.45rem,2.7vw,2.4rem);
+}
+.about-page[data-page="careers"] .cfo-career-main { max-width:790px; min-width:0; }
+.about-page[data-page="careers"] .cfo-career-kicker {
+  display:inline-flex; align-items:center; gap:.55rem; margin-bottom:.85rem;
+  color:var(--primary-blue); font-size:.7rem; letter-spacing:.14em; font-weight:800;
+}
+.about-page[data-page="careers"] .cfo-career-kicker::before {
+  content:""; width:7px; height:7px; background:#28896e; border-radius:50%;
+}
+.about-page[data-page="careers"] .cfo-career-title {
+  margin:0 0 .7rem; font-family:var(--font-heading); font-weight:700; letter-spacing:-.026em;
+  font-size:clamp(1.2rem,2vw,1.5rem); line-height:1.32; color:var(--dark-blue);
+}
+.about-page[data-page="careers"] .cfo-career-title::before { display:none; }
+.about-page[data-page="careers"] .cfo-career-desc {
+  margin:0; max-width:740px; color:#566b80; font-size:.96rem; line-height:1.65;
+}
+.about-page[data-page="careers"] .cfo-career-action { flex-shrink:0; align-self:center; }
+.about-page[data-page="careers"] .cfo-career-apply {
+  position:relative; z-index:2; min-width:144px; min-height:48px;
+  padding:.79rem 1.2rem; font-size:.89rem; font-weight:700; white-space:nowrap;
+  border-radius:999px; display:inline-flex; justify-content:center; align-items:center; gap:1rem;
+}
+.about-page[data-page="careers"] .cfo-career-arrow { font-size:1.2rem; line-height:1; transition:transform .2s; }
+.about-page[data-page="careers"] .cfo-career-apply:hover .cfo-career-arrow { transform:translateX(3px); }
+.about-page[data-page="careers"] .cfo-career-facts {
+  position:relative; z-index:1; display:grid; grid-template-columns:minmax(0,1fr) minmax(0,1.05fr) minmax(0,1.35fr);
+  gap:0; margin:0; padding:0 clamp(1.45rem,2.7vw,2.4rem) clamp(1.45rem,2.7vw,2.4rem);
+  font-size:inherit;
+}
+.about-page[data-page="careers"] .cfo-career-fact {
+  min-width:0; display:flex; align-items:flex-start; gap:.85rem;
+  padding:1rem .95rem; background:#f2f7fd;
+  border-block:1px solid #e4edf6;
+}
+.about-page[data-page="careers"] .cfo-career-fact:first-child {
+  border-left:1px solid #e4edf6; border-radius:13px 0 0 13px;
+}
+.about-page[data-page="careers"] .cfo-career-fact:last-child {
+  border-right:1px solid #e4edf6; border-radius:0 13px 13px 0;
+}
+.about-page[data-page="careers"] .cfo-career-fact + .cfo-career-fact { border-left:1px solid #dce8f4; }
+.about-page[data-page="careers"] .cfo-career-fact-icon {
+  display:grid; place-items:center; flex:0 0 36px; width:36px; height:36px;
+  border-radius:10px; background:#e1efff; color:#205b9a;
+}
+.about-page[data-page="careers"] .cfo-career-fact-icon svg { width:19px; height:19px; }
+.about-page[data-page="careers"] .cfo-career-fact-body { min-width:0; }
+.about-page[data-page="careers"] .cfo-career-fact dt {
+  margin:0 0 .22rem; color:#75869a; font-size:.68rem; font-weight:700;
+  text-transform:uppercase; letter-spacing:.085em;
+}
+.about-page[data-page="careers"] .cfo-career-fact dd {
+  margin:0; color:#123459; font-size:.85rem; font-weight:650; line-height:1.5; overflow-wrap:anywhere;
+}
+.about-page[data-page="careers"] .cfo-career-fact-note {
+  display:block; color:#718399; font-size:.7rem; line-height:1.5; margin-top:.22rem;
+}
+.about-page[data-page="careers"] .about-count {
+  padding:.34rem .8rem; font-size:.8rem; border-radius:50px;
+  font-weight:700; background:#eaf3fe; color:#164d88;
+}
+@media(max-width:900px) {
+  .about-page[data-page="careers"] .cfo-career-top { align-items:flex-start; }
+  .about-page[data-page="careers"] .cfo-career-facts { grid-template-columns:1fr; }
+  .about-page[data-page="careers"] .cfo-career-fact { border:1px solid #e4edf6; border-bottom:0; }
+  .about-page[data-page="careers"] .cfo-career-fact:first-child { border-radius:13px 13px 0 0; }
+  .about-page[data-page="careers"] .cfo-career-fact:last-child { border:1px solid #e4edf6; border-radius:0 0 13px 13px; }
+  .about-page[data-page="careers"] .cfo-career-fact + .cfo-career-fact { border-left:1px solid #e4edf6; }
+}
+@media(max-width:640px) {
+  .about-page[data-page="careers"] .cfo-career-top { flex-direction:column; align-items:stretch; gap:1.2rem; }
+  .about-page[data-page="careers"] .cfo-career-action { align-self:stretch; width:100%; }
+  .about-page[data-page="careers"] .cfo-career-apply { width:100%; }
+  .about-page[data-page="careers"] .cfo-career-desc { font-size:.9rem; }
+  .about-page[data-page="careers"] .cfo-career-fact { gap:.65rem; }
+}
+@media(prefers-reduced-motion:reduce) {
+  .about-page[data-page="careers"] .cfo-career-card,
+  .about-page[data-page="careers"] .cfo-career-arrow { transition:none!important; }
+}

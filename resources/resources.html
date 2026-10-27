@@ -8,7 +8,7 @@
     />
     <title>Resources Hub | CFO CRAFT</title>
     <meta
-      content="Guides, templates and tools on working capital, costing, GST and MIS for Indian manufacturing and trading businesses."
+      content="Explore the CFO CRAFT corporate profile, practical finance guides, templates and tools for growing Indian businesses."
       name="description"
     />
     <script
@@ -934,6 +934,12 @@
             ><button
               aria-pressed="false"
               class="chip"
+              data-topic="About CFO CRAFT"
+            >
+              About CFO CRAFT</button
+            ><button
+              aria-pressed="false"
+              class="chip"
               data-topic="Working capital"
             >
               Working capital</button
@@ -966,6 +972,7 @@
               <label class="sr" for="fmt">Format</label
               ><select id="fmt">
                 <option value="">All formats</option>
+                <option>Brochure</option>
                 <option>Guide</option>
                 <option>Template</option>
                 <option>Tool</option>
@@ -997,6 +1004,7 @@
               >Email your request</a
             ><a
               class="resource-btn resource-btn-line"
+              target="_blank"
               href="https://wa.me/919892560660"
               >Message on WhatsApp</a
             >
@@ -1016,7 +1024,7 @@
             </p>
           </div>
           <a class="resource-btn resource-btn-navy" href="../book-intro.html"
-            >Book an Intro Call</a
+            >Book an Intro</a
           >
         </div>
       </section>
@@ -1182,12 +1190,12 @@
     <script>
       const R = [
         {
-          t: "Working capital and cash conversion cycle calculator",
-          d: "Enter debtor, inventory and creditor days to see how many days of cash your operations tie up.",
-          topic: "Working capital",
-          fmt: "Tool",
-          url: "RESOURCE_URL",
-          status: "soon",
+          t: "CFO CRAFT Corporate Profile — Services",
+          d: "Explore our strategic and fractional CFO services, approach, service tiers, specialist capabilities and advisory leadership in this 15-page company brochure.",
+          topic: "About CFO CRAFT",
+          fmt: "Brochure",
+          url: "downloads/CFO-CRAFT-Corporate-Profile-Services.pdf",
+          status: "live",
         },
         {
           t: "13-week cash flow forecast",
@@ -1279,6 +1287,7 @@
         },
       ];
       const verb = {
+        Brochure: "Download PDF",
         Guide: "Read guide",
         Template: "Download template",
         Tool: "Open tool",
@@ -1303,7 +1312,7 @@
         el("index").innerHTML = list
           .map(
             (r) =>
-              `<li class="row"><div><h3>${esc(r.t)}</h3><p>${esc(r.d)}</p></div><span class="topic">${esc(r.topic)}</span><span class="fmt" data-f="${r.fmt}">${r.fmt}</span><span class="act">${r.status === "live" ? `<a href="${esc(r.url)}">${verb[r.fmt]}</a>` : '<span class="soon">In preparation</span>'}</span></li>`,
+              `<li class="row"><div><h3>${esc(r.t)}</h3><p>${esc(r.d)}</p></div><span class="topic">${esc(r.topic)}</span><span class="fmt" data-f="${r.fmt}">${r.fmt}</span><span class="act">${r.status === "live" ? `<a class="${r.fmt === "Brochure" ? "download-link" : ""}" href="${esc(r.url)}" ${r.fmt === "Brochure" ? 'download="CFO-CRAFT-Corporate-Profile-Services.pdf" type="application/pdf" aria-label="Download CFO CRAFT Corporate Profile PDF"' : ""}>${verb[r.fmt]}</a>` : '<span class="soon">In preparation</span>'}</span></li>`,
           )
           .join("");
         el("empty").hidden = list.length > 0;

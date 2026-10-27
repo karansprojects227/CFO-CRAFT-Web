@@ -1,7 +1,7 @@
 /* CFO CRAFT careers application UI. No backend is enabled until API_URL is configured. */
 (() => {
   'use strict';
-  const API_URL = ''; // Frontend only: set an exact deployed URL when the /api/careers/apply backend is ready.
+  const API_URL = 'https://cfo-craft-backend.onrender.com/api/careers/apply'; // Frontend only: set an exact deployed URL when the /api/careers/apply backend is ready.
   const MAX_BYTES = 5 * 1024 * 1024;
   const $ = (id) => document.getElementById(id);
   const catalog = Array.isArray(window.CFO_CAREER_ROLES) ? window.CFO_CAREER_ROLES : [];

@@ -104,15 +104,30 @@
   });
 
   const status = $('submit-status');
+  let statusHideTimer = null;
   const showStatus = (message, kind = 'error') => {
+    if (statusHideTimer !== null) {
+      clearTimeout(statusHideTimer);
+      statusHideTimer = null;
+    }
     status.hidden = false;
     status.className = `apply-status ${kind}`;
     status.textContent = message;
     status.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+    if (kind === 'success') {
+      statusHideTimer = setTimeout(() => {
+        status.hidden = true;
+        statusHideTimer = null;
+      }, 5000);
+    }
   };
   const submit = $('submit-application');
   form.addEventListener('submit', async event => {
     event.preventDefault();
+    if (statusHideTimer !== null) {
+      clearTimeout(statusHideTimer);
+      statusHideTimer = null;
+    }
     status.hidden = true;
     if (!form.reportValidity()) return;
     if (!chosenFile || !(await fileIsPdf(chosenFile).catch(() => false))) {

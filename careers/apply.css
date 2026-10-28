@@ -106,20 +106,15 @@
 @media (max-width:520px) { .apply-container { width:calc(100% - 30px); } .apply-hero { padding:27px 0 38px; } .apply-breadcrumb { margin-bottom:20px; } .apply-hero h1 { font-size:clamp(1.9rem,9vw,2.3rem); } .apply-hero-lead { font-size:.91rem; } .apply-hero-aside { padding:18px; } .apply-hero-points { flex-direction:column; gap:8px; } .apply-form-card { padding:21px 17px; border-radius:16px; } .apply-form-group-title { margin-bottom:18px; } .apply-fields { row-gap:17px; } .apply-upload { padding:17px; gap:12px; } .apply-upload-action { width:100%; text-align:center; } .apply-submit-row { flex-direction:column; align-items:stretch; gap:12px; } .apply-submit-row p { max-width:none; text-align:center; } .apply-card-divider { margin:27px 0; } }
 @media (prefers-reduced-motion:reduce) { .apply-page * { scroll-behavior:auto !important; transition:none !important; animation:none !important; } }
 
-
-/* Careers application refinements — hero-less page and restrained red accents */
-.apply-page { --apply-red: #bb404b; --apply-red-deep: #96303e; }
+/* Hero-less page spacing. Retain original CFO CRAFT blue theme. */
 .apply-form-section { padding-top: 126px; }
-.apply-section-number { color: var(--apply-red); }
-.apply-section-intro strong, .apply-field b, .apply-check b { color: var(--apply-red); }
-.apply-step-badge { color: var(--apply-red-deep); background: #fff0f1; }
-.apply-check input { accent-color: var(--apply-red); }
-.apply-check a { color: var(--apply-red-deep); }
-.apply-aside-label { color: var(--apply-red-deep); }
-.apply-help-check { color: var(--apply-red-deep); background: #ffedf0; }
+
+/* Red is reserved exclusively for the already-applied notification. */
 .apply-status.info {
-  background: #fff0f1; border-color: #e7afb6; color: #8b2734;
-  border-left: 4px solid var(--apply-red);
+  background: #fff0f1;
+  border: 1px solid #e7afb6;
+  border-left: 4px solid #bb404b;
+  color: #8b2734;
   box-shadow: 0 6px 18px rgba(187,64,75,.055);
 }
 @media (max-width: 768px) { .apply-form-section { padding-top: 109px; } }

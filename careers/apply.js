@@ -1,7 +1,7 @@
-/* CFO CRAFT careers application UI. No backend is enabled until API_URL is configured. */
+/* CFO CRAFT careers application frontend — live Render API connection. */
 (() => {
   'use strict';
-  const API_URL = 'https://cfo-craft-backend.onrender.com/api/careers/apply'; // Frontend only: set an exact deployed URL when the /api/careers/apply backend is ready.
+  const API_URL = 'https://cfo-craft-backend.onrender.com/api/careers/apply'; // Live CFO CRAFT Render backend.
   const MAX_BYTES = 5 * 1024 * 1024;
   const $ = (id) => document.getElementById(id);
   const catalog = Array.isArray(window.CFO_CAREER_ROLES) ? window.CFO_CAREER_ROLES : [];
@@ -104,29 +104,30 @@
   });
 
   const status = $('submit-status');
-  let statusHideTimer = null;
+  let successHideTimer = null;
   const showStatus = (message, kind = 'error') => {
-    if (statusHideTimer !== null) {
-      clearTimeout(statusHideTimer);
-      statusHideTimer = null;
+    if (successHideTimer !== null) {
+      clearTimeout(successHideTimer);
+      successHideTimer = null;
     }
     status.hidden = false;
     status.className = `apply-status ${kind}`;
     status.textContent = message;
     status.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
     if (kind === 'success') {
-      statusHideTimer = setTimeout(() => {
+      successHideTimer = setTimeout(() => {
         status.hidden = true;
-        statusHideTimer = null;
+        status.textContent = '';
+        successHideTimer = null;
       }, 5000);
     }
   };
   const submit = $('submit-application');
   form.addEventListener('submit', async event => {
     event.preventDefault();
-    if (statusHideTimer !== null) {
-      clearTimeout(statusHideTimer);
-      statusHideTimer = null;
+    if (successHideTimer !== null) {
+      clearTimeout(successHideTimer);
+      successHideTimer = null;
     }
     status.hidden = true;
     if (!form.reportValidity()) return;
@@ -157,6 +158,10 @@
       const response = await fetch(API_URL, { method: 'POST', body: payload, headers: { 'Accept': 'application/json' }, credentials: 'omit' });
       const data = await response.json().catch(() => ({}));
       if (!response.ok || data.success !== true) throw new Error(data.message || 'We could not submit your application. Please try again.');
+      if (data.duplicate === true) {
+        showStatus('You have already applied for this role using this email address. No new application was created or email notification sent. If you need to update your CV, please contact CFO CRAFT.', 'info');
+        return;
+      }
       showStatus('Your application was received successfully. Thank you for your interest in CFO CRAFT.', 'success');
       form.reset();
       chosenFile = null;

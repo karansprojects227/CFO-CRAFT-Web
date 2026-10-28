@@ -114,7 +114,7 @@
     status.className = `apply-status ${kind}`;
     status.textContent = message;
     status.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
-    if (kind === 'success') {
+    if (kind === 'success' || kind === 'info') {
       successHideTimer = setTimeout(() => {
         status.hidden = true;
         status.textContent = '';
@@ -151,7 +151,6 @@
     payload.set('cv', chosenFile, chosenFile.name);
     payload.set('role_slug', roleSelect.value);
     payload.set('privacy_consent', $('privacy_consent').checked ? 'true' : 'false');
-    payload.set('future_consent', $('future_consent').checked ? 'true' : 'false');
     submit.disabled = true;
     submit.textContent = 'Submitting application…';
     try {
@@ -169,7 +168,7 @@
       $('cv-filename').textContent = 'Choose a PDF file';
       $('cv-message').textContent = 'Click or drop your CV here · PDF only, up to 5 MB';
       $('note-count').textContent = '0 / 2000';
-      roleSelect.value = 'general';
+      roleSelect.value = roles.some(r => r.slug === request) ? request : 'general';
       displayRole();
     } catch (error) {
       showStatus(error instanceof Error ? error.message : 'Unable to submit your application.');

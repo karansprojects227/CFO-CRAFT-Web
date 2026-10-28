@@ -53,7 +53,7 @@
     $('review-success').hidden = state !== 'success';
     $('step-one').classList.toggle('active', state === 'request');
     $('step-two').classList.toggle('active', state === 'verify' || state === 'success');
-    $('review-progress').hidden = state === 'success';
+    document.querySelector('.review-progress').hidden = state === 'success';
     $('review-fineprint').hidden = state === 'success';
   };
   clearError();

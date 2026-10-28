@@ -1,0 +1,38 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="robots" content="noindex,nofollow,noarchive">
+  <title>Private CV Access | CFO CRAFT Careers</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&amp;family=Roboto:wght@400;500;700&amp;display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../style.css">
+  <link rel="stylesheet" href="../responsive.css">
+  <link rel="stylesheet" href="review.css">
+</head>
+<body>
+  <header class="review-nav"><a href="/"><img src="../images/logo.png" alt="CFO CRAFT"></a><span>Careers · Private CV access</span></header>
+  <main class="review-main">
+    <div class="review-card">
+      <p class="eyebrow">PRIVATE · OWNER VERIFICATION</p>
+      <h1>Download an applicant’s CV</h1>
+      <p class="intro">Use the Application ID from your CFO CRAFT Careers notification. A one-time verification code will be sent to the configured owner email address.</p>
+      <form id="request-form">
+        <label for="application-id">Application ID</label>
+        <input id="application-id" required autocomplete="off" spellcheck="false" placeholder="e.g. 12345678-1234-..." maxlength="36">
+        <button id="request-button" type="submit">Email verification code</button>
+      </form>
+      <form id="download-form" hidden>
+        <label for="verification-code">8-digit code from owner email</label>
+        <input id="verification-code" type="text" required autocomplete="one-time-code" inputmode="numeric" pattern="[0-9]{8}" maxlength="8" placeholder="00000000">
+        <button id="download-button" type="submit">Verify &amp; download PDF</button>
+      </form>
+      <p id="review-status" class="review-status" role="status" aria-live="polite" hidden></p>
+      <p class="fineprint">For authorized CFO CRAFT reviewers only. Codes expire in 10 minutes and can be used once. The CV is not publicly accessible.</p>
+    </div>
+  </main>
+  <script src="review.js" defer></script>
+</body>
+</html>

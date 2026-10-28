@@ -1,38 +1,908 @@
 <!doctype html>
 <html lang="en">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width,initial-scale=1">
-  <meta name="robots" content="noindex,nofollow,noarchive">
-  <title>Private CV Access | CFO CRAFT Careers</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&amp;family=Roboto:wght@400;500;700&amp;display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="../style.css">
-  <link rel="stylesheet" href="../responsive.css">
-  <link rel="stylesheet" href="review.css">
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex,nofollow,noarchive">
+<title>Private CV Access | CFO CRAFT Careers</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&amp;family=Roboto:wght@400;500;700&amp;display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../style.css"><link rel="stylesheet" href="../responsive.css"><link rel="stylesheet" href="review.css">
 </head>
-<body>
-  <header class="review-nav"><a href="/"><img src="../images/logo.png" alt="CFO CRAFT"></a><span>Careers · Private CV access</span></header>
-  <main class="review-main">
-    <div class="review-card">
-      <p class="eyebrow">PRIVATE · OWNER VERIFICATION</p>
-      <h1>Download an applicant’s CV</h1>
-      <p class="intro">Use the Application ID from your CFO CRAFT Careers notification. A one-time verification code will be sent to the configured owner email address.</p>
-      <form id="request-form">
-        <label for="application-id">Application ID</label>
-        <input id="application-id" required autocomplete="off" spellcheck="false" placeholder="e.g. 12345678-1234-..." maxlength="36">
-        <button id="request-button" type="submit">Email verification code</button>
-      </form>
-      <form id="download-form" hidden>
-        <label for="verification-code">8-digit code from owner email</label>
-        <input id="verification-code" type="text" required autocomplete="one-time-code" inputmode="numeric" pattern="[0-9]{8}" maxlength="8" placeholder="00000000">
-        <button id="download-button" type="submit">Verify &amp; download PDF</button>
-      </form>
-      <p id="review-status" class="review-status" role="status" aria-live="polite" hidden></p>
-      <p class="fineprint">For authorized CFO CRAFT reviewers only. Codes expire in 10 minutes and can be used once. The CV is not publicly accessible.</p>
-    </div>
-  </main>
-  <script src="review.js" defer></script>
-</body>
-</html>
+<body class="review-page">
+<a class="review-skip" href="#application-id">Skip to CV verification</a>
+<nav class="scrolled navbar" id="navbar">
+      <div class="nav-container">
+        <a class="nav-logo" href="/">
+          <img
+            alt="CFO Craft Logo"
+            class="brand-logo"
+            src="../images/logo.png"
+          />
+          <span class="custom-tooltip"> Go To Home Page </span>
+        </a>
+        <div class="nav-links" id="reviewNavLinks">
+          <!-- SERVICES DROPDOWN -->
+          <div class="nav-dropdown-wrap">
+            <span
+              aria-haspopup="true"
+              class="nav-link"
+              role="button"
+              tabindex="0"
+            >
+              Services
+              <svg
+                class="nav-chevron"
+                fill="none"
+                height="12"
+                viewbox="0 0 12 12"
+                width="12"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  d="M11.2498 2.99986L6.17049 8.74062C6.14908 8.76476 6.12279 8.78408 6.09336 8.79731C6.06393 8.81054 6.03202 8.81738 5.99976 8.81738C5.96749 8.81738 5.93559 8.81054 5.90615 8.79731C5.87672 8.78408 5.85043 8.76476 5.82902 8.74062L0.749756 2.99986"
+                  stroke="currentColor"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="1.25"
+                ></path>
+              </svg>
+            </span>
+            <div class="nav-dropdown dropdown-wide dropdown-left">
+              <div class="dropdown-arrow"></div>
+              <div class="dropdown-body">
+                <div class="dropdown-grid two-col-with-promo">
+                  <div class="dropdown-items-grid">
+                    <!-- Finance Diagnostic -->
+                    <a
+                      class="dropdown-item"
+                      href="../services/finance-diagnostic.html"
+                    >
+                      <div class="dd-icon">
+                        <svg
+                          fill="none"
+                          height="20"
+                          stroke="#082951"
+                          stroke-width="1.5"
+                          viewbox="0 0 24 24"
+                          width="20"
+                        >
+                          <circle cx="11" cy="11" r="7"></circle>
+                          <path d="M20 20l-4-4"></path>
+                          <path d="M8 11l2 2 4-4"></path>
+                        </svg>
+                      </div>
+                      <div class="dd-text">
+                        <div class="dd-title">Finance Diagnostic</div>
+                        <div class="dd-desc">
+                          Identify financial gaps, risks and opportunities
+                        </div>
+                      </div>
+                    </a>
+                    <!-- Fractional CFO - Starter -->
+                    <a
+                      class="dropdown-item"
+                      href="../services/fractional-cfo-starter.html"
+                    >
+                      <div class="dd-icon">
+                        <svg
+                          fill="none"
+                          height="20"
+                          stroke="#082951"
+                          stroke-width="1.5"
+                          viewbox="0 0 24 24"
+                          width="20"
+                        >
+                          <path d="M4 19V5"></path>
+                          <path d="M4 19h16"></path>
+                          <path d="M7 15l4-4 3 2 5-6"></path>
+                        </svg>
+                      </div>
+                      <div class="dd-text">
+                        <div class="dd-title">Fractional CFO - Starter</div>
+                        <div class="dd-desc">
+                          Essential finance support for growing businesses
+                        </div>
+                      </div>
+                    </a>
+                    <!-- Fractional CFO - Core -->
+                    <a
+                      class="dropdown-item"
+                      href="../services/fractional-cfo-core.html"
+                    >
+                      <div class="dd-icon">
+                        <svg
+                          fill="none"
+                          height="20"
+                          stroke="#082951"
+                          stroke-width="1.5"
+                          viewbox="0 0 24 24"
+                          width="20"
+                        >
+                          <rect
+                            height="16"
+                            rx="2"
+                            width="18"
+                            x="3"
+                            y="4"
+                          ></rect>
+                          <path d="M7 9h10"></path>
+                          <path d="M7 13h6"></path>
+                          <path d="M7 17h4"></path>
+                        </svg>
+                      </div>
+                      <div class="dd-text">
+                        <div class="dd-title">Fractional CFO - Core</div>
+                        <div class="dd-desc">
+                          Ongoing CFO support to improve control and performance
+                        </div>
+                      </div>
+                    </a>
+                    <!-- Fractional CFO - Growth -->
+                    <a
+                      class="dropdown-item"
+                      href="../services/fractional-cfo-growth.html"
+                    >
+                      <div class="dd-icon">
+                        <svg
+                          fill="none"
+                          height="20"
+                          stroke="#082951"
+                          stroke-width="1.5"
+                          viewbox="0 0 24 24"
+                          width="20"
+                        >
+                          <path d="M4 18l6-6 4 4 6-8"></path>
+                          <path d="M16 8h4v4"></path>
+                        </svg>
+                      </div>
+                      <div class="dd-text">
+                        <div class="dd-title">Fractional CFO - Growth</div>
+                        <div class="dd-desc">
+                          Strategic finance leadership for ambitious growth
+                        </div>
+                      </div>
+                    </a>
+                    <!-- Specialist & Project Work -->
+                    <a
+                      class="dropdown-item"
+                      href="../services/specialist-project-work.html"
+                    >
+                      <div class="dd-icon">
+                        <svg
+                          fill="none"
+                          height="20"
+                          stroke="#082951"
+                          stroke-width="1.5"
+                          viewbox="0 0 24 24"
+                          width="20"
+                        >
+                          <path d="M12 3v18"></path>
+                          <path d="M5 7h14"></path>
+                          <path d="M7 7l-4 7h8L7 7z"></path>
+                          <path d="M17 7l-4 7h8l-4-7z"></path>
+                        </svg>
+                      </div>
+                      <div class="dd-text">
+                        <div class="dd-title">
+                          Specialist &amp; Project Work
+                        </div>
+                        <div class="dd-desc">
+                          Focused finance expertise for specific business needs
+                        </div>
+                      </div>
+                    </a>
+                  </div>
+                  <!-- Promo -->
+                  <div class="dropdown-promo">
+                    <div class="promo-title">
+                      Finance Leadership, Built Around Your Business.
+                    </div>
+                    <div class="promo-desc">
+                      Practical CFO expertise for manufacturing and trading
+                      businesses, tailored to your stage, needs and growth
+                      plans.
+                    </div>
+                    <a class="promo-btn" href="../book-intro.html">
+                      Book an Intro
+                    </a>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- FREE TOOLS DROPDOWN -->
+          <div class="nav-dropdown-wrap">
+            <span
+              aria-haspopup="true"
+              class="nav-link"
+              role="button"
+              tabindex="0"
+            >
+              <span class="nav-ai-icon"> ✦ </span>
+              Free Tools
+              <svg
+                class="nav-chevron"
+                fill="none"
+                height="12"
+                viewbox="0 0 12 12"
+                width="12"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  d="M11.2498 2.99986L6.17049 8.74062C6.14908 8.76476 6.12279 8.78408 6.09336 8.79731C6.06393 8.81054 6.03202 8.81738 5.99976 8.81738C5.96749 8.81738 5.93559 8.81054 5.90615 8.79731C5.87672 8.78408 5.85043 8.76476 5.82902 8.74062L0.749756 2.99986"
+                  stroke="currentColor"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="1.25"
+                ></path>
+              </svg>
+            </span>
+            <div class="nav-dropdown dropdown-compact">
+              <div class="dropdown-arrow"></div>
+              <div class="dropdown-body">
+                <!-- Working Capital Calculator -->
+                <a
+                  class="dropdown-item"
+                  href="../free-tools/working-capital-calculator.html"
+                >
+                  <div class="dd-icon">
+                    <svg
+                      fill="none"
+                      height="20"
+                      stroke="#082951"
+                      stroke-width="1.5"
+                      viewbox="0 0 24 24"
+                      width="20"
+                    >
+                      <rect height="20" rx="2" width="16" x="4" y="2"></rect>
+                      <line x1="8" x2="16" y1="6" y2="6"></line>
+                      <line x1="8" x2="10" y1="10" y2="10"></line>
+                      <line x1="14" x2="16" y1="10" y2="10"></line>
+                      <line x1="8" x2="10" y1="14" y2="14"></line>
+                      <line x1="14" x2="16" y1="14" y2="14"></line>
+                      <line x1="8" x2="16" y1="18" y2="18"></line>
+                    </svg>
+                  </div>
+                  <div class="dd-text">
+                    <div class="dd-title">Working Capital Calculator</div>
+                    <div class="dd-desc">
+                      See how much cash is tied up in your business
+                    </div>
+                  </div>
+                </a>
+                <!-- Monthly Cash Flow Model Template -->
+                <a
+                  class="dropdown-item"
+                  href="../free-tools/monthly-cash-flow-model.html"
+                >
+                  <div class="dd-icon">
+                    <svg
+                      fill="none"
+                      height="20"
+                      stroke="#082951"
+                      stroke-width="1.5"
+                      viewbox="0 0 24 24"
+                      width="20"
+                    >
+                      <path d="M3 3v18h18"></path>
+                      <path d="M6 16l4-5 3 3 5-7"></path>
+                    </svg>
+                  </div>
+                  <div class="dd-text">
+                    <div class="dd-title">Monthly Cash Flow Model Template</div>
+                    <div class="dd-desc">
+                      Plan and track your monthly cash inflows and outflows
+                    </div>
+                  </div>
+                </a>
+                <!-- Overdraft Cost Calculator -->
+                <a
+                  class="dropdown-item"
+                  href="../free-tools/overdraft-cost-calculator.html"
+                >
+                  <div class="dd-icon">
+                    <svg
+                      fill="none"
+                      height="20"
+                      stroke="#082951"
+                      stroke-width="1.5"
+                      viewbox="0 0 24 24"
+                      width="20"
+                    >
+                      <circle cx="12" cy="12" r="9"></circle>
+                      <path d="M12 7v10"></path>
+                      <path
+                        d="M15 9c-.6-1-1.7-1.5-3-1.5-1.7 0-3 1-3 2.3 0 1.4 1.2 2 3 2.5 1.8.5 3 1.1 3 2.5 0 1.4-1.3 2.4-3 2.4-1.3 0-2.5-.5-3.1-1.5"
+                      ></path>
+                    </svg>
+                  </div>
+                  <div class="dd-text">
+                    <div class="dd-title">Overdraft Cost Calculator</div>
+                    <div class="dd-desc">
+                      Calculate the real cost of your overdraft facility
+                    </div>
+                  </div>
+                </a>
+                <!-- GST Reconciliation Checklist -->
+                <a
+                  class="dropdown-item"
+                  href="../free-tools/gst-reconciliation-checklist.html"
+                >
+                  <div class="dd-icon">
+                    <svg
+                      fill="none"
+                      height="20"
+                      stroke="#082951"
+                      stroke-width="1.5"
+                      viewbox="0 0 24 24"
+                      width="20"
+                    >
+                      <rect height="18" rx="2" width="16" x="4" y="3"></rect>
+                      <path d="M8 8l1.5 1.5L12 7"></path>
+                      <line x1="14" x2="17" y1="9" y2="9"></line>
+                      <path d="M8 14l1.5 1.5L12 13"></path>
+                      <line x1="14" x2="17" y1="15" y2="15"></line>
+                    </svg>
+                  </div>
+                  <div class="dd-text">
+                    <div class="dd-title">GST Reconciliation Checklist</div>
+                    <div class="dd-desc">
+                      A practical checklist for accurate GST reconciliation
+                    </div>
+                  </div>
+                </a>
+                <!-- CMA Data Template -->
+                <a
+                  class="dropdown-item"
+                  href="../free-tools/cma-data-template.html"
+                >
+                  <div class="dd-icon">
+                    <svg
+                      fill="none"
+                      height="20"
+                      stroke="#082951"
+                      stroke-width="1.5"
+                      viewbox="0 0 24 24"
+                      width="20"
+                    >
+                      <rect height="16" rx="2" width="18" x="3" y="4"></rect>
+                      <path d="M3 9h18"></path>
+                      <path d="M8 4v5"></path>
+                      <path d="M13 9v11"></path>
+                      <path d="M18 9v11"></path>
+                    </svg>
+                  </div>
+                  <div class="dd-text">
+                    <div class="dd-title">CMA Data Template</div>
+                    <div class="dd-desc">
+                      Organize financial data for bank and credit applications
+                    </div>
+                  </div>
+                </a>
+              </div>
+            </div>
+          </div>
+          <!-- INDUSTRIES DROPDOWN -->
+          <div class="nav-dropdown-wrap">
+            <span
+              aria-haspopup="true"
+              class="nav-link"
+              role="button"
+              tabindex="0"
+            >
+              Industries
+              <svg
+                class="nav-chevron"
+                fill="none"
+                height="12"
+                viewbox="0 0 12 12"
+                width="12"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  d="M11.2498 2.99986L6.17049 8.74062C6.14908 8.76476 6.12279 8.78408 6.09336 8.79731C6.06393 8.81054 6.03202 8.81738 5.99976 8.81738C5.96749 8.81738 5.93559 8.81054 5.90615 8.79731C5.87672 8.78408 5.85043 8.76476 5.82902 8.74062L0.749756 2.99986"
+                  stroke="currentColor"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="1.25"
+                ></path>
+              </svg>
+            </span>
+            <div class="nav-dropdown dropdown-compact">
+              <div class="dropdown-arrow"></div>
+              <div class="dropdown-body">
+                <!-- Manufacturing -->
+                <a
+                  class="dropdown-item"
+                  href="../industries/manufacturing.html"
+                >
+                  <div class="dd-icon">
+                    <svg
+                      fill="none"
+                      height="20"
+                      stroke="#082951"
+                      stroke-width="1.5"
+                      viewbox="0 0 24 24"
+                      width="20"
+                    >
+                      <path
+                        d="M3 21h18M3 7v1a3 3 0 0 0 6 0V7m0 1a3 3 0 0 0 6 0V7m0 1a3 3 0 0 0 6 0V7H3l2-4h14l2 4"
+                      ></path>
+                      <path d="M5 21V11m14 0v10"></path>
+                    </svg>
+                  </div>
+                  <div class="dd-text">
+                    <div class="dd-title">Manufacturing</div>
+                    <div class="dd-desc">
+                      ₹20–200 Cr manufacturers across India
+                    </div>
+                  </div>
+                </a>
+                <!-- Trading & Distribution -->
+                <a class="dropdown-item" href="../industries/trading.html">
+                  <div class="dd-icon">
+                    <svg
+                      fill="none"
+                      height="20"
+                      stroke="#082951"
+                      stroke-width="1.5"
+                      viewbox="0 0 24 24"
+                      width="20"
+                    >
+                      <rect height="14" rx="2" width="20" x="2" y="7"></rect>
+                      <path
+                        d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"
+                      ></path>
+                    </svg>
+                  </div>
+                  <div class="dd-text">
+                    <div class="dd-title">Trading &amp; Distribution</div>
+                    <div class="dd-desc">
+                      FMCG, steel, chemicals, and commodity traders
+                    </div>
+                  </div>
+                </a>
+                <!-- Services -->
+                <a class="dropdown-item" href="../industries/services.html">
+                  <div class="dd-icon">
+                    <svg
+                      fill="none"
+                      height="20"
+                      stroke="#082951"
+                      stroke-width="1.5"
+                      viewbox="0 0 24 24"
+                      width="20"
+                    >
+                      <path d="M4 20V10"></path>
+                      <path d="M10 20V4"></path>
+                      <path d="M16 20v-7"></path>
+                      <path d="M22 20H2"></path>
+                      <path d="M7 10h3"></path>
+                      <path d="M13 4h3"></path>
+                      <path d="M19 13h3"></path>
+                    </svg>
+                  </div>
+                  <div class="dd-text">
+                    <div class="dd-title">Services</div>
+                    <div class="dd-desc">
+                      Project-based businesses focused on utilisation and
+                      profitability
+                    </div>
+                  </div>
+                </a>
+                <!-- High-Growth Startups -->
+                <a class="dropdown-item" href="../industries/startups.html">
+                  <div class="dd-icon">
+                    <svg
+                      fill="none"
+                      height="20"
+                      stroke="#082951"
+                      stroke-width="1.5"
+                      viewbox="0 0 24 24"
+                      width="20"
+                    >
+                      <path d="M4 18l6-6 4 4 6-8"></path>
+                      <path d="M16 8h4v4"></path>
+                    </svg>
+                  </div>
+                  <div class="dd-text">
+                    <div class="dd-title">High-Growth Startups</div>
+                    <div class="dd-desc">
+                      Investor-ready reporting, runway and burn visibility
+                    </div>
+                  </div>
+                </a>
+              </div>
+            </div>
+          </div>
+          <!-- ABOUT DROPDOWN -->
+          <div class="nav-dropdown-wrap">
+            <span
+              aria-haspopup="true"
+              class="nav-link"
+              role="button"
+              tabindex="0"
+            >
+              About
+              <svg
+                class="nav-chevron"
+                fill="none"
+                height="12"
+                viewbox="0 0 12 12"
+                width="12"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  d="M11.2498 2.99986L6.17049 8.74062C6.14908 8.76476 6.12279 8.78408 6.09336 8.79731C6.06393 8.81054 6.03202 8.81738 5.99976 8.81738C5.96749 8.81738 5.93559 8.81054 5.90615 8.79731C5.87672 8.78408 5.85043 8.76476 5.82902 8.74062L0.749756 2.99986"
+                  stroke="currentColor"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="1.25"
+                ></path>
+              </svg>
+            </span>
+            <div class="nav-dropdown dropdown-compact">
+              <div class="dropdown-arrow"></div>
+              <div class="dropdown-body">
+                <a class="dropdown-item" href="../about/team.html">
+                  <div class="dd-icon">
+                    <svg
+                      fill="none"
+                      height="20"
+                      stroke="#082951"
+                      stroke-width="1.5"
+                      viewbox="0 0 24 24"
+                      width="20"
+                    >
+                      <path
+                        d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"
+                      ></path>
+                      <circle cx="9" cy="7" r="4"></circle>
+                      <path d="M23 21v-2a4 4 0 0 0-3-3.87"></path>
+                      <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
+                    </svg>
+                  </div>
+                  <div class="dd-text">
+                    <div class="dd-title">Our Team</div>
+                    <div class="dd-desc">Meet the CFO CRAFT advisory team</div>
+                  </div>
+                </a>
+                <a class="dropdown-item" href="../about/how-we-work.html">
+                  <div class="dd-icon">
+                    <svg
+                      fill="none"
+                      height="20"
+                      stroke="#082951"
+                      stroke-width="1.5"
+                      viewbox="0 0 24 24"
+                      width="20"
+                    >
+                      <circle cx="12" cy="12" r="10"></circle>
+                      <line x1="2" x2="22" y1="12" y2="12"></line>
+                      <path
+                        d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"
+                      ></path>
+                    </svg>
+                  </div>
+                  <div class="dd-text">
+                    <div class="dd-title">How We Work</div>
+                    <div class="dd-desc">Our engagement model and process</div>
+                  </div>
+                </a>
+                <a class="dropdown-item" href="../about/careers.html">
+                  <div class="dd-icon">
+                    <svg
+                      fill="none"
+                      height="20"
+                      stroke="#082951"
+                      stroke-width="1.5"
+                      viewbox="0 0 24 24"
+                      width="20"
+                    >
+                      <rect
+                        height="14"
+                        rx="2"
+                        ry="2"
+                        width="20"
+                        x="2"
+                        y="3"
+                      ></rect>
+                      <line x1="8" x2="16" y1="21" y2="21"></line>
+                      <line x1="12" x2="12" y1="17" y2="21"></line>
+                    </svg>
+                  </div>
+                  <div class="dd-text">
+                    <div class="dd-title">Careers</div>
+                    <div class="dd-desc">Join the CFO CRAFT team</div>
+                  </div>
+                </a>
+              </div>
+            </div>
+          </div>
+          <!-- RESOURCES DROPDOWN -->
+          <div class="nav-dropdown-wrap">
+            <span
+              aria-haspopup="true"
+              class="nav-link"
+              role="button"
+              tabindex="0"
+            >
+              Resources
+              <svg
+                class="nav-chevron"
+                fill="none"
+                height="12"
+                viewbox="0 0 12 12"
+                width="12"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  d="M11.2498 2.99986L6.17049 8.74062C6.14908 8.76476 6.12279 8.78408 6.09336 8.79731C6.06393 8.81054 6.03202 8.81738 5.99976 8.81738C5.96749 8.81738 5.93559 8.81054 5.90615 8.79731C5.87672 8.78408 5.85043 8.76476 5.82902 8.74062L0.749756 2.99986"
+                  stroke="currentColor"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="1.25"
+                ></path>
+              </svg>
+            </span>
+            <div class="nav-dropdown dropdown-wide">
+              <div class="dropdown-arrow"></div>
+              <div class="dropdown-body">
+                <div class="dropdown-grid three-col">
+                  <div class="dropdown-col">
+                    <a class="dropdown-item" href="../resources/resources.html">
+                      <div class="dd-icon">
+                        <svg
+                          fill="none"
+                          height="20"
+                          stroke="#082951"
+                          stroke-width="1.5"
+                          viewbox="0 0 24 24"
+                          width="20"
+                        >
+                          <circle cx="11" cy="11" r="8"></circle>
+                          <line x1="21" x2="16.65" y1="21" y2="16.65"></line>
+                        </svg>
+                      </div>
+                      <div class="dd-text">
+                        <div class="dd-title">Resources Hub</div>
+                        <div class="dd-desc">
+                          Guides, templates &amp; insights for Indian businesses
+                        </div>
+                      </div>
+                    </a>
+                    <a
+                      class="dropdown-item"
+                      href="../resources/case-studies.html"
+                    >
+                      <div class="dd-icon">
+                        <svg
+                          fill="none"
+                          height="20"
+                          stroke="#082951"
+                          stroke-width="1.5"
+                          viewbox="0 0 24 24"
+                          width="20"
+                        >
+                          <path
+                            d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"
+                          ></path>
+                          <polyline points="14 2 14 8 20 8"></polyline>
+                        </svg>
+                      </div>
+                      <div class="dd-text">
+                        <div class="dd-title">Case Studies</div>
+                        <div class="dd-desc">
+                          See how businesses use CFO CRAFT
+                        </div>
+                      </div>
+                    </a>
+                    <a class="dropdown-item" href="../resources/events.html">
+                      <div class="dd-icon">
+                        <svg
+                          fill="none"
+                          height="20"
+                          stroke="#082951"
+                          stroke-width="1.5"
+                          viewbox="0 0 24 24"
+                          width="20"
+                        >
+                          <rect
+                            height="18"
+                            rx="2"
+                            ry="2"
+                            width="18"
+                            x="3"
+                            y="4"
+                          ></rect>
+                          <line x1="16" x2="16" y1="2" y2="6"></line>
+                          <line x1="8" x2="8" y1="2" y2="6"></line>
+                          <line x1="3" x2="21" y1="10" y2="10"></line>
+                        </svg>
+                      </div>
+                      <div class="dd-text">
+                        <div class="dd-title">Events &amp; Webinars</div>
+                        <div class="dd-desc">Connect with us face-to-face</div>
+                      </div>
+                    </a>
+                  </div>
+                  <div class="dropdown-col">
+                    <div class="dd-col-title">Free Tools</div>
+                    <a
+                      class="dropdown-tool-link"
+                      href="../free-tools/working-capital-calculator.html"
+                    >
+                      <svg
+                        fill="none"
+                        height="14"
+                        stroke="#082951"
+                        stroke-width="1.5"
+                        viewbox="0 0 24 24"
+                        width="14"
+                      >
+                        <rect height="20" rx="2" width="16" x="4" y="2"></rect>
+                        <line x1="8" x2="16" y1="6" y2="6"></line>
+                      </svg>
+                      Working Capital Calculator
+                    </a>
+                    <a
+                      class="dropdown-tool-link"
+                      href="../free-tools/monthly-cash-flow-model.html"
+                    >
+                      <svg
+                        fill="none"
+                        height="14"
+                        stroke="#082951"
+                        stroke-width="1.5"
+                        viewbox="0 0 24 24"
+                        width="14"
+                      >
+                        <path d="M22 12h-4l-3 9L9 3l-3 9H2"></path>
+                      </svg>
+                      Monthly Cash Flow Model Template
+                    </a>
+                    <a
+                      class="dropdown-tool-link"
+                      href="../free-tools/overdraft-cost-calculator.html"
+                    >
+                      <svg
+                        fill="none"
+                        height="14"
+                        stroke="#082951"
+                        stroke-width="1.5"
+                        viewbox="0 0 24 24"
+                        width="14"
+                      >
+                        <path
+                          d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"
+                        ></path>
+                      </svg>
+                      Overdraft Cost Calculator
+                    </a>
+                    <a
+                      class="dropdown-tool-link"
+                      href="../free-tools/gst-reconciliation-checklist.html"
+                    >
+                      <svg
+                        fill="none"
+                        height="14"
+                        stroke="#082951"
+                        stroke-width="1.5"
+                        viewbox="0 0 24 24"
+                        width="14"
+                      >
+                        <path
+                          d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"
+                        ></path>
+                      </svg>
+                      GST Reconciliation Checklist
+                    </a>
+                    <a
+                      class="dropdown-tool-link"
+                      href="../free-tools/cma-data-template.html"
+                    >
+                      <svg
+                        fill="none"
+                        height="14"
+                        stroke="#082951"
+                        stroke-width="1.5"
+                        viewbox="0 0 24 24"
+                        width="14"
+                      >
+                        <rect height="18" rx="2" width="18" x="3" y="3"></rect>
+                        <path d="M3 9h18"></path>
+                        <path d="M9 21V9"></path>
+                      </svg>
+                      CMA Data Template
+                    </a>
+                  </div>
+                  <div class="dropdown-col">
+                    <div class="dropdown-featured-card">
+                      <div class="featured-tag">CFO Insights</div>
+                      <div class="featured-title">
+                        How to reduce your cash conversion cycle by 40%
+                      </div>
+                      <a
+                        class="featured-link"
+                        href="../resources/resources.html"
+                      >
+                        Read more
+                      </a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <a class="nav-link" href="../pricing.html"> Pricing </a>
+        </div>
+        <div class="nav-right">
+          <a class="nav-signin" href="../client-login.html">
+            <svg
+              fill="none"
+              height="20"
+              stroke="currentColor"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="1.5"
+              viewbox="0 0 24 24"
+              width="20"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <circle cx="12" cy="8" r="4"></circle>
+              <path d="M20 21a8 8 0 1 0-16 0"></path>
+            </svg>
+            Client Login
+          </a>
+          <a class="btn-secondary nav-cta" href="../book-intro.html">
+            Book an Intro
+          </a>
+        </div>
+        <button
+          aria-label="Toggle menu"
+          aria-expanded="false"
+          aria-controls="reviewNavLinks"
+          class="mobile-menu-btn"
+          id="mobileMenuBtn"
+        >
+          <span> </span>
+          <span> </span>
+          <span> </span>
+        </button>
+      </div>
+    </nav>
+<main class="review-main">
+<section class="review-card" aria-labelledby="review-title">
+<div class="review-heading"><span class="review-kicker">PRIVATE CV ACCESS</span><h1 id="review-title">Download an applicant’s CV</h1>
+<p class="intro">Use the Application ID from your CFO CRAFT Careers notification. We'll send a one-time code to the authorized owner email.</p></div>
+<div class="review-progress" aria-label="Verification progress">
+<span id="step-one" class="review-progress-step active"><span>01</span> Request code</span>
+<span class="review-progress-line" aria-hidden="true"></span>
+<span id="step-two" class="review-progress-step"><span>02</span> Verify &amp; download</span>
+</div>
+<div id="review-workflow">
+<form id="request-form">
+<label for="application-id">Application ID</label>
+<input id="application-id" required autocomplete="off" spellcheck="false" placeholder="e.g. 12345678-1234-..." maxlength="36">
+<button id="request-button" type="submit">Send verification code <span aria-hidden="true">→</span></button>
+</form>
+<form id="download-form" hidden>
+<p class="review-step-help">Verification code sent to the owner email. Enter the 8-digit code below to download the CV.</p>
+<label for="verification-code">8-digit verification code</label>
+<input id="verification-code" type="text" required autocomplete="one-time-code" inputmode="numeric" pattern="[0-9]{8}" maxlength="8" placeholder="Enter 8-digit code">
+<button id="download-button" type="submit">Verify &amp; download PDF <span aria-hidden="true">↓</span></button>
+<p class="review-resend-help">Didn't receive the code? <button type="button" id="resend-code" class="review-text-button">Send a new code</button></p>
+</form>
+<p id="review-error" class="review-status error" role="alert" hidden></p>
+</div>
+<div id="review-success" class="review-success" role="status" aria-live="polite" hidden>
+<div class="review-success-icon" aria-hidden="true">✓</div>
+<h2>CV downloaded successfully</h2>
+<p>Your PDF download has started. For security, this one-time verification code can’t be reused.</p>
+</div>
+<p id="review-fineprint" class="fineprint">For authorized CFO CRAFT reviewers only. Verification codes expire in 10 minutes and can be used once. CVs are never publicly accessible.</p>
+</section>
+</main>
+<script src="review.js" defer></script>
+</body></html>

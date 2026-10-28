@@ -1,22 +1,42 @@
-* { box-sizing: border-box; }
-body { margin: 0; background: linear-gradient(145deg,#f3f7fc,#fff); min-height:100vh; color:#082951; font-family:Roboto,Arial,sans-serif; }
-.review-nav { height:84px; display:flex; align-items:center; justify-content:space-between; gap:16px; padding:12px max(24px,calc((100vw - 1240px)/2)); background:#fff; box-shadow:0 2px 16px rgba(8,41,81,.07); }
-.review-nav a img { display:block; width:85px; max-height:60px; object-fit:contain; }
-.review-nav span { color:#67798c; font-size:.86rem; }
-.review-main { min-height:calc(100vh - 84px); display:grid; place-items:center; padding:48px 20px; }
-.review-card { width:min(100%,570px); background:#fff; border:1px solid #dbe6f1; border-radius:23px; padding:clamp(25px,5vw,44px); box-shadow:0 20px 55px rgba(8,41,81,.09); }
-.eyebrow { color:#2b6db2; font-weight:800; font-size:.76rem; letter-spacing:.12em; }
-h1 { font:600 clamp(1.7rem,4vw,2.2rem)/1.25 Manrope,sans-serif; letter-spacing:-.03em; margin:9px 0 14px; }
-.intro { color:#596b7e; line-height:1.65; margin:0 0 28px; }
-form { display:grid; gap:12px; margin-top:18px; }
-label { font-size:.9rem; font-weight:700; }
-input { min-height:52px; width:100%; padding:13px 15px; color:#082951; background:#fff; border:1px solid #d5e0ec; border-radius:11px; font:inherit; }
-input:focus-visible,button:focus-visible { outline:3px solid #2b6db2; outline-offset:2px; }
-button { cursor:pointer; min-height:51px; border:0; border-radius:50px; background:#eeba7d; color:#082951; font-weight:700; font-size:.94rem; }
-button:hover { background:#f3c68f; }
-button:disabled { cursor:wait; opacity:.68; }
-.review-status { padding:14px 16px; border-radius:11px; background:#eef6ff; border:1px solid #b9d7f4; color:#174b7d; margin-top:18px; line-height:1.55; }
-.review-status.error { background:#fff2f2; color:#9c273c; border-color:#f1c5cb; }
-.fineprint { font-size:.8rem; line-height:1.6; color:#778798; margin-top:26px; }
-[hidden] { display:none !important; }
-@media(max-width:600px){.review-nav { height:74px; padding:10px 18px; }.review-nav span { font-size:.73rem; }.review-main { padding:22px 16px; align-items:start; }.review-card { border-radius:16px; }}
+/* CFO CRAFT Private CV: site-consistent navy, blue and peach theme */
+*{box-sizing:border-box}
+.review-page{margin:0;min-height:100vh;background:linear-gradient(145deg,#f2f6fa,#fff);color:#082951;font-family:var(--font-primary,"Roboto",sans-serif)}
+.review-page .navbar{background:rgba(250,250,250,.97);box-shadow:0 2px 14px rgba(8,41,81,.055);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px)}
+.review-page .navbar .nav-link,.review-page .navbar .nav-signin,.review-page .navbar .nav-logo{color:#082951}
+.review-page .navbar .brand-logo{filter:none}
+.review-page .navbar .mobile-menu-btn span{background:#082951}
+.review-page .navbar .nav-link:hover,.review-page .navbar .nav-signin:hover{background:rgba(8,41,81,.06)}
+.review-page .navbar .nav-cta{background:#eeba7d;color:#071c31;border-radius:50px}
+.review-page .navbar .nav-cta:hover{background:#f3c68f}
+.review-skip{position:fixed;z-index:4000;left:-1000px;top:12px;background:white;padding:12px 18px;border-radius:8px}.review-skip:focus{left:12px}
+.review-main{min-height:100vh;display:grid;place-items:center;padding:130px 20px 70px}
+.review-card{width:min(100%,650px);border:1px solid #dce7f2;border-radius:23px;background:#fff;padding:clamp(24px,4vw,46px);box-shadow:0 20px 56px rgba(8,41,81,.085)}
+.review-kicker{display:block;color:#2b6db2;font-weight:800;font-size:.76rem;letter-spacing:.14em}
+.review-heading h1{font:600 clamp(1.65rem,3.6vw,2.25rem)/1.28 var(--font-heading,"Manrope",sans-serif);letter-spacing:-.03em;margin:12px 0 14px;color:#082951}
+.intro{color:#5e7186;font-size:.95rem;line-height:1.72;margin:0}
+.review-progress{display:flex;align-items:center;gap:12px;margin:30px 0 24px}
+.review-progress-step{display:flex;align-items:center;gap:7px;color:#8391a1;font-size:.78rem;font-weight:700;white-space:nowrap}
+.review-progress-step span{display:grid;place-items:center;width:28px;height:28px;border-radius:9px;background:#edf2f8;color:#778b9f;font-size:.7rem}
+.review-progress-step.active{color:#215c98}.review-progress-step.active span{background:#e7f1fd;color:#2468ac}
+.review-progress-line{height:1px;flex:1;background:#dce5ee}
+#request-form,#download-form{display:grid;gap:12px}
+.review-card label{font-size:.9rem;font-weight:700;color:#102f55}
+.review-card input{min-height:53px;width:100%;padding:12px 15px;color:#082951;background:#fff;border:1px solid #d4e0ed;border-radius:11px;font:inherit}
+.review-card input:focus-visible,.review-card button:focus-visible{outline:3px solid #2b6db2;outline-offset:2px}
+.review-card button[type=submit]{cursor:pointer;min-height:53px;border:0;border-radius:999px;background:#eeba7d;color:#082951;font:700 .94rem var(--font-primary,"Roboto",sans-serif);display:flex;align-items:center;justify-content:center;gap:14px;transition:background .18s,transform .18s}
+.review-card button[type=submit]:hover{background:#f3c68f;transform:translateY(-1px)}
+.review-card button:disabled{cursor:wait;opacity:.65;transform:none}
+.review-step-help{font-size:.86rem;line-height:1.6;color:#526d87;background:#f2f7fc;padding:12px 14px;border-radius:9px;margin:0 0 6px}
+.review-resend-help{font-size:.8rem;color:#718297;text-align:center;margin:5px 0 0}
+.review-text-button{font:700 inherit;background:none;border:none;color:#2165aa;text-decoration:underline;text-underline-offset:3px;cursor:pointer;padding:5px}
+.review-status{padding:14px 17px;margin:18px 0 0;border-radius:11px;line-height:1.6;font-size:.87rem}
+.review-status.error{background:#fff0f1;border:1px solid #ebb9bf;border-left:4px solid #bc4052;color:#9c2539}
+.review-success{text-align:center;margin:14px auto 0;padding:30px 22px;border:1px solid #bce6c9;background:#effaf2;border-radius:17px;color:#1d6339}
+.review-success-icon{margin:0 auto 12px;width:52px;height:52px;display:grid;place-items:center;border-radius:50%;background:#d1f0da;color:#176c37;font-size:1.5rem;font-weight:800}
+.review-success h2{font:700 1.2rem var(--font-heading,"Manrope",sans-serif);margin:0 0 9px;color:#1f6a3d}
+.review-success p{line-height:1.65;font-size:.89rem;margin:0;color:#34724b}
+.fineprint{border-top:1px solid #e7edf5;padding-top:18px;margin:27px 0 0;font-size:.78rem;line-height:1.65;color:#778798}
+[hidden]{display:none!important}
+@media(max-width:768px){.review-page .navbar .nav-links{background:#fff}.review-page .navbar .nav-links .nav-link{color:#082951}.review-main{padding:102px 16px 40px}.review-card{border-radius:18px;padding:25px 20px}}
+@media(max-width:500px){.review-main{padding:90px 12px 28px}.review-progress{gap:6px}.review-progress-step{font-size:.7rem}.review-progress-step span{width:26px;height:26px}.review-card{padding:22px 17px}}
+@media(prefers-reduced-motion:reduce){.review-page *{transition:none!important}}

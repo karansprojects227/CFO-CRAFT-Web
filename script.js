@@ -4783,6 +4783,8 @@ if (document.readyState === "loading") {
       const previous = Number(story.dataset.storyActive ?? -1);
       if (!force && previous === step) return;
       story.dataset.storyActive = String(step);
+      if (story.id === 'industries') story.style.setProperty('--industry-index', step);
+      if (story.id === 'services') story.style.setProperty('--service-index', step);
       panels.forEach((panel, i) => {
         const active = i === step;
         panel.classList.toggle('is-active', active);
@@ -4802,7 +4804,22 @@ if (document.readyState === "loading") {
         const name = panels[step]?.dataset.storyLabel || panels[step]?.querySelector('.feature-title')?.textContent?.trim() || '';
         progress.textContent = `${String(step+1).padStart(2,'0')} / ${String(panels.length).padStart(2,'0')} — ${name}`;
       }
+      // Re-arm the same entrance for every slide, including the initial slide.
+      // The visual is ALWAYS visible in CSS unless this one active panel has
+      // deliberately been marked for a short entrance animation.
       if (previous !== step || force) {
+        panels.forEach(panel => panel.classList.remove('cfo-reveal-run'));
+        // Check the visible pinned canvas, not the multi-viewport scroll track.
+        // The track intersects long before the user reaches its first slide.
+        const pin = story.querySelector('.cfo-story-pin') || story;
+        const rect = pin.getBoundingClientRect();
+        const inView = rect.top < window.innerHeight * .88 && rect.bottom > nav;
+        if (inView && !motionPreference.matches) {
+          const target = panels[step];
+          // Force a fresh animation timeline on revisit even when scrolling quickly.
+          void target.offsetWidth;
+          target.classList.add('cfo-reveal-run');
+        }
         window.dispatchEvent(new CustomEvent('cfo:storychange', {detail:{story, index:step}}));
       }
     }
@@ -4883,6 +4900,35 @@ if (document.readyState === "loading") {
     measure();
     for (const story of roots) setStep(story, 0, true);
     selectFromScroll();
+    // The observed element is the pinned viewport, but state belongs to its
+    // parent story. Observe both directions; re-arm when it truly leaves.
+    if ('IntersectionObserver' in window) {
+      const pinStories = new Map(roots.map(story => [
+        story.querySelector('.cfo-story-pin') || story, story
+      ]));
+      const entryObserver = new IntersectionObserver(entries => {
+        entries.forEach(entry => {
+          const story = pinStories.get(entry.target);
+          if (!story) return;
+          if (!entry.isIntersecting) {
+            story.dataset.cfoEntryStarted = 'no';
+            return;
+          }
+          if (motionPreference.matches || !pinEnabled() || story.dataset.cfoEntryStarted === 'yes') return;
+          story.dataset.cfoEntryStarted = 'yes';
+          // Synchronize with whichever slide is currently selected. This
+          // covers the first Manufacturing / Finance Diagnostic visit as well
+          // as re-entry from below without needing a slide change.
+          const index = Number(story.dataset.storyActive || 0);
+          const panel = story._cfoPanels[index];
+          if (!panel) return;
+          panel.classList.remove('cfo-reveal-run');
+          void panel.offsetWidth;
+          panel.classList.add('cfo-reveal-run');
+        });
+      }, { threshold: 0, rootMargin: `-${nav}px 0px -12% 0px` });
+      pinStories.forEach((story, pin) => entryObserver.observe(pin));
+    }
     window.addEventListener('scroll', scheduleScroll, {passive:true});
     window.addEventListener('resize', () => {
       if (lastWidth===window.innerWidth && lastHeight===window.innerHeight) return;

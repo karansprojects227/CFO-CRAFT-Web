@@ -5457,3 +5457,688 @@ h6,
 .home-page #contact .contact-form .form-group .cc-field-error[hidden] { display: none !important; }
 .home-page #contact .cc-contact-disclosure { cursor: default; }
 .home-page #contact .contact-form .form-group select:has(option[value=""]:checked) { color: #6d859b; }
+
+
+/* ================================================================
+   CFO CRAFT / SHAPED INDUSTRY GALLERY — scoped to #industries only.
+   All other stories, existing dashboards and site styles are intact.
+   ================================================================ */
+.home-page #industries.cfo-industry-shaped { background:#f5f7fb !important; }
+.home-page #industries.cfo-industry-shaped.story-enhanced > .cfo-story-pin { background:#f5f7fb; }
+.home-page #industries.cfo-industry-shaped .cfo-story-inner {
+  position:relative; isolation:isolate; overflow:hidden;
+  max-width:1380px; width:calc(100% - 44px);
+  background:linear-gradient(150deg,#fff 45%,#fbfdff 100%);
+  border:1px solid #e3eaf3; border-radius:36px;
+  box-shadow:0 18px 56px rgba(8,41,81,.075);
+  padding:clamp(17px,2.6vh,25px) clamp(23px,2.5vw,38px) clamp(18px,2.6vh,28px);
+}
+.home-page #industries.cfo-industry-shaped .cfo-story-inner:before {
+ content:"";position:absolute;inset:13px;border:1px solid rgba(43,109,178,.09);border-radius:27px;pointer-events:none;z-index:-1;
+}
+.home-page #industries.cfo-industry-shaped .cfo-story-inner:after {
+ content:"";position:absolute;width:310px;height:310px;right:-140px;bottom:-155px;
+ border:1px solid rgba(43,109,178,.12);border-radius:36%;transform:rotate(-22deg);pointer-events:none;
+}
+.home-page #industries.cfo-industry-shaped .cfo-story-heading {max-width:none;text-align:center;margin:0 auto 0!important;}
+.home-page #industries.cfo-industry-shaped .cfo-story-heading .section-heading {
+ font-size:clamp(1.55rem,2.4vw,2.25rem)!important;line-height:1.15;margin:0 0 .28rem!important;
+}
+.home-page #industries.cfo-industry-shaped .cfo-story-heading .section-subheading {
+ max-width:1000px;margin:0 auto;font-size:clamp(.76rem,1vw,.9rem)!important;line-height:1.48;
+}
+.home-page #industries.cfo-industry-shaped .cfo-story-nav {
+ width:min(480px,100%);max-width:none;margin:0 auto!important;align-self:center;
+ position:relative;padding:5px 7px;border-radius:50px;background:#f3f7fc;border:1px solid #e3ebf5;
+}
+.home-page #industries.cfo-industry-shaped .cfo-story-progress {display:grid!important;grid-template-columns:repeat(4,minmax(0,1fr));gap:4px;position:relative;}
+.home-page #industries.cfo-industry-shaped .cfo-story-progress:before {
+ content:"";position:absolute;width:calc((100% - 12px)/4);height:34px;top:0;left:0;z-index:0;
+ border:1px solid #cfdfef;border-radius:28px;background:#e3effe;
+ box-shadow:0 4px 12px rgba(43,109,178,.09);
+ transform:translateX(calc(var(--industry-index,0) * (100% + 4px)));
+ transition:transform .56s cubic-bezier(.22,1,.36,1);
+}
+.home-page #industries.cfo-industry-shaped .cfo-story-segment {z-index:1;min-height:34px!important;display:grid;place-items:center;border-radius:26px;padding:0!important;}
+.home-page #industries.cfo-industry-shaped .cfo-story-segment-line {display:none!important;}
+.home-page #industries.cfo-industry-shaped .cfo-story-segment-label,
+.home-page #industries.cfo-industry-shaped .cfo-story-segment.is-active .cfo-story-segment-label {
+ display:block;font-family:var(--font-heading);font-size:.82rem!important;line-height:1;font-weight:700;color:#7890ad;padding:0!important;
+}
+.home-page #industries.cfo-industry-shaped .cfo-story-segment.is-active .cfo-story-segment-label {color:#082951;}
+.home-page #industries.cfo-industry-shaped .cfo-story-current {display:none!important;}
+.home-page #industries.cfo-industry-shaped .cfo-story-stage {min-height:0;margin-top:0;}
+.home-page #industries.cfo-industry-shaped .cfo-story-panel,
+.home-page #industries.cfo-industry-shaped .cfo-story-panel.reverse {
+ grid-template-columns:minmax(0,.70fr) minmax(0,1.30fr)!important;
+ gap:clamp(20px,2.7vw,44px)!important;
+ align-items:center;padding:0 5px!important;
+}
+.home-page #industries.cfo-industry-shaped .feature-text {align-self:center;}
+.home-page #industries.cfo-industry-shaped .feature-tag {display:none!important;}
+.home-page #industries.cfo-industry-shaped .feature-title {font-size:clamp(1.75rem,2.8vw,2.5rem)!important;font-weight:600;line-height:1.13;margin:0 0 .7rem!important;letter-spacing:-.03em;color:#082951;}
+.home-page #industries.cfo-industry-shaped .feature-desc,
+.home-page #industries.cfo-industry-shaped .feature-list li {
+ font-family:var(--font-primary);font-size:clamp(.91rem,1.13vw,1.03rem)!important;line-height:1.57!important;
+ color:#536b89!important;font-weight:400!important;letter-spacing:0;
+}
+.home-page #industries.cfo-industry-shaped .feature-desc {margin:0 0 .65rem!important;max-width:37ch;}
+.home-page #industries.cfo-industry-shaped .feature-list {list-style:none!important;padding:0!important;margin:0 0 .8rem!important;display:flex;flex-wrap:wrap;column-gap:13px;row-gap:3px;}
+.home-page #industries.cfo-industry-shaped .feature-list li {margin:0!important;padding:0 0 0 12px!important;position:relative;}
+.home-page #industries.cfo-industry-shaped .feature-list li:before {content:"";position:absolute;left:0;top:.68em;width:5px;height:5px;border-radius:50%;background:#91b6dd;}
+.home-page #industries.cfo-industry-shaped .feature-link {font-size:.94rem!important;color:#0b376b;display:inline-flex;gap:5px;align-items:center;margin-top:.55rem;font-weight:700;}
+.home-page #industries.cfo-industry-shaped .feature-visual {
+ border:1px solid #d8e5f2!important;border-radius:24px!important;padding:7px!important;background:#f8fbff!important;
+ box-shadow:0 14px 32px rgba(9,47,101,.085)!important;overflow:hidden;
+}
+.home-page #industries.cfo-industry-shaped .feature-dashboard-embed {overflow:hidden;border-radius:17px!important;}
+/* Both sides enter independently when scroll changes the active industry. */
+.home-page #industries.cfo-industry-shaped.story-enhanced .cfo-story-panel .feature-text,
+.home-page #industries.cfo-industry-shaped.story-enhanced .cfo-story-panel .feature-visual {opacity:0;}
+.home-page #industries.cfo-industry-shaped.story-enhanced .cfo-story-panel.is-active .feature-text {animation:cfoIndustryCopyIn .72s cubic-bezier(.19,1,.22,1) both;}
+.home-page #industries.cfo-industry-shaped.story-enhanced .cfo-story-panel.is-active .feature-visual {animation:cfoIndustryVisualIn .8s cubic-bezier(.19,1,.22,1) .09s both;}
+@keyframes cfoIndustryCopyIn {from{opacity:0;transform:translate3d(-25px,15px,0);filter:blur(4px)}to{opacity:1;transform:translate3d(0,0,0);filter:blur(0)}}
+@keyframes cfoIndustryVisualIn {from{opacity:0;transform:translate3d(26px,17px,0) scale(.966);filter:blur(4px)}to{opacity:1;transform:translate3d(0,0,0) scale(1);filter:blur(0)}}
+@media(min-width:1025px){
+ .home-page #industries.cfo-industry-shaped.story-enhanced .cfo-story-inner {height:calc(100% - 18px)!important;max-height:780px;align-self:center;grid-template-rows:auto auto minmax(0,1fr);gap:clamp(5px,1.2vh,12px);}
+ .home-page #industries.cfo-industry-shaped.story-enhanced .cfo-story-pin {align-items:center;}
+ .home-page #industries.cfo-industry-shaped .feature-visual {width:100%!important;max-width:none!important;justify-self:stretch!important;}
+}
+@media(max-width:1024px){
+ .home-page #industries.cfo-industry-shaped .cfo-story-inner {width:calc(100% - 24px);border-radius:26px;padding:20px!important;}
+ .home-page #industries.cfo-industry-shaped .cfo-story-panel,
+ .home-page #industries.cfo-industry-shaped .cfo-story-panel.reverse {grid-template-columns:1fr!important;gap:13px!important;}
+ .home-page #industries.cfo-industry-shaped .feature-text {padding:0!important;}
+ .home-page #industries.cfo-industry-shaped .feature-desc {max-width:none;}
+ .home-page #industries.cfo-industry-shaped .feature-title {font-size:clamp(1.5rem,4vw,2rem)!important;}
+ .home-page #industries.cfo-industry-shaped .feature-visual {max-width:780px!important;justify-self:center;}
+}
+@media(max-width:768px){
+ .home-page #industries.cfo-industry-shaped .cfo-story-inner {width:calc(100% - 18px);border-radius:23px;padding:18px 15px!important;}
+ .home-page #industries.cfo-industry-shaped .cfo-story-inner:before {inset:8px;border-radius:17px;}
+ .home-page #industries.cfo-industry-shaped .cfo-story-heading .section-heading {font-size:1.48rem!important;}
+ .home-page #industries.cfo-industry-shaped .cfo-story-heading .section-subheading {font-size:.77rem!important;}
+ .home-page #industries.cfo-industry-shaped .feature-title {font-size:1.5rem!important;margin:0 0 .45rem!important;}
+ .home-page #industries.cfo-industry-shaped .feature-desc,
+ .home-page #industries.cfo-industry-shaped .feature-list li {font-size:.83rem!important;line-height:1.48!important;}
+ .home-page #industries.cfo-industry-shaped .feature-list {margin-bottom:.35rem!important;}
+ .home-page #industries.cfo-industry-shaped .feature-link {font-size:.82rem!important;margin-top:.2rem;}
+ .home-page #industries.cfo-industry-shaped .feature-visual {border-radius:14px!important;padding:4px!important;}
+ .home-page #industries.cfo-industry-shaped .feature-dashboard-embed {border-radius:11px!important;}
+}
+@media(prefers-reduced-motion:reduce){
+ .home-page #industries.cfo-industry-shaped .cfo-story-progress:before{transition:none!important;}
+ .home-page #industries.cfo-industry-shaped .feature-text,
+ .home-page #industries.cfo-industry-shaped .feature-visual{animation:none!important;opacity:1!important;filter:none!important;transform:none!important;}
+}
+
+
+/* 28 Oct — Industries: full-name moving selector, ordered entry and full SVG fit */
+.home-page #industries.cfo-industry-shaped .cfo-story-nav {
+  width:min(740px,100%)!important;
+  padding:5px 7px!important;
+}
+.home-page #industries.cfo-industry-shaped .cfo-story-progress {
+  grid-template-columns:repeat(4,minmax(0,1fr))!important;
+  gap:4px!important;
+}
+.home-page #industries.cfo-industry-shaped .cfo-story-segment {
+  min-width:0!important; padding:4px 8px!important;
+  min-height:40px!important;
+}
+.home-page #industries.cfo-industry-shaped .cfo-story-progress:before {
+  height:40px!important;
+}
+.home-page #industries.cfo-industry-shaped .cfo-story-segment-label,
+.home-page #industries.cfo-industry-shaped .cfo-story-segment.is-active .cfo-story-segment-label {
+  font-size:clamp(.70rem,.95vw,.86rem)!important;
+  line-height:1.18!important;
+  text-align:center!important;
+  white-space:normal!important;
+  overflow-wrap:normal!important;
+  letter-spacing:0!important;
+  width:100%!important;
+}
+.home-page #industries.cfo-industry-shaped .cfo-story-panel .feature-text {
+  display:flex!important;
+  flex-direction:column!important;
+  align-items:flex-start!important;
+  justify-content:center!important;
+}
+.home-page #industries.cfo-industry-shaped .feature-list {
+  display:flex!important;
+  flex-direction:column!important;
+  align-items:flex-start!important;
+  flex-wrap:nowrap!important;
+  gap:5px!important;
+}
+.home-page #industries.cfo-industry-shaped .feature-desc,
+.home-page #industries.cfo-industry-shaped .feature-list li {
+  font-size:clamp(.88rem,1.13vw,1.03rem)!important;
+  color:#536b89!important;
+  font-weight:400!important;
+  line-height:1.52!important;
+}
+/* Keeping the dashboard's SVG at its original 800x450 aspect ensures no bottom crop. */
+@media(min-width:1025px){
+  .home-page #industries.cfo-industry-shaped .cfo-story-panel .feature-visual {
+    width:min(100%,850px,calc((100svh - var(--home-nav-offset,76px) - 263px) * 16 / 9))!important;
+    min-width:0!important;
+    max-width:100%!important;
+    height:auto!important;
+    aspect-ratio:16 / 9!important;
+    justify-self:center!important;
+    align-self:center!important;
+    flex-shrink:0!important;
+    padding:5px!important;
+  }
+  .home-page #industries.cfo-industry-shaped .feature-dashboard-embed {
+    width:100%!important;
+    height:auto!important;
+    aspect-ratio:16 / 9!important;
+  }
+}
+.home-page #industries.cfo-industry-shaped .feature-dashboard-frame {
+  display:block!important;width:100%!important;height:100%!important;
+}
+/* Entrance order: title, description, each point, link, then right dashboard. */
+.home-page #industries.cfo-industry-shaped.story-enhanced .cfo-story-panel .feature-text,
+.home-page #industries.cfo-industry-shaped.story-enhanced .cfo-story-panel .feature-visual {
+  filter:none;
+}
+.home-page #industries.cfo-industry-shaped.story-enhanced .cfo-story-panel.is-active .feature-text {
+  animation:none!important;
+}
+.home-page #industries.cfo-industry-shaped.story-enhanced .cfo-story-panel.is-active .feature-title {
+  animation:cfoIndustryOrderedIn .55s cubic-bezier(.19,1,.22,1) both;
+}
+.home-page #industries.cfo-industry-shaped.story-enhanced .cfo-story-panel.is-active .feature-desc {
+  animation:cfoIndustryOrderedIn .58s cubic-bezier(.19,1,.22,1) .16s both;
+}
+.home-page #industries.cfo-industry-shaped.story-enhanced .cfo-story-panel.is-active .feature-list li {
+  animation:cfoIndustryOrderedIn .5s cubic-bezier(.19,1,.22,1) both;
+}
+.home-page #industries.cfo-industry-shaped.story-enhanced .cfo-story-panel.is-active .feature-list li:nth-child(1){animation-delay:.28s;}
+.home-page #industries.cfo-industry-shaped.story-enhanced .cfo-story-panel.is-active .feature-list li:nth-child(2){animation-delay:.39s;}
+.home-page #industries.cfo-industry-shaped.story-enhanced .cfo-story-panel.is-active .feature-list li:nth-child(3){animation-delay:.50s;}
+.home-page #industries.cfo-industry-shaped.story-enhanced .cfo-story-panel.is-active .feature-list li:nth-child(4){animation-delay:.61s;}
+.home-page #industries.cfo-industry-shaped.story-enhanced .cfo-story-panel.is-active .feature-link {
+  animation:cfoIndustryOrderedIn .54s cubic-bezier(.19,1,.22,1) .74s both;
+}
+.home-page #industries.cfo-industry-shaped.story-enhanced .cfo-story-panel.is-active .feature-visual {
+  animation:cfoIndustryVisualIn .75s cubic-bezier(.19,1,.22,1) .92s both!important;
+}
+@keyframes cfoIndustryOrderedIn {
+  from{opacity:0;transform:translate3d(-16px,13px,0);filter:blur(2px)}
+  to{opacity:1;transform:translate3d(0,0,0);filter:blur(0)}
+}
+@media(max-width:1024px){
+  .home-page #industries.cfo-industry-shaped .cfo-story-nav{width:100%!important;}
+  .home-page #industries.cfo-industry-shaped .cfo-story-segment-label{font-size:clamp(.65rem,1.6vw,.80rem)!important;}
+  .home-page #industries.cfo-industry-shaped .feature-visual{width:100%!important;height:auto!important;aspect-ratio:16/9!important;}
+  .home-page #industries.cfo-industry-shaped .feature-dashboard-embed{height:auto!important;aspect-ratio:16/9!important;}
+}
+@media(max-width:600px){
+  .home-page #industries.cfo-industry-shaped .cfo-story-segment{padding:3px 2px!important;min-height:47px!important;}
+  .home-page #industries.cfo-industry-shaped .cfo-story-progress:before{height:47px!important;}
+  .home-page #industries.cfo-industry-shaped .cfo-story-segment-label,
+  .home-page #industries.cfo-industry-shaped .cfo-story-segment.is-active .cfo-story-segment-label{font-size:clamp(.53rem,2vw,.68rem)!important;line-height:1.16!important;}
+}
+@media(prefers-reduced-motion:reduce){
+  .home-page #industries.cfo-industry-shaped .cfo-story-panel.is-active .feature-title,
+  .home-page #industries.cfo-industry-shaped .cfo-story-panel.is-active .feature-desc,
+  .home-page #industries.cfo-industry-shaped .cfo-story-panel.is-active .feature-list li,
+  .home-page #industries.cfo-industry-shaped .cfo-story-panel.is-active .feature-link,
+  .home-page #industries.cfo-industry-shaped .cfo-story-panel.is-active .feature-visual{
+    animation:none!important;opacity:1!important;transform:none!important;filter:none!important;
+  }
+}
+
+/* 28 Oct — final industry reveal timing and medium, stable dashboard */
+/* Keep the SVG at native 16:9. Larger than the earlier fit, but never clipped. */
+@media (min-width:1025px) {
+  .home-page #industries.cfo-industry-shaped .cfo-story-panel .feature-visual {
+    width:min(100%, 780px, calc((100svh - var(--home-nav-offset, 76px) - 194px) * 16 / 9))!important;
+    max-width:100%!important;
+    height:auto!important;
+    aspect-ratio:16 / 9!important;
+    margin:0!important;
+    align-self:center!important;
+    justify-self:center!important;
+  }
+}
+/* Never animate the panel as a unit: each left element enters separately. */
+.home-page #industries.cfo-industry-shaped.story-enhanced .cfo-story-panel.is-active .feature-text {
+  animation:none!important;
+  transform:none!important;
+}
+/* Text builds first; the dashboard starts only after the final Learn More entry. */
+.home-page #industries.cfo-industry-shaped.story-enhanced .cfo-story-panel.is-active .feature-title {
+  animation:cfoIndustryOrderedIn .42s ease-out 0s both!important;
+}
+.home-page #industries.cfo-industry-shaped.story-enhanced .cfo-story-panel.is-active .feature-desc {
+  animation:cfoIndustryOrderedIn .43s ease-out .18s both!important;
+}
+.home-page #industries.cfo-industry-shaped.story-enhanced .cfo-story-panel.is-active .feature-list li {
+  animation:cfoIndustryOrderedIn .40s ease-out both!important;
+}
+.home-page #industries.cfo-industry-shaped.story-enhanced .cfo-story-panel.is-active .feature-list li:nth-child(1){animation-delay:.38s!important;}
+.home-page #industries.cfo-industry-shaped.story-enhanced .cfo-story-panel.is-active .feature-list li:nth-child(2){animation-delay:.55s!important;}
+.home-page #industries.cfo-industry-shaped.story-enhanced .cfo-story-panel.is-active .feature-list li:nth-child(3){animation-delay:.72s!important;}
+.home-page #industries.cfo-industry-shaped.story-enhanced .cfo-story-panel.is-active .feature-list li:nth-child(4){animation-delay:.89s!important;}
+.home-page #industries.cfo-industry-shaped.story-enhanced .cfo-story-panel.is-active .feature-link {
+  animation:cfoIndustryOrderedIn .42s ease-out 1.08s both!important;
+}
+/* Strictly one entrance, ending at transform: none / opacity: 1, no float or hover drift. */
+.home-page #industries.cfo-industry-shaped.story-enhanced .cfo-story-panel.is-active .feature-visual {
+  animation:cfoIndustryDashboardArrive .85s cubic-bezier(.2,.72,.2,1) 1.56s both!important;
+  transition:none!important;
+}
+@keyframes cfoIndustryDashboardArrive {
+  0% {opacity:0;transform:translate3d(58px,0,0);}
+  100% {opacity:1;transform:translate3d(0,0,0);}
+}
+.home-page #industries.cfo-industry-shaped .feature-visual:hover {
+  transform:none!important;
+}
+@media (prefers-reduced-motion:reduce) {
+  .home-page #industries.cfo-industry-shaped.story-enhanced .cfo-story-panel.is-active .feature-title,
+  .home-page #industries.cfo-industry-shaped.story-enhanced .cfo-story-panel.is-active .feature-desc,
+  .home-page #industries.cfo-industry-shaped.story-enhanced .cfo-story-panel.is-active .feature-list li,
+  .home-page #industries.cfo-industry-shaped.story-enhanced .cfo-story-panel.is-active .feature-link,
+  .home-page #industries.cfo-industry-shaped.story-enhanced .cfo-story-panel.is-active .feature-visual {
+    animation:none!important;opacity:1!important;transform:none!important;filter:none!important;
+  }
+}
+
+/* ================================================================
+   28 Oct 2026 — Industry primary-blue + genuine delayed reveal fix.
+   Only #industries is scoped; existing section/dashboard JS untouched.
+   ================================================================ */
+.home-page #industries.cfo-industry-shaped .cfo-story-panel .feature-title {
+  color:var(--primary-blue) !important;
+}
+.home-page #industries.cfo-industry-shaped .cfo-story-segment.is-active,
+.home-page #industries.cfo-industry-shaped .cfo-story-segment.is-active .cfo-story-segment-label {
+  color:var(--primary-blue) !important;
+}
+.home-page #industries.cfo-industry-shaped .cfo-story-progress:before {
+  border-color:rgba(43,109,178,.30);
+}
+/* An !important opacity on .feature-visual previously prevented keyframe
+   opacity from working. Leave opacity animation-controllable here. */
+.home-page #industries.cfo-industry-shaped.story-enhanced .cfo-story-panel .feature-visual {
+  opacity:0;
+  transform:translate3d(66px,0,0);
+  transition:none !important;
+}
+.home-page #industries.cfo-industry-shaped.story-enhanced .cfo-story-panel.is-active .feature-visual {
+  animation:cfoIndustryRevealFromRight .90s cubic-bezier(.21,.75,.2,1) 1.59s both !important;
+}
+@keyframes cfoIndustryRevealFromRight {
+  from { opacity:0; transform:translate3d(66px,0,0); }
+  to { opacity:1; transform:translate3d(0,0,0); }
+}
+/* The stable dashboard is never moved on hover after entering. */
+.home-page #industries.cfo-industry-shaped .feature-visual:hover {
+  transform:none !important;
+}
+@media (prefers-reduced-motion: reduce) {
+  .home-page #industries.cfo-industry-shaped.story-enhanced .cfo-story-panel .feature-visual,
+  .home-page #industries.cfo-industry-shaped.story-enhanced .cfo-story-panel.is-active .feature-visual {
+    opacity:1 !important;transform:none !important;animation:none !important;
+  }
+}
+
+/* ================================================================
+   28 Oct — Correct disappearing industry copy (regression hotfix).
+   The old story CSS zeroed the whole .feature-text parent; child
+   stagger animations cannot show through an invisible ancestor.
+   Keep its parent fully visible; animate only its individual children.
+   Dashboard remains separately delayed after Learn More.
+   ================================================================ */
+.home-page #industries.cfo-industry-shaped.story-enhanced .cfo-story-panel .feature-text,
+.home-page #industries.cfo-industry-shaped.story-enhanced .cfo-story-panel.is-active .feature-text {
+  opacity: 1 !important;
+  visibility: visible !important;
+  transform: none !important;
+  filter: none !important;
+  animation: none !important;
+}
+/* Stable layout while each item individually arrives. */
+.home-page #industries.cfo-industry-shaped.story-enhanced .cfo-story-panel.is-active .feature-title,
+.home-page #industries.cfo-industry-shaped.story-enhanced .cfo-story-panel.is-active .feature-desc,
+.home-page #industries.cfo-industry-shaped.story-enhanced .cfo-story-panel.is-active .feature-list li,
+.home-page #industries.cfo-industry-shaped.story-enhanced .cfo-story-panel.is-active .feature-link {
+  visibility: visible !important;
+}
+
+
+/* ============================================================
+   CFO CRAFT — SERVICES SIX-STEP SHAPED SCROLL SHOWCASE
+   Matches approved industry treatment; services only.
+   Panels remain positioned by existing scroll-story JS.
+   ============================================================ */
+.home-page #services.cfo-story {background:#f5f7fb!important;}
+.home-page #services.cfo-story.story-enhanced > .cfo-story-pin {background:#f5f7fb;align-items:center;}
+.home-page #services.cfo-story .cfo-story-inner {
+  position:relative; isolation:isolate; overflow:hidden;
+  max-width:1380px; width:calc(100% - 44px);
+  background:linear-gradient(150deg,#fff 45%,#fbfdff 100%);
+  border:1px solid #e3eaf3; border-radius:36px;
+  box-shadow:0 18px 56px rgba(8,41,81,.075);
+  padding:clamp(17px,2.6vh,25px) clamp(23px,2.5vw,38px) clamp(18px,2.6vh,28px);
+}
+.home-page #services.cfo-story .cfo-story-inner:before {
+  content:"";position:absolute;inset:13px;border:1px solid rgba(43,109,178,.09);
+  border-radius:27px;pointer-events:none;z-index:-1;
+}
+.home-page #services.cfo-story .cfo-story-inner:after {
+  content:"";position:absolute;width:310px;height:310px;right:-140px;bottom:-155px;
+  border:1px solid rgba(43,109,178,.12);border-radius:36%;transform:rotate(-22deg);
+  pointer-events:none;
+}
+.home-page #services.cfo-story.story-enhanced .cfo-story-inner {
+  height:calc(100% - 18px)!important;max-height:780px;align-self:center;
+  grid-template-rows:auto auto minmax(0,1fr);
+  gap:clamp(5px,1.2vh,12px);
+}
+.home-page #services.cfo-story .cfo-story-heading {max-width:none;text-align:center;margin:0 auto!important;}
+.home-page #services.cfo-story .cfo-story-heading .section-heading {
+  font-size:clamp(1.55rem,2.4vw,2.25rem)!important;line-height:1.15;margin:0 0 .28rem!important;
+}
+.home-page #services.cfo-story .cfo-story-heading .section-subheading {
+  max-width:1000px;margin:0 auto;font-size:clamp(.76rem,1vw,.9rem)!important;line-height:1.48;
+}
+.home-page #services.cfo-story .cfo-story-nav {
+  width:min(1010px,100%)!important;max-width:none;margin:0 auto!important;align-self:center;
+  position:relative;padding:5px 7px!important;border-radius:50px;
+  background:#f3f7fc;border:1px solid #e3ebf5;
+}
+.home-page #services.cfo-story .cfo-story-progress {
+  display:grid!important;grid-template-columns:repeat(6,minmax(0,1fr))!important;
+  gap:4px!important;position:relative;
+}
+.home-page #services.cfo-story .cfo-story-progress:before {
+  content:"";position:absolute;width:calc((100% - 20px)/6);height:42px;top:0;left:0;z-index:0;
+  border:1px solid rgba(43,109,178,.30);border-radius:28px;background:#e3effe;
+  box-shadow:0 4px 12px rgba(43,109,178,.09);
+  transform:translateX(calc(var(--service-index,0) * (100% + 4px)));
+  transition:transform .56s cubic-bezier(.22,1,.36,1);
+}
+.home-page #services.cfo-story .cfo-story-segment {
+  min-width:0!important;min-height:42px!important;z-index:1;
+  display:grid;place-items:center;border-radius:26px;padding:4px 5px!important;
+}
+.home-page #services.cfo-story .cfo-story-segment-line {display:none!important;}
+.home-page #services.cfo-story .cfo-story-segment-label,
+.home-page #services.cfo-story .cfo-story-segment.is-active .cfo-story-segment-label {
+  display:block;font-family:var(--font-heading);font-size:clamp(.62rem,.88vw,.82rem)!important;
+  line-height:1.15!important;font-weight:700;padding:0!important;
+  color:#7890ad;text-align:center;white-space:normal;letter-spacing:0;
+}
+.home-page #services.cfo-story .cfo-story-segment.is-active .cfo-story-segment-label {color:var(--primary-blue)!important;}
+.home-page #services.cfo-story .cfo-story-current {display:none!important;}
+.home-page #services.cfo-story .cfo-story-stage {min-height:0;margin-top:0;}
+.home-page #services.cfo-story .cfo-story-panel,
+.home-page #services.cfo-story .cfo-story-panel.reverse {
+  grid-template-columns:minmax(0,.78fr) minmax(0,1.22fr)!important;
+  gap:clamp(20px,2.7vw,44px)!important;align-items:center;padding:0 5px!important;
+}
+.home-page #services.cfo-story .cfo-story-panel .feature-text {
+  min-width:0;align-self:center;display:flex;flex-direction:column;align-items:flex-start;
+  justify-content:center;opacity:1!important;visibility:visible!important;
+  transform:none!important;filter:none!important;animation:none!important;
+}
+.home-page #services.cfo-story .feature-tag {display:none!important;}
+.home-page #services.cfo-story .feature-title {
+  font-size:clamp(1.75rem,2.8vw,2.5rem)!important;font-weight:600;line-height:1.13;
+  margin:0 0 .7rem!important;letter-spacing:-.03em;color:var(--primary-blue)!important;
+}
+.home-page #services.cfo-story .feature-desc,
+.home-page #services.cfo-story .feature-list li {
+  font-family:var(--font-primary);font-size:clamp(.88rem,1.13vw,1.03rem)!important;
+  line-height:1.52!important;color:#536b89!important;font-weight:400!important;letter-spacing:0;
+}
+.home-page #services.cfo-story .feature-desc {margin:0 0 .65rem!important;max-width:42ch;}
+.home-page #services.cfo-story .feature-list {
+  list-style:none!important;padding:0!important;margin:0 0 .8rem!important;
+  display:flex;flex-direction:column;align-items:flex-start;flex-wrap:nowrap;gap:5px;
+}
+.home-page #services.cfo-story .feature-list li {margin:0!important;padding:0 0 0 12px!important;position:relative;}
+.home-page #services.cfo-story .feature-list li:before {
+  content:"";position:absolute;left:0;top:.68em;width:5px;height:5px;border-radius:50%;background:#91b6dd;
+}
+.home-page #services.cfo-story .feature-link {
+  font-size:.94rem!important;color:#0b376b;display:inline-flex;gap:5px;
+  align-items:center;margin-top:.55rem;font-weight:700;
+}
+.home-page #services.cfo-story .feature-visual {
+  border:1px solid #d8e5f2!important;border-radius:24px!important;padding:5px!important;
+  background:#f8fbff!important;box-shadow:0 14px 32px rgba(9,47,101,.085)!important;
+  overflow:hidden;max-width:100%!important;height:auto!important;aspect-ratio:16/9!important;
+  justify-self:center;align-self:center;transition:none!important;
+}
+.home-page #services.cfo-story .feature-visual:hover {transform:none!important;}
+.home-page #services.cfo-story .feature-dashboard-embed {
+  width:100%!important;height:auto!important;aspect-ratio:16/9!important;
+  overflow:hidden;border-radius:17px!important;
+}
+.home-page #services.cfo-story .feature-dashboard-frame {display:block!important;width:100%!important;height:100%!important;}
+@media(min-width:1025px) {
+  .home-page #services.cfo-story .cfo-story-panel .feature-visual {
+    width:min(100%,790px,calc((100svh - var(--home-nav-offset,76px) - 205px) * 16 / 9))!important;
+  }
+}
+/* The parent must stay visible; only the individual text items are staggered. */
+.home-page #services.cfo-story.story-enhanced .cfo-story-panel.is-active .feature-title {
+  animation:cfoServiceTextEnter .42s ease-out 0s both!important;
+}
+.home-page #services.cfo-story.story-enhanced .cfo-story-panel.is-active .feature-desc {
+  animation:cfoServiceTextEnter .43s ease-out .18s both!important;
+}
+.home-page #services.cfo-story.story-enhanced .cfo-story-panel.is-active .feature-list li {
+  animation:cfoServiceTextEnter .4s ease-out both!important;
+}
+.home-page #services.cfo-story.story-enhanced .cfo-story-panel.is-active .feature-list li:nth-child(1){animation-delay:.38s!important;}
+.home-page #services.cfo-story.story-enhanced .cfo-story-panel.is-active .feature-list li:nth-child(2){animation-delay:.55s!important;}
+.home-page #services.cfo-story.story-enhanced .cfo-story-panel.is-active .feature-list li:nth-child(3){animation-delay:.72s!important;}
+.home-page #services.cfo-story.story-enhanced .cfo-story-panel.is-active .feature-list li:nth-child(4){animation-delay:.89s!important;}
+.home-page #services.cfo-story.story-enhanced .cfo-story-panel.is-active .feature-list li:nth-child(5){animation-delay:1.06s!important;}
+.home-page #services.cfo-story.story-enhanced .cfo-story-panel.is-active .feature-list li:nth-child(6){animation-delay:1.23s!important;}
+.home-page #services.cfo-story.story-enhanced .cfo-story-panel.is-active .feature-link {
+  animation:cfoServiceTextEnter .42s ease-out 1.43s both!important;
+}
+.home-page #services.cfo-story.story-enhanced .cfo-story-panel .feature-visual {
+  opacity:0;transform:translate3d(66px,0,0);transition:none!important;
+}
+.home-page #services.cfo-story.story-enhanced .cfo-story-panel.is-active .feature-visual {
+  animation:cfoServiceDashboardEnter .85s cubic-bezier(.21,.75,.2,1) 1.88s both!important;
+}
+@keyframes cfoServiceTextEnter {
+  from {opacity:0;transform:translate3d(-16px,13px,0);filter:blur(2px);}
+  to {opacity:1;transform:translate3d(0,0,0);filter:blur(0);}
+}
+@keyframes cfoServiceDashboardEnter {
+  from {opacity:0;transform:translate3d(66px,0,0);}
+  to {opacity:1;transform:translate3d(0,0,0);}
+}
+@media(max-width:1024px) {
+  .home-page #services.cfo-story .cfo-story-inner {width:calc(100% - 24px);border-radius:26px;padding:20px!important;}
+  .home-page #services.cfo-story .cfo-story-panel,
+  .home-page #services.cfo-story .cfo-story-panel.reverse {grid-template-columns:1fr!important;gap:13px!important;}
+  .home-page #services.cfo-story .feature-desc {max-width:none;}
+  .home-page #services.cfo-story .feature-title {font-size:clamp(1.5rem,4vw,2rem)!important;}
+  .home-page #services.cfo-story .feature-visual {max-width:780px!important;}
+}
+@media(max-width:768px) {
+  .home-page #services.cfo-story .cfo-story-inner {width:calc(100% - 18px);border-radius:23px;padding:18px 15px!important;}
+  .home-page #services.cfo-story .cfo-story-inner:before {inset:8px;border-radius:17px;}
+  .home-page #services.cfo-story .cfo-story-heading .section-heading {font-size:1.48rem!important;}
+  .home-page #services.cfo-story .cfo-story-heading .section-subheading {font-size:.77rem!important;}
+  .home-page #services.cfo-story .cfo-story-nav {padding:4px!important;}
+  .home-page #services.cfo-story .cfo-story-segment {padding:3px 2px!important;min-height:46px!important;}
+  .home-page #services.cfo-story .cfo-story-progress:before {height:46px!important;}
+  .home-page #services.cfo-story .cfo-story-segment-label,
+  .home-page #services.cfo-story .cfo-story-segment.is-active .cfo-story-segment-label {font-size:clamp(.49rem,1.6vw,.68rem)!important;line-height:1.16!important;}
+  .home-page #services.cfo-story .feature-title {font-size:1.5rem!important;margin-bottom:.45rem!important;}
+  .home-page #services.cfo-story .feature-desc,
+  .home-page #services.cfo-story .feature-list li {font-size:.83rem!important;line-height:1.48!important;}
+  .home-page #services.cfo-story .feature-list {gap:3px!important;margin-bottom:.35rem!important;}
+  .home-page #services.cfo-story .feature-link {font-size:.82rem!important;margin-top:.2rem;}
+  .home-page #services.cfo-story .feature-visual {border-radius:14px!important;padding:4px!important;}
+  .home-page #services.cfo-story .feature-dashboard-embed {border-radius:11px!important;}
+}
+@media(prefers-reduced-motion:reduce) {
+  .home-page #services.cfo-story .cfo-story-progress:before {transition:none!important;}
+  .home-page #services.cfo-story .cfo-story-panel .feature-title,
+  .home-page #services.cfo-story .cfo-story-panel .feature-desc,
+  .home-page #services.cfo-story .cfo-story-panel .feature-list li,
+  .home-page #services.cfo-story .cfo-story-panel .feature-link,
+  .home-page #services.cfo-story .cfo-story-panel .feature-visual {
+    animation:none!important;opacity:1!important;transform:none!important;filter:none!important;
+  }
+}
+
+
+/* ================================================================
+   CFO CRAFT — 28 OCT: RELIABLE SHARED REVEAL (INDUSTRIES + SERVICES)
+   JS arms an active panel only when it is on screen. Never leave a
+   dashboard invisible when it is simply waiting for a scroll event.
+   ================================================================ */
+/* Baseline: every selected panel is visible even without JS animation. */
+.home-page #industries.cfo-story.story-enhanced .cfo-story-panel.is-active .feature-visual,
+.home-page #services.cfo-story.story-enhanced .cfo-story-panel.is-active .feature-visual {
+  opacity:1;
+  visibility:visible !important;
+  transform:none;
+  filter:none;
+  animation:none;
+}
+.home-page #industries.cfo-story.story-enhanced .cfo-story-panel.is-active .feature-text,
+.home-page #services.cfo-story.story-enhanced .cfo-story-panel.is-active .feature-text {
+  opacity:1 !important;
+  visibility:visible !important;
+  transform:none !important;
+  filter:none !important;
+  animation:none !important;
+}
+/* Disable old child animation timing. New stagger runs only after explicit arm. */
+.home-page #industries.cfo-story.story-enhanced .cfo-story-panel.is-active .feature-title,
+.home-page #industries.cfo-story.story-enhanced .cfo-story-panel.is-active .feature-desc,
+.home-page #industries.cfo-story.story-enhanced .cfo-story-panel.is-active .feature-list li,
+.home-page #industries.cfo-story.story-enhanced .cfo-story-panel.is-active .feature-link,
+.home-page #services.cfo-story.story-enhanced .cfo-story-panel.is-active .feature-title,
+.home-page #services.cfo-story.story-enhanced .cfo-story-panel.is-active .feature-desc,
+.home-page #services.cfo-story.story-enhanced .cfo-story-panel.is-active .feature-list li,
+.home-page #services.cfo-story.story-enhanced .cfo-story-panel.is-active .feature-link {
+  animation:none !important;
+  opacity:1;
+  visibility:visible !important;
+  transform:none;
+  filter:none;
+}
+/* Text: left-to-right blur/fade, with vertical mask progressively
+   revealing lines of longer headings and paragraphs. */
+@keyframes cfoSharedTextLineReveal {
+  0% { opacity:0; transform:translate3d(-20px,9px,0); filter:blur(2.5px); clip-path:inset(0 100% 0 0); }
+  38% { opacity:.65; filter:blur(1.2px); }
+  72% { opacity:.96; filter:blur(.3px); }
+  100% { opacity:1; transform:translate3d(0,0,0); filter:blur(0); clip-path:inset(0 0 0 0); }
+}
+@keyframes cfoSharedDashboardReveal {
+  0% { opacity:0; transform:translate3d(72px,0,0); }
+  55% { opacity:.78; }
+  100% { opacity:1; transform:translate3d(0,0,0); }
+}
+.home-page #industries.cfo-story.story-enhanced .cfo-story-panel.is-active.cfo-reveal-run .feature-title,
+.home-page #services.cfo-story.story-enhanced .cfo-story-panel.is-active.cfo-reveal-run .feature-title {
+  animation:cfoSharedTextLineReveal .78s cubic-bezier(.18,.7,.18,1) .03s both !important;
+}
+.home-page #industries.cfo-story.story-enhanced .cfo-story-panel.is-active.cfo-reveal-run .feature-desc,
+.home-page #services.cfo-story.story-enhanced .cfo-story-panel.is-active.cfo-reveal-run .feature-desc {
+  animation:cfoSharedTextLineReveal 1.02s cubic-bezier(.18,.7,.18,1) .28s both !important;
+}
+.home-page #industries.cfo-story.story-enhanced .cfo-story-panel.is-active.cfo-reveal-run .feature-list li,
+.home-page #services.cfo-story.story-enhanced .cfo-story-panel.is-active.cfo-reveal-run .feature-list li {
+  animation:cfoSharedTextLineReveal .68s cubic-bezier(.18,.7,.18,1) both !important;
+}
+.home-page #industries.cfo-story.story-enhanced .cfo-story-panel.is-active.cfo-reveal-run .feature-list li:nth-child(1),
+.home-page #services.cfo-story.story-enhanced .cfo-story-panel.is-active.cfo-reveal-run .feature-list li:nth-child(1) {animation-delay:.64s!important}
+.home-page #industries.cfo-story.story-enhanced .cfo-story-panel.is-active.cfo-reveal-run .feature-list li:nth-child(2),
+.home-page #services.cfo-story.story-enhanced .cfo-story-panel.is-active.cfo-reveal-run .feature-list li:nth-child(2) {animation-delay:.81s!important}
+.home-page #industries.cfo-story.story-enhanced .cfo-story-panel.is-active.cfo-reveal-run .feature-list li:nth-child(3),
+.home-page #services.cfo-story.story-enhanced .cfo-story-panel.is-active.cfo-reveal-run .feature-list li:nth-child(3) {animation-delay:.98s!important}
+.home-page #industries.cfo-story.story-enhanced .cfo-story-panel.is-active.cfo-reveal-run .feature-list li:nth-child(4),
+.home-page #services.cfo-story.story-enhanced .cfo-story-panel.is-active.cfo-reveal-run .feature-list li:nth-child(4) {animation-delay:1.15s!important}
+.home-page #industries.cfo-story.story-enhanced .cfo-story-panel.is-active.cfo-reveal-run .feature-list li:nth-child(5),
+.home-page #services.cfo-story.story-enhanced .cfo-story-panel.is-active.cfo-reveal-run .feature-list li:nth-child(5) {animation-delay:1.32s!important}
+.home-page #industries.cfo-story.story-enhanced .cfo-story-panel.is-active.cfo-reveal-run .feature-list li:nth-child(6),
+.home-page #services.cfo-story.story-enhanced .cfo-story-panel.is-active.cfo-reveal-run .feature-list li:nth-child(6) {animation-delay:1.49s!important}
+.home-page #industries.cfo-story.story-enhanced .cfo-story-panel.is-active.cfo-reveal-run .feature-link,
+.home-page #services.cfo-story.story-enhanced .cfo-story-panel.is-active.cfo-reveal-run .feature-link {
+  animation:cfoSharedTextLineReveal .64s cubic-bezier(.18,.7,.18,1) 1.63s both !important;
+}
+.home-page #industries.cfo-story.story-enhanced .cfo-story-panel.is-active.cfo-reveal-run .feature-visual,
+.home-page #services.cfo-story.story-enhanced .cfo-story-panel.is-active.cfo-reveal-run .feature-visual {
+  animation:cfoSharedDashboardReveal 1.12s cubic-bezier(.18,.75,.17,1) 2.20s both !important;
+  /* The whole 16:9 frame moves as one; no movement after reveal. */
+}
+/* Services: scrolling works, but no scrollbar is painted. */
+.home-page #services.cfo-story.story-enhanced .cfo-story-panel .feature-text {
+  min-height:0 !important;
+  max-height:100% !important;
+  overflow-y:auto !important;
+  overflow-x:hidden !important;
+  scrollbar-width:none !important;
+  -ms-overflow-style:none !important;
+  overscroll-behavior:contain;
+  justify-content:flex-start !important;
+  padding-block:5px !important;
+}
+.home-page #services.cfo-story.story-enhanced .cfo-story-panel .feature-text::-webkit-scrollbar { display:none !important; width:0 !important; }
+/* Compact the long service slide while preserving its full text. */
+.home-page #services.cfo-story.story-enhanced .cfo-story-panel,
+.home-page #services.cfo-story.story-enhanced .cfo-story-panel.reverse {min-height:0 !important;}
+.home-page #services.cfo-story.story-enhanced .cfo-story-stage {min-height:0 !important;}
+@media (prefers-reduced-motion:reduce) {
+  .home-page #industries.cfo-story.story-enhanced .cfo-story-panel.is-active.cfo-reveal-run .feature-title,
+  .home-page #industries.cfo-story.story-enhanced .cfo-story-panel.is-active.cfo-reveal-run .feature-desc,
+  .home-page #industries.cfo-story.story-enhanced .cfo-story-panel.is-active.cfo-reveal-run .feature-list li,
+  .home-page #industries.cfo-story.story-enhanced .cfo-story-panel.is-active.cfo-reveal-run .feature-link,
+  .home-page #industries.cfo-story.story-enhanced .cfo-story-panel.is-active.cfo-reveal-run .feature-visual,
+  .home-page #services.cfo-story.story-enhanced .cfo-story-panel.is-active.cfo-reveal-run .feature-title,
+  .home-page #services.cfo-story.story-enhanced .cfo-story-panel.is-active.cfo-reveal-run .feature-desc,
+  .home-page #services.cfo-story.story-enhanced .cfo-story-panel.is-active.cfo-reveal-run .feature-list li,
+  .home-page #services.cfo-story.story-enhanced .cfo-story-panel.is-active.cfo-reveal-run .feature-link,
+  .home-page #services.cfo-story.story-enhanced .cfo-story-panel.is-active.cfo-reveal-run .feature-visual {
+    animation:none!important;opacity:1!important;transform:none!important;filter:none!important;clip-path:none!important;
+  }
+}
+
+
+/* CFO CRAFT — 29 Oct: unblocked right-dashboard reveal.
+   Only active, explicitly armed slides animate; otherwise visual remains visible.
+   No opacity !important or transform !important can override keyframes. */
+@media (prefers-reduced-motion: no-preference) {
+  .home-page #industries.cfo-story.story-enhanced .cfo-story-panel.is-active.cfo-reveal-run .feature-visual,
+  .home-page #services.cfo-story.story-enhanced .cfo-story-panel.is-active.cfo-reveal-run .feature-visual {
+    opacity: 1;
+    visibility: visible !important;
+    transform: none;
+    filter: none;
+    animation: cfoSharedDashboardReveal 1.14s cubic-bezier(.19,.75,.18,1) 2.20s both !important;
+    will-change: opacity, transform, filter;
+  }
+  .home-page #industries.cfo-story.story-enhanced .cfo-story-panel.is-active.cfo-reveal-run .feature-visual:hover,
+  .home-page #services.cfo-story.story-enhanced .cfo-story-panel.is-active.cfo-reveal-run .feature-visual:hover {
+    transform: none; /* keep static after animation */
+  }
+}
+
+/* 29 Oct — right SVG slides + fades without blur; left copy retains blur. */
+.home-page #industries.cfo-story.story-enhanced .cfo-story-panel.is-active.cfo-reveal-run .feature-visual,
+.home-page #services.cfo-story.story-enhanced .cfo-story-panel.is-active.cfo-reveal-run .feature-visual {
+  filter: none !important;
+  will-change: opacity, transform;
+}

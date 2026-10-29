@@ -210,119 +210,105 @@ document.addEventListener("DOMContentLoaded", () => {
     setHowProgress();
   }
 
-  // ===== Case Studies — Sticky Scroll Story =====
-  const caseSection = document.querySelector("[data-case-scroll]");
-  const caseTrack = document.getElementById("cs-slider");
-
-  if (caseSection && caseTrack) {
-    const caseSlides = [...caseTrack.querySelectorAll("[data-case-slide]")];
-    const caseSegments = [...caseSection.querySelectorAll("[data-case-progress]")];
-    const caseCount = document.getElementById("case-study-count");
-    const caseProgressText = document.getElementById("case-study-progress-text");
-    const caseScroller = caseSection.querySelector(".cs-slider-container");
-    const casePrev = caseSection.querySelector("[data-case-prev]");
-    const caseNext = caseSection.querySelector("[data-case-next]");
-
-    let activeCase = -1;
-    let caseRaf = 0;
-
-    const setCase = (index) => {
-      const safe = Math.max(0, Math.min(caseSlides.length - 1, index));
-      if (safe === activeCase) return;
-      activeCase = safe;
-      if (casePrev) casePrev.disabled = safe === 0;
-      if (caseNext) caseNext.disabled = safe === caseSlides.length - 1;
-
-      if (window.innerWidth > 768) {
-        caseTrack.style.transform = `translate3d(-${safe * 100}%, 0, 0)`;
-      }
-
-      caseSegments.forEach((segment, i) => {
-        segment.classList.toggle("is-complete", i < safe);
-        segment.classList.toggle("is-current", i === safe);
+  // ===== CASE STUDIES — 9-STEP PREMIUM PINNED SHOWCASE =====
+  (() => {
+    const section = document.querySelector('[data-csx-scroll]');
+    if (!section) return;
+    const steps = [...section.querySelectorAll('[data-csx-index]')];
+    const panels = [...section.querySelectorAll('[data-csx-panel]')];
+    const dots = [...section.querySelectorAll('[data-csx-dot]')];
+    const counter = section.querySelector('[data-csx-counter]');
+    const prev = section.querySelector('[data-csx-prev]');
+    const next = section.querySelector('[data-csx-next]');
+    const pinned = section.querySelector('.csx-sticky');
+    const isDesktop = () => window.matchMedia('(min-width:769px)').matches;
+    let active = -1, raf = 0;
+    const clamp = (n) => Math.max(0, Math.min(panels.length - 1, n));
+    const display = (index) => {
+      const value = clamp(index);
+      if (value === active) return;
+      active = value;
+      panels.forEach((p, i) => {
+        const current = i === value;
+        p.classList.toggle('is-current', current);
+        p.setAttribute('aria-hidden', current ? 'false' : 'true');
       });
-
-      if (caseCount) {
-        caseCount.textContent =
-          `${String(safe + 1).padStart(2, "0")} / ${String(caseSlides.length).padStart(2, "0")}`;
-      }
-
-      if (caseProgressText) {
-        caseProgressText.textContent =
-          `Case study ${safe + 1} of ${caseSlides.length}`;
+      steps.forEach((s, i) => {
+        s.classList.toggle('is-current', i === value);
+        s.setAttribute('aria-current', i === value ? 'step' : 'false');
+      });
+      dots.forEach((d, i) => {
+        d.classList.toggle('is-current', i === value);
+        d.classList.toggle('is-complete', i < value);
+        d.setAttribute('aria-current', i === value ? 'step' : 'false');
+      });
+      if (counter) counter.textContent = `${String(value + 1).padStart(2, '0')} / ${String(panels.length).padStart(2, '0')}`;
+      const step = steps[value];
+      if (step && !isDesktop()) step.scrollIntoView({ inline:'nearest', block:'nearest', behavior:'smooth' });
+    };
+    const size = () => {
+      // Preserve normal page scroll outside the story. 9 equal intervals, one pinned viewport.
+      section.style.height = isDesktop() ? `${(panels.length + 1) * 100}svh` : '';
+    };
+    const sync = () => {
+      raf = 0;
+      if (!isDesktop()) return;
+      const rect = section.getBoundingClientRect();
+      const height = Math.max(1, section.offsetHeight - (window.innerHeight || 1));
+      const travelled = Math.max(0, Math.min(height, -rect.top));
+      display(Math.min(panels.length - 1, Math.floor(travelled / height * panels.length)));
+    };
+    const request = () => { if (!raf) raf = requestAnimationFrame(sync); };
+    const navigate = (index) => {
+      const target = clamp(index);
+      display(target);
+      if (isDesktop()) {
+        const range = Math.max(0, section.offsetHeight - window.innerHeight);
+        const top = section.getBoundingClientRect().top + window.scrollY;
+        // Navigate to interval center, avoiding snap-back on the next scroll tick.
+        const position = (target + 0.32) / panels.length;
+        window.scrollTo({ top:top + range * position, behavior:'smooth' });
       }
     };
-
-    const sizeCaseStory = () => {
-      if (window.innerWidth > 768) {
-        // One clear scrolling interval per case study, plus the pinned viewport.
-        caseSection.style.height = `${(caseSlides.length + 1) * 100}svh`;
-      } else {
-        caseSection.style.height = "";
-      }
-    };
-
-    const updateCaseStory = () => {
-      caseRaf = 0;
-
-      if (window.innerWidth <= 768) {
-        caseTrack.style.transform = "";
-        return;
-      }
-
-      const rect = caseSection.getBoundingClientRect();
-      const viewport = window.innerHeight || document.documentElement.clientHeight;
-      const scrollable = Math.max(1, caseSection.offsetHeight - viewport);
-      const travelled = Math.max(0, Math.min(scrollable, -rect.top));
-      const progress = travelled / scrollable;
-
-      // Guarantees every slide from 1 through the last one receives a full range.
-      const index = Math.min(
-        caseSlides.length - 1,
-        Math.floor(progress * caseSlides.length),
-      );
-
-      setCase(index);
-    };
-
-    const requestCaseUpdate = () => {
-      if (!caseRaf) caseRaf = requestAnimationFrame(updateCaseStory);
-    };
-
-    sizeCaseStory();
-    window.addEventListener("scroll", requestCaseUpdate, { passive: true });
-    window.addEventListener("resize", () => {
-      sizeCaseStory();
-      requestCaseUpdate();
+    steps.forEach((step, i) => step.addEventListener('click', () => navigate(i)));
+    dots.forEach((dot, i) => dot.addEventListener('click', () => navigate(i)));
+    prev?.addEventListener('click', () => navigate(active - 1));
+    next?.addEventListener('click', () => navigate(active + 1));
+    window.addEventListener('scroll', request, {passive:true});
+    window.addEventListener('resize', () => { size();request(); }, {passive:true});
+    if (pinned) pinned.addEventListener('keydown', e => {
+      if (e.key === 'ArrowRight') { e.preventDefault();navigate(active+1); }
+      if (e.key === 'ArrowLeft') { e.preventDefault();navigate(active-1); }
     });
-
-    // Mobile/tablet: native horizontal swipe with counter sync.
-    if (caseScroller) {
-      let mobileRaf = 0;
-      caseScroller.addEventListener("scroll", () => {
-        if (window.innerWidth > 768 || mobileRaf) return;
-        mobileRaf = requestAnimationFrame(() => {
-          mobileRaf = 0;
-          const width = caseScroller.clientWidth || 1;
-          setCase(Math.round(caseScroller.scrollLeft / width));
+    // Mobile swipe over the illustration or copy.
+    let touchX = null;
+    section.addEventListener('touchstart', e => { if (!isDesktop() && e.touches.length === 1 && e.target.closest('.csx-panels')) touchX=e.touches[0].clientX; }, {passive:true});
+    section.addEventListener('touchend', e => {
+      if (touchX === null || isDesktop()) return;
+      const diff=e.changedTouches[0].clientX-touchX;
+      touchX=null;
+      if (Math.abs(diff)>55) navigate(active + (diff<0?1:-1));
+    }, {passive:true});
+    size();display(0);sync();
+    // Trigger the first entry when the pinned viewport actually appears, not on page reload.
+    // Re-entering from either direction also replays the entrance choreography.
+    if ('IntersectionObserver' in window) {
+      const entry = new IntersectionObserver((entries) => {
+        entries.forEach((item) => {
+          if (item.isIntersecting) {
+            section.classList.remove('csx-animate');
+            void section.offsetWidth;
+            section.classList.add('csx-animate');
+          } else {
+            section.classList.remove('csx-animate');
+          }
         });
-      }, { passive: true });
+      }, { threshold: 0.12 });
+      entry.observe(pinned || section);
+    } else {
+      section.classList.add('csx-animate');
     }
-
-    // Phone only: click arrows without changing the desktop scroll-story.
-    const navigateMobileCase = (delta) => {
-      if (window.innerWidth > 768 || !caseScroller) return;
-      const next = Math.max(0, Math.min(caseSlides.length - 1, activeCase + delta));
-      caseScroller.scrollTo({ left: next * caseScroller.clientWidth, behavior: "smooth" });
-      setCase(next);
-    };
-    casePrev?.addEventListener("click", () => navigateMobileCase(-1));
-    caseNext?.addEventListener("click", () => navigateMobileCase(1));
-
-    setCase(0);
-    updateCaseStory();
-  }
-
+  })();
 
   // ===== LIVE DASHBOARD ANIMATIONS — continuous, slow and readable =====
   // Mirrors the looping behaviour used by the service SVG dashboards:

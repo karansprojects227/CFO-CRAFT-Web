@@ -5297,3 +5297,31 @@
  .home-page #case-studies.csx-animate .csx-panel.is-current .csx-story-visual,
  .home-page #case-studies.csx-animate .csx-step {animation:none!important;opacity:1!important;transform:none!important;filter:none!important;}
 }
+
+/* Magnetic Connect — phone-safe refinements. Other sections untouched. */
+@media (max-width: 768px) {
+  .home-page .cfo-magnetic-connect {
+    right: max(18px, env(safe-area-inset-right));
+    bottom: max(20px, env(safe-area-inset-bottom));
+  }
+  .home-page .cfo-magnetic-action {
+    -webkit-tap-highlight-color: transparent;
+    touch-action: manipulation;
+  }
+}
+@media (max-width: 380px) {
+  .home-page .cfo-magnetic-connect.is-open .cfo-magnetic-wa {
+    transform: translate(-5px, -135px) scale(1);
+  }
+  .home-page .cfo-magnetic-connect.is-open .cfo-magnetic-call {
+    transform: translate(-75px, -76px) scale(1);
+  }
+}
+@media (max-width: 768px) and (max-height: 420px) and (orientation: landscape) {
+  .home-page .cfo-magnetic-connect.is-open .cfo-magnetic-wa {
+    transform: translate(-74px, -76px) scale(1);
+  }
+  .home-page .cfo-magnetic-connect.is-open .cfo-magnetic-call {
+    transform: translate(-145px, -3px) scale(1);
+  }
+}

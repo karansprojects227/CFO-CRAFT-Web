@@ -297,8 +297,9 @@ document.addEventListener("DOMContentLoaded", () => {
         entries.forEach((item) => {
           if (item.isIntersecting) {
             section.classList.remove('csx-animate');
-            void section.offsetWidth;
-            section.classList.add('csx-animate');
+            requestAnimationFrame(() => {
+              if (item.isIntersecting) section.classList.add('csx-animate');
+            });
           } else {
             section.classList.remove('csx-animate');
           }
@@ -365,6 +366,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     let raf = 0;
     let visible = true;
+    let lastPaint = 0;
 
     const ease = (p) =>
       p < 0.5
@@ -421,7 +423,10 @@ document.addEventListener("DOMContentLoaded", () => {
     const frame = (now) => {
       raf = 0;
       if (!visible) return;
-      render(progressAt(now - epoch));
+      if (now - lastPaint >= 40) { // cap non-essential dashboard counters at ~25 fps
+        lastPaint = now;
+        render(progressAt(now - epoch));
+      }
       raf = requestAnimationFrame(frame);
     };
 
@@ -4640,6 +4645,7 @@ function cr3nP5oFahNL86vESFrkKjmuupsQa1mPzN7(host) {
   const frame = document.createElement("iframe");
   frame.className = "feature-dashboard-frame";
   frame.title = host.dataset.dashboardTitle || "Animated CFO CRAFT dashboard";
+  frame.loading = "lazy";
   frame.setAttribute("scrolling", "no");
   frame.setAttribute("tabindex", "-1");
   frame.setAttribute("aria-hidden", "true");
@@ -4682,7 +4688,7 @@ function initCfoCraftAnimatedDashboards() {
       const idx = Number(story.dataset.storyActive || 0);
       const nearViewport = activeRoots.has(story) && !document.hidden;
       hosts.forEach((host, i) => {
-        if (nearViewport && (i === idx || i === Math.min(idx+1, hosts.length-1))) {
+        if (nearViewport && i === idx) {
           cr3nP5oFahNL86vESFrkKjmuupsQa1mPzN7(host);
         } else {
           destr3nP5oFahNL86vESFrkKjmuupsQa1mPzN7(host);
@@ -4803,8 +4809,11 @@ if (document.readyState === "loading") {
         if (inView && !motionPreference.matches) {
           const target = panels[step];
           // Force a fresh animation timeline on revisit even when scrolling quickly.
-          void target.offsetWidth;
-          target.classList.add('cfo-reveal-run');
+          requestAnimationFrame(() => {
+            if (panels[step] === target && target.classList.contains('is-active')) {
+              target.classList.add('cfo-reveal-run');
+            }
+          });
         }
         window.dispatchEvent(new CustomEvent('cfo:storychange', {detail:{story, index:step}}));
       }

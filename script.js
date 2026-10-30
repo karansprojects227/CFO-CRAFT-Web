@@ -235,6 +235,7 @@ document.addEventListener("DOMContentLoaded", () => {
       });
       steps.forEach((s, i) => {
         s.classList.toggle('is-current', i === value);
+        s.classList.toggle('is-complete', i < value);
         s.setAttribute('aria-current', i === value ? 'step' : 'false');
       });
       dots.forEach((d, i) => {
@@ -256,6 +257,8 @@ document.addEventListener("DOMContentLoaded", () => {
       const rect = section.getBoundingClientRect();
       const height = Math.max(1, section.offsetHeight - (window.innerHeight || 1));
       const travelled = Math.max(0, Math.min(height, -rect.top));
+      const rail = section.querySelector('.csx-steps');
+      if (rail) rail.style.setProperty('--csx-rail-progress', `${(travelled / height * 100).toFixed(2)}%`);
       display(Math.min(panels.length - 1, Math.floor(travelled / height * panels.length)));
     };
     const request = () => { if (!raf) raf = requestAnimationFrame(sync); };

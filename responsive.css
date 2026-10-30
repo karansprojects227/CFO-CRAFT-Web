@@ -5325,3 +5325,55 @@
     transform: translate(-145px, -3px) scale(1);
   }
 }
+
+/* CFO CRAFT Case Studies — desktop 9-step vertical scroll-progress rail.
+   All existing cards, images, hover and story animations are unchanged. */
+@media (min-width: 769px) {
+  .home-page #case-studies .csx-steps {
+    --csx-rail-progress: 0%;
+    position: relative;
+    padding-left: 28px !important;
+    overflow: hidden !important;
+    isolation: isolate;
+  }
+  .home-page #case-studies .csx-steps::before {
+    content: "" !important;
+    display: block !important;
+    position: absolute;
+    left: 9px;
+    top: calc(100% / 18);
+    bottom: calc(100% / 18);
+    width: 2px;
+    border-radius: 8px;
+    background: linear-gradient(to bottom,
+      #0a67c6 0%, #0a67c6 var(--csx-rail-progress),
+      #d1dde9 var(--csx-rail-progress), #d1dde9 100%);
+    pointer-events: none;
+    z-index: 0;
+  }
+  .home-page #case-studies .csx-step::before {
+    content: "" !important;
+    display: block !important;
+    position: absolute;
+    left: -19px;
+    top: 50%;
+    width: 11px;
+    height: 11px;
+    border-radius: 50%;
+    background: #cdd9e5;
+    border: 2px solid #f5f7fa;
+    box-sizing: border-box;
+    transform: translate(-50%, -50%);
+    pointer-events: none;
+    z-index: 1;
+    transition: background-color .25s ease, box-shadow .25s ease;
+  }
+  .home-page #case-studies .csx-step.is-complete::before {
+    background: #7eb4eb;
+  }
+  .home-page #case-studies .csx-step.is-current::before {
+    background: #0868cb;
+    border-color: #fff;
+    box-shadow: 0 0 0 2px #f0b56b;
+  }
+}

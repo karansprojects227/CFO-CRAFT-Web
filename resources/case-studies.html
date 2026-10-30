@@ -26,329 +26,8 @@
     <link href="../style.css" rel="stylesheet" />
     <link href="../responsive.css" rel="stylesheet" />
     <link href="resources.css" rel="stylesheet" />
-    <style>
-      /* ==========================================================================
-   CASE STUDIES — TEXT-ONLY COMING SOON PAGE
-   Uses the existing CFO CRAFT theme from ../style.css + resources.css.
-   ========================================================================== */
 
-      .case-studies-page .resource-hero .resource-wrap {
-        display: block;
-        max-width: 1200px;
-      }
-
-      .case-studies-page .case-hero-copy {
-        max-width: 860px;
-      }
-
-      .case-studies-page .case-status {
-        display: inline-flex;
-        align-items: center;
-        gap: 0.55rem;
-        margin: 0 0 1.1rem;
-        padding: 0.48rem 0.72rem;
-        border: 1px solid rgba(166, 203, 247, 0.22);
-        border-radius: 999px;
-        background: rgba(166, 203, 247, 0.08);
-        color: var(--light-blue);
-        font-size: 0.75rem;
-        font-weight: 700;
-        letter-spacing: 0.09em;
-        text-transform: uppercase;
-      }
-
-      .case-studies-page .case-status::before {
-        content: "";
-        width: 7px;
-        height: 7px;
-        border-radius: 50%;
-        background: var(--creamish);
-        box-shadow: 0 0 0 5px rgba(238, 186, 125, 0.12);
-      }
-
-      .case-studies-page .case-block {
-        padding: clamp(4rem, 7vw, 6rem) 0;
-        background: var(--white);
-      }
-
-      .case-studies-page .case-block.alt {
-        background: var(--gray-100);
-      }
-
-      .case-studies-page .case-head {
-        max-width: 760px;
-        margin-bottom: 2.4rem;
-      }
-
-      .case-studies-page .case-head h2 {
-        position: relative;
-        display: inline-block;
-        margin: 0;
-        padding-bottom: 0.85rem;
-        color: var(--dark-blue);
-        font-family: var(--font-heading);
-        font-size: clamp(1.8rem, 3.2vw, 2.45rem);
-        font-weight: 500;
-        line-height: 1.2;
-        letter-spacing: -0.02em;
-      }
-
-      .case-studies-page .case-head h2::after {
-        content: "";
-        position: absolute;
-        left: 0;
-        bottom: 0;
-        width: 72px;
-        height: 4px;
-        border-radius: 999px;
-        background: linear-gradient(
-          90deg,
-          var(--light-blue),
-          var(--primary-blue)
-        );
-      }
-
-      .case-studies-page .case-head p {
-        margin: 1rem 0 0;
-        color: var(--gray-600);
-        font-size: 1rem;
-        line-height: 1.7;
-      }
-
-      .case-studies-page .case-grid {
-        display: grid;
-        grid-template-columns: repeat(3, minmax(0, 1fr));
-        gap: 1.25rem;
-      }
-
-      .case-studies-page .case-card {
-        position: relative;
-        overflow: hidden;
-        min-height: 100%;
-        padding: 1.55rem 1.45rem 1.4rem;
-        border: 1px solid rgba(8, 41, 81, 0.09);
-        border-top: 0;
-        border-radius: 18px;
-        background: linear-gradient(180deg, #ffffff, #fbfcff);
-        box-shadow:
-          inset 0 3px 0 var(--primary-blue),
-          var(--shadow-sm);
-        transition:
-          transform 0.24s ease,
-          box-shadow 0.24s ease,
-          border-color 0.24s ease;
-      }
-
-      .case-studies-page .case-card:hover {
-        transform: translateY(-4px);
-        border-color: rgba(43, 109, 178, 0.2);
-        box-shadow:
-          inset 0 3px 0 var(--primary-blue),
-          var(--shadow-md);
-      }
-
-      .case-studies-page .case-card::after {
-        content: "";
-        position: absolute;
-        top: -42px;
-        right: -38px;
-        width: 130px;
-        height: 130px;
-        border-radius: 50%;
-        background: radial-gradient(
-          circle,
-          rgba(166, 203, 247, 0.25),
-          rgba(166, 203, 247, 0) 70%
-        );
-        pointer-events: none;
-      }
-
-      .case-studies-page .case-num {
-        display: inline-block;
-        margin-bottom: 1rem;
-        color: var(--primary-blue);
-        font-family: var(--font-heading);
-        font-size: 0.78rem;
-        font-weight: 800;
-        letter-spacing: 0.08em;
-      }
-
-      .case-studies-page .case-card h3 {
-        margin: 0 0 0.65rem;
-        color: var(--dark-blue);
-        font-family: var(--font-heading);
-        font-size: 1.12rem;
-        font-weight: 600;
-        line-height: 1.35;
-      }
-
-      .case-studies-page .case-card p {
-        margin: 0;
-        color: var(--gray-600);
-        font-size: 0.94rem;
-        line-height: 1.65;
-      }
-
-      .case-studies-page .case-structure {
-        max-width: 920px;
-        display: grid;
-        gap: 0.9rem;
-      }
-
-      .case-studies-page .case-step {
-        display: grid;
-        grid-template-columns: 58px minmax(0, 1fr);
-        gap: 1rem;
-        align-items: start;
-        padding: 1.25rem 1.3rem;
-        border: 1px solid var(--gray-200);
-        border-radius: 16px;
-        background: linear-gradient(180deg, #ffffff, #fbfcff);
-        box-shadow: var(--shadow-sm);
-      }
-
-      .case-studies-page .case-step span {
-        display: grid;
-        width: 44px;
-        height: 44px;
-        place-items: center;
-        border: 1px solid rgba(43, 109, 178, 0.14);
-        border-radius: 50%;
-        background: rgba(166, 203, 247, 0.18);
-        color: var(--primary-blue);
-        font-family: var(--font-heading);
-        font-size: 0.76rem;
-        font-weight: 800;
-      }
-
-      .case-studies-page .case-step h3 {
-        margin: 0 0 0.3rem;
-        color: var(--dark-blue);
-        font-family: var(--font-heading);
-        font-size: 1.05rem;
-        font-weight: 600;
-      }
-
-      .case-studies-page .case-step p {
-        margin: 0;
-        color: var(--gray-600);
-        font-size: 0.94rem;
-        line-height: 1.65;
-      }
-
-      .case-studies-page .case-coming {
-        position: relative;
-        overflow: hidden;
-        padding: clamp(2rem, 4vw, 3rem);
-        border: 1px solid rgba(43, 109, 178, 0.14);
-        border-radius: 20px;
-        background:
-          radial-gradient(
-            circle at 88% 18%,
-            rgba(166, 203, 247, 0.2),
-            transparent 32%
-          ),
-          linear-gradient(145deg, #ffffff, #f7fbff);
-        box-shadow: var(--shadow-md);
-      }
-
-      .case-studies-page .case-coming::after {
-        content: "COMING SOON";
-        position: absolute;
-        right: -2.5rem;
-        bottom: 0.6rem;
-        color: rgba(43, 109, 178, 0.05);
-        font-family: var(--font-heading);
-        font-size: clamp(3rem, 8vw, 6.5rem);
-        font-weight: 800;
-        letter-spacing: -0.04em;
-        white-space: nowrap;
-        pointer-events: none;
-      }
-
-      .case-studies-page .case-coming-inner {
-        position: relative;
-        z-index: 1;
-        max-width: 720px;
-      }
-
-      .case-studies-page .case-coming-kicker {
-        margin: 0 0 0.75rem;
-        color: var(--primary-blue);
-        font-size: 0.76rem;
-        font-weight: 800;
-        letter-spacing: 0.1em;
-        text-transform: uppercase;
-      }
-
-      .case-studies-page .case-coming h2 {
-        margin: 0 0 0.8rem;
-        color: var(--dark-blue);
-        font-family: var(--font-heading);
-        font-size: clamp(1.65rem, 3vw, 2.25rem);
-        font-weight: 500;
-        line-height: 1.25;
-      }
-
-      .case-studies-page .case-coming p {
-        margin: 0;
-        color: var(--gray-600);
-        font-size: 1rem;
-        line-height: 1.7;
-      }
-
-      .case-studies-page .case-actions {
-        display: flex;
-        flex-wrap: wrap;
-        gap: 0.8rem;
-        margin-top: 1.4rem;
-      }
-
-      .case-studies-page .case-link {
-        display: inline-flex;
-        align-items: center;
-        gap: 0.4rem;
-        color: var(--primary-blue);
-        font-weight: 700;
-        font-size: 0.9rem;
-      }
-
-      .case-studies-page .case-link:hover {
-        gap: 0.65rem;
-      }
-
-      @media (max-width: 900px) {
-        .case-studies-page .case-grid {
-          grid-template-columns: 1fr;
-        }
-      }
-
-      @media (max-width: 560px) {
-        .case-studies-page .case-block {
-          padding: 3.5rem 0;
-        }
-
-        .case-studies-page .case-card,
-        .case-studies-page .case-step,
-        .case-studies-page .case-coming {
-          border-radius: 14px;
-        }
-
-        .case-studies-page .case-step {
-          grid-template-columns: 48px minmax(0, 1fr);
-          padding: 1rem;
-        }
-
-        .case-studies-page .case-step span {
-          width: 38px;
-          height: 38px;
-        }
-
-        .case-studies-page .case-coming::after {
-          display: none;
-        }
-      }
-    </style>
+    <link href="case-studies-3d.css" rel="stylesheet" />
   </head>
   <body class="resource-page case-studies-page" data-page="case-studies">
     <a class="resource-skip" href="#main">Skip to content</a>
@@ -1210,154 +889,87 @@
       </div>
     </nav>
     <main id="main">
-      <section class="resource-hero">
+      <section class="resource-hero case3d-hero">
         <div class="resource-wrap">
           <div class="resource-hero-grid">
             <div class="case-hero-copy resource-hero-copy">
               <p class="resource-crumb">
                 <a href="/">Home</a> / Resources / Case Studies
               </p>
-              <p class="case-status">Case Studies · Coming Soon</p>
+              <span class="case3d-eyebrow">CFO CRAFT · Success stories</span>
               <h1>Real businesses. Measurable finance outcomes.</h1>
               <p class="resource-lede">
-                We are preparing practical, anonymised case studies that show
-                the finance problem, what changed, and the business outcome —
-                without marketing fluff or inflated claims.
+                Discover how forward-thinking businesses solve complex finance
+                challenges and unlock lasting growth with CFO CRAFT.
               </p>
+              <a class="case3d-explore" href="#case3d-experience"
+                >Explore the stories <span aria-hidden="true">↓</span></a
+              >
             </div>
           </div>
         </div>
       </section>
-      <section class="case-block">
-        <div class="resource-wrap">
-          <div class="case-head">
-            <h2>What you will find here</h2>
-            <p>
-              Each case study will focus on a real finance problem faced by a
-              promoter-led business and the practical work used to improve it.
-            </p>
-          </div>
-          <div class="case-grid">
-            <article class="case-card">
-              <span class="case-num">01</span>
-              <h3>Cash &amp; working capital</h3>
-              <p>
-                Debtor ageing, inventory holding, creditor terms and the changes
-                that improve cash conversion without slowing the business.
-              </p>
-            </article>
-            <article class="case-card">
-              <span class="case-num">02</span>
-              <h3>MIS &amp; decision-making</h3>
-              <p>
-                How management reporting moves from delayed accounting data to a
-                monthly view that promoters can actually use for decisions.
-              </p>
-            </article>
-            <article class="case-card">
-              <span class="case-num">03</span>
-              <h3>Margins &amp; profitability</h3>
-              <p>
-                Product, customer and channel profitability work that helps a
-                business see where margin is being made, lost or quietly
-                diluted.
-              </p>
-            </article>
-          </div>
+      <section
+        aria-label="Explore nine CFO CRAFT case studies"
+        class="case3d-section"
+        id="case3d-experience"
+      >
+        <div class="case3d-intro">
+          <span class="case3d-kicker">CASE STUDIES</span>
+          <h2>Stories of real impact.</h2>
+          <p>
+            Explore nine finance transformations. Scroll, swipe, select a side
+            card, or use the arrows.
+          </p>
         </div>
-      </section>
-      <section class="case-block alt">
-        <div class="resource-wrap">
-          <div class="case-head">
-            <h2>How each case study will be structured</h2>
-            <p>
-              The emphasis will stay on the business situation, the finance work
-              and the measurable result — not on a long sales story.
-            </p>
-          </div>
-          <div class="case-structure">
-            <div class="case-step">
-              <span>01</span>
-              <div>
-                <h3>Business context</h3>
-                <p>
-                  The size and nature of the business, how finance was operating
-                  and what the promoter was trying to solve.
-                </p>
-              </div>
-            </div>
-            <div class="case-step">
-              <span>02</span>
-              <div>
-                <h3>The finance gap</h3>
-                <p>
-                  The specific issue — cash, reporting, margin, controls,
-                  funding readiness or another decision-critical finance
-                  problem.
-                </p>
-              </div>
-            </div>
-            <div class="case-step">
-              <span>03</span>
-              <div>
-                <h3>What changed</h3>
-                <p>
-                  The reports, processes, reviews, controls or management
-                  routines that were put in place with the business team.
-                </p>
-              </div>
-            </div>
-            <div class="case-step">
-              <span>04</span>
-              <div>
-                <h3>The outcome</h3>
-                <p>
-                  What improved in the numbers, visibility or decision-making,
-                  with clear context around what the result actually means.
-                </p>
-              </div>
-            </div>
-          </div>
+        <div
+          aria-label="3D case study carousel; use left and right arrow keys"
+          class="case3d-stage"
+          tabindex="0"
+        >
+          <div class="case3d-perspective" data-case3d-track=""></div>
         </div>
-      </section>
-      <section class="case-block">
-        <div class="resource-wrap">
-          <div class="case-coming">
-            <div class="case-coming-inner">
-              <p class="case-coming-kicker">In preparation</p>
-              <h2>Our first detailed case studies are being prepared.</h2>
-              <p>
-                We are documenting the work carefully and anonymising client
-                information before publishing. Until then, you can explore our
-                practical resources or speak with us about the finance problem
-                you are trying to solve.
-              </p>
-              <div class="case-actions">
-                <a class="resource-btn resource-btn-navy" href="resources.html">
-                  Explore Resources
-                </a>
-                <a class="case-link" href="https://wa.me/919892560660" target="_blank">
-                  Talk to CFO CRAFT <span aria-hidden="true">→</span>
-                </a>
-              </div>
-            </div>
-          </div>
+        <div class="case3d-controls">
+          <button
+            aria-label="Previous case study"
+            class="case3d-arrow"
+            data-case3d-prev=""
+            type="button"
+          >
+            ←
+          </button>
+          <div
+            aria-label="Choose case study"
+            class="case3d-dots"
+            data-case3d-dots=""
+          ></div>
+          <button
+            aria-label="Next case study"
+            class="case3d-arrow"
+            data-case3d-next=""
+            type="button"
+          >
+            →
+          </button>
         </div>
-      </section>
-      <section class="resource-cta">
-        <div class="resource-wrap">
+        <div aria-live="polite" class="case3d-count">
+          <span data-case3d-current="">01</span>
+          <span class="case3d-count-divider">/</span> 09
+        </div>
+        <article aria-live="polite" class="case3d-detail">
           <div>
-            <h2>Need the outcome before the case study is published?</h2>
-            <p>
-              Tell us what is happening in your numbers. We will tell you
-              quickly whether it is the kind of finance problem we can help
-              solve.
-            </p>
+            <span class="case3d-detail-tag" data-case3d-category=""
+              >Service Company</span
+            >
+            <h3 data-case3d-title="">Pricing Strategy Reinvention</h3>
+            <p data-case3d-challenge=""></p>
+            <p data-case3d-solution=""></p>
           </div>
-          <a class="resource-btn resource-btn-navy" href="../book-intro.html">
-            Book an Intro
-          </a>
-        </div>
+          <div class="case3d-impact">
+            <span class="case3d-impact-eyebrow">THE IMPACT</span>
+            <ul data-case3d-impact=""></ul>
+          </div>
+        </article>
       </section>
     </main>
     <footer class="footer">
@@ -1518,7 +1130,7 @@
         </div>
       </div>
     </footer>
-
     <script src="../script.js"></script>
+    <script defer="True" src="case-studies-3d.js"></script>
   </body>
 </html>

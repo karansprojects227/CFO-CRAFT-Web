@@ -5811,3 +5811,60 @@ body.lead-modal-open{overflow:hidden;}
     padding-right: 1rem;
   }
 }
+
+
+/* CFO CRAFT | Download CTA — exact Resources Hub brochure treatment.
+   Covers the Excel lead trigger and secure PDF report trigger only.
+   Kept separate from calculators, print/actions, redirects and modals. */
+body.tool-page .lead-download-trigger,
+body.tool-page .report-open {
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  gap: 9px;
+  min-height: 44px;
+  padding: 11px 16px;
+  border-radius: 10px;
+  background: var(--dark-blue, #082951);
+  border: 1px solid var(--dark-blue, #082951);
+  color: #fff;
+  text-decoration: none;
+  white-space: nowrap;
+  font-family: var(--font-primary, Roboto, sans-serif);
+  font-size: .82rem;
+  font-weight: 700;
+  line-height: 1.25;
+  box-shadow: 0 5px 14px rgba(8,41,81,.13);
+  cursor: pointer;
+  transition: background .2s ease, border-color .2s ease,
+              transform .2s ease, box-shadow .2s ease;
+}
+body.tool-page .lead-download-trigger::before,
+body.tool-page .report-open::before {
+  content: none;
+  font-size: 1.08rem;
+  line-height: .7;
+}
+body.tool-page .lead-download-trigger:hover,
+body.tool-page .report-open:hover {
+  background: var(--primary-blue, #2b6db2);
+  border-color: var(--primary-blue, #2b6db2);
+  color: #fff;
+  transform: translateY(-2px);
+  box-shadow: 0 9px 18px rgba(8,41,81,.2);
+}
+body.tool-page .lead-download-trigger:focus-visible,
+body.tool-page .report-open:focus-visible {
+  outline: 3px solid var(--light-blue, #a6cbf7);
+  outline-offset: 3px;
+}
+body.tool-page .lead-download-trigger:active,
+body.tool-page .report-open:active { transform: translateY(0); }
+@media (max-width: 760px) {
+  body.tool-page .lead-download-trigger,
+  body.tool-page .report-open { width: 100%; }
+}
+@media (prefers-reduced-motion: reduce) {
+  body.tool-page .lead-download-trigger,
+  body.tool-page .report-open { transition: none; }
+}
